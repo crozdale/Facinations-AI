@@ -9,7 +9,7 @@ export const VAULTS = [
     network: 137,
     vaultType: "NFT Fractional Vault",
     contract: "0x0000000000000000000000000000000000000000", // ← replace later
-    externalUrl: "https://xdalegallery.com/artwork/untitled-study-1",
+    externalUrl: "https://xdale.io/artwork/untitled-study-1",
     status: "active",
   },
   {
@@ -21,7 +21,7 @@ export const VAULTS = [
     network: 137,
     vaultType: "NFT Vault",
     contract: null, // no on-chain vault yet
-    externalUrl: "https://xdalegallery.com/artwork/untitled-study-2",
+    externalUrl: "https://xdale.io/artwork/untitled-study-2",
     status: "draft",
   },
 ];

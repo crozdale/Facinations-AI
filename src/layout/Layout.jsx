@@ -13,7 +13,7 @@ export default function Layout() {
         <Link to="/swap">Swap</Link>
 
         <a
-          href="https://xdalegallery.com"
+          href="https://xdale.io"
           target="_blank"
           rel="noreferrer"
         >
