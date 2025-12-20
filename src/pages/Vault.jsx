@@ -1,3 +1,4 @@
+
 import { VAULTS } from "../registry/vaultRegistry";
 import ActionLink from "../components/ActionLink";
 
@@ -20,7 +21,6 @@ function StatusBadge({ status }) {
 function VaultCard({ vault }) {
   return (
     <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-      {/* Ultra-subtle XER watermark */}
       <img
         src="/logos/file_000000007664723087835154623dcdd2-909afde2-6657-4a4b-bdba-4bff6a945004.png"
         alt=""
@@ -76,4 +76,3 @@ export default function Vault() {
     </div>
   );
 }
-
