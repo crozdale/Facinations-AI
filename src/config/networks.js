@@ -1,10 +1,16 @@
+// Canonical network configuration
+// ETH-DRY: Ethereum enabled for READ-ONLY hydration
+
 export const NETWORKS = {
-  1: {
+  ethereum: {
     chainId: 1,
     name: "Ethereum",
+    rpcFallback: "https://rpc.ankr.com/eth"
   },
-  137: {
+
+  polygon: {
     chainId: 137,
     name: "Polygon",
-  },
+    rpcFallback: "https://polygon-rpc.com"
+  }
 };

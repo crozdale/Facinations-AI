@@ -1,40 +1,19 @@
 export default function Gallery() {
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16">
-      <header className="text-center">
-        <h1 className="font-serif text-4xl md:text-5xl font-bold">
+    <div className="max-w-7xl mx-auto px-8 py-20">
+      <div className="mb-10">
+        <h1 className="text-4xl font-serif font-bold">
           Gallery
         </h1>
-        <p className="mt-4 max-w-3xl mx-auto text-black/70">
-          Curated fine-art works referenced by Façinations™.
+        <p className="mt-3 text-black/70 max-w-3xl">
+          Curated fine-art works originating from Xdale Gallery.
+          This view is intentionally inert and functions as a visual index only.
         </p>
-      </header>
+      </div>
 
-      <section className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-sm">
-          <h3 className="font-serif text-xl font-semibold">
-            Untitled Study I
-          </h3>
-          <p className="mt-1 text-sm text-black/70">
-            Artist Name · 2024
-          </p>
-          <p className="mt-4 text-sm text-black/60">
-            Referenced artwork prepared for vaulting.
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-sm">
-          <h3 className="font-serif text-xl font-semibold">
-            Additional Works
-          </h3>
-          <p className="mt-1 text-sm text-black/70">
-            Placeholder
-          </p>
-          <p className="mt-4 text-sm text-black/60">
-            Further artworks will appear here.
-          </p>
-        </div>
-      </section>
+      <div className="rounded-xl bg-white p-12 shadow-md text-black/50 text-center">
+        Gallery content will populate here.
+      </div>
     </div>
   );
 }

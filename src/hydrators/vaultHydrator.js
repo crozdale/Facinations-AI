@@ -1,40 +1,39 @@
 import { Contract } from "ethers";
 
 /**
- * Read-only vault hydrator (safe stub)
+ * Read-only vault hydration.
+ * NO writes. NO side effects.
+ * Safe to call without wallet connection.
  */
 export async function hydrateVaultFromChain({
   provider,
   vaultAddress,
-  vaultAbi,
+  vaultAbi
 }) {
   if (!provider || !vaultAddress || !vaultAbi) {
-    return {
-      name: null,
-      totalSupply: null,
-      owner: null,
-    };
+    return null;
   }
 
-  try {
-    const contract = new Contract(vaultAddress, vaultAbi, provider);
+  const contract = new Contract(vaultAddress, vaultAbi, provider);
 
-    const [name, totalSupply, owner] = await Promise.all([
-      contract.name?.().catch(() => null),
-      contract.totalSupply?.().catch(() => null),
-      contract.owner?.().catch(() => null),
+  try {
+    const [
+      name,
+      symbol,
+      totalSupply
+    ] = await Promise.all([
+      contract.name(),
+      contract.symbol(),
+      contract.totalSupply()
     ]);
 
     return {
       name,
-      totalSupply,
-      owner,
+      symbol,
+      totalSupply: totalSupply.toString()
     };
-  } catch {
-    return {
-      name: null,
-      totalSupply: null,
-      owner: null,
-    };
+  } catch (err) {
+    console.error("Vault hydration failed:", err);
+    return null;
   }
 }

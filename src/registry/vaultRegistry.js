@@ -1,14 +1,23 @@
+// ETH-DRY REGISTRY BINDING
+// Temporary Ethereum ERC-20 hydration for DRY-RUN validation only
+// NOT a production vault topology
+
 export const VAULTS = [
   {
-    id: "untitled-study-1",
-    title: "Untitled Study I",
-    artist: "Artist Name",
-    network: 137,
-    vaultType: "NFT Fractional Vault",
-    contract: "0x0000000000000000000000000000000000000000",
-    externalUrl: "https://xdalegallery.com/artwork/untitled-study-1",
-    marketplaceUrl: null,
-    status: "active",
-  },
-];
+    id: "xer-erc20-eth-dry",
+    title: "XER Token (ETH · DRY-RUN)",
+    artist: "Xdale / XER",
+    status: "dry-run",
+    vaultType: "ERC-20 Reference (Read-Only)",
 
+    // Ethereum mainnet
+    network: 1,
+    enabled: true,
+
+    // Ethereum XER ERC-20 (checksummed)
+    contract: "0x2926F34AD98CCc6d90556C9F570E2DEe2dA89eE",
+
+    // Canonical external reference
+    externalUrl: "https://xdalegallery.com"
+  }
+];

@@ -1,0 +1,12 @@
+// src/brand/brandAssets.js
+
+export const BRAND = {
+  FACINATIONS: {
+    WORDMARK: "/logos/facinations-gold.svg",
+    SIGIL: "/logos/facinations-sigil-gold.svg",
+  },
+  XER: {
+    WORDMARK: "/logos/xer-wordmark-gold.svg",
+    SIGIL: "/logos/xer-sigil-gold.svg",
+  },
+};
