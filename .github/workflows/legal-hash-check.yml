@@ -1,0 +1,26 @@
+name: Legal Document Integrity Check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify-legal-hashes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify legal document hashes
+        run: npm run verify:legal
