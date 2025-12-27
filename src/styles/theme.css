@@ -1,0 +1,79 @@
+:root {
+  --bg: #0f0f14;
+  --card: #1a1a1f;
+  --text: #ffffff;
+  --accent: #caa85c;
+}
+
+.light {
+  --bg: #f6f6f7;
+  --card: #ffffff;
+  --text: #111;
+  --accent: #c8a13c;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  font-family: Inter, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(12px);
+}
+
+.sigil {
+  height: 34px;
+  margin-right: 10px;
+}
+
+.brand {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: gold;
+}
+
+.nav a {
+  margin: 0 12px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.swap-card {
+  margin: 80px auto;
+  padding: 32px;
+  width: 360px;
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 16px;
+  border-radius: 10px;
+  border: none;
+}
+
+.primary {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #6f7cff, #9f7cff);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+}
+
+.footer {
+  text-align: center;
+  padding: 24px;
+  opacity: 0.6;
+}

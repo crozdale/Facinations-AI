@@ -1,26 +1,18 @@
-import { Link } from "react-router-dom";
-
 export default function VaultCard({ vault }) {
   return (
-    <Link
-      to={`/vault/${vault.id}`}
-      className="block border rounded-xl p-6 hover:shadow-lg transition"
-    >
-      <h3 className="text-xl font-semibold mb-1">
-        {vault.title}
-      </h3>
+    <div className="vault-card">
+      <img src={vault.image} alt={vault.name} />
+      <h3>{vault.name}</h3>
+      <p>{vault.description}</p>
 
-      <p className="text-sm text-black/70">
-        {vault.artist}
-      </p>
-
-      <div className="mt-4 text-sm">
-        <div>{vault.vaultType}</div>
-        <div>Chain {vault.chainId}</div>
-        <div className="mt-1 text-green-700">
-          {vault.status}
-        </div>
-      </div>
-    </Link>
+      <a
+        href={`https://ipfs.io/ipfs/${vault.ipfs.replace("ipfs://", "")}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="vault-link"
+      >
+        View on IPFS
+      </a>
+    </div>
   );
 }

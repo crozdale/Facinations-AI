@@ -1,25 +1,16 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./layout/Layout";
-
-import Home from "./pages/Home";
-import Gallery from "./pages/Gallery";
-import Vault from "./pages/Vault";
-import VaultDetail from "./pages/VaultDetail";
+import Header from "./components/Header";
 import Swap from "./pages/Swap";
+import Footer from "./components/Footer";
+import "./styles/theme.css";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/vault" element={<Vault />} />
-          <Route path="/swap" element={<Swap />} />
-           <Route path="/vault/:id" element={<VaultDetail />} />
-
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Header />
+      <main className="app-container">
+        <Swap />
+      </main>
+      <Footer />
+    </>
   );
 }

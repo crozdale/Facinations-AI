@@ -1,23 +1,71 @@
-// ETH-DRY REGISTRY BINDING
-// Temporary Ethereum ERC-20 hydration for DRY-RUN validation only
-// NOT a production vault topology
+/**
+ * Façinations — Canonical Vault Registry
+ * --------------------------------------------------
+ * This file is the single source of truth for:
+ * - Vault existence
+ * - Artwork metadata
+ * - Chain + contract bindings
+ * - Legal pack references
+ * - External provenance links
+ *
+ * Rule:
+ * If a vault is not declared here, it does not exist.
+ */
 
 export const VAULTS = [
   {
-    id: "xer-erc20-eth-dry",
-    title: "XER Token (ETH · DRY-RUN)",
-    artist: "Xdale / XER",
-    status: "dry-run",
-    vaultType: "ERC-20 Reference (Read-Only)",
+    vaultId: "VAULT-ALBATRIX-001",
 
-    // Ethereum mainnet
-    network: 1,
-    enabled: true,
+    artwork: {
+      title: "Untitled Study I",
+      artist: "Artist Name",
+      year: "2024",
+      medium: "Mixed Media",
+    },
 
-    // Ethereum XER ERC-20 (checksummed)
-    contract: "0x2926F34AD98CCc6d90556C9F570E2DEe2dA89eE",
+    chain: {
+      chainId: 137,
+      name: "Polygon",
+    },
 
-    // Canonical external reference
-    externalUrl: "https://xdalegallery.com"
-  }
+    vaultType: "NFT Fractional Vault",
+
+    contracts: {
+      vault: "0x0000000000000000000000000000000000000000", // replace when deployed
+      fraction: null, // populated only after fractionalization
+    },
+
+    externalLinks: {
+      xdaleGallery: "https://xdalegallery.com/artwork/untitled-study-i",
+      explorer: null, // auto-derived once vault address is set
+      thirdParty: [], // e.g. Magic Eden, OpenSea (optional)
+    },
+
+    legal: {
+      jurisdiction: "UK",
+      version: "v1.0",
+      pdfPath:
+        "/vaults/VAULT-ALBATRIX-001/Legal-Pack-UK-ALBATRIX-001-v1.0.pdf",
+    },
+
+    status: "active", // draft | active | frozen | retired
+  },
 ];
+
+/**
+ * Lookup helpers
+ * --------------------------------------------------
+ */
+
+export function getVaultById(vaultId) {
+  return VAULTS.find((v) => v.vaultId === vaultId);
+}
+
+export function getAllActiveVaults() {
+  return VAULTS.filter((v) => v.status === "active");
+}
+
+export function getVaultAddress(vaultId) {
+  const vault = getVaultById(vaultId);
+  return vault?.contracts?.vault ?? null;
+}

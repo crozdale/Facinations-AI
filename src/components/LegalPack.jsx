@@ -41,30 +41,6 @@ export default function LegalPack({ vault, onAcknowledge }) {
         Legal & Disclosures
       </h3>
 
-      <p className="text-sm text-slate-400">
-        Select your jurisdiction, review the legal document, and acknowledge
-        before proceeding.
-      </p>
-
-      {/* Jurisdiction selector */}
-      <div className="flex flex-wrap gap-2">
-        {jurisdictions.map((code) => (
-          <button
-            key={code}
-            onClick={() => setJurisdiction(code)}
-            className={`rounded-md px-3 py-1.5 text-sm font-medium transition
-              ${
-                code === jurisdiction
-                  ? "bg-blue-600 text-white"
-                  : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-              }`}
-          >
-            {packs[code].label}
-          </button>
-        ))}
-      </div>
-
-      {/* Legal link */}
       <a
         href={href}
         target="_blank"
@@ -74,13 +50,6 @@ export default function LegalPack({ vault, onAcknowledge }) {
         View Legal Pack ({active.label})
       </a>
 
-      {/* Hash display */}
-      <div className="rounded-md bg-slate-950 p-3 text-xs text-slate-300 break-all">
-        <div className="text-slate-400 mb-1">Document SHA-256</div>
-        <code>{active.sha256}</code>
-      </div>
-
-      {/* Acknowledgement */}
       <label className="flex items-start gap-3 text-sm text-slate-300">
         <input
           type="checkbox"
@@ -89,8 +58,7 @@ export default function LegalPack({ vault, onAcknowledge }) {
           className="mt-1"
         />
         <span>
-          I confirm that I have reviewed the legal document corresponding to
-          the hash shown above.
+          I confirm that I have read and understood the legal documentation.
         </span>
       </label>
 

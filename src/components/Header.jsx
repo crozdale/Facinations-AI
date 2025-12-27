@@ -1,26 +1,22 @@
 import { Link } from "react-router-dom";
-import { BRAND } from "../brand/brandAssets";
-import ConnectWalletButton from "./ConnectWalletButton";
+import ThemeToggle from "./ThemeToggle";
+import "../styles/theme.css";
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between px-8 py-4 border-b bg-white">
-      <Link to="/" className="flex items-center">
-        <img
-          src={BRAND.FACINATIONS.WORDMARK}
-          alt="Façinations"
-          className="h-10 w-auto"
-        />
-      </Link>
+    <header className="header">
+      <div className="header-left">
+        <img src="/sigil-gold.png" alt="Sigil" className="sigil" />
+        <span className="brand">Facinations</span>
+      </div>
 
-      <nav className="flex gap-8 text-lg font-medium">
+      <nav className="nav">
         <Link to="/">Home</Link>
         <Link to="/gallery">Gallery</Link>
-        <Link to="/vault">Vault</Link>
-        <Link to="/swap">Swap</Link>
+        <Link to="/vaults">Vaults</Link>
       </nav>
 
-      <ConnectWalletButton />
+      <ThemeToggle />
     </header>
   );
 }

@@ -1,45 +1,176 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* =========================================================
-   Façinations — Brand Polish & Negative Space Discipline
-   A3: global, restrained, non-interactive refinements only
-   ========================================================= */
-
-html,
-body {
-  height: 100%;
+/* ================================
+   Theme Variables
+================================ */
+:root {
+  --bg: #0f0f14;
+  --card: #1a1a1f;
+  --text: #ffffff;
+  --muted: #aaaaaa;
+  --border: #2a2a2a;
+  --accent: #5b8cff;
 }
 
-body {
-  margin: 0;
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  background-color: #f9fafb; /* bg-gray-50 */
-  color: #000000;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.light {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #121212;
+  --muted: #555;
+  --border: #ddd;
+  --accent: #4b6cff;
 }
 
-/* Reduce visual noise globally */
+/* ================================
+   Global Reset
+================================ */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: Inter, system-ui, sans-serif;
 }
 
-/* Ensure images never imply interaction */
-img {
-  user-select: none;
+/* ================================
+   Page Layout
+================================ */
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Typography discipline */
-h1,
-h2,
-h3 {
-  letter-spacing: -0.01em;
+/* ================================
+   Swap Card
+================================ */
+.swap-container {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.45);
 }
 
-/* Subtle focus without color noise */
-:focus-visible {
-  outline: 2px solid rgba(0, 0, 0, 0.15);
-  outline-offset: 2px;
+h1 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ================================
+   Inputs
+================================ */
+.field {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  display: block;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ================================
+   Buttons
+================================ */
+button {
+  width: 100%;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), #7f5cff);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  background: #333;
+  cursor: not-allowed;
+}
+
+/* ================================
+   Status Text
+================================ */
+.status {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--muted);
+}
+..swap-container {
+  background: var(--card);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+}
+
+input,
+select {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+label {
+  color: var(--muted);
+}
+
+button {
+  background: linear-gradient(135deg, var(--accent), #7f5cff);
+}
+* {
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+/* Layout helpers */
+.page {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: var(--text);
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+/* Header nav */
+.nav a {
+  margin-left: 24px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: gold;
 }
