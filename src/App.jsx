@@ -1,16 +1,18 @@
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import Swap from "./pages/Swap";
-import Footer from "./components/Footer";
-import "./styles/theme.css";
+import Home from "./pages/Home";
+import Gallery from "./pages/Gallery";
+import Vaults from "./pages/Vaults";
 
 export default function App() {
   return (
     <>
       <Header />
-      <main className="app-container">
-        <Swap />
-      </main>
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/vaults" element={<Vaults />} />
+      </Routes>
     </>
   );
 }

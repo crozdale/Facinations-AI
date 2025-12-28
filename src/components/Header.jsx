@@ -1,22 +1,21 @@
 import { Link } from "react-router-dom";
-import ThemeToggle from "./ThemeToggle";
-import "../styles/theme.css";
+import "./Header.css";
 
 export default function Header() {
   return (
     <header className="header">
-      <div className="header-left">
-        <img src="/sigil-gold.png" alt="Sigil" className="sigil" />
-        <span className="brand">Facinations</span>
+      <div className="logo">
+        <img src="/sigil.png" alt="Sigil" />
+        <span>Facinations</span>
       </div>
 
-      <nav className="nav">
+      <nav>
         <Link to="/">Home</Link>
         <Link to="/gallery">Gallery</Link>
         <Link to="/vaults">Vaults</Link>
       </nav>
 
-      <ThemeToggle />
+      <button className="theme-btn">🌙 Dark</button>
     </header>
   );
 }
