@@ -1,73 +1,19 @@
-/* Theme */
-:root {
-  --bg: #f4f4f4;
-  --text: #111;
-  --card: #ffffff;
-}
-
-.dark {
-  --bg: #0b0c10;
-  --text: #f2f2f2;
-  --card: #15171c;
-}
-
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #0b0b0b;
+  color: white;
   font-family: system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Header */
-.header {
+#root {
+  min-height: 100vh;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  background: #0e0e10;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.logo {
-  height: 32px;
-}
-
-.brand-text {
-  color: gold;
-  font-weight: 700;
-  font-size: 1.2rem;
-}
-
-.nav a {
-  margin: 0 1rem;
-  color: white;
-  text-decoration: none;
-}
-
-.theme-toggle {
-  background: #6d5dfc;
-  color: white;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-/* Main */
-.main {
-  text-align: center;
-  padding: 6rem 1rem;
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 2rem;
-  opacity: 0.6;
+  flex-direction: column;
 }

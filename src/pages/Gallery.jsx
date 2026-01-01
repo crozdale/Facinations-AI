@@ -1,8 +1,10 @@
 export default function Gallery() {
   return (
-    <div className="page">
+    <section className="page">
       <h1>Gallery</h1>
-      <p>Curated digital artifacts.</p>
-    </div>
+      <p>Curated digital works and collections.</p>
+    </section>
   );
 }
+
+

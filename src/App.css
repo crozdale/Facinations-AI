@@ -1,15 +1,56 @@
+/* =========================
+   GLOBAL RESET
+========================= */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* =========================
+   BASE STYLES
+========================= */
 body {
+  padding-top: 72px;
   background: #0e0e0e;
   font-family: system-ui, sans-serif;
   color: white;
 }
 
+/* =========================
+   HEADER
+========================= */
+.site-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+  background: #000;
+}
+
+/* LOGO */
+.site-logo {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+main {
+  line-height: 1.6;
+}
+
+main h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* =========================
+   SWAP COMPONENT
+========================= */
 .swap-container {
   height: 100vh;
   display: flex;

@@ -1,18 +1,93 @@
-.page {
-  max-width: 960px;
-  margin: 4rem auto;
-  padding: 0 1.5rem;
+.site-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #000;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
 }
 
-.vault-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.vault-card {
-  background: #111;
-  border: 1px solid #333;
-  padding: 1.5rem;
-  border-radius: 8px;
+
+
+body {
+  padding-top: 90px;
+  background: #000;
+  color: #eaeaea;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
+
+
+
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lang-select {
+  background: #000;
+  color: #d4af37;
+  border: 1px solid #444;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.lang-select:focus {
+  outline: none;
+  border-color: #d4af37;
+}
+
+.wallet-btn {
+  background: linear-gradient(135deg, #d4af37, #b8962e);
+  color: black;
+  border: none;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wallet-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+
+
+.logo {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.site-nav {
+  display: flex;
+  gap: 32px;
+}
+
+.site-nav a {
+  color: #d4af37;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.site-nav a:hover {
+  color: #fff2b0;
+  text-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
+}
+

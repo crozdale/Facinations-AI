@@ -1,23 +1,30 @@
+import { Link } from "react-router-dom";
+import "./Header.css";
+
 export default function Header() {
   return (
-    <header
-      style={{
-        display: "flex",
-        alignItems: "center",
-        padding: "16px 32px",
-        borderBottom: "1px solid #222",
-        background: "#000",
-      }}
-    >
-      <img
-        src="/logo-gold.png"
-        alt="Facinations"
-        height="42"
-        style={{ marginRight: 16 }}
-      />
-      <h1 style={{ color: "#d4af37", fontWeight: 500 }}>
-        Facinations
-      </h1>
+    <header className="site-header">
+      <div className="header-inner">
+        <Link to="/" className="logo-wrap">
+          <img
+            src="/xdale-logo.png"
+            alt="XDALE"
+            style={{
+              height: "48px",
+              width: "auto",
+              cursor: "pointer",
+            }}
+          />
+        </Link>
+
+        <nav className="site-nav">
+          <Link to="/">Home</Link>
+          <Link to="/gallery">Gallery</Link>
+          <Link to="/vaults">Vaults</Link>
+          <Link to="/swap">Swap</Link>
+          <Link to="/legal">Legal</Link>
+        </nav>
+      </div>
     </header>
   );
 }

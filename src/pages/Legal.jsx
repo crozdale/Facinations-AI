@@ -1,21 +1,15 @@
 export default function Legal() {
   return (
     <section className="page">
-      <h1>Legal Framework</h1>
-
+      <h1>Legal</h1>
       <p>
-        Façinations operates under a registry-first legal architecture.
-        Each asset is defined before minting, trading, or fractionalization.
+        Facinations provides tools for digital presentation and provenance
+        tracking. Ownership, intellectual property rights, and legal obligations
+        remain the responsibility of their respective holders.
       </p>
-
-      <ul>
-        <li>All vaults are declared in the Canonical Vault Registry</li>
-        <li>Legal packs define ownership, jurisdiction, and rights</li>
-        <li>No asset exists outside the registry</li>
-      </ul>
-
       <p>
-        View full registry: <a href="/vaults">Vault Registry</a>
+        All content is provided “as is” and subject to applicable laws governing
+        digital assets, intellectual property, and decentralized technologies.
       </p>
     </section>
   );
