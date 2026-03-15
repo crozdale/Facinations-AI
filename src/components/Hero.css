@@ -1,0 +1,17 @@
+.sigil-gold {
+  width: 180px;
+  height: 180px;
+
+  background-image: url("../assets/gold-texture.png");
+  background-size: cover;
+  background-position: center;
+
+  -webkit-mask-image: url("../assets/sigil-mask.svg");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+
+  mask-image: url("../assets/sigil-mask.svg");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+}
+

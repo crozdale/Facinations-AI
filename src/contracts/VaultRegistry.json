@@ -1,19 +1,40 @@
 [
   {
     "inputs": [
-      {
-        "internalType": "string",
-        "name": "vaultId",
-        "type": "string"
-      }
+      { "internalType": "address", "name": "admin", "type": "address" },
+      { "internalType": "address", "name": "premiumAccess", "type": "address" }
     ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "vaultId", "type": "string" },
+      { "internalType": "address", "name": "vaultContract", "type": "address" },
+      { "internalType": "bool", "name": "premiumRequired", "type": "bool" }
+    ],
+    "name": "registerVault",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "string", "name": "vaultId", "type": "string" }],
     "name": "getVault",
     "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
+      { "internalType": "address", "name": "vaultContract", "type": "address" },
+      { "internalType": "bool", "name": "premiumRequired", "type": "bool" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "index", "type": "uint256" }],
+    "name": "vaultByIndex",
+    "outputs": [
+      { "internalType": "string", "name": "vaultId", "type": "string" },
+      { "internalType": "address", "name": "vaultContract", "type": "address" },
+      { "internalType": "bool", "name": "premiumRequired", "type": "bool" }
     ],
     "stateMutability": "view",
     "type": "function"

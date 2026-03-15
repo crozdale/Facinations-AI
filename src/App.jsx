@@ -1,26 +1,34 @@
-import { Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
+// src/App.jsx
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Gallery from "./pages/Gallery";
-import Vaults from "./pages/Vaults";
-import VaultDetail from "./pages/VaultDetail";
-import Swap from "./pages/Swap";
-import Legal from "./pages/Legal";
+import Home from "./pages/Home.jsx";
+import Gallery from "./pages/Gallery.jsx";
+import Collection from "./pages/Collection.jsx";
+import CollectionExchange from "./pages/CollectionExchange.jsx";
+import Vaults from "./pages/Vaults.jsx";
+import Whitepaper from "./pages/Whitepaper.jsx";
+import BlogazineRedirect from "./pages/BlogazineRedirect.jsx";
+// REMOVE this line:
+// import NotFound from "./NotFound.tsx";
 
-function App() {
+export default function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
+    <Router>
+      <Routes>
         <Route path="/" element={<Home />} />
+
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/collection" element={<Collection />} />
+        <Route path="/exchange" element={<CollectionExchange />} />
         <Route path="/vaults" element={<Vaults />} />
-        <Route path="/vaults/:vaultId" element={<VaultDetail />} />
-        <Route path="/swap" element={<Swap />} />
-        <Route path="/legal" element={<Legal />} />
-      </Route>
-    </Routes>
+
+        <Route path="/whitepaper" element={<Whitepaper />} />
+        <Route path="/blogazine" element={<BlogazineRedirect />} />
+
+        {/* TEMP: no NotFound route until file exists */}
+        {/* <Route path="*" element={<NotFound />} /> */}
+      </Routes>
+    </Router>
   );
 }
-
-export default App;

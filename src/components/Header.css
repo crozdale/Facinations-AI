@@ -1,53 +1,161 @@
-.site-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #000;
-  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-  z-index: 1000;
-}
+﻿@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap');
 
-.header-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 14px 32px;
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0.85rem 2rem;
+  background: rgba(6,6,6,0.97);
+  border-bottom: 1px solid rgba(212,175,55,0.12);
+  backdrop-filter: blur(8px);
 }
 
-.logo {
-  height: 48px;
-  width: auto;
-  display: block;
+.logo img {
+  height: 38px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(212,175,55,0.2));
+  transition: filter 0.3s;
 }
+.logo img:hover { filter: drop-shadow(0 0 20px rgba(212,175,55,0.4)); }
 
-.site-nav {
+.nav {
   display: flex;
-  gap: 32px;
+  gap: 0.1rem;
+  align-items: center;
 }
-
-.site-nav a {
-  color: #d4af37;
+.nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #888;
   text-decoration: none;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  padding: 0.4rem 0.7rem;
+  transition: color 0.2s;
+  position: relative;
 }
-
-.site-nav a:hover {
-  color: #fff;
-}
-.wallet-btn {
-  margin-left: 24px;
-  padding: 8px 16px;
-  border: 1px solid #d4af37;
-  background: transparent;
-  color: #d4af37;
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.wallet-btn:hover {
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; right: 50%;
+  height: 1px;
   background: #d4af37;
-  color: black;
+  transition: left 0.25s, right 0.25s;
+}
+.nav a:hover, .nav a.nav-active { color: #d4af37; }
+.nav a:hover::after, .nav a.nav-active::after { left: 0.7rem; right: 0.7rem; }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lang-select {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  background: transparent;
+  color: #888;
+  border: 1px solid rgba(212,175,55,0.2);
+  padding: 0.38rem 0.6rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lang-select:hover { color: #d4af37; border-color: rgba(212,175,55,0.5); }
+
+.wallet-button {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: none;
+  color: #d4af37;
+  border: 1px solid rgba(212,175,55,0.4);
+  padding: 0.45rem 1.1rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.wallet-button:hover {
+  background: rgba(212,175,55,0.1);
+  border-color: #d4af37;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+.ham-line {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: #d4af37;
+  transition: all 0.3s;
+}
+.ham-line.open:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.ham-line.open:nth-child(2) { opacity: 0; }
+.ham-line.open:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed;
+  top: 63px;
+  left: 0; right: 0;
+  z-index: 199;
+  background: rgba(6,6,6,0.98);
+  border-bottom: 1px solid rgba(212,175,55,0.12);
+  backdrop-filter: blur(12px);
+  animation: slideDown 0.2s ease;
+}
+.mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+.mobile-link {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #888;
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  border-left: 2px solid transparent;
+  transition: all 0.2s;
+}
+.mobile-link:hover, .mobile-link-active {
+  color: #d4af37;
+  border-left-color: #d4af37;
+  background: rgba(212,175,55,0.04);
+}
+.mobile-lang {
+  padding: 0.75rem 2rem;
+  border-top: 1px solid rgba(212,175,55,0.08);
+  margin-top: 0.5rem;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .hamburger { display: flex; }
+  .site-header { padding: 0.75rem 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .site-header { padding: 0.75rem 1rem; }
 }

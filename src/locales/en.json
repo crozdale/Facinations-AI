@@ -1,9 +1,8 @@
 {
-  "brand": "Façinations",
+  "siteTitle": "Facinations",
   "nav": {
-    "gallery": "Gallery",
-    "vaults": "Vaults",
-    "swap": "Swap",
-    "legal": "Legal"
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
   }
 }

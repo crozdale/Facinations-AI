@@ -10,6 +10,13 @@ contract VaultRegistry {
         bool active;
     }
 
+    event VaultRegistered(
+        string vaultId,
+        uint256 tokenId,
+        address contractAddr,
+        string legalURI
+    );
+
     mapping(string => Vault) public vaults;
 
     function registerVault(
@@ -24,6 +31,13 @@ contract VaultRegistry {
             contractAddr,
             legalURI,
             true
+        );
+
+        emit VaultRegistered(
+            vaultId,
+            tokenId,
+            contractAddr,
+            legalURI
         );
     }
 }

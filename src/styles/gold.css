@@ -1,0 +1,21 @@
+.gold-sigil {
+  width: 280px;
+  height: 280px;
+
+  background-image: url("/textures/gold.jpg");
+  background-size: 200% 200%;
+  background-position: center;
+
+  mask-image: url("/sigils/facinations-sigil.svg");
+  -webkit-mask-image: url("/sigils/facinations-sigil.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+
+  animation: goldShimmer 8s linear infinite;
+}
+
+@keyframes goldShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}

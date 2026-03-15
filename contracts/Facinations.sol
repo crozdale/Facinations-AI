@@ -6,36 +6,44 @@ import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Facinations is ERC721URIStorage, ERC2981, Ownable {
-    uint256 public tokenCounter;
-    uint256 public constant MAX_SUPPLY = 1000;
-    uint256 public mintPrice = 0.01 ether;
+    uint256 private _tokenCounter;
 
-    constructor() ERC721("Facinations", "FAC") Ownable(msg.sender) {
-        _setDefaultRoyalty(msg.sender, 500); // 5%
+    constructor(
+        string memory name_,
+        string memory symbol_,
+        address initialOwner,
+        address royaltyReceiver,
+        uint96 royaltyFee
+    )
+        ERC721(name_, symbol_)
+        Ownable(initialOwner)
+    {
+        _setDefaultRoyalty(royaltyReceiver, royaltyFee);
+        _tokenCounter = 0;
     }
 
-    function mint(string memory tokenURI) external payable {
-        require(tokenCounter < MAX_SUPPLY, "Sold out");
-        require(msg.value == mintPrice, "Incorrect ETH amount");
-
-        uint256 tokenId = tokenCounter;
-        tokenCounter++;
-
-        _safeMint(msg.sender, tokenId);
-        _setTokenURI(tokenId, tokenURI);
+    function mint(
+        address to,
+        string memory uri
+    ) external onlyOwner {
+        uint256 tokenId = _tokenCounter;
+        _safeMint(to, tokenId);
+        _setTokenURI(tokenId, uri);
+        _tokenCounter++;
     }
 
-    function withdraw() external onlyOwner {
-        (bool ok, ) = payable(owner()).call{value: address(this).balance}("");
-        require(ok, "Withdraw failed");
-    }
-
+    // 🔑 THIS IS THE FIX
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC721, ERC2981)
+        override(ERC721URIStorage, ERC2981)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
     }
 }
+cd C:\Users\crozd\Downloads\facinations-foundry
+set SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/4f9f75fdaf684612a5a51450cbd25832
+set PRIVATE_KEY=0xcffe123456933ac37ae163d993ea93352ae663fd28e3471fcd4898edc780ff6
+forge script script/DeployVaultRegistry.s.sol --rpc-url %SEPOLIA_RPC_URL% --private-key %PRIVATE_KEY% --broadcast
+

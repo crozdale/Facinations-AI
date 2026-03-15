@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PixL — Douglas Greedale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Questrial&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f2efe9;
+    --ash: #b0a99e;
+    --charcoal: #3a3530;
+    --graphite: #6b6360;
+    --white-smoke: #e8e4dd;
+    --accent: #c8b89a;
+    --gold: #a08060;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Questrial', sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ─── GRAIN OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem 3rem;
+    background: rgba(242,239,233,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(160,150,140,0.25);
+  }
+
+  .logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .logo span { color: var(--gold); }
+
+  nav { display: flex; gap: 2.4rem; align-items: center; }
+  nav a {
+    font-family: 'Questrial', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -3px;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  nav a:hover { color: var(--ink); }
+  nav a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: var(--ink);
+    color: var(--paper) !important;
+    padding: 0.6rem 1.4rem;
+    letter-spacing: 0.12em !important;
+    transition: background 0.3s !important;
+  }
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { background: var(--charcoal) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 4rem 5rem;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Questrial', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--graphite);
+  }
+
+  .hero-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 2rem 0;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--graphite);
+    line-height: 1.7;
+    max-width: 420px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 2.8rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .btn-primary {
+    font-family: 'Questrial', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid var(--ink);
+  }
+  .btn-primary:hover { background: transparent; color: var(--ink); }
+
+  .btn-ghost {
+    font-family: 'Questrial', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--graphite);
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    border: 1px solid var(--ash);
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+  .hero-image {
+    position: relative;
+    overflow: hidden;
+    background: var(--charcoal);
+    opacity: 0;
+    animation: fadeIn 1.2s 0.3s forwards;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(1.08);
+    transform: scale(1.04);
+    transition: transform 8s ease;
+  }
+  .hero-image:hover img { transform: scale(1.0); }
+
+  .hero-image-caption {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: rgba(242,239,233,0.75);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── SECTION TITLES ─── */
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .section-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--graphite); }
+
+  /* ─── FEATURED WORK ─── */
+  #works {
+    padding: 8rem 5rem;
+    background: var(--paper);
+  }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+  }
+
+  .work-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--charcoal);
+    cursor: pointer;
+  }
+
+  .work-card.large { grid-row: span 2; }
+
+  .work-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(15%) contrast(1.05);
+    transition: transform 0.7s ease, filter 0.5s ease;
+    min-height: 280px;
+  }
+  .work-card:hover img {
+    transform: scale(1.06);
+    filter: grayscale(0%) contrast(1.1);
+  }
+
+  .work-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(14,14,14,0.85) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+  }
+  .work-card:hover .work-overlay { opacity: 1; }
+
+  .work-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--paper);
+    margin-bottom: 0.4rem;
+  }
+  .work-meta {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .work-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--paper);
+    margin-top: 0.6rem;
+  }
+
+  /* ─── FEATURED LISTING ─── */
+  #featured {
+    padding: 8rem 5rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .featured-image {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+  .featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(10%) contrast(1.1);
+    transition: transform 0.8s ease;
+  }
+  .featured-image:hover img { transform: scale(1.04); }
+  .featured-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(200,184,154,0.3);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: 1.2rem; right: 1.2rem;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.8rem;
+    z-index: 2;
+  }
+
+  .featured-content { padding: 1rem 0; }
+
+  .featured-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .featured-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--paper);
+    margin-bottom: 0.5rem;
+  }
+  .featured-artist {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ash);
+    margin-bottom: 1.8rem;
+  }
+
+  .featured-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(200,184,154,0.2);
+    background: rgba(255,255,255,0.03);
+  }
+
+  .spec-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .spec-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ash);
+  }
+  .spec-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--paper);
+  }
+
+  .featured-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(242,239,233,0.7);
+    margin-bottom: 2rem;
+    border-left: 2px solid var(--gold);
+    padding-left: 1.2rem;
+  }
+
+  .featured-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .featured-price span {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ash);
+    vertical-align: middle;
+    margin-left: 0.5rem;
+  }
+
+  .featured-actions { display: flex; gap: 1rem; }
+
+  .btn-light {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    border: 1px solid var(--paper);
+    transition: all 0.3s;
+    cursor: pointer;
+    font-family: 'Questrial', sans-serif;
+  }
+  .btn-light:hover { background: transparent; color: var(--paper); }
+
+  .btn-outline-light {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--ash);
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    border: 1px solid rgba(200,184,154,0.4);
+    transition: all 0.3s;
+    cursor: pointer;
+    font-family: 'Questrial', sans-serif;
+  }
+  .btn-outline-light:hover { border-color: var(--paper); color: var(--paper); }
+
+  /* ─── ABOUT ─── */
+  #about {
+    padding: 8rem 5rem;
+    background: var(--white-smoke);
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-image-wrap {
+    position: relative;
+  }
+  .about-image-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    width: 60%;
+    height: 60%;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .about-image-wrap img {
+    width: 100%;
+    display: block;
+    filter: grayscale(20%) contrast(1.05);
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-content {}
+  .about-content .section-header { text-align: left; }
+
+  .about-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.12rem;
+    line-height: 1.85;
+    color: var(--charcoal);
+    margin-bottom: 1.4rem;
+  }
+  .about-text em { color: var(--graphite); }
+
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--ink);
+    line-height: 1.5;
+    border-left: 3px solid var(--gold);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--ash);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    margin-top: 0.4rem;
+  }
+
+  /* ─── MEDIA TYPES ─── */
+  #media {
+    padding: 8rem 5rem;
+    background: var(--paper);
+  }
+
+  .media-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .media-card {
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(160,150,140,0.3);
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+    background: var(--paper);
+  }
+  .media-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+  .media-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.4s;
+  }
+  .media-card:hover::before { width: 100%; }
+
+  .media-icon {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+  }
+  .media-type {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .media-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    color: var(--graphite);
+    line-height: 1.7;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    padding: 8rem 5rem;
+    background: var(--charcoal);
+    color: var(--paper);
+    text-align: center;
+  }
+
+  #contact .section-title { color: var(--paper); }
+  #contact .section-eyebrow { color: var(--gold); }
+
+  .contact-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ash);
+    max-width: 480px;
+    margin: 1rem auto 3rem;
+    line-height: 1.7;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ash);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(200,184,154,0.25);
+    color: var(--paper);
+    padding: 0.8rem 1rem;
+    font-family: 'Questrial', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--charcoal); }
+  .form-group textarea { height: 120px; }
+
+  .form-submit {
+    font-family: 'Questrial', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 0.5rem;
+    align-self: center;
+  }
+  .form-submit:hover { background: var(--accent); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: var(--ash);
+    padding: 3rem 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(200,184,154,0.15);
+  }
+
+  .footer-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--paper);
+    letter-spacing: 0.25em;
+  }
+  .footer-logo span { color: var(--gold); }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--graphite);
+    text-align: center;
+  }
+
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ─── ANIMATION ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ─── GIF PREVIEW MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(14,14,14,0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-inner {
+    background: var(--charcoal);
+    max-width: 800px;
+    width: 90%;
+    padding: 2.5rem;
+    position: relative;
+    border: 1px solid rgba(200,184,154,0.2);
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem; right: 1.2rem;
+    font-size: 1.4rem;
+    color: var(--ash);
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--paper); }
+  .modal-inner img { width: 100%; display: block; margin-bottom: 1.2rem; }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--paper);
+    margin-bottom: 0.4rem;
+  }
+  .modal-sub {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    header { padding: 1.2rem 1.5rem; }
+    nav { gap: 1.2rem; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-text { padding: 5rem 2rem 3rem; }
+    .hero-image { height: 55vw; }
+    #works, #featured, #about, #media, #contact { padding: 5rem 2rem; }
+    .works-grid { grid-template-columns: 1fr; }
+    .work-card.large { grid-row: auto; }
+    .featured-grid { grid-template-columns: 1fr; gap: 3rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .media-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">Pix<span>L</span></a>
+  <nav>
+    <a href="#works">Works</a>
+    <a href="#featured">Featured</a>
+    <a href="#about">Artist</a>
+    <a href="#media">Media</a>
+    <a href="#contact" class="nav-cta">Acquire</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Gallery · Graphite & Digital</p>
+    <h1 class="hero-title">
+      The Art of<br><em>Perception</em><br>in Grayscale
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">
+      Original works exploring the ritual of perception — where the human face meets geometry, and observation becomes dramaturgical act.
+    </p>
+    <div class="hero-actions">
+      <a href="#works" class="btn-primary">View Collection</a>
+      <a href="#featured" class="btn-ghost">Featured Work</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="An_MP4_Animation.png" alt="Ritual Cube — Douglas Greedale">
+    <div class="hero-image-caption">Ritual Cube, pencil on paper, 2024</div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Collection</p>
+    <h2 class="section-title">Selected <em>Works</em></h2>
+  </div>
+
+  <div class="works-grid reveal">
+    <div class="work-card large" onclick="openModal()">
+      <img src="Shapes_of_Grey_Corporate_GIF.gif" alt="Shapes of Grey">
+      <div class="work-overlay">
+        <div class="work-title">Shapes of Grey</div>
+        <div class="work-meta">Animated · MP4 + GIF · 20s · 1920×1080</div>
+        <div class="work-price">$2,990 USD</div>
+      </div>
+    </div>
+
+    <div class="work-card">
+      <img src="An_MP4_Animation.png" alt="Ritual Cube">
+      <div class="work-overlay">
+        <div class="work-title">Ritual Cube</div>
+        <div class="work-meta">Pencil on Paper · Original</div>
+        <div class="work-price">Enquire</div>
+      </div>
+    </div>
+
+    <div class="work-card" style="background: #2a2520; display: flex; align-items: center; justify-content: center; min-height: 200px;">
+      <div style="text-align:center; padding: 2rem;">
+        <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; color:var(--ash); margin-bottom:0.8rem;">More works</div>
+        <div style="font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--graphite);">Coming Soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section id="featured">
+  <div class="featured-grid">
+    <div class="featured-image reveal">
+      <div class="featured-badge">Available Now</div>
+      <img src="Shapes_of_Grey_Corporate_GIF.gif" alt="Shapes of Grey animated">
+    </div>
+
+    <div class="featured-content reveal">
+      <p class="featured-eyebrow">Featured Work · 2024</p>
+      <h2 class="featured-title">Shapes of Grey</h2>
+      <p class="featured-artist">Douglas Greedale</p>
+
+      <div class="featured-specs">
+        <div class="spec-item">
+          <span class="spec-label">Medium</span>
+          <span class="spec-value">MP4 + GIF</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Duration</span>
+          <span class="spec-value">20 seconds</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Resolution</span>
+          <span class="spec-value">1920 × 1080</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Format</span>
+          <span class="spec-value">16:9 Landscape</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Trademark</span>
+          <span class="spec-value">Corporate</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Edition</span>
+          <span class="spec-value">1 of 1</span>
+        </div>
+      </div>
+
+      <p class="featured-description">
+        A dual-axis Rubik's Cube rotates in slow vertical turns and random horizontal tilts, revealing grayscale emotional fragments with each pause. The stationary woman observes — her gesture echoing the original Shapes of Gray pose — while chiaroscuro reflections flicker across her face in a ritual of perception.
+      </p>
+
+      <div class="featured-price">$2,990 <span>USD</span></div>
+
+      <div class="featured-actions">
+        <button class="btn-light" onclick="openModal()">Preview Animation</button>
+        <a href="#contact" class="btn-outline-light">Acquire</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-image-wrap reveal">
+    <img src="An_MP4_Animation.png" alt="Ritual Cube drawing">
+  </div>
+
+  <div class="about-content reveal">
+    <div class="section-header" style="text-align:left">
+      <p class="section-eyebrow">The Artist</p>
+      <h2 class="section-title">Douglas <em>Greedale</em></h2>
+    </div>
+
+    <p class="about-text">
+      Douglas Greedale works at the intersection of graphite portraiture and digital animation — exploring the fragmented nature of human perception through geometric structures and dramatic chiaroscuro.
+    </p>
+
+    <div class="about-quote">
+      "Each turn of the cube reveals new emotional fragments — inscribing a ritual of perception and dramaturgical reflection."
+    </div>
+
+    <p class="about-text">
+      His works place the observer as both subject and witness. <em>Shapes of Grey</em> and the pencil series extend this practice into motion and stillness simultaneously — a duality that defines his visual language.
+    </p>
+
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Years Practice</div>
+      </div>
+      <div>
+        <div class="stat-num">2</div>
+        <div class="stat-label">Media Types</div>
+      </div>
+      <div>
+        <div class="stat-num">1:1</div>
+        <div class="stat-label">Editions Only</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA TYPES -->
+<section id="media">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Formats Available</p>
+    <h2 class="section-title">Works in <em>Every Medium</em></h2>
+  </div>
+
+  <div class="media-grid reveal">
+    <div class="media-card">
+      <div class="media-icon">✏️</div>
+      <div class="media-type">Original Drawing</div>
+      <div class="media-desc">Pencil and graphite on archival paper. Unique, signed originals available for private collection.</div>
+    </div>
+    <div class="media-card">
+      <div class="media-icon">🎞</div>
+      <div class="media-type">MP4 Animation</div>
+      <div class="media-desc">Full 1920×1080 HD animation. Delivered as MP4 for institutional display and digital acquisition.</div>
+    </div>
+    <div class="media-card">
+      <div class="media-icon">🖼</div>
+      <div class="media-type">Animated GIF</div>
+      <div class="media-desc">Looping GIF format ideal for web, digital signage, and corporate trademark applications.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Acquisition & Enquiries</p>
+    <h2 class="section-title" style="color:var(--paper)">Begin the <em>Conversation</em></h2>
+  </div>
+  <p class="contact-sub reveal">
+    For purchase enquiries, licensing, or private viewings — reach out directly.
+  </p>
+
+  <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" placeholder="Your name" required>
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" placeholder="Last name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="your@email.com" required>
+    </div>
+    <div class="form-group">
+      <label>Interest</label>
+      <select>
+        <option value="">Select a work…</option>
+        <option>Shapes of Grey — MP4 + GIF ($2,990)</option>
+        <option>Ritual Cube — Original Drawing</option>
+        <option>Commission Enquiry</option>
+        <option>Corporate Licensing</option>
+        <option>General Enquiry</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Message</label>
+      <textarea placeholder="Tell us about your interest or collection…"></textarea>
+    </div>
+    <button type="submit" class="form-submit">Send Enquiry</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Pix<span>L</span></div>
+  <div class="footer-copy">© 2024 Douglas Greedale · All rights reserved</div>
+  <div class="footer-links">
+    <a href="#works">Works</a>
+    <a href="#about">Artist</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img src="Shapes_of_Grey_Corporate_GIF.gif" alt="Shapes of Grey – animated preview">
+    <div class="modal-title">Shapes of Grey</div>
+    <div class="modal-sub">20-second animated loop · 1920×1080 · MP4 + GIF</div>
+  </div>
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // Modal
+  function openModal() {
+    document.getElementById('modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = 'Enquiry Sent ✓';
+    btn.style.background = '#7a9070';
+    setTimeout(() => {
+      btn.textContent = 'Send Enquiry';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+
+  // Header shrink on scroll
+  window.addEventListener('scroll', () => {
+    document.querySelector('header').style.padding =
+      window.scrollY > 60 ? '0.9rem 3rem' : '1.4rem 3rem';
+  });
+</script>
+</body>
+</html>

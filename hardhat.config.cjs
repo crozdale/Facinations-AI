@@ -1,14 +1,18 @@
-require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-ethers");
 require("dotenv").config();
 
 module.exports = {
-  solidity: "0.8.20",
+  solidity: {
+    version: "0.8.24",
+    settings: {
+      optimizer: { enabled: true, runs: 200 },
+    },
+  },
   networks: {
     sepolia: {
-      url: process.env.SEPOLIA_RPC_URL,
-      accounts: [process.env.PRIVATE_KEY],
+      type: "http",
+      url: process.env.CHAINSTACK_RPC_URL,
+      accounts: [process.env.DEPLOYER_PRIVATE_KEY],
     },
   },
 };
-
-

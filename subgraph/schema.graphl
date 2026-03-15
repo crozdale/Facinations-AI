@@ -1,0 +1,9 @@
+type PremiumPurchase @entity(immutable: true) {
+  id: ID!
+  ...
+}
+
+type Vault @entity(immutable: true) {
+  id: ID!
+  ...
+}

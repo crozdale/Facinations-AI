@@ -1,29 +1,24 @@
-import { ethers } from "ethers";
-// import VaultRegistryABI from "../abis/VaultRegistry.json";
+/**
+ * Facinations — Canonical Vault Registry
+ * -------------------------------------
+ * If a vault is not declared here, it does not exist.
+ */
 
-// On-chain registry contract
-const REGISTRY_ADDRESS = "0xYOUR_DEPLOYED_REGISTRY_ADDRESS";
-
-export async function getVault(vaultId) {
-  const provider = new ethers.BrowserProvider(window.ethereum);
-  const contract = new ethers.Contract(
-    REGISTRY_ADDRESS,
-    //VaultRegistryABI,
-    provider
-  );
-
-  return await contract.vaults(vaultId);
-}
-
-export async function registerVault(vaultId, tokenId, contractAddress, legalURI) {
-  const provider = new ethers.BrowserProvider(window.ethereum);
-  const signer = await provider.getSigner();
-
-  const contract = new ethers.Contract(
-    REGISTRY_ADDRESS,
-   // VaultRegistryABI,
-    signer
-  );
-
-  return contract.registerVault(vaultId, tokenId, contractAddress, legalURI);
-}
+export const VAULTS = [
+  {
+    vaultId: "VAULT-ALBATRIX-001",
+    name: "Albatrix I",
+    description: "Genesis fractionalized artwork vault.",
+    contractAddress: "0x0000000000000000000000000000000000000000",
+    chainId: 1,
+    premiumRequired: true
+  },
+  {
+    vaultId: "VAULT-OPEN-ARCHIVE",
+    name: "Open Archive",
+    description: "Read-only provenance archive.",
+    contractAddress: "0x0000000000000000000000000000000000000000",
+    chainId: 1,
+    premiumRequired: false
+  }
+];

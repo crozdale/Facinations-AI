@@ -1,0 +1,18 @@
+type Swap @entity {
+  id: ID!                      # tx hash
+  user: Bytes!                 # address that called swap()
+  tokenOut: Bytes!             # token received
+  amountIn: BigInt!            # XER sent (before fee)
+  feePaid: BigInt!             # protocol fee in XER
+  amountOut: BigInt!           # tokens received
+  timestamp: BigInt!           # block timestamp
+  blockNumber: BigInt!         # block number
+}
+
+type SwapUser @entity {
+  id: ID!                      # user address
+  totalSwaps: BigInt!          # number of swaps
+  totalXerIn: BigInt!          # cumulative XER spent
+  totalFeesPaid: BigInt!       # cumulative fees paid
+  lastSwapAt: BigInt!          # timestamp of most recent swap
+}

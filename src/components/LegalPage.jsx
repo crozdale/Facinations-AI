@@ -7,11 +7,8 @@ export default function LegalPage({ file }) {
   useEffect(() => {
     fetch(file)
       .then((res) => res.text())
-      .then((text) =>
-        setContent(
-          text.replace("{{DATE}}", new Date().toLocaleDateString())
-        )
-      );
+      .then(setContent)
+      .catch(() => setContent("Failed to load document."));
   }, [file]);
 
   return (

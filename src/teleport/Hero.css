@@ -1,0 +1,17 @@
+.teleport-hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2rem;
+  color: #ffffff;
+  background: linear-gradient(120deg, #1a1a1a, #000000);
+}
+
+/* CRITICAL TELEPORT SAFETY */
+.teleport-shell {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}

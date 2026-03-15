@@ -1,0 +1,25 @@
+{
+  "transactions": [
+    {
+      "rpc": "https://ethereum-sepolia.core.chainstack.com/95e64965a9d6491c81dfaa88e63c7980"
+    },
+    {
+      "rpc": "https://ethereum-sepolia.core.chainstack.com/95e64965a9d6491c81dfaa88e63c7980"
+    },
+    {
+      "rpc": "https://ethereum-sepolia.core.chainstack.com/95e64965a9d6491c81dfaa88e63c7980"
+    },
+    {
+      "rpc": "https://ethereum-sepolia.core.chainstack.com/95e64965a9d6491c81dfaa88e63c7980"
+    },
+    {
+      "rpc": "https://ethereum-sepolia.core.chainstack.com/95e64965a9d6491c81dfaa88e63c7980"
+    },
+    {
+      "rpc": "https://ethereum-sepolia.core.chainstack.com/95e64965a9d6491c81dfaa88e63c7980"
+    },
+    {
+      "rpc": "https://ethereum-sepolia.core.chainstack.com/95e64965a9d6491c81dfaa88e63c7980"
+    }
+  ]
+}

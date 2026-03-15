@@ -1,0 +1,18 @@
+type Swap @entity(immutable: true) {
+  id: ID!
+  user: Bytes!
+  tokenOut: Bytes!
+  amountIn: BigInt!
+  feePaid: BigInt!
+  amountOut: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+type SwapUser @entity(immutable: false) {
+  id: ID!
+  totalSwaps: BigInt!
+  totalXerIn: BigInt!
+  totalFeesPaid: BigInt!
+  lastSwapAt: BigInt!
+}

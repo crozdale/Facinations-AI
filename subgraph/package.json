@@ -1,0 +1,15 @@
+{
+  "name": "facinations-subgraph",
+  "version": "1.0.0",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --product hosted-service facinations"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-ts": "^0.38.2"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.91.1"
+  }
+}
