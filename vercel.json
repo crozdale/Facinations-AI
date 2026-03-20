@@ -1,25 +1,9 @@
 {
-  "buildCommand": "pnpm install --include=dev && pnpm exec vite build",
-  "outputDirectory": "dist",
-  "rewrites": [
-    {
-      "source": "/api/claude/:path*",
-      "destination": "https://api.anthropic.com/:path*"
-    },
-{
-  "buildCommand": "pnpm install --include=dev && pnpm exec vite build",
-  "outputDirectory": "dist",
   "rewrites": [
     {
       "source": "/api/claude/:path*",
       "destination": "/api/claude"
     },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
-}
     {
       "source": "/(.*)",
       "destination": "/index.html"
