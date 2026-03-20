@@ -1,14 +1,15 @@
-{
+Set-Content package.json '{
   "name": "facinations",
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18.18.0"
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite",
+    "build": "vite build",
     "preview": "vite preview",
     "facinations:build": "npx hardhat compile && node scripts/verify-events.js && node scripts/generate-subgraph.js && cd subgraph && npx graph codegen && npx graph build",
     "facinations:deploy": "npm run facinations:build && cd subgraph && npx graph deploy facinations -l v0.0.1",
@@ -44,4 +45,4 @@
     "vite": "^7.3.0",
     "vite-tsconfig-paths": "^6.0.3"
   }
-}
+}'
