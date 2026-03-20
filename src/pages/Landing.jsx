@@ -1,5 +1,6 @@
 // src/pages/Landing.jsx
 import { Link } from "react-router-dom";
+import { DealerIntelligencePanel } from "../components/dealer/DealerIntelligencePanel";
 
 export default function Landing() {
   return (
@@ -53,7 +54,16 @@ export default function Landing() {
         <div className="border border-zinc-800 rounded-lg p-5">
           <h2 className="text-lg font-medium mb-1">Sales Partners</h2>
           <p className="text-xs text-zinc-400 mb-4">
-            Learn the story and strategy behind Facinations at the Blogazine.
+            Learn the story and strategy behind Facinations at the 
+{/* Existing landing content above */}
+
+<DealerIntelligencePanel />
+
+{/* Rest of landing content below */}
+
+
+
+Blogazine.
           </p>
           <Link to="/blogazine" className="px-3 py-1.5 border border-zinc-700 rounded text-sm">
             Visit Blogazine
