@@ -7,15 +7,12 @@
   "engines": {
     "node": ">=18.18.0"
   },
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "facinations:build": "npx hardhat compile && node scripts/verify-events.js && node scripts/generate-subgraph.js && cd subgraph && npx graph codegen && npx graph build",
-    "facinations:deploy": "npm run facinations:build && cd subgraph && npx graph deploy facinations -l v0.0.1",
-    "facinations:fix": "node scripts/facinations-fix.js",
-    "facinations:redeploy": "node scripts/redeploy.js"
-  },
+ "scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+}
+
   "dependencies": {
     "@apollo/client": "^3.11.8",
     "@tanstack/react-query": "^5.90.21",
