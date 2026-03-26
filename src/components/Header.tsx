@@ -22,6 +22,7 @@ export default function Header() {
     ["/vaults", "nav.vaults", "Vaults"],
     ["/swap", "nav.swap", "Swap"],
     ["/studio", "nav.studio", "Studio"],
+    ["/dashboard", "nav.dashboard", "Dashboard"],
     ["/architecture", "nav.arch", "Docs"],
     ["/legal", "nav.legal", "Legal"],
   ];
@@ -38,12 +39,13 @@ export default function Header() {
             />
           </Link>
         </div>
-        <nav className="nav">
+        <nav className="nav" aria-label="Main navigation">
           {links.map(([path, key, fallback]) => (
             <Link
               key={path}
               to={path}
               className={location.pathname === path ? "nav-active" : ""}
+              aria-current={location.pathname === path ? "page" : undefined}
             >
               {t(key, fallback)}
             </Link>
@@ -54,6 +56,7 @@ export default function Header() {
             className="lang-select"
             value={i18n.language || "en"}
             onChange={handleLanguageChange}
+            aria-label="Select language"
           >
             {[
               ["en", "EN"],
@@ -65,6 +68,9 @@ export default function Header() {
               ["ko", "KO"],
               ["zh-CN", "ZH"],
               ["ja", "JA"],
+              ["ru", "RU"],
+              ["ar", "AR"],
+              ["hi", "HI"],
             ].map(([v, l]) => (
               <option key={v} value={v}>
                 {l}
@@ -75,7 +81,9 @@ export default function Header() {
           <button
             className="hamburger"
             onClick={() => setMenuOpen((o) => !o)}
-            aria-label="Menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             <span className={`ham-line ${menuOpen ? "open" : ""}`} />
             <span className={`ham-line ${menuOpen ? "open" : ""}`} />
@@ -84,7 +92,7 @@ export default function Header() {
         </div>
       </header>
       {menuOpen && (
-        <div className="mobile-menu">
+        <nav id="mobile-menu" className="mobile-menu" aria-label="Mobile navigation">
           <div className="mobile-menu-inner">
             {links.map(([path, key, fallback]) => (
               <Link
@@ -94,6 +102,7 @@ export default function Header() {
                   location.pathname === path ? "mobile-link-active" : ""
                 }`}
                 onClick={() => setMenuOpen(false)}
+                aria-current={location.pathname === path ? "page" : undefined}
               >
                 {t(key, fallback)}
               </Link>
@@ -103,6 +112,7 @@ export default function Header() {
                 className="lang-select"
                 value={i18n.language || "en"}
                 onChange={handleLanguageChange}
+                aria-label="Select language"
               >
                 {[
                   ["en", "EN"],
@@ -114,6 +124,9 @@ export default function Header() {
                   ["ko", "KO"],
                   ["zh-CN", "ZH"],
                   ["ja", "JA"],
+                  ["ru", "RU"],
+                  ["ar", "AR"],
+                  ["hi", "HI"],
                 ].map(([v, l]) => (
                   <option key={v} value={v}>
                     {l}
@@ -122,7 +135,7 @@ export default function Header() {
               </select>
             </div>
           </div>
-        </div>
+        </nav>
       )}
     </>
   );

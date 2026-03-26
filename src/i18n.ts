@@ -8,7 +8,7 @@ i18n
   .init({
     lng: localStorage.getItem("facinations_lang") || "en",
     fallbackLng: "en",
-    supportedLngs: ["en", "es", "fr", "it", "de", "ko", "zh-CN", "pt-BR", "ja"],
+    supportedLngs: ["en", "es", "fr", "it", "de", "ko", "zh-CN", "pt-BR", "ja", "ru", "ar", "hi"],
     backend: {
       loadPath: "/locales/{{lng}}/translation.json",
     },

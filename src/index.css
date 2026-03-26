@@ -1,33 +1,104 @@
-/* src/index.css (or main css) */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400&display=swap');
 
-/* 1. Tailwind directives must be at the root, before your custom classes */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 2. Your custom styles below */
+/* ── Design tokens ─────────────────────────────────────────────────────────── */
+/* Adapted from XerVault's token system to Musée-Crosdale's darker gallery palette */
 
+@layer base {
+  :root {
+    /* Backgrounds */
+    --background:      0 0% 3%;        /* #080808 — near-black gallery bg */
+    --card:            0 0% 4%;        /* #0a0a0a */
+    --card-surface:    0 0% 2%;        /* #050505 — deepest surface */
+
+    /* Foregrounds */
+    --foreground:      39 35% 88%;     /* #e8e0d0 — warm off-white */
+    --foreground-muted: 30 8% 56%;     /* #9a9288 — secondary text */
+    --foreground-dim:  30 5% 40%;      /* #6a6258 — tertiary / labels */
+
+    /* Gold — the primary accent */
+    --primary:         47 67% 52%;     /* #d4af37 — gallery gold */
+    --primary-foreground: 0 0% 2%;     /* dark text on gold buttons */
+
+    /* Borders */
+    --border:          47 67% 52% / 0.25;   /* gold-tinted, mid opacity */
+    --border-faint:    47 67% 52% / 0.08;   /* subtle section dividers */
+    --border-mid:      47 67% 52% / 0.15;   /* panels / cards */
+    --border-strong:   47 67% 52% / 0.4;    /* inputs / focus */
+
+    /* Semantic */
+    --destructive:     0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --input:           0 0% 4%;
+    --ring:            47 67% 52%;
+    --radius:          0px;            /* Musée uses sharp corners throughout */
+
+    /* Sidebar (mirrors main) */
+    --sidebar-background: 0 0% 2%;
+    --sidebar-foreground: 39 35% 88%;
+    --sidebar-primary: 47 67% 52%;
+    --sidebar-primary-foreground: 0 0% 2%;
+    --sidebar-accent:  0 0% 4%;
+    --sidebar-accent-foreground: 39 35% 88%;
+    --sidebar-border:  47 20% 18%;
+    --sidebar-ring:    47 67% 52%;
+
+    /* Typography */
+    --font-display: 'Cinzel', serif;
+    --font-body:    'Cormorant Garamond', Georgia, serif;
+
+    /* Risk / status colors */
+    --risk-low:    120 40% 45%;   /* #5cb85c */
+    --risk-medium: 47 55% 51%;    /* #d4af37 */
+    --risk-high:   348 100% 46%;  /* #e00055 */
+  }
+}
+
+/* ── Base styles ───────────────────────────────────────────────────────────── */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
+    margin: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+}
+
+/* ── Utility classes ───────────────────────────────────────────────────────── */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Legacy layout helpers (kept for existing components) */
 .vault-layout {
   display: grid;
   grid-template-columns: 2fr 1.5fr;
   gap: 2rem;
 }
-
 .vault-layout__detail {
-  border-left: 1px solid #e2e2e2;
+  border-left: 1px solid rgba(212, 175, 55, 0.15);
   padding-left: 1.5rem;
 }
-
 .teleport-shell {
   position: relative;
   z-index: 1;
   pointer-events: none;
-}
-
-body {
-  margin: 0;
-  background: #000;
-  color: #fff;
-  font-family: system-ui, sans-serif;
-  pointer-events: auto;
 }

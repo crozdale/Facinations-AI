@@ -1,47 +1,103 @@
-﻿export default function About() {
+// src/pages/About.tsx
+import { useTranslation } from "react-i18next";
+import { useMeta } from "../hooks/useMeta";
+import { tk } from "../styles/tokens";
+
+export default function About() {
+  const { t } = useTranslation();
+
+  useMeta({
+    title: t("about.title"),
+    description:
+      "Learn about Musée-Crosdale and the Facinations protocol — the on-chain infrastructure for fine-art provenance, fractionalization, and collector access.",
+  });
+
   return (
-    <div className="min-h-screen bg-black text-zinc-100 px-6 py-12 flex justify-center">
-      <div className="max-w-3xl w-full">
-        <h1 className="text-3xl font-semibold mb-4">About Facinations</h1>
+    <main style={{ background: tk.bg, minHeight: "100vh", fontFamily: tk.fontBody, color: tk.fg }}>
 
-        <p className="text-sm text-zinc-300 mb-6">
-          Facinations is a fine art–first platform for cultural capital. It
-          fractionalizes museum-grade works into programmable vaults and turns
-          provenance into a liquid, composable financial primitive.
+      {/* Hero */}
+      <header style={{
+        textAlign: "center",
+        padding: "5rem 2rem 3rem",
+        position: "relative",
+        borderBottom: `1px solid ${tk.borderFaint}`,
+      }}>
+        <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 70% 60% at 50% 0%, ${tk.goldTint05} 0%, transparent 70%)`, pointerEvents: "none" }} />
+        <p style={{ fontFamily: tk.fontDisplay, fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: tk.gold, marginBottom: "1rem" }}>
+          {t("about.eyebrow")}
+        </p>
+        <h1 style={{ fontFamily: tk.fontDisplay, fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)", fontWeight: 400, color: tk.fg, letterSpacing: "0.1em", margin: 0 }}>
+          {t("about.title")}
+        </h1>
+        <div style={{ width: 60, height: 1, background: `linear-gradient(to right, transparent, ${tk.gold}, transparent)`, margin: "1.5rem auto 0" }} />
+      </header>
+
+      {/* Body */}
+      <article style={{ maxWidth: 720, margin: "0 auto", padding: "4rem 2rem 6rem" }}>
+
+        <p style={{ fontSize: "1.05rem", color: tk.fgMuted, lineHeight: 1.9, fontStyle: "italic", marginBottom: "3rem", borderLeft: `2px solid ${tk.border}`, paddingLeft: "1.25rem" }}>
+          {t("about.lead")}
         </p>
 
-        <h2 className="text-lg font-medium mb-2">Why Now</h2>
-        <p className="text-sm text-zinc-400 mb-4">
-          The global fine art market is large, illiquid, and structurally
-          opaque. Facinations introduces a protocol layer that unlocks secondary
-          liquidity while preserving the discretion and prestige of traditional
-          art markets.
-        </p>
+        <section style={{ marginBottom: "2.5rem" }}>
+          <h2 style={{ fontFamily: tk.fontDisplay, fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: tk.gold, marginBottom: "0.75rem" }}>
+            {t("about.section_why")}
+          </h2>
+          <p style={{ fontSize: "0.98rem", color: tk.fgMuted, lineHeight: 1.9 }}>
+            {t("about.why_body")}
+          </p>
+        </section>
 
-        <h2 className="text-lg font-medium mb-2">How It Works</h2>
-        <ul className="text-sm text-zinc-400 mb-4 list-disc list-inside space-y-1">
-          <li>Gallery: discovery of curated works and civilization narratives.</li>
-          <li>Collection & Exchange: private, fine art–native secondary market.</li>
-          <li>Vaults: institutional-grade custody and provenance memory layer.</li>
-        </ul>
+        <section style={{ marginBottom: "2.5rem" }}>
+          <h2 style={{ fontFamily: tk.fontDisplay, fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: tk.gold, marginBottom: "0.75rem" }}>
+            {t("about.section_how")}
+          </h2>
+          <ul style={{ padding: 0, margin: 0, listStyle: "none" }}>
+            {[
+              t("about.how_gallery"),
+              t("about.how_exchange"),
+              t("about.how_vaults"),
+            ].map((item) => (
+              <li key={item} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start", marginBottom: "0.75rem", fontSize: "0.98rem", color: tk.fgMuted, lineHeight: 1.8 }}>
+                <span style={{ color: tk.goldTint10, flexShrink: 0, marginTop: "0.3rem" }}>—</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </section>
 
-        <h2 className="text-lg font-medium mb-2">Team</h2>
-        <p className="text-sm text-zinc-400 mb-6">
-          Facinations is built by a team at the intersection of fine art,
-          blockchain protocol design, and narrative systems, with experience
-          across galleries, DeFi, and cultural production.
-        </p>
+        <section style={{ marginBottom: "3rem" }}>
+          <h2 style={{ fontFamily: tk.fontDisplay, fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: tk.gold, marginBottom: "0.75rem" }}>
+            {t("about.section_team")}
+          </h2>
+          <p style={{ fontSize: "0.98rem", color: tk.fgMuted, lineHeight: 1.9 }}>
+            {t("about.team_body")}
+          </p>
+        </section>
 
-        <button
-          className="px-4 py-2 rounded border border-zinc-700 text-sm hover:bg-zinc-800 transition"
-          onClick={() => {
-            window.location.href =
-              "mailto:founder@facinations.app?subject=Investor%20Inquiry";
-          }}
-        >
-          Request Investor Deck
-        </button>
-      </div>
-    </div>
+        <div style={{ borderTop: `1px solid ${tk.borderFaint}`, paddingTop: "2.5rem" }}>
+          <button
+            style={{
+              fontFamily: tk.fontDisplay,
+              fontSize: "0.6rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: tk.gold,
+              border: `1px solid ${tk.borderMid}`,
+              background: "transparent",
+              padding: "0.65rem 1.5rem",
+              cursor: "pointer",
+              transition: `border-color 0.2s ${tk.ease}`,
+            }}
+            onClick={() => {
+              window.location.href =
+                "mailto:founder@facinations.app?subject=Investor%20Inquiry";
+            }}
+          >
+            {t("about.btn_investor")}
+          </button>
+        </div>
+      </article>
+    </main>
   );
 }

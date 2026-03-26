@@ -1,4 +1,6 @@
 ﻿import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useMeta } from "../hooks/useMeta";
 
 const sections = [
   { id: "overview", title: "How Data Flows", content: [
@@ -48,13 +50,18 @@ const sections = [
 ];
 
 export default function Architecture() {
+  const { t } = useTranslation();
+  useMeta({
+    title: t("architecture.eyebrow"),
+    description: "Technical documentation for the Facinations protocol — subgraph data flow, smart contracts, ETL pipeline, and swap mechanics.",
+  });
   const [active, setActive] = useState("overview");
   const current = sections.find(s => s.id === active);
   return (
     <div style={{ display: "flex", minHeight: "100vh", background: "#080808", color: "#e8e0d0", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');`}</style>
       <nav style={{ width: 220, borderRight: "1px solid rgba(212,175,55,0.1)", padding: "2.5rem 0", flexShrink: 0, background: "#060606" }}>
-        <p style={{ color: "#d4af37", fontFamily: "'Cinzel', serif", fontSize: "0.58rem", letterSpacing: "0.25em", textTransform: "uppercase", padding: "0 1.25rem", marginBottom: "1.5rem" }}>Architecture</p>
+        <p style={{ color: "#d4af37", fontFamily: "'Cinzel', serif", fontSize: "0.58rem", letterSpacing: "0.25em", textTransform: "uppercase", padding: "0 1.25rem", marginBottom: "1.5rem" }}>{t("architecture.eyebrow")}</p>
         {sections.map(s => (
           <button key={s.id} onClick={() => setActive(s.id)} style={{ display: "block", width: "100%", textAlign: "left", padding: "0.6rem 1.25rem", background: active === s.id ? "rgba(212,175,55,0.06)" : "transparent", border: "none", borderLeft: active === s.id ? "2px solid #d4af37" : "2px solid transparent", color: active === s.id ? "#d4af37" : "#444", cursor: "pointer", fontFamily: "'Cinzel', serif", fontSize: "0.62rem", letterSpacing: "0.08em", transition: "all 0.2s" }}>
             {s.title}

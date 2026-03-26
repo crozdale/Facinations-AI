@@ -1,6 +1,7 @@
 // src/pages/VaultDetail.tsx
 import React from "react";
 import { useParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { VAULTS } from "../features/vaults/registry/vaultRegistry";
 import { useVaultDetail } from "../features/vaults/hooks/useVaultDetail";
 
@@ -12,6 +13,7 @@ const labelStyle: React.CSSProperties = {
 };
 
 const VaultDetail: React.FC = () => {
+  const { t } = useTranslation();
   const { vaultId } = useParams<{ vaultId: string }>();
 
   // Registry for canonical metadata
@@ -29,9 +31,9 @@ const VaultDetail: React.FC = () => {
   if (!vault) {
     return (
       <main style={{ padding: "2rem", color: "#eee" }}>
-        <p>Vault not found.</p>
+        <p>{t("vaultDetail.not_found")}</p>
         <Link to="/vaults" style={{ color: "#d4af37" }}>
-          ← Back to vaults
+          {t("vaultDetail.back")}
         </Link>
       </main>
     );
@@ -62,7 +64,7 @@ const VaultDetail: React.FC = () => {
           textDecoration: "none",
         }}
       >
-        ← Back to vaults
+        {t("vaultDetail.back")}
       </Link>
 
       {/* Header */}
@@ -74,12 +76,12 @@ const VaultDetail: React.FC = () => {
 
         {loading && (
           <p style={{ marginTop: "0.5rem", fontSize: "0.8rem", color: "#777" }}>
-            Loading live metrics…
+            {t("vaultDetail.loading_metrics")}
           </p>
         )}
         {error && (
           <p style={{ marginTop: "0.5rem", fontSize: "0.8rem", color: "#f88" }}>
-            Live metrics unavailable.
+            {t("vaultDetail.metrics_unavailable")}
           </p>
         )}
       </header>
@@ -94,27 +96,27 @@ const VaultDetail: React.FC = () => {
         }}
       >
         <div>
-          <div style={labelStyle}>Vault ID</div>
+          <div style={labelStyle}>{t("vaultDetail.label_vault_id")}</div>
           <div style={{ fontFamily: "monospace", fontSize: "0.9rem" }}>
             {vault.vaultId}
           </div>
         </div>
 
         <div>
-          <div style={labelStyle}>Contract</div>
+          <div style={labelStyle}>{t("vaultDetail.label_contract")}</div>
           <div style={{ fontFamily: "monospace", fontSize: "0.9rem" }}>
             {vault.contractAddress}
           </div>
         </div>
 
         <div>
-          <div style={labelStyle}>Chain</div>
-          <div>Mainnet (chainId {vault.chainId})</div>
+          <div style={labelStyle}>{t("vaultDetail.label_chain")}</div>
+          <div>{t("vaultDetail.label_mainnet", { id: vault.chainId })}</div>
         </div>
 
         <div>
-          <div style={labelStyle}>Access</div>
-          <div>{vault.premiumRequired ? "Premium required" : "Open access"}</div>
+          <div style={labelStyle}>{t("vaultDetail.label_access")}</div>
+          <div>{vault.premiumRequired ? t("vaultDetail.label_premium") : t("vaultDetail.label_open")}</div>
         </div>
       </section>
 
@@ -138,7 +140,7 @@ const VaultDetail: React.FC = () => {
             marginBottom: "1rem",
           }}
         >
-          Metrics & Price
+          {t("vaultDetail.section_metrics")}
         </h2>
 
         <div
@@ -149,22 +151,22 @@ const VaultDetail: React.FC = () => {
           }}
         >
           <div>
-            <div style={labelStyle}>TVL</div>
+            <div style={labelStyle}>{t("vaultDetail.label_tvl")}</div>
             <div style={{ fontSize: "1rem" }}>{tvlDisplay}</div>
           </div>
 
           <div>
-            <div style={labelStyle}>Share price</div>
+            <div style={labelStyle}>{t("vaultDetail.label_share_price")}</div>
             <div style={{ fontSize: "1rem" }}>{sharePriceDisplay}</div>
           </div>
 
           <div>
-            <div style={labelStyle}>24h volume</div>
+            <div style={labelStyle}>{t("vaultDetail.label_volume_24h")}</div>
             <div style={{ fontSize: "1rem" }}>{volume24hDisplay}</div>
           </div>
 
           <div>
-            <div style={labelStyle}>Holders</div>
+            <div style={labelStyle}>{t("vaultDetail.label_holders")}</div>
             <div style={{ fontSize: "1rem" }}>{holdersDisplay}</div>
           </div>
         </div>
@@ -189,12 +191,12 @@ const VaultDetail: React.FC = () => {
             marginBottom: "1rem",
           }}
         >
-          Positions
+          {t("vaultDetail.section_positions")}
         </h2>
 
         {positions.length === 0 ? (
           <p style={{ fontSize: "0.85rem", color: "#aaa" }}>
-            Positions will appear here when wired to live data.
+            {t("vaultDetail.positions_empty")}
           </p>
         ) : (
           <table
@@ -214,7 +216,7 @@ const VaultDetail: React.FC = () => {
                     borderBottom: "1px solid rgba(255,255,255,0.08)",
                   }}
                 >
-                  Asset
+                  {t("vaultDetail.col_asset")}
                 </th>
                 <th
                   style={{
@@ -223,7 +225,7 @@ const VaultDetail: React.FC = () => {
                     borderBottom: "1px solid rgba(255,255,255,0.08)",
                   }}
                 >
-                  Weight
+                  {t("vaultDetail.col_weight")}
                 </th>
                 <th
                   style={{
@@ -232,7 +234,7 @@ const VaultDetail: React.FC = () => {
                     borderBottom: "1px solid rgba(255,255,255,0.08)",
                   }}
                 >
-                  Value (USD)
+                  {t("vaultDetail.col_value")}
                 </th>
               </tr>
             </thead>

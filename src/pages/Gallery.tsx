@@ -1,6 +1,8 @@
 ﻿import { useState, useEffect, useRef, useCallback } from "react";
 import MistralWidget from "../components/MistralWidget";
+import VoiceAICurator from "../components/VoiceAICurator";
 import { useTranslation } from "react-i18next";
+import { useMeta } from "../hooks/useMeta";
 
 // ───────────────────────── Image list ─────────────────────────
 const images = [
@@ -121,14 +123,14 @@ function getRelated(filename, all, n = 4) {
   return out;
 }
 
-const SERIES = [
-  { label: "All",         test: () => true },
-  { label: "Derain",      test: (f) => /^derain/i.test(f) },
-  { label: "Matisse",     test: (f) => /^matisse/i.test(f) },
-  { label: "Medieval",    test: (f) => /^medieval/i.test(f) },
-  { label: "Renaissance", test: (f) => /^renaissance/i.test(f) },
-  { label: "Originals",   test: (f) => !/\d{15,}/.test(f) },
-];
+const SERIES_TESTS = [
+  () => true,
+  (f: string) => /^derain/i.test(f),
+  (f: string) => /^matisse/i.test(f),
+  (f: string) => /^medieval/i.test(f),
+  (f: string) => /^renaissance/i.test(f),
+  (f: string) => !/\d{15,}/.test(f),
+] as const;
 
 // ───────── AI via Claude (kept) ─────────
 async function askClaude(system, userMsg, history = []) {
@@ -165,6 +167,7 @@ const zoomBtnStyle = {
 };
 
 function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }) {
+  const { t } = useTranslation();
   const [scale, setScale] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const scaleRef = useRef(1);
@@ -375,7 +378,7 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }) {
               width: "auto",
             }}
           >
-            reset
+            {t("gallery.zoom_reset")}
           </button>
         )}
       </div>
@@ -395,7 +398,7 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }) {
           whiteSpace: "nowrap",
         }}
       >
-        scroll · pinch · use +/- to zoom
+        {t("gallery.zoom_hint")}
       </div>
 
       {/* counter */}
@@ -498,6 +501,7 @@ function Markdown({ text }) {
 }
 
 function AiPanel({ filename, allImages, onJump }) {
+  const { t } = useTranslation();
   const label = getLabel(filename);
   const related = useRef(getRelated(filename, allImages)).current;
 
@@ -601,7 +605,7 @@ function AiPanel({ filename, allImages, onJump }) {
             marginTop: "0.2rem",
           }}
         >
-          AI Curator · Chat · Related
+          {t("gallery.ai_subtitle")}
         </div>
       </div>
 
@@ -622,7 +626,7 @@ function AiPanel({ filename, allImages, onJump }) {
             marginBottom: "0.5rem",
           }}
         >
-          Curator&apos;s Eye
+          {t("gallery.curators_eye")}
         </div>
 
         {status === "idle" && (
@@ -641,7 +645,7 @@ function AiPanel({ filename, allImages, onJump }) {
               borderRadius: "2px",
             }}
           >
-            ✦ Invoke AI Curator
+            {t("gallery.btn_invoke")}
           </button>
         )}
 
@@ -653,7 +657,7 @@ function AiPanel({ filename, allImages, onJump }) {
               fontStyle: "italic",
             }}
           >
-            Analysing…
+            {t("gallery.analysing")}
           </div>
         )}
 
@@ -678,8 +682,7 @@ function AiPanel({ filename, allImages, onJump }) {
                 marginBottom: "0.4rem",
               }}
             >
-              Could not reach AI. Check DevTools Network tab for /api/claude
-              errors.
+              {t("gallery.ai_error")}
             </div>
             <pre
               style={{
@@ -709,7 +712,7 @@ function AiPanel({ filename, allImages, onJump }) {
                 cursor: "pointer",
               }}
             >
-              Retry
+              {t("gallery.btn_retry")}
             </button>
           </div>
         )}
@@ -735,7 +738,7 @@ function AiPanel({ filename, allImages, onJump }) {
             marginBottom: "0.1rem",
           }}
         >
-          Ask the Curator
+          {t("gallery.ask_curator")}
         </div>
         {chat.length === 0 && (
           <div
@@ -745,7 +748,7 @@ function AiPanel({ filename, allImages, onJump }) {
               fontStyle: "italic",
             }}
           >
-            Ask anything about technique, history, symbolism…
+            {t("gallery.ask_hint")}
           </div>
         )}
         {chat.map((m, i) => (
@@ -787,7 +790,7 @@ function AiPanel({ filename, allImages, onJump }) {
               fontStyle: "italic",
             }}
           >
-            thinking…
+            {t("gallery.thinking")}
           </div>
         )}
         <div ref={endRef} />
@@ -807,7 +810,7 @@ function AiPanel({ filename, allImages, onJump }) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && send()}
-          placeholder="Ask anything…"
+          placeholder={t("gallery.placeholder_ask")}
           style={{
             flex: 1,
             background: "rgba(255,255,255,0.03)",
@@ -854,7 +857,7 @@ function AiPanel({ filename, allImages, onJump }) {
             marginBottom: "0.5rem",
           }}
         >
-          Related Works
+          {t("gallery.related_works")}
         </div>
         <div
           style={{
@@ -997,6 +1000,19 @@ const css = `
 
 export default function Gallery() {
   const { t } = useTranslation();
+  useMeta({
+    title: t("gallery.title"),
+    description: "Browse the Musée-Crosdale collection — original works by Crosdale and invited artists, each with on-chain provenance secured by the Facinations protocol.",
+    image: "/images/Alchemist-of-Light.jpg",
+  });
+  const SERIES = [
+    { label: t("gallery.filter_all"),         test: SERIES_TESTS[0] },
+    { label: t("gallery.filter_derain"),      test: SERIES_TESTS[1] },
+    { label: t("gallery.filter_matisse"),     test: SERIES_TESTS[2] },
+    { label: t("gallery.filter_medieval"),    test: SERIES_TESTS[3] },
+    { label: t("gallery.filter_renaissance"), test: SERIES_TESTS[4] },
+    { label: t("gallery.filter_originals"),   test: SERIES_TESTS[5] },
+  ];
   const [lbIdx, setLbIdx] = useState(null);
   const [filter, setFilter] = useState(0);
   const filtered = images.filter(SERIES[filter].test);
@@ -1064,7 +1080,7 @@ export default function Gallery() {
             letterSpacing: "0.1em",
           }}
         >
-          {filtered.length} works
+          {t("gallery.works_count", { count: filtered.length })}
         </span>
       </div>
 
@@ -1101,9 +1117,15 @@ export default function Gallery() {
           marginTop: "3rem",
           borderTop: "1px solid rgba(212,175,55,0.15)",
           paddingTop: "2rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "1rem",
         }}
       >
         <MistralWidget context="gallery" />
+        <VoiceAICurator context="Musée-Crosdale Gallery — fine art collection by Crosdale" />
       </div>
     </section>
   );
