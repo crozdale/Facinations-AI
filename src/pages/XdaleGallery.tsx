@@ -195,11 +195,26 @@ function ArtworkModal({ artwork, onClose }: { artwork: Artwork; onClose: () => v
   const { t } = useTranslation();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const [imgError, setImgError] = useState(false);
 
-  function handleEnquire() {
+  async function handleEnquire() {
     if (!form.name || !form.email) return;
-    // Stub: in production POST to CRM / email service
+    setSending(true);
+    const [firstName, ...rest] = form.name.trim().split(" ");
+    await fetch("/api/hubspot", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        formType: "artwork_enquiry",
+        email: form.email,
+        firstName,
+        lastName: rest.join(" ") || undefined,
+        message: form.message,
+        artworkTitle: artwork.title,
+      }),
+    }).catch(() => {}); // best-effort — don't block UX on CRM failure
+    setSending(false);
     setSent(true);
   }
 
@@ -269,9 +284,9 @@ function ArtworkModal({ artwork, onClose }: { artwork: Artwork; onClose: () => v
                   <textarea className="xm-input" rows={3} value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} placeholder={t("xdale.placeholder_message")} style={{ resize: "vertical" }} />
                 </div>
                 <div style={{ display: "flex", gap: "0.75rem" }}>
-                  <button className="xm-btn" onClick={handleEnquire} disabled={!form.name || !form.email}
-                    style={{ opacity: form.name && form.email ? 1 : 0.4, cursor: form.name && form.email ? "pointer" : "not-allowed" }}>
-                    {t("xdale.btn_enquire")}
+                  <button className="xm-btn" onClick={handleEnquire} disabled={!form.name || !form.email || sending}
+                    style={{ opacity: form.name && form.email && !sending ? 1 : 0.4, cursor: form.name && form.email && !sending ? "pointer" : "not-allowed" }}>
+                    {sending ? "…" : t("xdale.btn_enquire")}
                   </button>
                   <button className="xm-btn-ghost" onClick={onClose}>{t("xdale.btn_close")}</button>
                 </div>
@@ -386,9 +401,27 @@ function DealerOnboarding() {
   const { t } = useTranslation();
   const [form, setForm] = useState({ galleryName: "", contactName: "", email: "", website: "", location: "", description: "", artworkCount: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!form.galleryName || !form.email) return;
+    setSubmitting(true);
+    const [firstName, ...rest] = (form.contactName || form.galleryName).trim().split(" ");
+    await fetch("/api/hubspot", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        formType: "dealer_onboarding",
+        email: form.email,
+        firstName,
+        lastName: rest.join(" ") || undefined,
+        company: form.galleryName,
+        website: form.website,
+        location: form.location,
+        description: form.description,
+      }),
+    }).catch(() => {});
+    setSubmitting(false);
     setSubmitted(true);
   }
 
@@ -448,9 +481,9 @@ function DealerOnboarding() {
 
           <button
             onClick={handleSubmit}
-            disabled={!form.galleryName || !form.email}
-            style={{ alignSelf: "flex-start", padding: "0.7rem 2rem", background: form.galleryName && form.email ? "#d4af37" : "#222", border: "none", color: form.galleryName && form.email ? "#050505" : "#444", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: form.galleryName && form.email ? "pointer" : "not-allowed" }}>
-            {t("xdale.btn_submit_application")}
+            disabled={!form.galleryName || !form.email || submitting}
+            style={{ alignSelf: "flex-start", padding: "0.7rem 2rem", background: form.galleryName && form.email && !submitting ? "#d4af37" : "#222", border: "none", color: form.galleryName && form.email && !submitting ? "#050505" : "#444", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: form.galleryName && form.email && !submitting ? "pointer" : "not-allowed" }}>
+            {submitting ? "…" : t("xdale.btn_submit_application")}
           </button>
         </div>
       )}
