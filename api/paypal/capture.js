@@ -6,6 +6,11 @@
 //
 // Called by CryptoSuccess-equivalent page after PayPal redirects back with ?token=
 
+import { query }                          from "../lib/db.js";
+import { sendEmail, tplWelcome, tplReceipt } from "../lib/email.js";
+
+const TIER_PRICE = { starter: "29.00", gallery: "99.00" };
+
 async function getAccessToken() {
   const base  = process.env.PAYPAL_ENV === "live"
     ? "https://api-m.paypal.com"
@@ -65,10 +70,46 @@ export default async function handler(req, res) {
     const completed  = order.status === "COMPLETED";
     const unitTier   = order.purchase_units?.[0]?.custom_id;
     const tiersMatch = unitTier === tier;
+    const success    = completed && tiersMatch;
+
+    if (success) {
+      const email = order.payer?.email_address ?? null;
+
+      // Persist to subscriptions table (best-effort)
+      if (process.env.DATABASE_URL && email) {
+        query(
+          `INSERT INTO subscriptions (email, tier, status, updated_at)
+           VALUES ($1, $2, 'active', NOW())
+           ON CONFLICT (email) DO UPDATE SET
+             tier       = EXCLUDED.tier,
+             status     = 'active',
+             updated_at = NOW()`,
+          [email, tier]
+        ).catch((e) => console.warn("[paypal/capture] DB upsert failed:", e.message));
+      }
+
+      // Send welcome + receipt emails (best-effort)
+      if (email) {
+        const amount = TIER_PRICE[tier] ?? "—";
+        const tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1);
+        Promise.all([
+          sendEmail({
+            to: email,
+            subject: `Welcome to ${tierLabel} Studio — Musée-Crosdale`,
+            html: tplWelcome({ tier, periodEnd: null }),
+          }),
+          sendEmail({
+            to: email,
+            subject: "Your Musée-Crosdale Studio receipt",
+            html: tplReceipt({ tier, amount, periodEnd: null }),
+          }),
+        ]).catch(() => {});
+      }
+    }
 
     return res.status(200).json({
-      verified: completed && tiersMatch,
-      tier:     completed && tiersMatch ? tier : null,
+      verified: success,
+      tier:     success ? tier : null,
     });
   } catch (err) {
     console.error("[paypal/capture] error:", err.message);

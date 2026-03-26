@@ -5,6 +5,11 @@
 // Polls Coinbase Commerce for the charge status.
 // A charge is considered verified when its timeline contains COMPLETED or CONFIRMED.
 
+import { query }                          from "../lib/db.js";
+import { sendEmail, tplWelcome, tplReceipt } from "../lib/email.js";
+
+const TIER_PRICE = { starter: "29.00", gallery: "99.00" };
+
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -46,9 +51,46 @@ export default async function handler(req, res) {
     const chargeTier = data.metadata?.tier;
     const tiersMatch = chargeTier === tier;
 
+    const success = verified && tiersMatch;
+
+    if (success) {
+      const email = data.metadata?.email ?? data.customer_email ?? null;
+
+      // Persist to subscriptions table (best-effort)
+      if (process.env.DATABASE_URL && email) {
+        query(
+          `INSERT INTO subscriptions (email, tier, status, updated_at)
+           VALUES ($1, $2, 'active', NOW())
+           ON CONFLICT (email) DO UPDATE SET
+             tier       = EXCLUDED.tier,
+             status     = 'active',
+             updated_at = NOW()`,
+          [email, tier]
+        ).catch((e) => console.warn("[coinbase/verify] DB upsert failed:", e.message));
+      }
+
+      // Send welcome + receipt emails (best-effort)
+      if (email) {
+        const amount = TIER_PRICE[tier] ?? "—";
+        const tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1);
+        Promise.all([
+          sendEmail({
+            to: email,
+            subject: `Welcome to ${tierLabel} Studio — Musée-Crosdale`,
+            html: tplWelcome({ tier, periodEnd: null }),
+          }),
+          sendEmail({
+            to: email,
+            subject: "Your Musée-Crosdale Studio receipt",
+            html: tplReceipt({ tier, amount, periodEnd: null }),
+          }),
+        ]).catch(() => {});
+      }
+    }
+
     return res.status(200).json({
-      verified: verified && tiersMatch,
-      tier: verified && tiersMatch ? tier : null,
+      verified: success,
+      tier: success ? tier : null,
     });
   } catch (err) {
     console.error("[coinbase/verify] error:", err.message);

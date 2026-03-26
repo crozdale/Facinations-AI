@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { tier } = req.body ?? {};
+  const { tier, email } = req.body ?? {};
 
   if (!tier || !PLAN_PRICES[tier]) {
     return res.status(400).json({ error: "Invalid plan tier" });
@@ -49,7 +49,7 @@ export default async function handler(req, res) {
         local_price:  { amount: plan.amount, currency: "USD" },
         redirect_url: `${origin}/checkout/crypto-success?tier=${tier}`,
         cancel_url:   `${origin}/studio`,
-        metadata:     { tier },
+        metadata:     { tier, ...(email ? { email } : {}) },
       }),
     });
 
