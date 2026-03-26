@@ -41,35 +41,70 @@ export default async function handler(req, res) {
   }
 
   try {
-    const [dailyResult, vaultResult] = await Promise.all([
+    const MRR_RATES = { starter: 29, gallery: 99, institutional: 0 };
+
+    const [dailyResult, vaultResult, businessResult] = await Promise.all([
       db.query(`
         SELECT
-          date::TEXT                       AS date,
-          swap_count::INTEGER              AS "swapCount",
-          ROUND(swap_volume_xer, 4)::FLOAT AS "swapVolumeXer",
+          date::TEXT                          AS date,
+          swap_count::INTEGER                 AS "swapCount",
+          ROUND(swap_volume_xer, 4)::FLOAT    AS "swapVolumeXer",
           ROUND(xer_fees_collected, 4)::FLOAT AS "xerFeesCollected",
-          active_vault_count::INTEGER      AS "activeVaultCount"
+          active_vault_count::INTEGER         AS "activeVaultCount"
         FROM analytics_daily
         ORDER BY date DESC
         LIMIT 30
       `),
       db.query(`
         SELECT
-          fraction_id                        AS "vaultId",
-          COUNT(*)::INTEGER                  AS "tradeCount",
-          ROUND(SUM(xer_amount), 4)::FLOAT   AS "xerInflow"
+          fraction_id                       AS "vaultId",
+          COUNT(*)::INTEGER                 AS "tradeCount",
+          ROUND(SUM(xer_amount), 4)::FLOAT  AS "xerInflow"
         FROM trades
         GROUP BY fraction_id
         ORDER BY "xerInflow" DESC
       `),
+      db.query(`
+        SELECT
+          (SELECT COUNT(*) FROM subscriptions WHERE status = 'active')        AS "activeSubs",
+          (SELECT COUNT(*) FROM subscriptions WHERE status = 'past_due')      AS "pastDue",
+          (SELECT COUNT(*) FROM subscriptions WHERE status = 'cancelled')     AS "churned",
+          (SELECT COUNT(*) FROM subscriptions
+           WHERE status = 'active' AND created_at >= NOW() - INTERVAL '7 days') AS "newThisWeek",
+          (SELECT COUNT(*) FROM waitlist)                                      AS "waitlistCount",
+          (SELECT json_agg(sub_counts)
+           FROM (
+             SELECT tier, COUNT(*)::INTEGER AS count
+             FROM subscriptions
+             WHERE status = 'active'
+             GROUP BY tier
+           ) sub_counts)                                                       AS "tierBreakdown"
+      `),
     ]);
 
-    res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=60");
+    // Compute MRR from tier breakdown
+    const tierBreakdown = businessResult.rows[0]?.tierBreakdown ?? [];
+    const mrr = (tierBreakdown || []).reduce((sum, row) => {
+      return sum + (MRR_RATES[row.tier] ?? 0) * row.count;
+    }, 0);
+
+    const business = {
+      activeSubs:    parseInt(businessResult.rows[0]?.activeSubs  ?? 0),
+      pastDue:       parseInt(businessResult.rows[0]?.pastDue     ?? 0),
+      churned:       parseInt(businessResult.rows[0]?.churned     ?? 0),
+      newThisWeek:   parseInt(businessResult.rows[0]?.newThisWeek ?? 0),
+      waitlistCount: parseInt(businessResult.rows[0]?.waitlistCount ?? 0),
+      mrr,
+      tierBreakdown: tierBreakdown ?? [],
+    };
+
+    res.setHeader("Cache-Control", "s-maxage=120, stale-while-revalidate=60");
 
     return res.status(200).json({
       configured: true,
       daily:    dailyResult.rows,
       vaultTvl: vaultResult.rows,
+      business,
     });
   } catch (err) {
     console.error("[analytics] DB error:", err.message);

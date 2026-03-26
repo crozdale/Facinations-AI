@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
 import { Link } from "react-router-dom";
 import { fetchAnalytics } from "../api/analyticsApi";
-import type { DailyRow, VaultRow } from "../api/analyticsApi";
+import type { DailyRow, VaultRow, BusinessMetrics } from "../api/analyticsApi";
 
 // ── Placeholder fallback (used when DB is not configured) ─────────────────────
 const DAILY_PLACEHOLDER: DailyRow[] = [
@@ -47,6 +47,7 @@ export default function Analytics() {
   const [tab, setTab]       = useState<TabKey>("tab_volume");
   const [daily, setDaily]   = useState<DailyRow[]>(DAILY_PLACEHOLDER);
   const [vaultTvl, setVaultTvl] = useState<VaultRow[]>(VAULT_PLACEHOLDER);
+  const [business, setBusiness] = useState<BusinessMetrics | null>(null);
   const [isLive, setIsLive] = useState(false);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
@@ -60,6 +61,7 @@ export default function Analytics() {
         if (data.configured) {
           if (data.daily.length > 0)    setDaily(data.daily);
           if (data.vaultTvl.length > 0) setVaultTvl(data.vaultTvl);
+          if (data.business)            setBusiness(data.business);
           setIsLive(true);
         }
         // If not configured, placeholders remain in state
@@ -123,7 +125,39 @@ export default function Analytics() {
           </div>
         )}
 
-        {/* Summary cards */}
+        {/* Business metrics (live from subscriptions + waitlist tables) */}
+        {business && (
+          <div style={{ marginBottom: "2.5rem" }}>
+            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(212,175,55,0.4)", margin: "0 0 0.75rem" }}>
+              Studio · Business
+            </p>
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "1rem" }}>
+              {[
+                { label: "MRR",            value: `$${business.mrr.toLocaleString()}` },
+                { label: "Active Subs",    value: business.activeSubs },
+                { label: "New (7d)",       value: business.newThisWeek },
+                { label: "Past Due",       value: business.pastDue,  dim: business.pastDue === 0 },
+                { label: "Waitlist",       value: business.waitlistCount },
+              ].map((c) => (
+                <div key={c.label} style={{ border: `1px solid ${c.dim ? "rgba(212,175,55,0.08)" : "rgba(212,175,55,0.2)"}`, padding: "1rem 1.25rem", background: "#0a0a0a", minWidth: 120, flex: "1 1 120px" }}>
+                  <p style={{ margin: "0 0 0.4rem", fontSize: "0.6rem", fontFamily: "'Cinzel', serif", letterSpacing: "0.12em", color: "#555", textTransform: "uppercase" }}>{c.label}</p>
+                  <p style={{ margin: 0, fontSize: "1.4rem", color: c.dim ? "#2a2a2a" : "#d4af37", fontFamily: "'Cormorant Garamond', serif" }}>{c.value}</p>
+                </div>
+              ))}
+            </div>
+            {business.tierBreakdown.length > 0 && (
+              <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+                {business.tierBreakdown.map((t) => (
+                  <span key={t.tier} style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.15em", textTransform: "uppercase", padding: "0.2rem 0.6rem", border: "1px solid rgba(212,175,55,0.15)", color: "#6a6258" }}>
+                    {t.tier} · {t.count}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Protocol summary cards */}
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "2rem" }}>
           {[
             { label: t("analytics.card_swaps"),  value: loading ? "…" : totalSwaps },

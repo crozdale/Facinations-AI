@@ -39,6 +39,34 @@ export async function runMigrations() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+
+  await query(`
+    CREATE TABLE IF NOT EXISTS analytics_daily (
+      date                DATE    PRIMARY KEY,
+      swap_count          INTEGER NOT NULL DEFAULT 0,
+      swap_volume_xer     NUMERIC(18,4) NOT NULL DEFAULT 0,
+      xer_fees_collected  NUMERIC(18,4) NOT NULL DEFAULT 0,
+      active_vault_count  INTEGER NOT NULL DEFAULT 0
+    );
+  `);
+
+  await query(`
+    CREATE TABLE IF NOT EXISTS trades (
+      id               TEXT PRIMARY KEY,
+      fraction_id      TEXT NOT NULL,
+      "user"           TEXT NOT NULL,
+      xer_amount       NUMERIC(18,4) NOT NULL,
+      fraction_amount  NUMERIC(18,4) NOT NULL,
+      "timestamp"      TIMESTAMPTZ NOT NULL
+    );
+  `);
+
+  await query(`
+    CREATE INDEX IF NOT EXISTS idx_trades_user      ON trades ("user");
+    `);
+  await query(`
+    CREATE INDEX IF NOT EXISTS idx_trades_timestamp ON trades ("timestamp");
+  `);
 }
 
 /** Serverless handler — lets you trigger migrations via HTTP in dev/staging. */

@@ -15,10 +15,21 @@ export interface VaultRow {
   xerInflow: number;
 }
 
+export interface BusinessMetrics {
+  activeSubs:    number;
+  pastDue:       number;
+  churned:       number;
+  newThisWeek:   number;
+  waitlistCount: number;
+  mrr:           number;
+  tierBreakdown: { tier: string; count: number }[];
+}
+
 export interface AnalyticsResponse {
   configured: boolean;
-  daily: DailyRow[];
+  daily:    DailyRow[];
   vaultTvl: VaultRow[];
+  business?: BusinessMetrics;
 }
 
 export async function fetchAnalytics(): Promise<AnalyticsResponse> {

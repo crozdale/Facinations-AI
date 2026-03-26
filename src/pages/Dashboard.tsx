@@ -217,15 +217,17 @@ export default function Dashboard() {
 
   const lowerAddr = address?.toLowerCase() ?? "";
 
-  const { data: posData, loading: posLoading } = useQuery<{ userPositions: Position[] }>(
+  const { data: posData, loading: posLoading, error: posError } = useQuery<{ userPositions: Position[] }>(
     USER_POSITIONS_QUERY,
     { variables: { address: lowerAddr }, skip: !address, errorPolicy: "all" }
   );
 
-  const { data: tradeData, loading: tradeLoading } = useQuery<{ trades: Trade[] }>(
+  const { data: tradeData, loading: tradeLoading, error: tradeError } = useQuery<{ trades: Trade[] }>(
     USER_TRADES_QUERY,
     { variables: { address: lowerAddr }, skip: !address, errorPolicy: "all" }
   );
+
+  const subgraphUnavailable = !!(posError || tradeError);
 
   const positions = posData?.userPositions ?? [];
   const trades    = tradeData?.trades ?? [];
@@ -282,6 +284,13 @@ export default function Dashboard() {
               <p className="dash-card-sub">{t("dashboard.card_fees_unit")}</p>
             </div>
           </div>
+
+          {/* Subgraph unavailable notice */}
+          {subgraphUnavailable && (
+            <div style={{ marginBottom: "1.5rem", padding: "0.65rem 1rem", border: "1px solid rgba(212,175,55,0.12)", background: "rgba(212,175,55,0.03)", fontSize: "0.78rem", color: "#4a4238", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}>
+              On-chain data is temporarily unavailable — the subgraph may be syncing. Wallet balances and status are unaffected.
+            </div>
+          )}
 
           {/* Vault Positions */}
           <div className="dash-section">
