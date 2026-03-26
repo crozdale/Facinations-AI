@@ -12,6 +12,11 @@ export interface RegistryVault {
   riskScore: "Low" | "Medium" | "High";
   volatility: "Low" | "Medium" | "High";
   tvlUsd: number | null;       // total value locked in USD
+  // Fraction metadata
+  fractionTokenId: number;     // ERC1155 token ID used for fractions (0 = no fractions)
+  fractionPriceXer: number | null; // price per fraction in XER; null = POA
+  totalFractions: number;      // total fractions minted
+  availableFractions: number;  // fractions available to acquire
 }
 
 export const VAULTS: RegistryVault[] = [
@@ -26,6 +31,10 @@ export const VAULTS: RegistryVault[] = [
     riskScore: "Medium",
     volatility: "Medium",
     tvlUsd: 128000,
+    fractionTokenId: 1,
+    fractionPriceXer: 500,   // 500 XER per fraction
+    totalFractions: 1000,
+    availableFractions: 750,
   },
   {
     vaultId: "VAULT-OPEN-ARCHIVE",
@@ -38,5 +47,9 @@ export const VAULTS: RegistryVault[] = [
     riskScore: "Low",
     volatility: "Low",
     tvlUsd: 0,
+    fractionTokenId: 0,
+    fractionPriceXer: null,
+    totalFractions: 0,
+    availableFractions: 0,
   },
 ];

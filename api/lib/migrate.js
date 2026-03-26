@@ -92,6 +92,25 @@ export async function runMigrations() {
   `);
 
   await query(`
+    CREATE TABLE IF NOT EXISTS vault_enquiries (
+      id             SERIAL PRIMARY KEY,
+      vault_id       TEXT NOT NULL,
+      token_id       INT NOT NULL DEFAULT 1,
+      quantity       INT NOT NULL,
+      wallet_address TEXT,
+      name           TEXT,
+      email          TEXT NOT NULL,
+      message        TEXT,
+      status         TEXT NOT NULL DEFAULT 'pending',
+      created_at     TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await query(`
+    CREATE INDEX IF NOT EXISTS idx_vault_enquiries_vault ON vault_enquiries (vault_id);
+  `);
+
+  await query(`
     CREATE TABLE IF NOT EXISTS vaults_meta (
       vault_id             TEXT PRIMARY KEY,
       name                 TEXT NOT NULL,

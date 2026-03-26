@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { VAULTS } from "../features/vaults/registry/vaultRegistry";
 import { useVaultDetail } from "../features/vaults/hooks/useVaultDetail";
+import FractionPanel from "../components/FractionPanel";
 
 const labelStyle: React.CSSProperties = {
   fontSize: "0.85rem",
@@ -171,6 +172,11 @@ const VaultDetail: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Fraction Panel — shown for fractionalised vaults */}
+      {registryVault && registryVault.fractionTokenId > 0 && (
+        <FractionPanel vault={registryVault} />
+      )}
 
       {/* Positions */}
       <section
