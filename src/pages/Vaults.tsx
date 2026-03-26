@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useVaults } from "../features/vaults/hooks/useVaults";
 import { regionRestrictionMessage, swapsAllowed } from "../config/regionFlags";
 import { useMeta } from "../hooks/useMeta";
+import WalletGate from "../components/WalletGate";
 
 const RISK_COLORS: Record<string, string> = {
   Low: "#5cb85c",
@@ -53,6 +54,7 @@ const Vaults = () => {
   }
 
   return (
+    <WalletGate>
     <main style={{ background: "#080808", minHeight: "100vh" }}>
       {/* Risk Banner */}
       <div style={{
@@ -227,6 +229,7 @@ const Vaults = () => {
         </div>
       </div>
     </main>
+    </WalletGate>
   );
 };
 

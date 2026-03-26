@@ -4,7 +4,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFacinationsSwap } from "../hooks/useFacinationsSwap";
 import { swapsAllowed, regionRestrictionMessage } from "../config/regionFlags";
-import KycGate from "../components/KycGate";
+import WalletGate from "../components/WalletGate";
 import { useMeta } from "../hooks/useMeta";
 import { VAULTS } from "../features/vaults/registry/vaultRegistry";
 import type { RegistryVault } from "../features/vaults/registry/vaultRegistry";
@@ -145,7 +145,7 @@ const Swap: React.FC = () => {
           {t("swap.subtitle")}
         </p>
 
-        <KycGate featureName={t("swap.title")}>
+        <WalletGate>
         <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap", alignItems: "flex-start" }}>
 
           {/* Vault context card */}
@@ -318,7 +318,7 @@ const Swap: React.FC = () => {
             )}
           </section>
         </div>
-        </KycGate>
+        </WalletGate>
       </div>
     </main>
   );

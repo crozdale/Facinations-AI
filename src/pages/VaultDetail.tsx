@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { VAULTS } from "../features/vaults/registry/vaultRegistry";
 import { useVaultDetail } from "../features/vaults/hooks/useVaultDetail";
 import FractionPanel from "../components/FractionPanel";
+import WalletGate from "../components/WalletGate";
 
 const labelStyle: React.CSSProperties = {
   fontSize: "0.85rem",
@@ -55,6 +56,7 @@ const VaultDetail: React.FC = () => {
   const positions = liveVault?.positions ?? [];
 
   return (
+    <WalletGate>
     <main style={{ padding: "2rem", color: "#eee" }}>
       <Link
         to="/vaults"
@@ -275,6 +277,7 @@ const VaultDetail: React.FC = () => {
         )}
       </section>
     </main>
+    </WalletGate>
   );
 };
 
