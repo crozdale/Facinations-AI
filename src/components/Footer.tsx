@@ -41,7 +41,7 @@ export default function Footer() {
             fontFamily: "'Cinzel', serif",
             fontSize: "0.5rem",
             letterSpacing: "0.2em",
-            color: "#2a2a2a",
+            color: "#6a6258",
             textTransform: "uppercase",
           }}
         >
@@ -71,7 +71,7 @@ export default function Footer() {
               fontSize: "0.52rem",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#333",
+              color: "#6a6258",
               textDecoration: "none",
               padding: "0.3rem 0.6rem",
               border: "1px solid transparent",
@@ -82,7 +82,7 @@ export default function Footer() {
               e.currentTarget.style.borderColor = "rgba(212,175,55,0.2)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = "#333";
+              e.currentTarget.style.color = "#6a6258";
               e.currentTarget.style.borderColor = "transparent";
             }}
           >
@@ -96,7 +96,7 @@ export default function Footer() {
           fontFamily: "'Cinzel', serif",
           fontSize: "0.48rem",
           letterSpacing: "0.18em",
-          color: "#1e1e1e",
+          color: "#4a4238",
           textTransform: "uppercase",
         }}
       >

@@ -436,7 +436,7 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }) {
           position: "absolute",
           top: "0.7rem",
           right: "0.8rem",
-          color: "#2a2a2a",
+          color: "#6a6258",
           fontFamily: "'Cinzel',serif",
           fontSize: "0.6rem",
           letterSpacing: "0.1em",
@@ -630,7 +630,7 @@ function AiPanel({ filename, allImages, onJump }) {
         <div
           style={{
             fontSize: "0.58rem",
-            color: "#333",
+            color: "#6a6258",
             marginTop: "0.2rem",
           }}
         >
@@ -681,7 +681,7 @@ function AiPanel({ filename, allImages, onJump }) {
         {status === "loading" && (
           <div
             style={{
-              color: "#333",
+              color: "#6a6258",
               fontSize: "0.8rem",
               fontStyle: "italic",
             }}
@@ -1049,7 +1049,6 @@ export default function Gallery() {
   return (
     <section
       style={{
-        padding: "2rem",
         color: "#e8e0d0",
         minHeight: "100vh",
         background: "#0a0a0a",
@@ -1057,30 +1056,42 @@ export default function Gallery() {
     >
       <style>{css}</style>
 
-      <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+      {/* Page hero */}
+      <header style={{ textAlign: "center", padding: "4rem 2rem 3rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#d4af37", marginBottom: "1rem", position: "relative" }}>
+          Musée-Crosdale · Original Works
+        </p>
         <h1
           style={{
             fontFamily: "'Cinzel',serif",
-            color: "#d4af37",
-            fontSize: "2rem",
-            letterSpacing: "0.2em",
-            marginBottom: "0.25rem",
+            color: "#e8e0d0",
+            fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
+            fontWeight: 400,
+            letterSpacing: "0.15em",
+            margin: 0,
+            position: "relative",
           }}
         >
           {t("gallery.title")}
         </h1>
         <p
           style={{
-            color: "#888",
+            color: "#9a9288",
             fontFamily: "'Cormorant Garamond',serif",
             fontStyle: "italic",
             fontSize: "1.05rem",
+            marginTop: "1rem",
+            marginBottom: 0,
+            position: "relative",
           }}
         >
           {t("gallery.subtitle")}
         </p>
         <div className="g-div" />
-      </div>
+      </header>
+
+      <div style={{ padding: "2rem" }}>
 
       {/* Video hero */}
       <div
@@ -1117,7 +1128,7 @@ export default function Gallery() {
         <span
           style={{
             marginLeft: "auto",
-            color: "#444",
+            color: "#6a6258",
             fontFamily: "'Cinzel',serif",
             fontSize: "0.65rem",
             letterSpacing: "0.1em",
@@ -1169,6 +1180,7 @@ export default function Gallery() {
       >
         <MistralWidget context="gallery" />
         <VoiceAICurator context="Musée-Crosdale Gallery — fine art collection by Crosdale" />
+      </div>
       </div>
     </section>
   );

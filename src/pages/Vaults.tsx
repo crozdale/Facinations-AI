@@ -42,20 +42,50 @@ const Vaults = () => {
   });
 
   if (loading && safeVaults.length === 0) {
-    return <div style={{ color: "#ccc", padding: "2rem" }}>{t("vaults.loading")}</div>;
+    return (
+      <div style={{ background: "#080808", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(212,175,55,0.4)", animation: "pulse 1.6s ease-in-out infinite" }}>
+            {t("vaults.loading")}
+          </div>
+          <div style={{ width: 60, height: 1, background: "linear-gradient(to right, transparent, rgba(212,175,55,0.3), transparent)", margin: "1.5rem auto 0" }} />
+          <style>{`@keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }`}</style>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
     return (
-      <div style={{ color: "#f88", padding: "2rem" }}>
-        {t("vaults.error")}
+      <div style={{ background: "#080808", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ textAlign: "center", padding: "2rem" }}>
+          <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(212,175,55,0.5)", marginBottom: "1rem" }}>
+            Unable to Load Vaults
+          </div>
+          <p style={{ color: "#9a9288", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1rem" }}>
+            {t("vaults.error")}
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
     <WalletGate>
-    <main style={{ background: "#080808", minHeight: "100vh" }}>
+    <main style={{ background: "#080808", minHeight: "100vh", fontFamily: "'Cormorant Garamond', Georgia, serif", color: "#e8e0d0" }}>
+
+      {/* Page Hero */}
+      <header style={{ textAlign: "center", padding: "4rem 2rem 3rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#d4af37", marginBottom: "1rem", position: "relative" }}>
+          {t("vaults.eyebrow", "Facinations Protocol")}
+        </p>
+        <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 400, color: "#e8e0d0", letterSpacing: "0.1em", margin: 0, position: "relative" }}>
+          {t("vaults.title")}
+        </h1>
+        <div style={{ width: 60, height: 1, background: "linear-gradient(to right, transparent, #d4af37, transparent)", margin: "1.5rem auto 0" }} />
+      </header>
+
       {/* Risk Banner */}
       <div style={{
         background: "rgba(212,175,55,0.05)",
@@ -91,9 +121,6 @@ const Vaults = () => {
 
       <div style={{ padding: "2rem" }}>
         <header style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "2rem", flexWrap: "wrap" }}>
-          <h1 style={{ color: "#d4af37", margin: 0, fontFamily: "'Cinzel', serif", fontWeight: 400, letterSpacing: "0.1em" }}>
-            {t("vaults.title")}
-          </h1>
           <span style={{
             fontFamily: "'Cinzel', serif",
             fontSize: "0.5rem",
