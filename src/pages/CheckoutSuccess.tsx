@@ -42,6 +42,11 @@ export default function CheckoutSuccess() {
 
         subscribe(data.tier as PlanTier);
 
+        // Persist Stripe customer ID so SubscriptionContext can sync on future loads
+        if (data.customerId) {
+          try { localStorage.setItem("facinations_stripe_cid", data.customerId); } catch {}
+        }
+
         // Subscribe to Mailchimp tagged by plan tier (best-effort)
         if (data.customerEmail) {
           fetch("/api/mailchimp", {

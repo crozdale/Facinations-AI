@@ -2,7 +2,7 @@
 // Holds the user's active Studio subscription tier.
 // Persists to localStorage. In production, replace stub actions with Stripe Checkout calls.
 
-import React, { createContext, useContext, useState, useCallback } from "react";
+import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
 
 export type PlanTier = "none" | "starter" | "gallery" | "institutional";
 
@@ -166,6 +166,30 @@ export function SubscriptionProvider({ children }: { children: React.ReactNode }
     }
     const { url } = await res.json();
     window.location.href = url;
+  }, []);
+
+  // Sync tier from server on mount (if Stripe customer ID is stored locally)
+  useEffect(() => {
+    const customerId = (() => {
+      try { return localStorage.getItem("facinations_stripe_cid"); } catch { return null; }
+    })();
+    if (!customerId) return;
+
+    fetch(`/api/subscription/status?customer_id=${encodeURIComponent(customerId)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data.configured) return; // DB not set up — keep localStorage value
+        const serverTier: PlanTier = (data.tier as PlanTier) ?? "none";
+        // Only update if server disagrees with local state (avoids flicker on match)
+        setTier((local) => {
+          if (local !== serverTier) {
+            saveTier(serverTier);
+            return serverTier;
+          }
+          return local;
+        });
+      })
+      .catch(() => {}); // network failure — keep local state
   }, []);
 
   const activePlan = PLANS.find((p) => p.tier === tier) ?? null;
