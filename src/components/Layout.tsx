@@ -91,6 +91,39 @@ function NewsletterFooter() {
           {t("footer.newsletter_error", "Something went wrong — please try again.")}
         </p>
       )}
+
+      {/* Messenger links */}
+      <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center", gap: "1.25rem", alignItems: "center" }}>
+        {import.meta.env.VITE_THREEMA_ID && (
+          <a
+            href={`https://threema.id/${import.meta.env.VITE_THREEMA_ID}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Message us on Threema"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.4rem",
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.5rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "rgba(212,175,55,0.35)",
+              textDecoration: "none",
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(212,175,55,0.7)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(212,175,55,0.35)")}
+          >
+            {/* Threema shield icon (inline SVG) */}
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6L12 2z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            Threema
+          </a>
+        )}
+      </div>
     </footer>
   );
 }

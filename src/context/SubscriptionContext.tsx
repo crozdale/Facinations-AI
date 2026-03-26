@@ -80,6 +80,10 @@ interface SubscriptionCtx {
   cancel: () => void;
   /** Redirects to Stripe Checkout for the given tier. Resolves before redirect. */
   startCheckout: (tier: PlanTier, email?: string) => Promise<void>;
+  /** Redirects to Coinbase Commerce for the given tier (crypto payment). */
+  startCryptoCheckout: (tier: PlanTier) => Promise<void>;
+  /** Redirects to PayPal Checkout for the given tier. */
+  startPayPalCheckout: (tier: PlanTier) => Promise<void>;
   /** Billing details for display — stub values until Stripe is wired */
   nextBillingDate: string | null;
 }
@@ -134,6 +138,36 @@ export function SubscriptionProvider({ children }: { children: React.ReactNode }
     window.location.href = url;
   }, []);
 
+  const startCryptoCheckout = useCallback(async (t: PlanTier) => {
+    const res = await fetch("/api/coinbase", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tier: t }),
+    });
+    if (!res.ok) {
+      const { error } = await res.json().catch(() => ({ error: "Unknown error" }));
+      throw new Error(error ?? "Failed to start crypto checkout");
+    }
+    const { url, chargeId } = await res.json();
+    // Persist chargeId so CryptoSuccess can verify after redirect
+    try { localStorage.setItem("facinations_cb_charge", chargeId); } catch {}
+    window.location.href = url;
+  }, []);
+
+  const startPayPalCheckout = useCallback(async (t: PlanTier) => {
+    const res = await fetch("/api/paypal", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tier: t }),
+    });
+    if (!res.ok) {
+      const { error } = await res.json().catch(() => ({ error: "Unknown error" }));
+      throw new Error(error ?? "Failed to start PayPal checkout");
+    }
+    const { url } = await res.json();
+    window.location.href = url;
+  }, []);
+
   const activePlan = PLANS.find((p) => p.tier === tier) ?? null;
 
   return (
@@ -143,6 +177,8 @@ export function SubscriptionProvider({ children }: { children: React.ReactNode }
       subscribe,
       cancel,
       startCheckout,
+      startCryptoCheckout,
+      startPayPalCheckout,
       nextBillingDate: tier !== "none" ? nextMonthFirst() : null,
     }}>
       {children}

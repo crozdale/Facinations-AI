@@ -58,8 +58,10 @@ export default function Studio() {
     description: "Mint artworks to chain, access AI-guided lessons, and subscribe to the Facinations Studio — built for artists and collectors.",
     image: "/images/Astral-Cartographer.jpg",
   });
-  const { tier, activePlan, subscribe, cancel, startCheckout, nextBillingDate } = useSubscription();
+  const { tier, activePlan, subscribe, cancel, startCheckout, startCryptoCheckout, startPayPalCheckout, nextBillingDate } = useSubscription();
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
+  const [cryptoLoading, setCryptoLoading]     = useState<string | null>(null);
+  const [paypalLoading, setPaypalLoading]     = useState<string | null>(null);
   const [selected, setSelected] = useState(null);
   const [waitlistForm, setWaitlistForm] = useState({ email: "", practice: "", goal: "" });
   const [waitlistDone, setWaitlistDone] = useState(false);
@@ -225,34 +227,84 @@ export default function Studio() {
                       {t("studio.price_contact")}
                     </a>
                   ) : (
-                    <button
-                      disabled={checkoutLoading === plan.tier}
-                      onClick={async () => {
-                        setCheckoutLoading(plan.tier);
-                        try {
-                          await startCheckout(plan.tier);
-                        } catch (err: any) {
-                          alert(err?.message ?? "Could not start checkout. Please try again.");
-                          setCheckoutLoading(null);
-                        }
-                      }}
-                      style={{
-                        marginTop: "1.25rem", width: "100%", padding: "0.55rem",
-                        background: plan.tier === "gallery" ? "#d4af37" : "transparent",
-                        border: plan.tier === "gallery" ? "none" : "1px solid rgba(212,175,55,0.3)",
-                        color: plan.tier === "gallery" ? "#050505" : "#9a9288",
-                        fontFamily: "'Cinzel', serif", fontSize: "0.55rem",
-                        letterSpacing: "0.18em", textTransform: "uppercase",
-                        cursor: checkoutLoading ? "not-allowed" : "pointer",
-                        opacity: checkoutLoading && checkoutLoading !== plan.tier ? 0.5 : 1,
-                      }}
-                    >
-                      {checkoutLoading === plan.tier
-                        ? "Redirecting…"
-                        : tier === "none" || isDowngrade
-                          ? t("subscriptionGate.btn_subscribe")
-                          : t("subscriptionGate.btn_upgrade")}
-                    </button>
+                    <div style={{ marginTop: "1.25rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                      <button
+                        disabled={!!checkoutLoading}
+                        onClick={async () => {
+                          setCheckoutLoading(plan.tier);
+                          try {
+                            await startCheckout(plan.tier);
+                          } catch (err: any) {
+                            alert(err?.message ?? "Could not start checkout. Please try again.");
+                            setCheckoutLoading(null);
+                          }
+                        }}
+                        style={{
+                          width: "100%", padding: "0.55rem",
+                          background: plan.tier === "gallery" ? "#d4af37" : "transparent",
+                          border: plan.tier === "gallery" ? "none" : "1px solid rgba(212,175,55,0.3)",
+                          color: plan.tier === "gallery" ? "#050505" : "#9a9288",
+                          fontFamily: "'Cinzel', serif", fontSize: "0.55rem",
+                          letterSpacing: "0.18em", textTransform: "uppercase",
+                          cursor: checkoutLoading ? "not-allowed" : "pointer",
+                          opacity: checkoutLoading && checkoutLoading !== plan.tier ? 0.5 : 1,
+                        }}
+                      >
+                        {checkoutLoading === plan.tier
+                          ? "Redirecting…"
+                          : tier === "none" || isDowngrade
+                            ? t("subscriptionGate.btn_subscribe")
+                            : t("subscriptionGate.btn_upgrade")}
+                      </button>
+                      <button
+                        disabled={!!cryptoLoading}
+                        onClick={async () => {
+                          setCryptoLoading(plan.tier);
+                          try {
+                            await startCryptoCheckout(plan.tier);
+                          } catch (err: any) {
+                            alert(err?.message ?? "Could not start crypto checkout. Please try again.");
+                            setCryptoLoading(null);
+                          }
+                        }}
+                        style={{
+                          width: "100%", padding: "0.45rem",
+                          background: "transparent",
+                          border: "1px solid rgba(212,175,55,0.15)",
+                          color: "#4a4238",
+                          fontFamily: "'Cinzel', serif", fontSize: "0.5rem",
+                          letterSpacing: "0.15em", textTransform: "uppercase",
+                          cursor: cryptoLoading ? "not-allowed" : "pointer",
+                          opacity: cryptoLoading && cryptoLoading !== plan.tier ? 0.5 : 1,
+                        }}
+                      >
+                        {cryptoLoading === plan.tier ? "Redirecting…" : "Pay with Crypto"}
+                      </button>
+                      <button
+                        disabled={!!paypalLoading}
+                        onClick={async () => {
+                          setPaypalLoading(plan.tier);
+                          try {
+                            await startPayPalCheckout(plan.tier);
+                          } catch (err: any) {
+                            alert(err?.message ?? "Could not start PayPal checkout. Please try again.");
+                            setPaypalLoading(null);
+                          }
+                        }}
+                        style={{
+                          width: "100%", padding: "0.45rem",
+                          background: "transparent",
+                          border: "1px solid rgba(212,175,55,0.15)",
+                          color: "#4a4238",
+                          fontFamily: "'Cinzel', serif", fontSize: "0.5rem",
+                          letterSpacing: "0.15em", textTransform: "uppercase",
+                          cursor: paypalLoading ? "not-allowed" : "pointer",
+                          opacity: paypalLoading && paypalLoading !== plan.tier ? 0.5 : 1,
+                        }}
+                      >
+                        {paypalLoading === plan.tier ? "Redirecting…" : "Pay with PayPal"}
+                      </button>
+                    </div>
                   )
                 )}
               </div>
