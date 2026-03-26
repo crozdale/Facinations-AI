@@ -4,7 +4,7 @@
 //   - Inventory manager (add / remove works) — admin panel, localStorage-backed
 //   - Dealer onboarding application form
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
@@ -504,6 +504,28 @@ export default function XdaleGallery() {
   const [inventory, setInventory] = useState<Artwork[]>(loadInventory);
   const [selected, setSelected] = useState<Artwork | null>(null);
   const [tab, setTab] = useState<Tab>("gallery");
+
+  // Fetch from DB on mount; fall back to localStorage/seed if unavailable
+  useEffect(() => {
+    fetch("/api/admin/artworks?gallery=xdale")
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (!data?.artworks?.length) return;
+        setInventory(data.artworks.map((a: Record<string, unknown>) => ({
+          id:           a.id as string,
+          title:        a.title as string,
+          artist:       a.artist as string,
+          year:         a.year as number,
+          medium:       a.medium as string,
+          dimensions:   a.dimensions as string,
+          description:  a.description as string,
+          priceDisplay: a.price_display as string,
+          available:    a.available as boolean,
+          image:        a.image as string,
+        })));
+      })
+      .catch(() => {});
+  }, []);
 
   const available = inventory.filter((a) => a.available).length;
 

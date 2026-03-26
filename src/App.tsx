@@ -27,6 +27,7 @@ const Dashboard    = React.lazy(() => import("./pages/Dashboard"));
 const CheckoutSuccess = React.lazy(() => import("./pages/CheckoutSuccess"));
 const CryptoSuccess   = React.lazy(() => import("./pages/CryptoSuccess"));
 const PayPalSuccess   = React.lazy(() => import("./pages/PayPalSuccess"));
+const Admin        = React.lazy(() => import("./pages/Admin"));
 const NotFound     = React.lazy(() => import("./pages/NotFound"));
 
 // ── Loading fallback ──────────────────────────────────────────────────────────
@@ -87,6 +88,7 @@ export default function App() {
                 <Route path="/checkout/success"        element={<CheckoutSuccess />} />
                 <Route path="/checkout/crypto-success"  element={<CryptoSuccess />} />
                 <Route path="/checkout/paypal-success"  element={<PayPalSuccess />} />
+                <Route path="/admin"          element={<Admin />} />
                 <Route path="*"              element={<NotFound />} />
               </Routes>
             </Suspense>

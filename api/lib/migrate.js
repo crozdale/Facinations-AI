@@ -67,6 +67,45 @@ export async function runMigrations() {
   await query(`
     CREATE INDEX IF NOT EXISTS idx_trades_timestamp ON trades ("timestamp");
   `);
+
+  await query(`
+    CREATE TABLE IF NOT EXISTS artworks (
+      id            TEXT PRIMARY KEY,
+      title         TEXT NOT NULL,
+      artist        TEXT NOT NULL,
+      year          INT,
+      medium        TEXT,
+      dimensions    TEXT,
+      description   TEXT,
+      price_display TEXT DEFAULT 'POA',
+      available     BOOLEAN DEFAULT true,
+      image         TEXT,
+      gallery       TEXT DEFAULT 'xdale',
+      sort_order    INT DEFAULT 0,
+      created_at    TIMESTAMPTZ DEFAULT NOW(),
+      updated_at    TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await query(`
+    CREATE INDEX IF NOT EXISTS idx_artworks_gallery ON artworks (gallery);
+  `);
+
+  await query(`
+    CREATE TABLE IF NOT EXISTS vaults_meta (
+      vault_id             TEXT PRIMARY KEY,
+      name                 TEXT NOT NULL,
+      description          TEXT,
+      artist               TEXT,
+      year                 INT,
+      medium               TEXT,
+      image                TEXT,
+      legal_uri            TEXT,
+      total_fractions      INT,
+      available_fractions  INT,
+      updated_at           TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
 }
 
 /** Serverless handler — lets you trigger migrations via HTTP in dev/staging. */
