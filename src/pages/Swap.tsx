@@ -47,7 +47,7 @@ const Swap: React.FC = () => {
   });
 
   const { getQuote, executeSwap, isOnCorrectChain, account, connect } =
-    useFacinationsSwap(vault?.contractAddress);
+    useFacinationsSwap(vault?.contractAddress, tokenIn, tokenOut);
 
   const swapsOk   = swapsAllowed();
   const regionMsg = regionRestrictionMessage();
