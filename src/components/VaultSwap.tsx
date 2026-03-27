@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useWallet } from "../hooks/useWallet";
 import { useSwapContract } from "../hooks/useSwapContract";
 import { useSlippage } from "../hooks/useSlippage";
@@ -6,6 +7,7 @@ import SlippageControl from "./SlippageControl";
 import { ethers } from "ethers";
 
 export default function VaultSwap({ vault }) {
+  const { t } = useTranslation();
   const { signer, address, connect } = useWallet();
   const swap = useSwapContract(vault.swapContract, signer);
   const { slippagePct, setSlippagePct, computeMinOut } = useSlippage(0.5);
@@ -43,11 +45,11 @@ export default function VaultSwap({ vault }) {
       );
 
       if (!minOut || minOut <= 0) {
-        setStatus("Invalid slippage configuration");
+        setStatus(t("swap.invalid_slippage", "Invalid slippage configuration"));
         return;
       }
 
-      setStatus("Submitting swap…");
+      setStatus(t("swap.submitting", "Submitting swap…"));
 
       const tx = await swap.swap(
         ethers.parseUnits(amountIn, 18),
@@ -55,30 +57,30 @@ export default function VaultSwap({ vault }) {
       );
 
       await tx.wait();
-      setStatus("Swap complete");
+      setStatus(t("swap.complete", "Swap complete"));
     } catch {
-      setStatus("Swap reverted (slippage exceeded)");
+      setStatus(t("swap.reverted", "Swap reverted (slippage exceeded)"));
     }
   }
 
   if (!address) {
-    return <button onClick={connect}>Connect Wallet</button>;
+    return <button onClick={connect}>{t("wallet.connect", "Connect Wallet")}</button>;
   }
 
   return (
     <section style={{ marginTop: "40px" }}>
-      <h3>Swap Fractions</h3>
+      <h3>{t("swap.swap_fractions", "Swap Fractions")}</h3>
 
       <input
         type="number"
-        placeholder="Amount in"
+        placeholder={t("swap.amount_in_placeholder", "Amount in")}
         value={amountIn}
         onChange={e => setAmountIn(e.target.value)}
       />
 
       {quote && (
         <p>
-          Quote:{" "}
+          {t("swap.quote_label", "Quote:")}{"  "}
           <strong>
             {ethers.formatUnits(quote, 18)}
           </strong>

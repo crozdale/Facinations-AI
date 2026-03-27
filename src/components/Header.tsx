@@ -57,7 +57,7 @@ export default function Header() {
             className="lang-select"
             value={i18n.language || "en"}
             onChange={handleLanguageChange}
-            aria-label="Select language"
+            aria-label={t("common.select_language", "Select language")}
           >
             {[
               ["en", "EN"],
@@ -82,7 +82,7 @@ export default function Header() {
           <button
             className="hamburger"
             onClick={() => setMenuOpen((o) => !o)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-label={menuOpen ? t("common.close_menu", "Close menu") : t("common.open_menu", "Open menu")}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
           >
@@ -113,7 +113,7 @@ export default function Header() {
                 className="lang-select"
                 value={i18n.language || "en"}
                 onChange={handleLanguageChange}
-                aria-label="Select language"
+                aria-label={t("common.select_language", "Select language")}
               >
                 {[
                   ["en", "EN"],

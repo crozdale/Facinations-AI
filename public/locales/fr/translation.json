@@ -48,7 +48,9 @@
     "loading_page": "Chargement de la page",
     "return_to_studio": "Retourner au Studio",
     "invalid_link": "Lien de paiement invalide.",
-    "service_unreachable": "Impossible de joindre le service de vérification. Veuillez contacter le support."
+    "service_unreachable": "Impossible de joindre le service de vérification. Veuillez contacter le support.",
+    "select_language": "Sélectionner la langue",
+    "amount": "Montant"
   },
   "hero": {
     "title": "Facinations : Coffres d'art fractionné",
@@ -121,7 +123,8 @@
     "placeholder_ask": "Posez une question…",
     "related_works": "Œuvres connexes",
     "zoom_reset": "réinitialiser",
-    "zoom_hint": "défilement · pincement · utilisez +/- pour zoomer"
+    "zoom_hint": "défilement · pincement · utilisez +/- pour zoomer",
+    "royalty": "Royalty: {{percent}}%"
   },
   "vaults": {
     "title": "Coffres",
@@ -147,7 +150,15 @@
     "badge_premium": "XER PREMIUM",
     "btn_view": "Voir",
     "btn_swap": "Swap",
-    "btn_swap_restricted": "Swap (restreint)"
+    "btn_swap_restricted": "Swap (restreint)",
+    "error_heading": "Impossible de charger les coffres",
+    "view_on_ipfs": "View on IPFS",
+    "on_chain_title": "Coffres on-chain",
+    "contract_label": "Contrat :",
+    "premium_badge": "Premium requis",
+    "premium": "Premium",
+    "locked": "Verrouillé",
+    "open_vault": "Ouvrir le coffre"
   },
   "vaultDetail": {
     "back": "← Retour aux coffres",
@@ -170,7 +181,12 @@
     "positions_empty": "Les positions s'afficheront ici une fois connectées aux données en direct.",
     "col_asset": "Actif",
     "col_weight": "Poids",
-    "col_value": "Valeur (USD)"
+    "col_value": "Valeur (USD)",
+    "vault_heading": "Vault {{vaultId}}",
+    "label_id": "ID:",
+    "label_token_id": "Token ID:",
+    "label_contract_addr": "Contrat :",
+    "view_etherscan": "View on Etherscan"
   },
   "swap": {
     "title": "Swap",
@@ -192,6 +208,14 @@
     "btn_connect_wallet": "Connecter le portefeuille",
     "vault_context": "Échange vers",
     "label_min_received": "Min. reçu (glissement 0,5 %)",
+    "slippage_label": "Tolérance de glissement (%)",
+    "swap_fractions": "Échanger des fractions",
+    "amount_in_placeholder": "Montant entrant",
+    "quote_label": "Devis :",
+    "invalid_slippage": "Configuration de glissement invalide",
+    "submitting": "Soumission de l'échange…",
+    "complete": "Échange terminé",
+    "reverted": "Échange annulé (glissement dépassé)",
     "tx_confirmed": "Swap confirmé",
     "label_tx": "Tx",
     "arrow": "↕"
@@ -498,7 +522,9 @@
     "tag_risk": "Risque",
     "last_updated": "Dernière mise à jour : mars 2026",
     "body": "Facinations fournit des outils pour la présentation numérique et le suivi de provenance. La propriété, les droits de propriété intellectuelle et les obligations légales restent la responsabilité de leurs détenteurs respectifs.",
-    "body2": "Tout le contenu est fourni tel quel et soumis aux lois applicables régissant les actifs numériques, la propriété intellectuelle et les technologies décentralisées."
+    "body2": "Tout le contenu est fourni tel quel et soumis aux lois applicables régissant les actifs numériques, la propriété intellectuelle et les technologies décentralisées.",
+    "disclaimer_title": "Avis de non-responsabilité",
+    "disclaimer_body": "Facinations fournit uniquement des outils de provenance. Aucun conseil financier ou juridique n'est donné."
   },
   "studio": {
     "title": "Facinations Studio",
@@ -592,7 +618,25 @@
     "legal_title": "Juridique & Divulgations",
     "view_legal_pack": "Voir le dossier juridique ({{label}})",
     "legal_confirm": "Je confirme avoir lu et compris la documentation juridique.",
-    "jurisdiction_version": "Juridiction : {{jurisdiction}} · Version {{version}}"
+    "jurisdiction_version": "Juridiction : {{jurisdiction}} · Version {{version}}",
+    "buy_fractions_title": "Acheter des fractions",
+    "buy_fractions_btn": "Acheter (bientôt disponible)",
+    "buy_fractions_note": "Les achats de fractions s'activent une fois le coffre en ligne.",
+    "activity_title": "Activité en direct",
+    "activity_empty": "Pas encore d'activité.",
+    "actions_title": "Actions du coffre",
+    "fractionalize": "Fractionner",
+    "fully_funded": "Entièrement financé",
+    "not_fully_funded": "Pas entièrement financé",
+    "instrument_title": "Instrument #{{tokenId}}",
+    "fixed_exchange": "Échange fixe :",
+    "owner_label": "Propriétaire :",
+    "burned_redeemed": "(brûlé / racheté)",
+    "status_redeemed": "Racheté",
+    "status_active": "Actif",
+    "submitting_tx": "Soumission de la transaction…",
+    "fractionalization_complete": "Fractionnement terminé",
+    "tx_failed": "Transaction échouée"
   },
   "whitepaper": {
     "title": "Façinations",
@@ -651,6 +695,36 @@
     "s7_2_title": "Conclusion",
     "s7_2_p1": "Façinations comble l'absence d'une infrastructure de propriété transparente, liquide et géographiquement consciente pour les actifs culturels. Les tokens de provenance ERC-721, les coffres fractionnés ERC-1155, CivMap et la gouvernance DAO créent une couche souveraine pour l'art sur le web ouvert.",
     "s7_2_p2": "Le protocole est ouvert, composable et conçu pour une adoption institutionnelle à long terme. Les partenaires, galeries et développeurs sont invités à s'engager avec le réseau de test avant le lancement sur le réseau principal.",
-    "s7_2_contact": "Contact et dépôt"
+    "s7_2_contact": "Contact et dépôt",
+    "page_eyebrow": "Protocol",
+    "page_heading": "Facinations Fine-Art Protocol",
+    "page_subtitle": "Un système décentralisé pour la garde, l'échange et la provenance d'art numérique de qualité muséale sur Ethereum.",
+    "page_body1": "Le protocole Facinations introduit une structure de marché en couches : découverte de galeries, collections de collectionneurs, échanges curatés et garde de qualité coffre-fort. Chaque couche écrit dans un graphe de provenance partagé qui capture la gravité culturelle, pas seulement le prix.",
+    "page_body2": "Pour la spécification technique complète, téléchargez le whitepaper PDF ou inspectez les contrats intelligents open-source qui ancrent la garde, la liquidité et la provenance sur Ethereum.",
+    "btn_download": "Télécharger le whitepaper",
+    "btn_contracts": "Voir les contrats"
+  },
+  "premium": {
+    "activating": "Activation du Premium…",
+    "tx_confirmed": "Votre transaction est confirmée.",
+    "indexing": "En attente d'indexation on-chain."
+  },
+  "dao": {
+    "vote_yes": "Vote YES",
+    "vote_no": "Vote NO",
+    "voting": "Vote en cours…",
+    "vote_cast": "Vote émis",
+    "vote_failed": "Vote échoué",
+    "proposal_title": "Proposition DAO",
+    "target_placeholder": "Contrat cible",
+    "calldata_placeholder": "Calldata encodé",
+    "btn_propose": "Proposer",
+    "submitting_proposal": "Soumission de la proposition…",
+    "proposal_submitted": "Proposition soumise",
+    "failed": "Échec"
+  },
+  "theme": {
+    "dark": "🌙 Dark",
+    "light": "☀️ Light"
   }
 }

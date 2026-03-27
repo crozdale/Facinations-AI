@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import { useWeb3 } from "../providers/Web3Provider";
 
 export default function ConnectWalletButton() {
+  const { t } = useTranslation();
   const { account, connect } = useWeb3();
 
   return (
@@ -10,7 +12,7 @@ export default function ConnectWalletButton() {
     >
       {account
         ? `${account.slice(0, 6)}…${account.slice(-4)}`
-        : "Connect Wallet"}
+        : t("wallet.connect", "Connect Wallet")}
     </button>
   );
 }

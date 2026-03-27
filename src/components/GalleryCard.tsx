@@ -1,5 +1,6 @@
 // src/components/GalleryCard.tsx
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface GalleryCardItem {
   image?: string;
@@ -9,6 +10,7 @@ interface GalleryCardItem {
 }
 
 export default function GalleryCard({ item }: { item: GalleryCardItem }) {
+  const { t } = useTranslation();
   return (
     <div style={{
       border: "1px solid rgba(212,175,55,0.12)",
@@ -43,7 +45,7 @@ export default function GalleryCard({ item }: { item: GalleryCardItem }) {
           margin: 0,
           fontStyle: "italic",
         }}>
-          Royalty: {item.royaltyPercent}%
+          {t("gallery.royalty", "Royalty: {{percent}}%", { percent: item.royaltyPercent })}
         </p>
       )}
       {item.royaltyReceiver && (

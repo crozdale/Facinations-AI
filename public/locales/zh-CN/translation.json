@@ -48,7 +48,9 @@
     "loading_page": "页面加载中",
     "return_to_studio": "返回工作室",
     "invalid_link": "无效的结账链接。",
-    "service_unreachable": "无法连接验证服务，请联系支持团队。"
+    "service_unreachable": "无法连接验证服务，请联系支持团队。",
+    "select_language": "选择语言",
+    "amount": "金额"
   },
   "hero": {
     "title": "Facinations：分级精细艺术金库",
@@ -121,7 +123,8 @@
     "placeholder_ask": "随便问点什么…",
     "related_works": "相关作品",
     "zoom_reset": "重置",
-    "zoom_hint": "滚动 · 捏合 · 使用 +/- 缩放"
+    "zoom_hint": "滚动 · 捏合 · 使用 +/- 缩放",
+    "royalty": "Royalty: {{percent}}%"
   },
   "vaults": {
     "title": "金库",
@@ -147,7 +150,15 @@
     "badge_premium": "XER 高级",
     "btn_view": "查看",
     "btn_swap": "兑换",
-    "btn_swap_restricted": "兑换（受限）"
+    "btn_swap_restricted": "兑换（受限）",
+    "error_heading": "无法加载金库",
+    "view_on_ipfs": "View on IPFS",
+    "on_chain_title": "链上金库",
+    "contract_label": "合约:",
+    "premium_badge": "需要高级版",
+    "premium": "高级版",
+    "locked": "已锁定",
+    "open_vault": "打开金库"
   },
   "vaultDetail": {
     "back": "← 返回金库列表",
@@ -170,7 +181,12 @@
     "positions_empty": "连接实时数据后，持仓将显示在此处。",
     "col_asset": "资产",
     "col_weight": "权重",
-    "col_value": "价值（美元）"
+    "col_value": "价值（美元）",
+    "vault_heading": "Vault {{vaultId}}",
+    "label_id": "ID:",
+    "label_token_id": "Token ID:",
+    "label_contract_addr": "合约:",
+    "view_etherscan": "View on Etherscan"
   },
   "swap": {
     "title": "兑换",
@@ -192,6 +208,14 @@
     "btn_connect_wallet": "连接钱包",
     "vault_context": "兑换至",
     "label_min_received": "最低到账（0.5% 滑点）",
+    "slippage_label": "滑点容忍度 (%)",
+    "swap_fractions": "交换份额",
+    "amount_in_placeholder": "输入金额",
+    "quote_label": "报价:",
+    "invalid_slippage": "无效的滑点配置",
+    "submitting": "正在提交交换…",
+    "complete": "交换完成",
+    "reverted": "交换已撤销（超出滑点）",
     "tx_confirmed": "兑换已确认",
     "label_tx": "Tx",
     "arrow": "↕"
@@ -498,7 +522,9 @@
     "tag_risk": "风险",
     "last_updated": "最后更新：2026 年 3 月",
     "body": "Facinations 提供数字展示和溯源追踪工具。所有权、知识产权和法律义务由各自的持有者承担。",
-    "body2": "所有内容按现状提供，受管辖数字资产、知识产权和去中心化技术的适用法律约束。"
+    "body2": "所有内容按现状提供，受管辖数字资产、知识产权和去中心化技术的适用法律约束。",
+    "disclaimer_title": "免责声明",
+    "disclaimer_body": "Facinations 仅提供来源追踪工具，不提供任何财务或法律建议。"
   },
   "studio": {
     "title": "Facinations 工作室",
@@ -592,7 +618,25 @@
     "legal_title": "法律与披露",
     "view_legal_pack": "查看法律文件包 ({{label}})",
     "legal_confirm": "我确认已阅读并理解法律文件。",
-    "jurisdiction_version": "司法管辖区：{{jurisdiction}} · 版本 {{version}}"
+    "jurisdiction_version": "司法管辖区：{{jurisdiction}} · 版本 {{version}}",
+    "buy_fractions_title": "购买份额",
+    "buy_fractions_btn": "购买（即将推出）",
+    "buy_fractions_note": "金库上链后即可购买份额。",
+    "activity_title": "实时动态",
+    "activity_empty": "暂无活动。",
+    "actions_title": "金库操作",
+    "fractionalize": "碎片化",
+    "fully_funded": "已全额资助",
+    "not_fully_funded": "未全额资助",
+    "instrument_title": "Instrument #{{tokenId}}",
+    "fixed_exchange": "固定兑换:",
+    "owner_label": "所有者:",
+    "burned_redeemed": "（已销毁 / 已赎回）",
+    "status_redeemed": "已赎回",
+    "status_active": "活跃",
+    "submitting_tx": "正在提交交易…",
+    "fractionalization_complete": "碎片化完成",
+    "tx_failed": "交易失败"
   },
   "whitepaper": {
     "title": "Façinations",
@@ -651,6 +695,36 @@
     "s7_2_title": "结论",
     "s7_2_p1": "Façinations 解决了文化资产缺乏透明、流动且具有地理意识的所有权基础设施的问题。ERC-721 溯源代币、ERC-1155 分级金库、CivMap 和 DAO 治理为开放网络上的精细艺术创建了一个主权层。",
     "s7_2_p2": "该协议开放、可组合，专为长期机构采用而设计。合作伙伴、画廊和开发者被邀请在主网上线前参与测试网。",
-    "s7_2_contact": "联系方式与代码库"
+    "s7_2_contact": "联系方式与代码库",
+    "page_eyebrow": "Protocol",
+    "page_heading": "Facinations Fine-Art Protocol",
+    "page_subtitle": "基于以太坊的博物馆级数字美术品托管、交换和来源追踪的去中心化系统。",
+    "page_body1": "Facinations 协议引入了分层市场结构：画廊发现、收藏家收藏、精选交易所和金库级托管。每一层都写入共享的来源图谱，捕捉文化重力，而不仅仅是价格。",
+    "page_body2": "如需完整技术规范，请下载 PDF 白皮书或检查将托管、流动性和来源锚定到以太坊的开源智能合约。",
+    "btn_download": "下载白皮书",
+    "btn_contracts": "查看合约"
+  },
+  "premium": {
+    "activating": "正在激活高级版…",
+    "tx_confirmed": "您的交易已确认。",
+    "indexing": "等待链上索引。"
+  },
+  "dao": {
+    "voting": "投票中…",
+    "vote_cast": "投票已提交",
+    "vote_failed": "投票失败",
+    "proposal_title": "DAO 提案",
+    "target_placeholder": "目标合约",
+    "calldata_placeholder": "编码的调用数据",
+    "btn_propose": "提案",
+    "submitting_proposal": "正在提交提案…",
+    "proposal_submitted": "提案已提交",
+    "failed": "失败",
+    "vote_yes": "Vote YES",
+    "vote_no": "Vote NO"
+  },
+  "theme": {
+    "dark": "🌙 Dark",
+    "light": "☀️ Light"
   }
 }

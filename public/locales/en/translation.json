@@ -48,7 +48,9 @@
     "loading_page": "Loading page",
     "return_to_studio": "Return to Studio",
     "invalid_link": "Invalid checkout link.",
-    "service_unreachable": "Could not reach the verification service. Please contact support."
+    "service_unreachable": "Could not reach the verification service. Please contact support.",
+    "select_language": "Select language",
+    "amount": "Amount"
   },
   "hero": {
     "title": "Facinations: Fractional Fine Art Vaults",
@@ -109,6 +111,7 @@
     "filter_renaissance": "Renaissance",
     "filter_originals": "Originals",
     "works_count": "{{count}} works",
+    "royalty": "Royalty: {{percent}}%",
     "ai_subtitle": "AI Curator · Chat · Related",
     "curators_eye": "Curator's Eye",
     "btn_invoke": "✦ Invoke AI Curator",
@@ -147,7 +150,15 @@
     "badge_premium": "XER PREMIUM",
     "btn_view": "View",
     "btn_swap": "Swap",
-    "btn_swap_restricted": "Swap (restricted)"
+    "btn_swap_restricted": "Swap (restricted)",
+    "error_heading": "Unable to Load Vaults",
+    "view_on_ipfs": "View on IPFS",
+    "on_chain_title": "On-Chain Vaults",
+    "contract_label": "Contract:",
+    "premium_badge": "Premium Required",
+    "premium": "Premium",
+    "locked": "Locked",
+    "open_vault": "Open Vault"
   },
   "vaultDetail": {
     "back": "← Back to vaults",
@@ -170,7 +181,12 @@
     "positions_empty": "Positions will appear here when wired to live data.",
     "col_asset": "Asset",
     "col_weight": "Weight",
-    "col_value": "Value (USD)"
+    "col_value": "Value (USD)",
+    "vault_heading": "Vault {{vaultId}}",
+    "label_id": "ID:",
+    "label_token_id": "Token ID:",
+    "label_contract_addr": "Contract:",
+    "view_etherscan": "View on Etherscan"
   },
   "swap": {
     "title": "Swap",
@@ -192,6 +208,14 @@
     "btn_connect_wallet": "Connect Wallet",
     "vault_context": "Swapping into",
     "label_min_received": "Min. received (0.5% slippage)",
+    "slippage_label": "Slippage Tolerance (%)",
+    "swap_fractions": "Swap Fractions",
+    "amount_in_placeholder": "Amount in",
+    "quote_label": "Quote:",
+    "invalid_slippage": "Invalid slippage configuration",
+    "submitting": "Submitting swap…",
+    "complete": "Swap complete",
+    "reverted": "Swap reverted (slippage exceeded)",
     "tx_confirmed": "Swap confirmed",
     "label_tx": "Tx",
     "arrow": "↕"
@@ -498,7 +522,9 @@
     "tag_risk": "Risk",
     "last_updated": "Last updated: March 2026",
     "body": "Facinations provides tools for digital presentation and provenance tracking. Ownership, intellectual property rights, and legal obligations remain the responsibility of their respective holders.",
-    "body2": "All content is provided as-is and subject to applicable laws governing digital assets, intellectual property, and decentralized technologies."
+    "body2": "All content is provided as-is and subject to applicable laws governing digital assets, intellectual property, and decentralized technologies.",
+    "disclaimer_title": "Disclaimer",
+    "disclaimer_body": "Facinations provides provenance tools only. No financial or legal advice is given."
   },
   "studio": {
     "title": "Facinations Studio",
@@ -592,7 +618,25 @@
     "legal_title": "Legal & Disclosures",
     "view_legal_pack": "View Legal Pack ({{label}})",
     "legal_confirm": "I confirm that I have read and understood the legal documentation.",
-    "jurisdiction_version": "Jurisdiction: {{jurisdiction}} · Version {{version}}"
+    "jurisdiction_version": "Jurisdiction: {{jurisdiction}} · Version {{version}}",
+    "buy_fractions_title": "Buy Fractions",
+    "buy_fractions_btn": "Buy (coming soon)",
+    "buy_fractions_note": "Fraction purchases activate once the vault is live on-chain.",
+    "activity_title": "Live Activity",
+    "activity_empty": "No activity yet.",
+    "actions_title": "Vault Actions",
+    "fractionalize": "Fractionalize",
+    "fully_funded": "Fully Funded",
+    "not_fully_funded": "Not Fully Funded",
+    "instrument_title": "Instrument #{{tokenId}}",
+    "fixed_exchange": "Fixed exchange:",
+    "owner_label": "Owner:",
+    "burned_redeemed": "(burned / redeemed)",
+    "status_redeemed": "Redeemed",
+    "status_active": "Active",
+    "submitting_tx": "Submitting transaction…",
+    "fractionalization_complete": "Fractionalization complete",
+    "tx_failed": "Transaction failed"
   },
   "whitepaper": {
     "title": "Façinations",
@@ -651,6 +695,36 @@
     "s7_2_title": "Conclusion",
     "s7_2_p1": "Façinations addresses the absence of transparent, liquid, and geographically-aware ownership infrastructure for cultural assets. ERC-721 provenance tokens, ERC-1155 fractional vaults, CivMap, and DAO governance create a sovereign layer for fine art on the open web.",
     "s7_2_p2": "The protocol is open, composable, and designed for long-term institutional adoption. Partners, galleries, and developers are invited to engage with the testnet ahead of mainnet launch.",
-    "s7_2_contact": "Contact & Repository"
+    "s7_2_contact": "Contact & Repository",
+    "page_eyebrow": "Protocol",
+    "page_heading": "Facinations Fine-Art Protocol",
+    "page_subtitle": "A decentralised system for custody, exchange, and provenance of museum-grade digital fine art on Ethereum.",
+    "page_body1": "The Facinations protocol introduces a layered market structure: gallery discovery, collector collections, curated exchanges, and vault-grade custody. Each layer writes to a shared provenance graph that captures cultural gravity, not just price.",
+    "page_body2": "For the full technical specification, download the PDF whitepaper or inspect the open-source smart contracts that anchor custody, liquidity, and provenance to Ethereum.",
+    "btn_download": "Download whitepaper",
+    "btn_contracts": "View contracts"
+  },
+  "premium": {
+    "activating": "Activating Premium…",
+    "tx_confirmed": "Your transaction is confirmed.",
+    "indexing": "Waiting for on-chain indexing."
+  },
+  "dao": {
+    "vote_yes": "Vote YES",
+    "vote_no": "Vote NO",
+    "voting": "Voting…",
+    "vote_cast": "Vote cast",
+    "vote_failed": "Vote failed",
+    "proposal_title": "DAO Proposal",
+    "target_placeholder": "Target contract",
+    "calldata_placeholder": "Encoded calldata",
+    "btn_propose": "Propose",
+    "submitting_proposal": "Submitting proposal…",
+    "proposal_submitted": "Proposal submitted",
+    "failed": "Failed"
+  },
+  "theme": {
+    "dark": "🌙 Dark",
+    "light": "☀️ Light"
   }
 }

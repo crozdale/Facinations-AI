@@ -60,7 +60,7 @@ const Vaults = () => {
       <div style={{ background: "#080808", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ textAlign: "center", padding: "2rem" }}>
           <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(212,175,55,0.5)", marginBottom: "1rem" }}>
-            Unable to Load Vaults
+            {t("vaults.error_heading", "Unable to Load Vaults")}
           </div>
           <p style={{ color: "#9a9288", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1rem" }}>
             {t("vaults.error")}

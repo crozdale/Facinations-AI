@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next";
+
 export default function SlippageControl({ value, onChange }) {
+  const { t } = useTranslation();
   return (
     <div style={{ marginTop: "12px" }}>
       <label style={{ fontSize: "0.85rem" }}>
-        Slippage Tolerance (%)
+        {t("swap.slippage_label", "Slippage Tolerance (%)")}
       </label>
 
       <input

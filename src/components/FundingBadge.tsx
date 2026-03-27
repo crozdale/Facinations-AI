@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 export default function FundingBadge({ isFullyFunded }) {
+  const { t } = useTranslation();
   return (
     <span
       className={[
@@ -6,7 +9,7 @@ export default function FundingBadge({ isFullyFunded }) {
         isFullyFunded ? "bg-blue-600 text-white" : "bg-gray-800 text-white/90",
       ].join(" ")}
     >
-      {isFullyFunded ? "Fully Funded" : "Not Fully Funded"}
+      {isFullyFunded ? t("vault.fully_funded", "Fully Funded") : t("vault.not_fully_funded", "Not Fully Funded")}
     </span>
   );
 }

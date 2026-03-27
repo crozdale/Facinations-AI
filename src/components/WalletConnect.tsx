@@ -1,6 +1,8 @@
 ﻿import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { ethers } from "ethers";
 export default function WalletConnect() {
+  const { t } = useTranslation();
   const [address, setAddress] = useState(null);
   const [status, setStatus] = useState("idle");
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function WalletConnect() {
     <button className="wallet-button" onClick={status === "connected" ? disconnect : connect}
       style={{ fontFamily: "'Cinzel', serif", fontSize: "0.62rem", letterSpacing: "0.15em", textTransform: "uppercase", padding: "0.45rem 1.1rem", background: "none", border: "1px solid rgba(212,175,55,0.4)", color: "#d4af37", cursor: "pointer", display: "flex", alignItems: "center", gap: "0.5rem", whiteSpace: "nowrap", transition: "all 0.25s" }}>
       {status === "connected" && <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#2ecc71", display: "inline-block", flexShrink: 0 }} />}
-      {status === "connected" ? short : status === "connecting" ? "Connecting..." : "Connect Wallet"}
+      {status === "connected" ? short : status === "connecting" ? t("wallet.connecting", "Connecting…") : t("wallet.connect", "Connect Wallet")}
     </button>
   );
 }

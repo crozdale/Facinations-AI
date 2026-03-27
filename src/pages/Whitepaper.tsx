@@ -1,7 +1,9 @@
 ﻿// src/pages/Whitepaper.jsx
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Whitepaper() {
+  const { t } = useTranslation();
   return (
     <main
       style={{
@@ -29,7 +31,7 @@ export default function Whitepaper() {
               marginBottom: "0.7rem",
             }}
           >
-            Protocol
+            {t("whitepaper.page_eyebrow", "Protocol")}
           </div>
           <h1
             style={{
@@ -38,7 +40,7 @@ export default function Whitepaper() {
               marginBottom: "0.7rem",
             }}
           >
-            Facinations Fine-Art Protocol
+            {t("whitepaper.page_heading", "Facinations Fine-Art Protocol")}
           </h1>
           <p
             style={{
@@ -48,8 +50,7 @@ export default function Whitepaper() {
               lineHeight: 1.7,
             }}
           >
-            A decentralised system for custody, exchange, and provenance of
-            museum-grade digital fine art on Ethereum.
+            {t("whitepaper.page_subtitle", "A decentralised system for custody, exchange, and provenance of museum-grade digital fine art on Ethereum.")}
           </p>
         </header>
 
@@ -61,15 +62,10 @@ export default function Whitepaper() {
           }}
         >
           <p style={{ marginBottom: "1rem" }}>
-            The Facinations protocol introduces a layered market structure:
-            gallery discovery, collector collections, curated exchanges, and
-            vault-grade custody. Each layer writes to a shared provenance graph
-            that captures cultural gravity, not just price.
+            {t("whitepaper.page_body1", "The Facinations protocol introduces a layered market structure: gallery discovery, collector collections, curated exchanges, and vault-grade custody. Each layer writes to a shared provenance graph that captures cultural gravity, not just price.")}
           </p>
           <p>
-            For the full technical specification, download the PDF whitepaper or
-            inspect the open-source smart contracts that anchor custody,
-            liquidity, and provenance to Ethereum.
+            {t("whitepaper.page_body2", "For the full technical specification, download the PDF whitepaper or inspect the open-source smart contracts that anchor custody, liquidity, and provenance to Ethereum.")}
           </p>
         </section>
 
@@ -88,7 +84,7 @@ export default function Whitepaper() {
               textDecoration: "none",
             }}
           >
-            Download whitepaper
+            {t("whitepaper.btn_download", "Download whitepaper")}
           </a>
           <a
             href="https://etherscan.io/"
@@ -106,7 +102,7 @@ export default function Whitepaper() {
               textDecoration: "none",
             }}
           >
-            View contracts
+            {t("whitepaper.btn_contracts", "View contracts")}
           </a>
         </div>
       </div>

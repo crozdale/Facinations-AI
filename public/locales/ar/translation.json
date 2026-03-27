@@ -48,7 +48,9 @@
     "loading_page": "جارٍ تحميل الصفحة",
     "return_to_studio": "العودة إلى الاستوديو",
     "invalid_link": "رابط الدفع غير صالح.",
-    "service_unreachable": "تعذّر الوصول إلى خدمة التحقق. يرجى التواصل مع الدعم."
+    "service_unreachable": "تعذّر الوصول إلى خدمة التحقق. يرجى التواصل مع الدعم.",
+    "select_language": "اختر اللغة",
+    "amount": "المبلغ"
   },
   "hero": {
     "title": "Facinations: خزائن الفنون الجميلة الجزئية",
@@ -121,7 +123,8 @@
     "placeholder_ask": "اسأل أي شيء…",
     "related_works": "أعمال ذات صلة",
     "zoom_reset": "إعادة تعيين",
-    "zoom_hint": "تمرير · قرصة · استخدم +/- للتكبير"
+    "zoom_hint": "تمرير · قرصة · استخدم +/- للتكبير",
+    "royalty": "Royalty: {{percent}}%"
   },
   "vaults": {
     "title": "الخزائن",
@@ -147,7 +150,15 @@
     "badge_premium": "XER PREMIUM",
     "btn_view": "عرض",
     "btn_swap": "تبادل",
-    "btn_swap_restricted": "تبادل (مقيّد)"
+    "btn_swap_restricted": "تبادل (مقيّد)",
+    "error_heading": "تعذّر تحميل الخزائن",
+    "view_on_ipfs": "View on IPFS",
+    "on_chain_title": "الخزائن على السلسلة",
+    "contract_label": "العقد:",
+    "premium_badge": "يتطلب Premium",
+    "premium": "Premium",
+    "locked": "مقفل",
+    "open_vault": "فتح الخزينة"
   },
   "vaultDetail": {
     "back": "← العودة إلى الخزائن",
@@ -170,7 +181,12 @@
     "positions_empty": "ستظهر المراكز هنا عند ربطها ببيانات مباشرة.",
     "col_asset": "الأصل",
     "col_weight": "الوزن",
-    "col_value": "القيمة (USD)"
+    "col_value": "القيمة (USD)",
+    "vault_heading": "Vault {{vaultId}}",
+    "label_id": "ID:",
+    "label_token_id": "Token ID:",
+    "label_contract_addr": "العقد:",
+    "view_etherscan": "View on Etherscan"
   },
   "swap": {
     "title": "التبادل",
@@ -192,6 +208,14 @@
     "btn_connect_wallet": "ربط المحفظة",
     "vault_context": "التبادل إلى",
     "label_min_received": "الحد الأدنى المستلَم (انزلاق 0.5%)",
+    "slippage_label": "تحمّل الانزلاق (%)",
+    "swap_fractions": "تبادل الأجزاء",
+    "amount_in_placeholder": "المبلغ الوارد",
+    "quote_label": "السعر:",
+    "invalid_slippage": "إعداد انزلاق غير صالح",
+    "submitting": "جارٍ إرسال التبادل…",
+    "complete": "اكتمل التبادل",
+    "reverted": "تم إلغاء التبادل (تجاوز الانزلاق)",
     "tx_confirmed": "تم تأكيد التبادل",
     "label_tx": "المعاملة",
     "arrow": "↕"
@@ -498,7 +522,9 @@
     "tag_risk": "المخاطر",
     "last_updated": "آخر تحديث: مارس 2026",
     "body": "توفّر Facinations أدوات للعرض الرقمي وتتبع سجل الملكية. تبقى الملكية وحقوق الملكية الفكرية والالتزامات القانونية مسؤولية أصحابها المعنيين.",
-    "body2": "يُقدَّم جميع المحتوى كما هو ويخضع للقوانين المعمول بها التي تحكم الأصول الرقمية والملكية الفكرية والتقنيات اللامركزية."
+    "body2": "يُقدَّم جميع المحتوى كما هو ويخضع للقوانين المعمول بها التي تحكم الأصول الرقمية والملكية الفكرية والتقنيات اللامركزية.",
+    "disclaimer_title": "إخلاء المسؤولية",
+    "disclaimer_body": "تقدّم Facinations أدوات تتبّع المصدر فقط. لا يتم تقديم أي استشارات مالية أو قانونية."
   },
   "studio": {
     "title": "استوديو Facinations",
@@ -592,7 +618,25 @@
     "legal_title": "القانونية والإفصاحات",
     "view_legal_pack": "عرض الحزمة القانونية ({{label}})",
     "legal_confirm": "أؤكد أنني قرأت وفهمت الوثائق القانونية.",
-    "jurisdiction_version": "الاختصاص القضائي: {{jurisdiction}} · الإصدار {{version}}"
+    "jurisdiction_version": "الاختصاص القضائي: {{jurisdiction}} · الإصدار {{version}}",
+    "buy_fractions_title": "شراء الأجزاء",
+    "buy_fractions_btn": "شراء (قريباً)",
+    "buy_fractions_note": "ستُفعَّل مشتريات الأجزاء عند إطلاق الخزينة على السلسلة.",
+    "activity_title": "النشاط المباشر",
+    "activity_empty": "لا يوجد نشاط بعد.",
+    "actions_title": "إجراءات الخزينة",
+    "fractionalize": "تجزئة",
+    "fully_funded": "مموّل بالكامل",
+    "not_fully_funded": "غير مموّل بالكامل",
+    "instrument_title": "Instrument #{{tokenId}}",
+    "fixed_exchange": "تبادل ثابت:",
+    "owner_label": "المالك:",
+    "burned_redeemed": "(محروق / مستردّ)",
+    "status_redeemed": "مستردّ",
+    "status_active": "نشط",
+    "submitting_tx": "جارٍ إرسال المعاملة…",
+    "fractionalization_complete": "اكتملت التجزئة",
+    "tx_failed": "فشلت المعاملة"
   },
   "whitepaper": {
     "title": "Façinations",
@@ -651,6 +695,34 @@
     "s7_2_title": "الخلاصة",
     "s7_2_p1": "تعالج Façinations غياب بنية تحتية شفافة وسائلة وواعية جغرافيًا لملكية الأصول الثقافية. تخلق رموز سجل الملكية ERC-721 وخزائن ERC-1155 الجزئية وCivMap وحوكمة DAO طبقة سيادية للفنون الجميلة على الإنترنت المفتوح.",
     "s7_2_p2": "البروتوكول مفتوح وقابل للتركيب ومصمَّم للتبني المؤسسي على المدى الطويل. يُدعى الشركاء والمعارض والمطوّرون للتفاعل مع الشبكة التجريبية قبل إطلاق الشبكة الرئيسية.",
-    "s7_2_contact": "التواصل والمستودع"
+    "s7_2_contact": "التواصل والمستودع",
+    "page_eyebrow": "Protocol",
+    "page_heading": "Facinations Fine-Art Protocol",
+    "page_subtitle": "نظام لامركزي لحضانة وتبادل ومصدر الفنون الرقمية بجودة متحفية على Ethereum.",
+    "page_body1": "يُدخل بروتوكول Facinations هيكل سوق متعدد الطبقات: اكتشاف الصاليات، مجموعات الجامعين، البورصات المنسّقة، والحضانة بمستوى الخزينة. تكتب كل طبقة في رسم بياني مشترك للمصدر يلتقط الجاذبية الثقافية، وليس السعر فقط.",
+    "page_body2": "للاطلاع على المواصفات التقنية الكاملة، قم بتنزيل ورقة العمل البيضاء PDF أو فحص العقود الذكية مفتوحة المصدر التي تثبّت الحضانة والسيولة والمصدر على Ethereum.",
+    "btn_download": "تنزيل الورقة البيضاء",
+    "btn_contracts": "عرض العقود"
+  },
+  "premium": {
+    "activating": "جارٍ تفعيل Premium…",
+    "tx_confirmed": "تم تأكيد معاملتك.",
+    "indexing": "في انتظار الفهرسة على السلسلة."
+  },
+  "dao": {
+    "voting": "جارٍ التصويت…",
+    "vote_cast": "تم التصويت",
+    "vote_failed": "فشل التصويت",
+    "proposal_title": "مقترح DAO",
+    "target_placeholder": "العقد المستهدف",
+    "calldata_placeholder": "بيانات الاستدعاء المشفّرة",
+    "btn_propose": "اقتراح",
+    "submitting_proposal": "جارٍ إرسال المقترح…",
+    "proposal_submitted": "تم إرسال المقترح",
+    "failed": "فشل"
+  },
+  "theme": {
+    "dark": "🌙 Dark",
+    "light": "☀️ Light"
   }
 }

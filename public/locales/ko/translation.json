@@ -48,7 +48,9 @@
     "loading_page": "페이지 로딩 중",
     "return_to_studio": "스튜디오로 돌아가기",
     "invalid_link": "잘못된 결제 링크입니다.",
-    "service_unreachable": "인증 서비스에 연결할 수 없습니다. 지원팀에 문의하세요."
+    "service_unreachable": "인증 서비스에 연결할 수 없습니다. 지원팀에 문의하세요.",
+    "select_language": "언어 선택",
+    "amount": "금액"
   },
   "hero": {
     "title": "Facinations: 분할 순수 예술 볼트",
@@ -121,7 +123,8 @@
     "placeholder_ask": "무엇이든 질문하세요…",
     "related_works": "관련 작품",
     "zoom_reset": "초기화",
-    "zoom_hint": "스크롤 · 핀치 · +/- 버튼으로 확대/축소"
+    "zoom_hint": "스크롤 · 핀치 · +/- 버튼으로 확대/축소",
+    "royalty": "Royalty: {{percent}}%"
   },
   "vaults": {
     "title": "볼트",
@@ -147,7 +150,15 @@
     "badge_premium": "XER 프리미엄",
     "btn_view": "보기",
     "btn_swap": "스왑",
-    "btn_swap_restricted": "스왑 (제한됨)"
+    "btn_swap_restricted": "스왑 (제한됨)",
+    "error_heading": "볼트를 불러올 수 없습니다",
+    "view_on_ipfs": "View on IPFS",
+    "on_chain_title": "온체인 볼트",
+    "contract_label": "컨트랙트:",
+    "premium_badge": "프리미엄 필요",
+    "premium": "프리미엄",
+    "locked": "잠김",
+    "open_vault": "볼트 열기"
   },
   "vaultDetail": {
     "back": "← 볼트로 돌아가기",
@@ -170,7 +181,12 @@
     "positions_empty": "라이브 데이터에 연결되면 포지션이 여기에 표시됩니다.",
     "col_asset": "자산",
     "col_weight": "비중",
-    "col_value": "가치 (USD)"
+    "col_value": "가치 (USD)",
+    "vault_heading": "Vault {{vaultId}}",
+    "label_id": "ID:",
+    "label_token_id": "Token ID:",
+    "label_contract_addr": "컨트랙트:",
+    "view_etherscan": "View on Etherscan"
   },
   "swap": {
     "title": "스왑",
@@ -192,6 +208,14 @@
     "btn_connect_wallet": "지갑 연결",
     "vault_context": "스왑 대상",
     "label_min_received": "최소 수령액 (0.5% 슬리피지)",
+    "slippage_label": "슬리피지 허용치 (%)",
+    "swap_fractions": "지분 교환",
+    "amount_in_placeholder": "입력 금액",
+    "quote_label": "견적:",
+    "invalid_slippage": "잘못된 슬리피지 설정",
+    "submitting": "교환 제출 중…",
+    "complete": "교환 완료",
+    "reverted": "교환 취소됨 (슬리피지 초과)",
     "tx_confirmed": "스왑 확인됨",
     "label_tx": "Tx",
     "arrow": "↕"
@@ -498,7 +522,9 @@
     "tag_risk": "위험",
     "last_updated": "마지막 업데이트: 2026년 3월",
     "body": "Facinations는 디지털 프레젠테이션 및 출처 추적 도구를 제공합니다. 소유권, 지식재산권 및 법적 의무는 각 보유자의 책임으로 남습니다.",
-    "body2": "모든 콘텐츠는 있는 그대로 제공되며 디지털 자산, 지식재산 및 분산 기술을 규율하는 관련 법률의 적용을 받습니다."
+    "body2": "모든 콘텐츠는 있는 그대로 제공되며 디지털 자산, 지식재산 및 분산 기술을 규율하는 관련 법률의 적용을 받습니다.",
+    "disclaimer_title": "면책 조항",
+    "disclaimer_body": "Facinations는 출처 도구만 제공합니다. 재정적 또는 법적 조언은 제공하지 않습니다."
   },
   "studio": {
     "title": "Facinations 스튜디오",
@@ -592,7 +618,25 @@
     "legal_title": "법적 사항 및 공시",
     "view_legal_pack": "법적 패키지 보기 ({{label}})",
     "legal_confirm": "법적 문서를 읽고 이해했음을 확인합니다.",
-    "jurisdiction_version": "관할권: {{jurisdiction}} · 버전 {{version}}"
+    "jurisdiction_version": "관할권: {{jurisdiction}} · 버전 {{version}}",
+    "buy_fractions_title": "지분 구매",
+    "buy_fractions_btn": "구매 (출시 예정)",
+    "buy_fractions_note": "볼트가 온체인에서 활성화되면 지분 구매가 가능합니다.",
+    "activity_title": "실시간 활동",
+    "activity_empty": "아직 활동이 없습니다.",
+    "actions_title": "볼트 작업",
+    "fractionalize": "분할",
+    "fully_funded": "완전 자금 조달됨",
+    "not_fully_funded": "완전 자금 조달 안 됨",
+    "instrument_title": "Instrument #{{tokenId}}",
+    "fixed_exchange": "고정 교환:",
+    "owner_label": "소유자:",
+    "burned_redeemed": "(소각 / 상환됨)",
+    "status_redeemed": "상환됨",
+    "status_active": "활성",
+    "submitting_tx": "트랜잭션 제출 중…",
+    "fractionalization_complete": "분할 완료",
+    "tx_failed": "트랜잭션 실패"
   },
   "whitepaper": {
     "title": "Façinations",
@@ -651,6 +695,36 @@
     "s7_2_title": "결론",
     "s7_2_p1": "Façinations는 문화 자산에 대한 투명하고 유동적이며 지리적으로 인식하는 소유권 인프라의 부재를 해결합니다. ERC-721 출처 토큰, ERC-1155 분할 볼트, CivMap 및 DAO 거버넌스는 오픈 웹에서 순수 예술을 위한 주권 레이어를 만듭니다.",
     "s7_2_p2": "프로토콜은 개방적이고 구성 가능하며 장기적인 기관 채택을 위해 설계되었습니다. 파트너, 갤러리 및 개발자는 메인넷 출시 전에 테스트넷에 참여하도록 초대됩니다.",
-    "s7_2_contact": "연락처 및 저장소"
+    "s7_2_contact": "연락처 및 저장소",
+    "page_eyebrow": "Protocol",
+    "page_heading": "Facinations Fine-Art Protocol",
+    "page_subtitle": "Ethereum 기반의 박물관급 디지털 미술을 위한 탈중앙화 보관, 교환, 출처 시스템.",
+    "page_body1": "Facinations 프로토콜은 갤러리 발견, 수집가 컬렉션, 큐레이션된 거래소, 볼트급 보관의 계층적 시장 구조를 도입합니다. 각 계층은 가격뿐만 아니라 문화적 중력을 포착하는 공유 출처 그래프에 기록합니다.",
+    "page_body2": "전체 기술 사양은 PDF 백서를 다운로드하거나 Ethereum의 보관, 유동성 및 출처를 고정하는 오픈소스 스마트 컨트랙트를 검토하세요.",
+    "btn_download": "백서 다운로드",
+    "btn_contracts": "컨트랙트 보기"
+  },
+  "premium": {
+    "activating": "프리미엄 활성화 중…",
+    "tx_confirmed": "트랜잭션이 확인되었습니다.",
+    "indexing": "온체인 인덱싱 대기 중."
+  },
+  "dao": {
+    "voting": "투표 중…",
+    "vote_cast": "투표 완료",
+    "vote_failed": "투표 실패",
+    "proposal_title": "DAO 제안",
+    "target_placeholder": "대상 컨트랙트",
+    "calldata_placeholder": "인코딩된 콜데이터",
+    "btn_propose": "제안하기",
+    "submitting_proposal": "제안 제출 중…",
+    "proposal_submitted": "제안 제출됨",
+    "failed": "실패",
+    "vote_yes": "Vote YES",
+    "vote_no": "Vote NO"
+  },
+  "theme": {
+    "dark": "🌙 Dark",
+    "light": "☀️ Light"
   }
 }

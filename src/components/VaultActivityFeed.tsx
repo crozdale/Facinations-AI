@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ethers } from "ethers";
 import { useVaultEvents } from "../hooks/useVaultEvents";
 import { useSwapEvents } from "../hooks/useSwapEvents";
 
 export default function VaultActivityFeed({ vault }) {
+  const { t } = useTranslation();
   const [events, setEvents] = useState([]);
 
   useVaultEvents(vault.vaultContract, (e) => {
@@ -31,9 +33,9 @@ export default function VaultActivityFeed({ vault }) {
 
   return (
     <section style={{ marginTop: "40px" }}>
-      <h3>Live Activity</h3>
+      <h3>{t("vault.activity_title", "Live Activity")}</h3>
 
-      {events.length === 0 && <p>No activity yet.</p>}
+      {events.length === 0 && <p>{t("vault.activity_empty", "No activity yet.")}</p>}
 
       {events.map((e, i) => (
         <div key={i} style={{ fontSize: "0.85rem", marginBottom: "8px" }}>

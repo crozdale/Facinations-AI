@@ -1,21 +1,26 @@
+import { useTranslation } from "react-i18next";
+
 export default function RAIInstrumentCard({ instrument, onRedeemClick }) {
+  const { t } = useTranslation();
   const { tokenId, owner, redemptionAmountFmt, redeemed } = instrument;
 
   return (
     <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <div className="text-lg font-semibold text-white">Instrument #{tokenId.toString()}</div>
+          <div className="text-lg font-semibold text-white">
+            {t("vault.instrument_title", "Instrument #{{tokenId}}", { tokenId: tokenId.toString() })}
+          </div>
           <div className="text-sm text-white/70 mt-1">
-            Fixed exchange: <span className="text-white">{redemptionAmountFmt} XER</span>
+            {t("vault.fixed_exchange", "Fixed exchange:")}{" "}<span className="text-white">{redemptionAmountFmt} XER</span>
           </div>
           <div className="text-xs text-white/50 mt-1 break-all">
-            Owner: {owner ?? "(burned / redeemed)"}
+            {t("vault.owner_label", "Owner:")}{" "}{owner ?? t("vault.burned_redeemed", "(burned / redeemed)")}
           </div>
         </div>
 
         <div className="text-xs px-3 py-1 rounded-full border border-white/10 text-white/80">
-          {redeemed ? "Redeemed" : "Active"}
+          {redeemed ? t("vault.status_redeemed", "Redeemed") : t("vault.status_active", "Active")}
         </div>
       </div>
 
@@ -30,7 +35,7 @@ export default function RAIInstrumentCard({ instrument, onRedeemClick }) {
               : "bg-blue-600 text-white hover:bg-blue-500",
           ].join(" ")}
         >
-          Exchange for XER
+          {t("redeem.title", "Exchange for XER")}
         </button>
       </div>
     </div>

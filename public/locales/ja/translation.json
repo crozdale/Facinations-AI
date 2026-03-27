@@ -48,7 +48,9 @@
     "loading_page": "ページ読み込み中",
     "return_to_studio": "スタジオに戻る",
     "invalid_link": "無効なチェックアウトリンクです。",
-    "service_unreachable": "認証サービスに接続できませんでした。サポートにお問い合わせください。"
+    "service_unreachable": "認証サービスに接続できませんでした。サポートにお問い合わせください。",
+    "select_language": "言語を選択",
+    "amount": "金額"
   },
   "hero": {
     "title": "Facinations：分割ファインアート・ヴォルト",
@@ -121,7 +123,8 @@
     "placeholder_ask": "何でも質問してください…",
     "related_works": "関連作品",
     "zoom_reset": "リセット",
-    "zoom_hint": "スクロール · ピンチ · +/- でズーム"
+    "zoom_hint": "スクロール · ピンチ · +/- でズーム",
+    "royalty": "Royalty: {{percent}}%"
   },
   "vaults": {
     "title": "ヴォルト",
@@ -147,7 +150,15 @@
     "badge_premium": "XER プレミアム",
     "btn_view": "表示",
     "btn_swap": "スワップ",
-    "btn_swap_restricted": "スワップ（制限付き）"
+    "btn_swap_restricted": "スワップ（制限付き）",
+    "error_heading": "ヴォールトを読み込めません",
+    "view_on_ipfs": "View on IPFS",
+    "on_chain_title": "オンチェーン ヴォールト",
+    "contract_label": "コントラクト:",
+    "premium_badge": "プレミアム必須",
+    "premium": "プレミアム",
+    "locked": "ロック済み",
+    "open_vault": "ヴォールトを開く"
   },
   "vaultDetail": {
     "back": "← ヴォルト一覧に戻る",
@@ -170,7 +181,12 @@
     "positions_empty": "ライブデータに接続されると、ポジションがここに表示されます。",
     "col_asset": "資産",
     "col_weight": "ウェイト",
-    "col_value": "価値（USD）"
+    "col_value": "価値（USD）",
+    "vault_heading": "Vault {{vaultId}}",
+    "label_id": "ID:",
+    "label_token_id": "Token ID:",
+    "label_contract_addr": "コントラクト:",
+    "view_etherscan": "View on Etherscan"
   },
   "swap": {
     "title": "スワップ",
@@ -192,6 +208,14 @@
     "btn_connect_wallet": "ウォレットを接続",
     "vault_context": "スワップ先",
     "label_min_received": "最小受取額（0.5% スリッページ）",
+    "slippage_label": "スリッページ許容値 (%)",
+    "swap_fractions": "フラクション交換",
+    "amount_in_placeholder": "入力金額",
+    "quote_label": "見積もり:",
+    "invalid_slippage": "無効なスリッページ設定",
+    "submitting": "スワップを送信中…",
+    "complete": "スワップ完了",
+    "reverted": "スワップが取り消されました（スリッページ超過）",
     "tx_confirmed": "スワップが確認されました",
     "label_tx": "Tx",
     "arrow": "↕"
@@ -498,7 +522,9 @@
     "tag_risk": "リスク",
     "last_updated": "最終更新：2026年3月",
     "body": "Facinations はデジタルプレゼンテーションと来歴追跡のためのツールを提供します。所有権、知的財産権、法的義務はそれぞれの保有者の責任のままです。",
-    "body2": "すべてのコンテンツはあるがままの状態で提供され、デジタル資産、知的財産、分散型技術を管理する適用法に従います。"
+    "body2": "すべてのコンテンツはあるがままの状態で提供され、デジタル資産、知的財産、分散型技術を管理する適用法に従います。",
+    "disclaimer_title": "免責事項",
+    "disclaimer_body": "Facinationsはプロヴェナンスツールのみを提供します。財務的または法的アドバイスは提供されません。"
   },
   "studio": {
     "title": "Facinations スタジオ",
@@ -592,7 +618,25 @@
     "legal_title": "法的事項と開示",
     "view_legal_pack": "法的パッケージを表示 ({{label}})",
     "legal_confirm": "法的文書を読み、理解したことを確認します。",
-    "jurisdiction_version": "管轄区域: {{jurisdiction}} · バージョン {{version}}"
+    "jurisdiction_version": "管轄区域: {{jurisdiction}} · バージョン {{version}}",
+    "buy_fractions_title": "フラクション購入",
+    "buy_fractions_btn": "購入（近日公開）",
+    "buy_fractions_note": "ヴォールトがオンチェーンで公開されると購入が有効になります。",
+    "activity_title": "ライブ活動",
+    "activity_empty": "まだ活動がありません。",
+    "actions_title": "ヴォールト操作",
+    "fractionalize": "フラクション化",
+    "fully_funded": "完全資金調達済み",
+    "not_fully_funded": "未完全資金調達",
+    "instrument_title": "Instrument #{{tokenId}}",
+    "fixed_exchange": "固定交換:",
+    "owner_label": "所有者:",
+    "burned_redeemed": "（バーン済み / 償還済み）",
+    "status_redeemed": "償還済み",
+    "status_active": "アクティブ",
+    "submitting_tx": "トランザクション送信中…",
+    "fractionalization_complete": "フラクション化完了",
+    "tx_failed": "トランザクション失敗"
   },
   "whitepaper": {
     "title": "Façinations",
@@ -651,6 +695,36 @@
     "s7_2_title": "結論",
     "s7_2_p1": "Façinations は文化資産のための透明で流動的かつ地理的に認識された所有権インフラの欠如に対処します。ERC-721 来歴トークン、ERC-1155 分割ヴォルト、CivMap、DAO ガバナンスはオープンウェブ上のファインアートのためのソブリン層を作成します。",
     "s7_2_p2": "プロトコルはオープンで組み合わせ可能であり、長期的な機関採用のために設計されています。パートナー、ギャラリー、開発者はメインネットローンチ前にテストネットに参加することを招待されています。",
-    "s7_2_contact": "連絡先とリポジトリ"
+    "s7_2_contact": "連絡先とリポジトリ",
+    "page_eyebrow": "Protocol",
+    "page_heading": "Facinations Fine-Art Protocol",
+    "page_subtitle": "Ethereum上の美術館級デジタル美術のための分散型保管、交換、プロヴェナンスシステム。",
+    "page_body1": "Facinationsプロトコルは階層的な市場構造を導入します：ギャラリー発見、コレクター収集、キュレートされた取引所、ヴォールトグレードの保管。各層は価格だけでなく文化的重力を捉える共有プロヴェナンスグラフに書き込みます。",
+    "page_body2": "完全な技術仕様については、PDFホワイトペーパーをダウンロードするか、Ethereumに保管、流動性、プロヴェナンスを固定するオープンソーススマートコントラクトを検査してください。",
+    "btn_download": "ホワイトペーパーをダウンロード",
+    "btn_contracts": "コントラクトを表示"
+  },
+  "premium": {
+    "activating": "プレミアムを有効化中…",
+    "tx_confirmed": "トランザクションが確認されました。",
+    "indexing": "オンチェーンインデックス待機中。"
+  },
+  "dao": {
+    "voting": "投票中…",
+    "vote_cast": "投票完了",
+    "vote_failed": "投票失敗",
+    "proposal_title": "DAO提案",
+    "target_placeholder": "ターゲットコントラクト",
+    "calldata_placeholder": "エンコードされたコールデータ",
+    "btn_propose": "提案する",
+    "submitting_proposal": "提案を送信中…",
+    "proposal_submitted": "提案が送信されました",
+    "failed": "失敗",
+    "vote_yes": "Vote YES",
+    "vote_no": "Vote NO"
+  },
+  "theme": {
+    "dark": "🌙 Dark",
+    "light": "☀️ Light"
   }
 }

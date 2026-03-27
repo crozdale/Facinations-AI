@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 export default function VaultCard({ vault }) {
+  const { t } = useTranslation();
   return (
     <div className="vault-card">
       <img src={vault.image} alt={vault.name} />
@@ -11,7 +14,7 @@ export default function VaultCard({ vault }) {
         rel="noopener noreferrer"
         className="vault-link"
       >
-        View on IPFS
+        {t("vaults.view_on_ipfs", "View on IPFS")}
       </a>
     </div>
   );
