@@ -29,7 +29,9 @@
       "Bash(find C:Userscrozdmusee-crosdale -type f \\\\\\(-name *.sql -o -name *schema* -o -name *migration* -o -name *.db \\\\\\))",
       "Bash(find /c/Users/crozd/musee-crosdale -type f -path *migrations* -o -path *sql*)",
       "Bash(where ffmpeg:*)",
-      "Bash(ffmpeg -i \"C:/Users/crozd/musee-crosdale/public/facinations.mov\" -c:v libx264 -preset slow -crf 28 -vf \"scale=1920:-2\" -c:a aac -b:a 128k -movflags +faststart -y \"C:/Users/crozd/musee-crosdale/public/hero.mp4\")"
+      "Bash(ffmpeg -i \"C:/Users/crozd/musee-crosdale/public/facinations.mov\" -c:v libx264 -preset slow -crf 28 -vf \"scale=1920:-2\" -c:a aac -b:a 128k -movflags +faststart -y \"C:/Users/crozd/musee-crosdale/public/hero.mp4\")",
+      "Bash(vercel --prod)",
+      "Bash(find /c/Users/crozd/musee-crosdale/src -name *.css -type f -exec wc -l {} +)"
     ]
   }
 }
