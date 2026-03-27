@@ -38,58 +38,58 @@ interface WaitlistEntry {
 // ── Styles ────────────────────────────────────────────────────────────────────
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Cinzel:wght@400;600&display=swap');
-  .adm { background:#080808; min-height:100vh; color:#e8e0d0; font-family:'Cormorant Garamond',Georgia,serif; }
+  .adm { background:#1c1c1c; min-height:100vh; color:#f2ece0; font-family:'Cormorant Garamond',Georgia,serif; }
   .adm-inner { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 5rem; }
   .adm-eyebrow { font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.35em; text-transform:uppercase; color:#d4af37; margin:0 0 0.3rem; }
-  .adm-title { font-family:'Cinzel',serif; font-size:1.5rem; font-weight:400; color:#f0e8d0; letter-spacing:0.08em; margin:0 0 2rem; }
+  .adm-title { font-family:'Cinzel',serif; font-size:1.5rem; font-weight:400; color:#f8f2e4; letter-spacing:0.08em; margin:0 0 2rem; }
   .adm-tabs { display:flex; border-bottom:1px solid rgba(212,175,55,0.15); margin-bottom:2rem; gap:0; }
   .adm-tab { padding:0.55rem 1.25rem; border:none; border-bottom:2px solid transparent; background:transparent;
-             color:#4a4238; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.15em;
+             color:#6a6258; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.15em;
              text-transform:uppercase; cursor:pointer; }
   .adm-tab.active { color:#d4af37; border-bottom-color:#d4af37; }
   .adm-section-title { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase;
                        color:rgba(212,175,55,0.5); margin:0 0 1rem; }
   .adm-table { width:100%; border-collapse:collapse; }
   .adm-th { font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.12em; text-transform:uppercase;
-            color:#4a4238; padding:0.5rem 0.75rem; text-align:left; border-bottom:1px solid rgba(212,175,55,0.1); }
+            color:#6a6258; padding:0.5rem 0.75rem; text-align:left; border-bottom:1px solid rgba(212,175,55,0.1); }
   .adm-td { font-size:0.88rem; color:#ccc; padding:0.55rem 0.75rem; border-bottom:1px solid rgba(255,255,255,0.03);
             font-family:'Cormorant Garamond',serif; }
   .adm-td-gold { color:#d4af37; }
   .adm-td-green { color:#5cb85c; }
   .adm-td-red { color:#e05; }
-  .adm-td-mono { font-family:monospace; font-size:0.75rem; color:#6a6258; }
+  .adm-td-mono { font-family:monospace; font-size:0.75rem; color:#8a8278; }
   .adm-btn { padding:0.35rem 0.85rem; background:transparent; border:1px solid rgba(212,175,55,0.3);
-             color:#9a9288; font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.15em;
+             color:#b8b0a4; font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.15em;
              text-transform:uppercase; cursor:pointer; }
   .adm-btn:hover { border-color:#d4af37; color:#d4af37; }
-  .adm-btn-gold { background:#d4af37; border-color:#d4af37; color:#050505; }
+  .adm-btn-gold { background:#d4af37; border-color:#d4af37; color:#141414; }
   .adm-btn-gold:hover { background:#c49d2a; }
   .adm-btn-red { border-color:rgba(220,0,80,0.3); color:#e05; }
   .adm-btn-red:hover { border-color:#e05; }
   .adm-btn-ghost { padding:0.35rem 0.85rem; background:transparent; border:1px solid rgba(255,255,255,0.08);
-                   color:#4a4238; font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.15em;
+                   color:#6a6258; font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.15em;
                    text-transform:uppercase; cursor:pointer; }
-  .adm-btn-ghost:hover { border-color:rgba(212,175,55,0.2); color:#9a9288; }
+  .adm-btn-ghost:hover { border-color:rgba(212,175,55,0.2); color:#b8b0a4; }
   .adm-btn-sm { padding:0.3rem 0.65rem; background:transparent; border:1px solid rgba(212,175,55,0.2);
-                color:#9a9288; font-family:'Cinzel',serif; font-size:0.48rem; letter-spacing:0.12em;
+                color:#b8b0a4; font-family:'Cinzel',serif; font-size:0.48rem; letter-spacing:0.12em;
                 text-transform:uppercase; cursor:pointer; }
   .adm-btn-sm:hover { border-color:#d4af37; color:#d4af37; }
   .adm-btn-danger { border-color:rgba(220,0,80,0.25) !important; color:#cc0044 !important; }
   .adm-btn-danger:hover { border-color:#e05 !important; color:#e05 !important; }
   .adm-form { display:flex; flex-direction:column; gap:0.85rem; max-width:600px;
-              border:1px solid rgba(212,175,55,0.12); padding:1.5rem; background:#0a0a0a; margin-bottom:2rem; }
+              border:1px solid rgba(212,175,55,0.12); padding:1.5rem; background:#202020; margin-bottom:2rem; }
   .adm-label { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase;
                color:rgba(212,175,55,0.4); margin-bottom:0.2rem; display:block; }
-  .adm-input { background:#080808; border:1px solid rgba(212,175,55,0.15); color:#e8e0d0;
+  .adm-input { background:#1c1c1c; border:1px solid rgba(212,175,55,0.15); color:#f2ece0;
                padding:0.5rem 0.75rem; font-family:'Cormorant Garamond',serif; font-size:0.95rem;
                width:100%; box-sizing:border-box; }
   .adm-input:focus { outline:none; border-color:rgba(212,175,55,0.4); }
   .adm-row2 { display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; }
   .adm-badge { display:inline-block; font-family:'Cinzel',serif; font-size:0.48rem; letter-spacing:0.12em;
                text-transform:uppercase; padding:0.15rem 0.5rem; border:1px solid; }
-  .adm-gate { display:flex; align-items:center; justify-content:center; min-height:100vh; background:#080808; }
+  .adm-gate { display:flex; align-items:center; justify-content:center; min-height:100vh; background:#1c1c1c; }
   .adm-gate-inner { text-align:center; max-width:380px; padding:2rem; }
-  .adm-empty { font-style:italic; color:#2a2a2a; padding:2rem; text-align:center;
+  .adm-empty { font-style:italic; color:#484848; padding:2rem; text-align:center;
                border:1px solid rgba(212,175,55,0.06); font-size:0.88rem; }
 `;
 
@@ -252,7 +252,7 @@ function ArtworksTab({ secret }: { secret: string }) {
             <textarea className="adm-input" rows={3} value={form.description ?? ""} onChange={f("description")} style={{ resize:"vertical" }} />
           </div>
           <div style={{ display:"flex", alignItems:"center", gap:"1rem" }}>
-            <label style={{ display:"flex", alignItems:"center", gap:"0.4rem", fontFamily:"'Cinzel',serif", fontSize:"0.5rem", letterSpacing:"0.15em", color:"#6a6258", textTransform:"uppercase", cursor:"pointer" }}>
+            <label style={{ display:"flex", alignItems:"center", gap:"0.4rem", fontFamily:"'Cinzel',serif", fontSize:"0.5rem", letterSpacing:"0.15em", color:"#8a8278", textTransform:"uppercase", cursor:"pointer" }}>
               <input type="checkbox" checked={form.available ?? true} onChange={(e) => setForm((p) => ({ ...p, available: e.target.checked }))} />
               Available
             </label>
@@ -267,7 +267,7 @@ function ArtworksTab({ secret }: { secret: string }) {
       )}
 
       {loading ? (
-        <p style={{ fontStyle:"italic", color:"#2a2a2a", fontSize:"0.85rem" }}>Loading…</p>
+        <p style={{ fontStyle:"italic", color:"#484848", fontSize:"0.85rem" }}>Loading…</p>
       ) : artworks.length === 0 ? (
         <div className="adm-empty">No artworks yet. Add one above.</div>
       ) : (
@@ -330,8 +330,8 @@ function SubscribersTab({ secret }: { secret: string }) {
     return new Date(s).toLocaleDateString("en-GB", { day:"numeric", month:"short", year:"numeric" });
   }
 
-  if (loading) return <p style={{ fontStyle:"italic", color:"#2a2a2a", fontSize:"0.85rem" }}>Loading…</p>;
-  if (!data?.configured) return <p style={{ fontStyle:"italic", color:"#4a4238", fontSize:"0.85rem" }}>DATABASE_URL not configured.</p>;
+  if (loading) return <p style={{ fontStyle:"italic", color:"#484848", fontSize:"0.85rem" }}>Loading…</p>;
+  if (!data?.configured) return <p style={{ fontStyle:"italic", color:"#6a6258", fontSize:"0.85rem" }}>DATABASE_URL not configured.</p>;
 
   return (
     <div>
@@ -339,7 +339,7 @@ function SubscribersTab({ secret }: { secret: string }) {
         {(["subs","waitlist"] as const).map((t) => (
           <button key={t} onClick={() => setSubTab(t)}
             style={{ padding:"0.45rem 1rem", border:"none", borderBottom:`2px solid ${subTab===t?"#d4af37":"transparent"}`,
-                     background:"transparent", color:subTab===t?"#d4af37":"#4a4238",
+                     background:"transparent", color:subTab===t?"#d4af37":"#6a6258",
                      fontFamily:"'Cinzel',serif", fontSize:"0.55rem", letterSpacing:"0.12em",
                      textTransform:"uppercase", cursor:"pointer" }}>
             {t === "subs" ? `Subscribers (${data.subscribers.length})` : `Waitlist (${data.waitlist.length})`}
@@ -468,7 +468,7 @@ function GalleriesTab({ secret }: { secret: string }) {
   }
 
   const F: React.CSSProperties = { display:"flex", flexDirection:"column", gap:"0.4rem" };
-  const inp: React.CSSProperties = { padding:"0.45rem 0.65rem", background:"#060606", border:"1px solid rgba(212,175,55,0.12)", color:"#e8e0d0", fontFamily:"'Cormorant Garamond',serif", fontSize:"0.9rem", width:"100%", boxSizing:"border-box" };
+  const inp: React.CSSProperties = { padding:"0.45rem 0.65rem", background:"#181818", border:"1px solid rgba(212,175,55,0.12)", color:"#f2ece0", fontFamily:"'Cormorant Garamond',serif", fontSize:"0.9rem", width:"100%", boxSizing:"border-box" };
 
   return (
     <div>
@@ -478,7 +478,7 @@ function GalleriesTab({ secret }: { secret: string }) {
       </div>
 
       {showForm && (
-        <div style={{ border:"1px solid rgba(212,175,55,0.12)", background:"#0a0a0a", padding:"1.5rem", marginBottom:"1.5rem" }}>
+        <div style={{ border:"1px solid rgba(212,175,55,0.12)", background:"#202020", padding:"1.5rem", marginBottom:"1.5rem" }}>
           <p className="adm-section-title">{editing ? `Edit: ${editing.name}` : "New Gallery"}</p>
           {error && <p style={{ color:"#e05", fontFamily:"'Cormorant Garamond',serif", fontSize:"0.85rem", margin:"0 0 0.75rem" }}>{error}</p>}
           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.75rem" }}>
@@ -529,7 +529,7 @@ function GalleriesTab({ secret }: { secret: string }) {
       )}
 
       {loading ? (
-        <p style={{ color:"#4a4238", fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.2em" }}>Loading…</p>
+        <p style={{ color:"#6a6258", fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.2em" }}>Loading…</p>
       ) : (
         <table className="adm-table">
           <thead>
@@ -585,7 +585,7 @@ export default function Admin() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && input && save(input)}
-            style={{ background:"#0a0a0a", border:"1px solid rgba(212,175,55,0.2)", color:"#e8e0d0",
+            style={{ background:"#202020", border:"1px solid rgba(212,175,55,0.2)", color:"#f2ece0",
                      padding:"0.65rem 1rem", fontFamily:"'Cormorant Garamond',serif", fontSize:"1rem",
                      width:"100%", boxSizing:"border-box", outline:"none", marginBottom:"0.75rem" }}
             autoFocus
@@ -593,7 +593,7 @@ export default function Admin() {
           <button
             onClick={() => input && save(input)}
             style={{ width:"100%", padding:"0.6rem", background:"#d4af37", border:"none",
-                     color:"#050505", fontFamily:"'Cinzel',serif", fontSize:"0.6rem",
+                     color:"#141414", fontFamily:"'Cinzel',serif", fontSize:"0.6rem",
                      letterSpacing:"0.2em", textTransform:"uppercase", cursor:"pointer" }}>
             Enter
           </button>

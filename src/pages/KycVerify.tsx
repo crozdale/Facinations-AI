@@ -31,7 +31,7 @@ const DOC_TYPES = [
 ];
 
 const H: React.CSSProperties = {
-  fontFamily: "'Cinzel', serif", fontWeight: 400, letterSpacing: "0.08em", color: "#f0e8d0",
+  fontFamily: "'Cinzel', serif", fontWeight: 400, letterSpacing: "0.08em", color: "#f8f2e4",
 };
 
 const LABEL: React.CSSProperties = {
@@ -43,21 +43,21 @@ const LABEL: React.CSSProperties = {
 const INPUT: React.CSSProperties = {
   width: "100%", boxSizing: "border-box",
   padding: "0.6rem 0.85rem",
-  background: "#0c0c0c", border: "1px solid rgba(212,175,55,0.18)",
-  color: "#e8e0d0", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem",
+  background: "#242424", border: "1px solid rgba(212,175,55,0.18)",
+  color: "#f2ece0", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem",
 };
 
 const SELECT: React.CSSProperties = { ...INPUT, appearance: "none", cursor: "pointer" };
 
 const BTN: React.CSSProperties = {
   padding: "0.65rem 2rem", background: "#d4af37", border: "none",
-  color: "#050505", fontFamily: "'Cinzel', serif", fontSize: "0.6rem",
+  color: "#141414", fontFamily: "'Cinzel', serif", fontSize: "0.6rem",
   letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer",
 };
 
 const BTN_GHOST: React.CSSProperties = {
   ...BTN, background: "transparent",
-  border: "1px solid rgba(212,175,55,0.2)", color: "#6a6258",
+  border: "1px solid rgba(212,175,55,0.2)", color: "#8a8278",
 };
 
 export default function KycVerify() {
@@ -85,11 +85,11 @@ export default function KycVerify() {
   // Already verified — redirect away
   if (status === "approved") {
     return (
-      <main style={{ background: "#080808", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <main style={{ background: "#1c1c1c", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ textAlign: "center", padding: "3rem" }}>
           <div style={{ fontSize: "2rem", marginBottom: "1rem", color: "#5cb85c" }}>✓</div>
           <h2 style={{ ...H, fontSize: "1.1rem", marginBottom: "0.5rem" }}>{t("kyc.verified_heading")}</h2>
-          <p style={{ color: "#6a6258", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", marginBottom: "1.5rem" }}>
+          <p style={{ color: "#8a8278", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", marginBottom: "1.5rem" }}>
             {t("kyc.verified_body")}
           </p>
           <Link to="/swap" style={BTN}>{t("kyc.btn_go_swap")}</Link>
@@ -146,13 +146,13 @@ export default function KycVerify() {
   }
 
   return (
-    <main style={{ background: "#080808", minHeight: "100vh" }}>
+    <main style={{ background: "#1c1c1c", minHeight: "100vh" }}>
       {/* Header */}
       <div style={{ borderBottom: "1px solid rgba(212,175,55,0.1)", padding: "1.25rem 2rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.25em", color: "#d4af37", textTransform: "uppercase" }}>
           {t("kyc.title")}
         </span>
-        <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.15em", color: "#4a4238" }}>
+        <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.15em", color: "#6a6258" }}>
           {t("kyc.region_label", { region })}
         </span>
       </div>
@@ -194,7 +194,7 @@ export default function KycVerify() {
         {step === 1 && (
           <div>
             <h2 style={{ ...H, fontSize: "1.1rem", marginBottom: "0.4rem" }}>{t("kyc.details_heading")}</h2>
-            <p style={{ color: "#6a6258", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", marginBottom: "1.75rem" }}>
+            <p style={{ color: "#8a8278", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", marginBottom: "1.75rem" }}>
               {t("kyc.details_body")}
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -221,7 +221,7 @@ export default function KycVerify() {
               </div>
             </div>
             <div style={{ marginTop: "2rem", display: "flex", gap: "0.75rem" }}>
-              <button style={{ ...BTN, background: detailsValid() ? "#d4af37" : "#333", color: detailsValid() ? "#050505" : "#555", cursor: detailsValid() ? "pointer" : "not-allowed" }}
+              <button style={{ ...BTN, background: detailsValid() ? "#d4af37" : "#333", color: detailsValid() ? "#141414" : "#555", cursor: detailsValid() ? "pointer" : "not-allowed" }}
                 onClick={() => detailsValid() && setStep(2)} disabled={!detailsValid()}>
                 {t("common.continue")}
               </button>
@@ -234,7 +234,7 @@ export default function KycVerify() {
         {step === 2 && (
           <div>
             <h2 style={{ ...H, fontSize: "1.1rem", marginBottom: "0.4rem" }}>{t("kyc.doc_heading")}</h2>
-            <p style={{ color: "#6a6258", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", marginBottom: "1.75rem" }}>
+            <p style={{ color: "#8a8278", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", marginBottom: "1.75rem" }}>
               {t("kyc.doc_body")}
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -243,8 +243,8 @@ export default function KycVerify() {
                   display: "flex", alignItems: "center", gap: "1rem",
                   padding: "1rem 1.25rem",
                   border: `1px solid ${docType === doc.id ? "#d4af37" : "rgba(212,175,55,0.15)"}`,
-                  background: docType === doc.id ? "rgba(212,175,55,0.05)" : "#0a0a0a",
-                  color: docType === doc.id ? "#d4af37" : "#9a9288",
+                  background: docType === doc.id ? "rgba(212,175,55,0.05)" : "#202020",
+                  color: docType === doc.id ? "#d4af37" : "#b8b0a4",
                   fontFamily: "'Cinzel', serif", fontSize: "0.75rem", letterSpacing: "0.1em",
                   cursor: "pointer", textAlign: "left",
                 }}>
@@ -255,7 +255,7 @@ export default function KycVerify() {
               ))}
             </div>
             <div style={{ marginTop: "2rem", display: "flex", gap: "0.75rem" }}>
-              <button style={{ ...BTN, background: docType ? "#d4af37" : "#333", color: docType ? "#050505" : "#555", cursor: docType ? "pointer" : "not-allowed" }}
+              <button style={{ ...BTN, background: docType ? "#d4af37" : "#333", color: docType ? "#141414" : "#555", cursor: docType ? "pointer" : "not-allowed" }}
                 onClick={() => docType && setStep(3)} disabled={!docType}>
                 {t("common.continue")}
               </button>
@@ -268,20 +268,20 @@ export default function KycVerify() {
         {step === 3 && (
           <div>
             <h2 style={{ ...H, fontSize: "1.1rem", marginBottom: "0.4rem" }}>{t("kyc.upload_heading")}</h2>
-            <p style={{ color: "#6a6258", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", marginBottom: "1.75rem" }}>
+            <p style={{ color: "#8a8278", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", marginBottom: "1.75rem" }}>
               {t("kyc.upload_body", { documentType: DOC_TYPES.find((d) => d.id === docType)?.label ?? "" })}
             </p>
 
             {/* Upload zone */}
             <label style={{
               display: "block", border: `2px dashed ${fileSelected ? "#d4af37" : "rgba(212,175,55,0.2)"}`,
-              background: fileSelected ? "rgba(212,175,55,0.04)" : "#0a0a0a",
+              background: fileSelected ? "rgba(212,175,55,0.04)" : "#202020",
               padding: "2.5rem", textAlign: "center", cursor: "pointer",
             }}>
               <input type="file" accept="image/*,.pdf" style={{ display: "none" }}
                 onChange={(e) => setFileSelected(!!e.target.files?.length)} />
               <div style={{ fontSize: "1.8rem", marginBottom: "0.75rem" }}>{fileSelected ? "✓" : "📄"}</div>
-              <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.15em", color: fileSelected ? "#d4af37" : "#4a4238", margin: "0 0 0.4rem" }}>
+              <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.15em", color: fileSelected ? "#d4af37" : "#6a6258", margin: "0 0 0.4rem" }}>
                 {fileSelected ? t("kyc.upload_selected") : t("kyc.upload_prompt")}
               </p>
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.8rem", color: "#333", margin: 0, fontStyle: "italic" }}>
@@ -289,13 +289,13 @@ export default function KycVerify() {
               </p>
             </label>
 
-            <p style={{ marginTop: "1rem", fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.1em", color: "#2a2a2a" }}>
+            <p style={{ marginTop: "1rem", fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.1em", color: "#484848" }}>
               🔒 {t("kyc.upload_security")}
             </p>
 
             <div style={{ marginTop: "1.5rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
               <button
-                style={{ ...BTN, background: fileSelected && !submitting ? "#d4af37" : "#333", color: fileSelected && !submitting ? "#050505" : "#555", cursor: fileSelected && !submitting ? "pointer" : "not-allowed" }}
+                style={{ ...BTN, background: fileSelected && !submitting ? "#d4af37" : "#333", color: fileSelected && !submitting ? "#141414" : "#555", cursor: fileSelected && !submitting ? "pointer" : "not-allowed" }}
                 onClick={handleSubmit} disabled={!fileSelected || submitting}>
                 {submitting ? t("kyc.btn_submitting") : t("kyc.btn_submit_verification")}
               </button>
@@ -314,7 +314,7 @@ export default function KycVerify() {
           <div style={{ textAlign: "center" }}>
             <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>⏳</div>
             <h2 style={{ ...H, fontSize: "1.1rem", marginBottom: "0.5rem" }}>{t("kyc.confirm_heading")}</h2>
-            <p style={{ color: "#6a6258", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", lineHeight: 1.7, marginBottom: "2rem" }}>
+            <p style={{ color: "#8a8278", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", lineHeight: 1.7, marginBottom: "2rem" }}>
               {t("kyc.confirm_body")}
             </p>
             <div style={{ display: "inline-flex", flexDirection: "column", gap: "0.75rem", alignItems: "center" }}>
@@ -331,7 +331,7 @@ export default function KycVerify() {
                   [Dev] Simulate Approval →
                 </button>
               )}
-              <Link to="/" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.15em", color: "#4a4238", textDecoration: "none" }}>
+              <Link to="/" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.15em", color: "#6a6258", textDecoration: "none" }}>
                 {t("kyc.btn_return_home")}
               </Link>
             </div>
@@ -340,7 +340,7 @@ export default function KycVerify() {
 
         {/* Footer note */}
         {step !== 4 && (
-          <p style={{ marginTop: "2.5rem", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.78rem", color: "#2a2a2a", fontStyle: "italic", lineHeight: 1.6 }}>
+          <p style={{ marginTop: "2.5rem", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.78rem", color: "#484848", fontStyle: "italic", lineHeight: 1.6 }}>
             {t("kyc.footer_note")}{" "}
             <Link to="/legal" style={{ color: "#3a3a3a" }}>{t("legal.tab_privacy")}</Link>
           </p>

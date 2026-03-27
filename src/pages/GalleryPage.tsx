@@ -32,14 +32,14 @@ interface Artwork {
 // ── CSS ────────────────────────────────────────────────────────────────────────
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap');
-  .gp-root { background:#080808; min-height:100vh; font-family:'Cormorant Garamond',Georgia,serif; color:#e8e0d0; }
+  .gp-root { background:#1c1c1c; min-height:100vh; font-family:'Cormorant Garamond',Georgia,serif; color:#f2ece0; }
   .gp-header { border-bottom:1px solid rgba(212,175,55,0.1); background:rgba(212,175,55,0.02); padding:3rem 2rem; }
   .gp-header-inner { max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:1.5rem; }
   @media(min-width:640px){ .gp-header-inner { flex-direction:row; align-items:center; } }
-  .gp-logo { width:64px; height:64px; border:1px solid rgba(212,175,55,0.2); background:#0c0c0c; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Cinzel',serif; font-size:1.4rem; color:rgba(212,175,55,0.4); }
+  .gp-logo { width:64px; height:64px; border:1px solid rgba(212,175,55,0.2); background:#242424; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Cinzel',serif; font-size:1.4rem; color:rgba(212,175,55,0.4); }
   .gp-eyebrow { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.4em; text-transform:uppercase; color:#d4af37; margin:0 0 0.5rem; }
-  .gp-name { font-family:'Cinzel',serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:400; color:#f0e8d0; letter-spacing:0.06em; margin:0 0 0.5rem; }
-  .gp-blurb { font-size:0.92rem; color:#9a9288; line-height:1.8; max-width:560px; font-style:italic; }
+  .gp-name { font-family:'Cinzel',serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:400; color:#f8f2e4; letter-spacing:0.06em; margin:0 0 0.5rem; }
+  .gp-blurb { font-size:0.92rem; color:#b8b0a4; line-height:1.8; max-width:560px; font-style:italic; }
   .gp-location { font-size:0.75rem; color:rgba(212,175,55,0.3); margin-top:0.4rem; letter-spacing:0.08em; }
   .gp-grid { max-width:1200px; margin:0 auto; padding:3.5rem 2rem 6rem; }
   .gp-grid-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:2.5rem; }
@@ -49,27 +49,27 @@ const css = `
   @media(min-width:640px){ .gp-artwork-grid { grid-template-columns:repeat(3,1fr); } }
   @media(min-width:960px){ .gp-artwork-grid { grid-template-columns:repeat(4,1fr); } }
   .gp-card { cursor:pointer; }
-  .gp-card-img-wrap { aspect-ratio:3/4; overflow:hidden; background:#0c0c0c; margin-bottom:0.75rem; position:relative; border:1px solid rgba(212,175,55,0.08); }
+  .gp-card-img-wrap { aspect-ratio:3/4; overflow:hidden; background:#242424; margin-bottom:0.75rem; position:relative; border:1px solid rgba(212,175,55,0.08); }
   .gp-card-img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease; }
   .gp-card:hover .gp-card-img { transform:scale(1.05); }
   .gp-badge-avail { position:absolute; bottom:0.5rem; left:0.5rem; font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:#d4af37; background:rgba(8,8,8,0.85); border:1px solid rgba(212,175,55,0.3); padding:0.2rem 0.5rem; }
   .gp-badge-sold { position:absolute; bottom:0.5rem; left:0.5rem; font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:#666; background:rgba(8,8,8,0.85); border:1px solid #333; padding:0.2rem 0.5rem; }
-  .gp-card-title { font-family:'Cinzel',serif; font-size:0.85rem; color:#f0e8d0; letter-spacing:0.04em; margin:0 0 0.2rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:color .2s; }
+  .gp-card-title { font-family:'Cinzel',serif; font-size:0.85rem; color:#f8f2e4; letter-spacing:0.04em; margin:0 0 0.2rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:color .2s; }
   .gp-card:hover .gp-card-title { color:#d4af37; }
-  .gp-card-meta { font-size:0.78rem; color:#6a6258; }
+  .gp-card-meta { font-size:0.78rem; color:#8a8278; }
   /* Modal */
   .gp-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:100; display:flex; align-items:center; justify-content:center; padding:1rem; }
-  .gp-modal { background:#0a0a0a; border:1px solid rgba(212,175,55,0.15); max-width:860px; width:100%; max-height:90vh; overflow-y:auto; display:grid; grid-template-columns:1fr 1fr; position:relative; }
+  .gp-modal { background:#202020; border:1px solid rgba(212,175,55,0.15); max-width:860px; width:100%; max-height:90vh; overflow-y:auto; display:grid; grid-template-columns:1fr 1fr; position:relative; }
   @media(max-width:640px){ .gp-modal { grid-template-columns:1fr; } }
   .gp-modal-img { width:100%; height:100%; object-fit:cover; min-height:300px; display:block; }
   .gp-modal-body { padding:2rem; display:flex; flex-direction:column; gap:0.75rem; }
-  .gp-modal-close { position:absolute; top:0.75rem; right:0.75rem; background:none; border:none; color:#6a6258; font-size:1.5rem; cursor:pointer; z-index:1; line-height:1; }
+  .gp-modal-close { position:absolute; top:0.75rem; right:0.75rem; background:none; border:none; color:#8a8278; font-size:1.5rem; cursor:pointer; z-index:1; line-height:1; }
   .gp-modal-close:hover { color:#d4af37; }
-  .gp-input { width:100%; box-sizing:border-box; padding:0.5rem 0.7rem; background:#060606; border:1px solid rgba(212,175,55,0.15); color:#e8e0d0; font-family:'Cormorant Garamond',serif; font-size:0.9rem; }
+  .gp-input { width:100%; box-sizing:border-box; padding:0.5rem 0.7rem; background:#181818; border:1px solid rgba(212,175,55,0.15); color:#f2ece0; font-family:'Cormorant Garamond',serif; font-size:0.9rem; }
   .gp-input:focus { outline:none; border-color:rgba(212,175,55,0.4); }
-  .gp-input::placeholder { color:#2a2a2a; }
+  .gp-input::placeholder { color:#484848; }
   .gp-label { font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(212,175,55,0.4); display:block; margin-bottom:0.25rem; }
-  .gp-btn { padding:0.6rem 1.5rem; background:#d4af37; border:none; color:#050505; font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; }
+  .gp-btn { padding:0.6rem 1.5rem; background:#d4af37; border:none; color:#141414; font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; }
   .gp-btn:hover { background:#c09f27; }
   .gp-btn:disabled { background:#222; color:#444; cursor:not-allowed; }
   .gp-empty { border:1px solid rgba(212,175,55,0.08); padding:6rem 2rem; text-align:center; }
@@ -135,7 +135,7 @@ function ArtworkModal({ artwork, gallery, onClose }: { artwork: Artwork; gallery
         <div>
           {artwork.image && !imgError
             ? <img src={artwork.image} alt={artwork.title} className="gp-modal-img" onError={() => setImgError(true)} />
-            : <div style={{ minHeight:300, background:"#080808", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"3rem", color:"rgba(212,175,55,0.08)", fontFamily:"'Cinzel',serif" }}>{artwork.title[0]}</div>
+            : <div style={{ minHeight:300, background:"#1c1c1c", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"3rem", color:"rgba(212,175,55,0.08)", fontFamily:"'Cinzel',serif" }}>{artwork.title[0]}</div>
           }
         </div>
         <div className="gp-modal-body">
@@ -143,8 +143,8 @@ function ArtworkModal({ artwork, gallery, onClose }: { artwork: Artwork; gallery
             <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.55rem", letterSpacing:"0.3em", color:"#d4af37", margin:"0 0 0.4rem", textTransform:"uppercase" }}>
               {artwork.available ? "Available" : "Sold"}
             </p>
-            <h2 style={{ fontFamily:"'Cinzel',serif", fontSize:"1.1rem", fontWeight:400, color:"#f0e8d0", letterSpacing:"0.06em", margin:"0 0 0.2rem" }}>{artwork.title}</h2>
-            <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"0.9rem", color:"#6a6258", margin:0 }}>
+            <h2 style={{ fontFamily:"'Cinzel',serif", fontSize:"1.1rem", fontWeight:400, color:"#f8f2e4", letterSpacing:"0.06em", margin:"0 0 0.2rem" }}>{artwork.title}</h2>
+            <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"0.9rem", color:"#8a8278", margin:0 }}>
               {artwork.artist}{artwork.year ? ` · ${artwork.year}` : ""}
             </p>
           </div>
@@ -154,7 +154,7 @@ function ArtworkModal({ artwork, gallery, onClose }: { artwork: Artwork; gallery
               .filter(([, v]) => v)
               .map(([k, v]) => (
                 <div key={k}>
-                  <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.52rem", letterSpacing:"0.15em", color:"#4a4238", textTransform:"uppercase", margin:"0 0 0.15rem" }}>{k}</p>
+                  <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.52rem", letterSpacing:"0.15em", color:"#6a6258", textTransform:"uppercase", margin:"0 0 0.15rem" }}>{k}</p>
                   <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"0.88rem", color:"#ccc", margin:0 }}>{v}</p>
                 </div>
               ))
@@ -234,7 +234,7 @@ export default function GalleryPage() {
 
   if (loading) {
     return (
-      <div style={{ background:"#080808", minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center" }}>
+      <div style={{ background:"#1c1c1c", minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center" }}>
         <span style={{ fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.35em", color:"rgba(212,175,55,0.3)", textTransform:"uppercase" }}>Loading…</span>
       </div>
     );
@@ -242,7 +242,7 @@ export default function GalleryPage() {
 
   if (notFound || !gallery) {
     return (
-      <div style={{ background:"#080808", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"1rem" }}>
+      <div style={{ background:"#1c1c1c", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"1rem" }}>
         <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.9rem", color:"rgba(212,175,55,0.3)", letterSpacing:"0.1em" }}>Gallery not found</p>
         <Link to="/galleries" style={{ fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.2em", color:"#d4af37", textDecoration:"none", textTransform:"uppercase" }}>
           ← All Galleries

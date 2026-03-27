@@ -44,55 +44,55 @@ function uid() { return String(++_uid); }
 // ── CSS ───────────────────────────────────────────────────────────────────────
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap');
-  .swapp-root { background: #080808; min-height: 100vh; font-family: 'Cormorant Garamond', Georgia, serif; color: #e8e0d0; }
+  .swapp-root { background: #1c1c1c; min-height: 100vh; font-family: 'Cormorant Garamond', Georgia, serif; color: #f2ece0; }
   .swapp-beta-banner { background: rgba(212,175,55,0.06); border-bottom: 1px solid rgba(212,175,55,0.15); padding: 0.6rem 2rem; text-align: center; }
   .swapp-beta-text { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: #d4af37; margin: 0; }
   .swapp-hero { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 3rem; text-align: center; }
   .swapp-eyebrow { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.45em; text-transform: uppercase; color: #d4af37; margin-bottom: 1rem; }
-  .swapp-title { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 400; color: #f0e8d0; letter-spacing: 0.1em; margin: 0 0 1rem; }
-  .swapp-subtitle { font-size: 1.05rem; color: #9a9288; line-height: 1.8; font-style: italic; max-width: 520px; margin: 0 auto; }
+  .swapp-title { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 400; color: #f8f2e4; letter-spacing: 0.1em; margin: 0 0 1rem; }
+  .swapp-subtitle { font-size: 1.05rem; color: #b8b0a4; line-height: 1.8; font-style: italic; max-width: 520px; margin: 0 auto; }
 
   /* Builder */
   .swapp-builder { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem 5rem; }
   .swapp-builder-label { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.4em; text-transform: uppercase; color: #d4af37; text-align: center; margin-bottom: 2rem; }
   .swapp-legs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: start; }
   @media (max-width: 640px) { .swapp-legs { grid-template-columns: 1fr; } }
-  .swapp-leg { border: 1px solid rgba(212,175,55,0.15); background: #0a0a0a; min-height: 280px; display: flex; flex-direction: column; }
+  .swapp-leg { border: 1px solid rgba(212,175,55,0.15); background: #202020; min-height: 280px; display: flex; flex-direction: column; }
   .swapp-leg-header { padding: 1rem 1.25rem; border-bottom: 1px solid rgba(212,175,55,0.08); display: flex; align-items: center; justify-content: space-between; }
-  .swapp-leg-title { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #6a6258; }
+  .swapp-leg-title { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #8a8278; }
   .swapp-leg-total { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #d4af37; }
   .swapp-leg-items { flex: 1; padding: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
-  .swapp-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; border: 1px solid rgba(212,175,55,0.1); background: #080808; }
+  .swapp-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; border: 1px solid rgba(212,175,55,0.1); background: #1c1c1c; }
   .swapp-item-img { width: 36px; height: 44px; object-fit: cover; flex-shrink: 0; border: 1px solid rgba(212,175,55,0.08); }
-  .swapp-item-img-fallback { width: 36px; height: 44px; background: #0c0c0c; border: 1px solid rgba(212,175,55,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem; color: rgba(212,175,55,0.15); }
+  .swapp-item-img-fallback { width: 36px; height: 44px; background: #242424; border: 1px solid rgba(212,175,55,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem; color: rgba(212,175,55,0.15); }
   .swapp-item-info { flex: 1; min-width: 0; }
-  .swapp-item-label { font-family: 'Cinzel', serif; font-size: 0.72rem; color: #f0e8d0; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0 0 0.1rem; }
-  .swapp-item-sub { font-size: 0.72rem; color: #6a6258; margin: 0; }
+  .swapp-item-label { font-family: 'Cinzel', serif; font-size: 0.72rem; color: #f8f2e4; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0 0 0.1rem; }
+  .swapp-item-sub { font-size: 0.72rem; color: #8a8278; margin: 0; }
   .swapp-item-eth { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: #d4af37; flex-shrink: 0; }
   .swapp-item-remove { background: none; border: none; color: #333; cursor: pointer; font-size: 1rem; line-height: 1; padding: 0; flex-shrink: 0; }
   .swapp-item-remove:hover { color: #e05; }
-  .swapp-add-btn { margin: 0.75rem; padding: 0.55rem; border: 1px dashed rgba(212,175,55,0.2); background: transparent; color: #4a4238; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .swapp-add-btn { margin: 0.75rem; padding: 0.55rem; border: 1px dashed rgba(212,175,55,0.2); background: transparent; color: #6a6258; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
   .swapp-add-btn:hover { border-color: rgba(212,175,55,0.5); color: #d4af37; }
   .swapp-divider { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.5rem; }
   .swapp-arrow { font-size: 1.8rem; color: rgba(212,175,55,0.25); }
   .swapp-balance { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.1em; text-align: center; }
   .swapp-propose { margin-top: 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-  .swapp-propose-btn { padding: 0.75rem 2.5rem; background: #d4af37; border: none; color: #050505; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+  .swapp-propose-btn { padding: 0.75rem 2.5rem; background: #d4af37; border: none; color: #141414; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
   .swapp-propose-btn:hover { background: #c09f27; }
   .swapp-propose-btn:disabled { background: #222; color: #444; cursor: not-allowed; }
-  .swapp-propose-ghost { padding: 0.75rem 2rem; background: transparent; border: 1px solid rgba(212,175,55,0.2); color: #6a6258; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
+  .swapp-propose-ghost { padding: 0.75rem 2rem; background: transparent; border: 1px solid rgba(212,175,55,0.2); color: #8a8278; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
   .swapp-submitted { border: 1px solid rgba(92,184,92,0.2); background: rgba(92,184,92,0.03); padding: 2rem; text-align: center; margin-top: 2rem; }
 
   /* Picker overlay */
   .swapp-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1rem; }
-  .swapp-picker { background: #0a0a0a; border: 1px solid rgba(212,175,55,0.2); width: 100%; max-width: 580px; max-height: 80vh; display: flex; flex-direction: column; }
+  .swapp-picker { background: #202020; border: 1px solid rgba(212,175,55,0.2); width: 100%; max-width: 580px; max-height: 80vh; display: flex; flex-direction: column; }
   .swapp-picker-header { padding: 1rem 1.25rem; border-bottom: 1px solid rgba(212,175,55,0.1); display: flex; align-items: center; justify-content: space-between; }
-  .swapp-picker-title { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.2em; color: #f0e8d0; text-transform: uppercase; }
-  .swapp-picker-close { background: none; border: none; color: #6a6258; font-size: 1.4rem; cursor: pointer; line-height: 1; }
+  .swapp-picker-title { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.2em; color: #f8f2e4; text-transform: uppercase; }
+  .swapp-picker-close { background: none; border: none; color: #8a8278; font-size: 1.4rem; cursor: pointer; line-height: 1; }
   .swapp-picker-close:hover { color: #d4af37; }
   .swapp-picker-tabs { display: flex; border-bottom: 1px solid rgba(212,175,55,0.08); }
-  .swapp-picker-tab { flex: 1; padding: 0.65rem; background: none; border: none; border-bottom: 2px solid transparent; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: #4a4238; cursor: pointer; transition: color 0.2s; }
-  .swapp-picker-tab:hover { color: #9a9288; }
+  .swapp-picker-tab { flex: 1; padding: 0.65rem; background: none; border: none; border-bottom: 2px solid transparent; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: #6a6258; cursor: pointer; transition: color 0.2s; }
+  .swapp-picker-tab:hover { color: #b8b0a4; }
   .swapp-picker-tab.active { color: #d4af37; border-bottom-color: #d4af37; }
   .swapp-picker-body { flex: 1; overflow-y: auto; padding: 1rem; }
   .swapp-art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
@@ -100,17 +100,17 @@ const css = `
   .swapp-art-cell { cursor: pointer; border: 1px solid transparent; transition: border-color 0.15s; }
   .swapp-art-cell:hover { border-color: rgba(212,175,55,0.4); }
   .swapp-art-cell img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
-  .swapp-art-cell-title { font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.06em; color: #9a9288; padding: 0.3rem 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .swapp-vault-row { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 0.75rem; border: 1px solid rgba(212,175,55,0.1); background: #080808; cursor: pointer; margin-bottom: 0.5rem; transition: border-color 0.15s; }
+  .swapp-art-cell-title { font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.06em; color: #b8b0a4; padding: 0.3rem 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .swapp-vault-row { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 0.75rem; border: 1px solid rgba(212,175,55,0.1); background: #1c1c1c; cursor: pointer; margin-bottom: 0.5rem; transition: border-color 0.15s; }
   .swapp-vault-row:hover { border-color: rgba(212,175,55,0.4); }
-  .swapp-vault-name { font-family: 'Cinzel', serif; font-size: 0.78rem; color: #f0e8d0; letter-spacing: 0.05em; margin: 0 0 0.15rem; }
-  .swapp-vault-meta { font-size: 0.75rem; color: #6a6258; margin: 0; }
+  .swapp-vault-name { font-family: 'Cinzel', serif; font-size: 0.78rem; color: #f8f2e4; letter-spacing: 0.05em; margin: 0 0 0.15rem; }
+  .swapp-vault-meta { font-size: 0.75rem; color: #8a8278; margin: 0; }
   .swapp-vault-eth { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: #d4af37; margin-left: auto; flex-shrink: 0; }
   .swapp-xer-form { padding: 1.5rem 0.5rem; display: flex; flex-direction: column; gap: 1rem; }
-  .swapp-xer-input { padding: 0.6rem 0.85rem; background: #060606; border: 1px solid rgba(212,175,55,0.2); color: #e8e0d0; font-family: 'Cormorant Garamond', serif; font-size: 1rem; width: 100%; box-sizing: border-box; }
+  .swapp-xer-input { padding: 0.6rem 0.85rem; background: #181818; border: 1px solid rgba(212,175,55,0.2); color: #f2ece0; font-family: 'Cormorant Garamond', serif; font-size: 1rem; width: 100%; box-sizing: border-box; }
   .swapp-xer-input:focus { outline: none; border-color: rgba(212,175,55,0.5); }
-  .swapp-xer-est { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: #6a6258; font-style: italic; }
-  .swapp-xer-add { padding: 0.6rem 1.75rem; background: #d4af37; border: none; color: #050505; font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; }
+  .swapp-xer-est { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: #8a8278; font-style: italic; }
+  .swapp-xer-add { padding: 0.6rem 1.75rem; background: #d4af37; border: none; color: #141414; font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; }
   .swapp-xer-add:disabled { background: #222; color: #444; cursor: not-allowed; }
 
   /* Info sections */
@@ -122,8 +122,8 @@ const css = `
   .swapp-type-cell:nth-child(2n) { border-right: none; }
   @media (min-width: 640px) { .swapp-type-cell:nth-child(2n) { border-right: 1px solid rgba(212,175,55,0.08); } .swapp-type-cell:last-child { border-right: none; } }
   .swapp-type-icon { font-size: 1.1rem; color: rgba(212,175,55,0.3); margin-bottom: 0.75rem; }
-  .swapp-type-label { font-family: 'Cinzel', serif; font-size: 0.85rem; color: #f0e8d0; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-  .swapp-type-desc { font-size: 0.8rem; color: #6a6258; line-height: 1.7; }
+  .swapp-type-label { font-family: 'Cinzel', serif; font-size: 0.85rem; color: #f8f2e4; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .swapp-type-desc { font-size: 0.8rem; color: #8a8278; line-height: 1.7; }
   .swapp-risk-notice { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 2rem; }
   .swapp-risk-box { display: flex; align-items: flex-start; gap: 0.75rem; border: 1px solid rgba(212,175,55,0.15); background: rgba(212,175,55,0.03); padding: 1.25rem 1.5rem; }
   .swapp-risk-text { font-size: 0.8rem; color: rgba(212,175,55,0.65); line-height: 1.7; margin: 0; }
@@ -305,7 +305,7 @@ function LegPanel({ title, items, onAdd, onRemove }: {
       </div>
       <div className="swapp-leg-items">
         {items.length === 0 && (
-          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.85rem", color: "#2a2a2a", fontStyle: "italic", textAlign: "center", margin: "auto 0", padding: "2rem 1rem" }}>
+          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.85rem", color: "#484848", fontStyle: "italic", textAlign: "center", margin: "auto 0", padding: "2rem 1rem" }}>
             {t("vaults.empty")}
           </p>
         )}
@@ -389,14 +389,14 @@ export default function Swapp() {
         {submitted ? (
           <div className="swapp-submitted">
             <p style={{ fontFamily: "'Cinzel',serif", fontSize: "1rem", color: "#5cb85c", margin: "0 0 0.5rem", letterSpacing: "0.08em" }}>Barter Proposed ✓</p>
-            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#6a6258", fontStyle: "italic", margin: "0 0 1.5rem" }}>
+            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#8a8278", fontStyle: "italic", margin: "0 0 1.5rem" }}>
               Your barter proposal has been submitted. The counterparty will be notified once the contract layer is live.
             </p>
-            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.85rem", color: "#4a4238", marginBottom: "1.5rem" }}>
+            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.85rem", color: "#6a6258", marginBottom: "1.5rem" }}>
               <p style={{ margin: "0 0 0.25rem" }}>Offering: {offerItems.map((i) => i.label).join(", ")} — {offerTotal.toFixed(3)} ETH</p>
               <p style={{ margin: 0 }}>Wanting: {wantItems.map((i) => i.label).join(", ")} — {wantTotal.toFixed(3)} ETH</p>
             </div>
-            <button onClick={handleReset} style={{ padding: "0.6rem 1.75rem", background: "transparent", border: "1px solid rgba(212,175,55,0.2)", color: "#6a6258", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", cursor: "pointer" }}>
+            <button onClick={handleReset} style={{ padding: "0.6rem 1.75rem", background: "transparent", border: "1px solid rgba(212,175,55,0.2)", color: "#8a8278", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", cursor: "pointer" }}>
               New Barter
             </button>
           </div>
@@ -434,7 +434,7 @@ export default function Swapp() {
             </div>
 
             {!canPropose && (offerItems.length > 0 || wantItems.length > 0) && (
-              <p style={{ textAlign: "center", marginTop: "0.75rem", fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#4a4238", fontStyle: "italic" }}>
+              <p style={{ textAlign: "center", marginTop: "0.75rem", fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#6a6258", fontStyle: "italic" }}>
                 {t("swapp.propose_hint")}
               </p>
             )}

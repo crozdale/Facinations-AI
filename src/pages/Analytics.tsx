@@ -31,7 +31,7 @@ const TAB_KEYS = ["tab_volume", "tab_tvl", "tab_fees"] as const;
 type TabKey = typeof TAB_KEYS[number];
 
 const HEADING: React.CSSProperties = { fontFamily: "'Cinzel', serif", fontWeight: 400, letterSpacing: "0.08em", color: "#d4af37" };
-const TH: React.CSSProperties = { fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#6a6258", padding: "0.5rem 0.75rem", textAlign: "left", borderBottom: "1px solid rgba(212,175,55,0.15)" };
+const TH: React.CSSProperties = { fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#8a8278", padding: "0.5rem 0.75rem", textAlign: "left", borderBottom: "1px solid rgba(212,175,55,0.15)" };
 const TD: React.CSSProperties = { fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", color: "#ccc", padding: "0.5rem 0.75rem", borderBottom: "1px solid rgba(255,255,255,0.04)" };
 const NUM: React.CSSProperties = { ...TD, color: "#d4af37", textAlign: "right" };
 
@@ -93,7 +93,7 @@ export default function Analytics() {
   const activeVaults = daily[0]?.activeVaultCount ?? 0;
 
   return (
-    <main style={{ background: "#080808", minHeight: "100vh" }}>
+    <main style={{ background: "#1c1c1c", minHeight: "100vh" }}>
       {/* Admin banner */}
       <div style={{ background: "rgba(80,20,200,0.07)", borderBottom: "1px solid rgba(100,60,220,0.2)", padding: "0.6rem 2rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
         <span style={{ color: "#9060e0", fontSize: "0.85rem", flexShrink: 0 }}>🔒</span>
@@ -106,13 +106,13 @@ export default function Analytics() {
         <header style={{ display: "flex", alignItems: "baseline", gap: "1rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
           <div>
             <h1 style={{ ...HEADING, margin: "0 0 0.25rem", fontSize: "1.4rem" }}>{t("analytics.title")}</h1>
-            <p style={{ color: "#6a6258", fontSize: "0.85rem", margin: 0, fontStyle: "italic" }}>
+            <p style={{ color: "#8a8278", fontSize: "0.85rem", margin: 0, fontStyle: "italic" }}>
               {t("analytics.subtitle")}
             </p>
           </div>
           {/* Live / Placeholder badge */}
           {!loading && (
-            <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.15em", textTransform: "uppercase", padding: "0.2rem 0.6rem", border: `1px solid ${isLive ? "rgba(92,184,92,0.3)" : "rgba(212,175,55,0.15)"}`, color: isLive ? "#5cb85c" : "#4a4238" }}>
+            <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.15em", textTransform: "uppercase", padding: "0.2rem 0.6rem", border: `1px solid ${isLive ? "rgba(92,184,92,0.3)" : "rgba(212,175,55,0.15)"}`, color: isLive ? "#5cb85c" : "#6a6258" }}>
               {isLive ? "Live" : "Placeholder"}
             </span>
           )}
@@ -139,16 +139,16 @@ export default function Analytics() {
                 { label: "Past Due",       value: business.pastDue,  dim: business.pastDue === 0 },
                 { label: "Waitlist",       value: business.waitlistCount },
               ].map((c) => (
-                <div key={c.label} style={{ border: `1px solid ${c.dim ? "rgba(212,175,55,0.08)" : "rgba(212,175,55,0.2)"}`, padding: "1rem 1.25rem", background: "#0a0a0a", minWidth: 120, flex: "1 1 120px" }}>
+                <div key={c.label} style={{ border: `1px solid ${c.dim ? "rgba(212,175,55,0.08)" : "rgba(212,175,55,0.2)"}`, padding: "1rem 1.25rem", background: "#202020", minWidth: 120, flex: "1 1 120px" }}>
                   <p style={{ margin: "0 0 0.4rem", fontSize: "0.6rem", fontFamily: "'Cinzel', serif", letterSpacing: "0.12em", color: "#555", textTransform: "uppercase" }}>{c.label}</p>
-                  <p style={{ margin: 0, fontSize: "1.4rem", color: c.dim ? "#2a2a2a" : "#d4af37", fontFamily: "'Cormorant Garamond', serif" }}>{c.value}</p>
+                  <p style={{ margin: 0, fontSize: "1.4rem", color: c.dim ? "#484848" : "#d4af37", fontFamily: "'Cormorant Garamond', serif" }}>{c.value}</p>
                 </div>
               ))}
             </div>
             {business.tierBreakdown.length > 0 && (
               <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                 {business.tierBreakdown.map((t) => (
-                  <span key={t.tier} style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.15em", textTransform: "uppercase", padding: "0.2rem 0.6rem", border: "1px solid rgba(212,175,55,0.15)", color: "#6a6258" }}>
+                  <span key={t.tier} style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.15em", textTransform: "uppercase", padding: "0.2rem 0.6rem", border: "1px solid rgba(212,175,55,0.15)", color: "#8a8278" }}>
                     {t.tier} · {t.count}
                   </span>
                 ))}
@@ -165,7 +165,7 @@ export default function Analytics() {
             { label: t("analytics.card_fees"),   value: loading ? "…" : totalFees },
             { label: t("analytics.card_vaults"), value: loading ? "…" : activeVaults },
           ].map((card) => (
-            <div key={card.label} style={{ border: "1px solid rgba(212,175,55,0.2)", padding: "1rem 1.25rem", background: "#0a0a0a", minWidth: 140, flex: "1 1 140px" }}>
+            <div key={card.label} style={{ border: "1px solid rgba(212,175,55,0.2)", padding: "1rem 1.25rem", background: "#202020", minWidth: 140, flex: "1 1 140px" }}>
               <p style={{ margin: "0 0 0.4rem", fontSize: "0.6rem", fontFamily: "'Cinzel', serif", letterSpacing: "0.12em", color: "#555", textTransform: "uppercase" }}>{card.label}</p>
               <p style={{ margin: 0, fontSize: "1.4rem", color: "#d4af37", fontFamily: "'Cormorant Garamond', serif" }}>{card.value}</p>
             </div>
@@ -175,7 +175,7 @@ export default function Analytics() {
         {/* Tab nav */}
         <div style={{ display: "flex", borderBottom: "1px solid rgba(212,175,55,0.15)", marginBottom: "1.25rem" }}>
           {TAB_KEYS.map((key) => (
-            <button key={key} onClick={() => setTab(key)} style={{ padding: "0.5rem 1rem", border: "none", borderBottom: key === tab ? "2px solid #d4af37" : "2px solid transparent", background: "transparent", color: key === tab ? "#d4af37" : "#6a6258", fontFamily: "'Cinzel', serif", fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer" }}>
+            <button key={key} onClick={() => setTab(key)} style={{ padding: "0.5rem 1rem", border: "none", borderBottom: key === tab ? "2px solid #d4af37" : "2px solid transparent", background: "transparent", color: key === tab ? "#d4af37" : "#8a8278", fontFamily: "'Cinzel', serif", fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer" }}>
               {t(`analytics.${key}`)}
             </button>
           ))}

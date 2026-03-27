@@ -58,12 +58,12 @@ export default function Architecture() {
   const [active, setActive] = useState("overview");
   const current = sections.find(s => s.id === active);
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#080808", color: "#e8e0d0", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#1c1c1c", color: "#f2ece0", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');`}</style>
-      <nav style={{ width: 220, borderRight: "1px solid rgba(212,175,55,0.1)", padding: "2.5rem 0", flexShrink: 0, background: "#060606" }}>
+      <nav style={{ width: 220, borderRight: "1px solid rgba(212,175,55,0.1)", padding: "2.5rem 0", flexShrink: 0, background: "#181818" }}>
         <p style={{ color: "#d4af37", fontFamily: "'Cinzel', serif", fontSize: "0.58rem", letterSpacing: "0.25em", textTransform: "uppercase", padding: "0 1.25rem", marginBottom: "1.5rem" }}>{t("architecture.eyebrow")}</p>
         {sections.map(s => (
-          <button key={s.id} onClick={() => setActive(s.id)} style={{ display: "block", width: "100%", textAlign: "left", padding: "0.6rem 1.25rem", background: active === s.id ? "rgba(212,175,55,0.06)" : "transparent", border: "none", borderLeft: active === s.id ? "2px solid #d4af37" : "2px solid transparent", color: active === s.id ? "#d4af37" : "#6a6258", cursor: "pointer", fontFamily: "'Cinzel', serif", fontSize: "0.62rem", letterSpacing: "0.08em", transition: "all 0.2s" }}>
+          <button key={s.id} onClick={() => setActive(s.id)} style={{ display: "block", width: "100%", textAlign: "left", padding: "0.6rem 1.25rem", background: active === s.id ? "rgba(212,175,55,0.06)" : "transparent", border: "none", borderLeft: active === s.id ? "2px solid #d4af37" : "2px solid transparent", color: active === s.id ? "#d4af37" : "#8a8278", cursor: "pointer", fontFamily: "'Cinzel', serif", fontSize: "0.62rem", letterSpacing: "0.08em", transition: "all 0.2s" }}>
             {s.title}
           </button>
         ))}
@@ -73,8 +73,8 @@ export default function Architecture() {
         {current.content.map((block, i) => (
           <div key={i} style={{ marginBottom: "2rem" }}>
             <h2 style={{ fontFamily: "'Cinzel', serif", color: "#a09080", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "0.6rem" }}>{block.heading}</h2>
-            {block.body && <p style={{ color: "#9a9288", lineHeight: 1.9, fontSize: "0.98rem" }}>{block.body}</p>}
-            {block.code && <pre style={{ background: "#0c0c0c", border: "1px solid rgba(212,175,55,0.12)", padding: "1.2rem", fontSize: "0.78rem", color: "#d4af37", overflowX: "auto", fontFamily: "monospace", lineHeight: 1.7, marginTop: "0.5rem" }}>{block.code}</pre>}
+            {block.body && <p style={{ color: "#b8b0a4", lineHeight: 1.9, fontSize: "0.98rem" }}>{block.body}</p>}
+            {block.code && <pre style={{ background: "#242424", border: "1px solid rgba(212,175,55,0.12)", padding: "1.2rem", fontSize: "0.78rem", color: "#d4af37", overflowX: "auto", fontFamily: "monospace", lineHeight: 1.7, marginTop: "0.5rem" }}>{block.code}</pre>}
           </div>
         ))}
       </main>

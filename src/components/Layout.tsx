@@ -28,7 +28,7 @@ function SiteFooter() {
   }
 
   return (
-    <footer style={{ background: "#050505", borderTop: "1px solid rgba(212,175,55,0.12)" }}>
+    <footer style={{ background: "#141414", borderTop: "1px solid rgba(212,175,55,0.12)" }}>
 
       {/* Newsletter row */}
       <div style={{
@@ -62,10 +62,10 @@ function SiteFooter() {
               style={{
                 flex: 1,
                 padding: "0.6rem 0.9rem",
-                background: "#0a0a0a",
+                background: "#202020",
                 border: "1px solid rgba(212,175,55,0.2)",
                 borderRight: "none",
-                color: "#e8e0d0",
+                color: "#f2ece0",
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: "0.9rem",
                 outline: "none",
@@ -78,7 +78,7 @@ function SiteFooter() {
                 padding: "0.6rem 1.4rem",
                 background: state === "loading" ? "#1a1a1a" : "#d4af37",
                 border: "1px solid rgba(212,175,55,0.2)",
-                color: state === "loading" ? "#555" : "#050505",
+                color: state === "loading" ? "#555" : "#141414",
                 fontFamily: "'Cinzel', serif",
                 fontSize: "0.55rem",
                 letterSpacing: "0.2em",
@@ -150,7 +150,7 @@ function SiteFooter() {
             fontFamily: "'Cinzel', serif",
             fontSize: "0.45rem",
             letterSpacing: "0.2em",
-            color: "#4a4238",
+            color: "#6a6258",
             textTransform: "uppercase",
           }}>
             © {year} · {t("footer.protocol_tagline", "Decentralised Fine-Art Protocol")}
@@ -175,7 +175,7 @@ function SiteFooter() {
                 fontSize: "0.5rem",
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
-                color: "#6a6258",
+                color: "#8a8278",
                 textDecoration: "none",
                 padding: "0.3rem 0.55rem",
                 border: "1px solid transparent",
@@ -186,7 +186,7 @@ function SiteFooter() {
                 e.currentTarget.style.borderColor = "rgba(212,175,55,0.2)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = "#6a6258";
+                e.currentTarget.style.color = "#8a8278";
                 e.currentTarget.style.borderColor = "transparent";
               }}
             >
@@ -200,7 +200,7 @@ function SiteFooter() {
           <div style={{
             fontFamily: "monospace",
             fontSize: "0.55rem",
-            color: "#4a4238",
+            color: "#6a6258",
             letterSpacing: "0.05em",
             marginBottom: "0.2rem",
           }}>
@@ -228,8 +228,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#080808",
-      color: "#e8e0d0",
+      background: "#1c1c1c",
+      color: "#f2ece0",
       display: "flex",
       flexDirection: "column",
       position: "relative",
@@ -267,7 +267,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           e.currentTarget.style.height = "auto";
           e.currentTarget.style.zIndex = "9999";
           e.currentTarget.style.background = "#d4af37";
-          e.currentTarget.style.color = "#050505";
+          e.currentTarget.style.color = "#141414";
           e.currentTarget.style.padding = "0.5rem 1rem";
           e.currentTarget.style.fontFamily = "'Cinzel', serif";
           e.currentTarget.style.fontSize = "0.7rem";

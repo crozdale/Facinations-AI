@@ -11,11 +11,11 @@ interface Props {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  gate: { border: "1px solid rgba(212,175,55,0.15)", background: "#0a0a0a", padding: "2rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" },
+  gate: { border: "1px solid rgba(212,175,55,0.15)", background: "#202020", padding: "2rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" },
   icon: { fontSize: "1.8rem", color: "#d4af37" },
-  heading: { fontFamily: "'Cinzel', serif", fontSize: "0.9rem", fontWeight: 400, color: "#f0e8d0", letterSpacing: "0.1em", margin: 0 },
-  body: { fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", color: "#6a6258", lineHeight: 1.7, fontStyle: "italic", maxWidth: 380, margin: 0 },
-  btn: { padding: "0.6rem 1.75rem", background: "#d4af37", border: "none", color: "#050505", fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase" as const, cursor: "pointer", textDecoration: "none", display: "inline-block" },
+  heading: { fontFamily: "'Cinzel', serif", fontSize: "0.9rem", fontWeight: 400, color: "#f8f2e4", letterSpacing: "0.1em", margin: 0 },
+  body: { fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", color: "#8a8278", lineHeight: 1.7, fontStyle: "italic", maxWidth: 380, margin: 0 },
+  btn: { padding: "0.6rem 1.75rem", background: "#d4af37", border: "none", color: "#141414", fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase" as const, cursor: "pointer", textDecoration: "none", display: "inline-block" },
   btnOutline: { padding: "0.6rem 1.75rem", background: "transparent", border: "1px solid rgba(212,175,55,0.3)", color: "#d4af37", fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase" as const, cursor: "pointer", textDecoration: "none", display: "inline-block" },
   badge: { fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: "rgba(212,175,55,0.5)", border: "1px solid rgba(212,175,55,0.15)", padding: "0.2rem 0.6rem" },
 };

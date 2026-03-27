@@ -33,26 +33,26 @@ const PLACEHOLDERS: Record<Context, string> = {
 };
 
 const css = `
-  .mw-fab { position:fixed; bottom:2rem; right:2rem; z-index:1000; width:52px; height:52px; border:1px solid rgba(212,175,55,0.4); background:#080808; color:#d4af37; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.1em; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 32px rgba(0,0,0,0.8); transition:border-color 0.2s; }
+  .mw-fab { position:fixed; bottom:2rem; right:2rem; z-index:1000; width:52px; height:52px; border:1px solid rgba(212,175,55,0.4); background:#1c1c1c; color:#d4af37; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.1em; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 32px rgba(0,0,0,0.8); transition:border-color 0.2s; }
   .mw-fab:hover { border-color:#d4af37; background:rgba(212,175,55,0.05); }
-  .mw-panel { position:fixed; bottom:5.5rem; right:2rem; z-index:1000; width:340px; max-height:500px; background:#080808; border:1px solid rgba(212,175,55,0.2); display:flex; flex-direction:column; box-shadow:0 8px 48px rgba(0,0,0,0.85); overflow:hidden; }
+  .mw-panel { position:fixed; bottom:5.5rem; right:2rem; z-index:1000; width:340px; max-height:500px; background:#1c1c1c; border:1px solid rgba(212,175,55,0.2); display:flex; flex-direction:column; box-shadow:0 8px 48px rgba(0,0,0,0.85); overflow:hidden; }
   .mw-header { padding:0.85rem 1rem; border-bottom:1px solid rgba(212,175,55,0.1); display:flex; align-items:center; gap:0.65rem; }
   .mw-dot { width:6px; height:6px; background:#d4af37; flex-shrink:0; }
-  .mw-title { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.12em; color:#f0e8d0; }
-  .mw-sub { font-family:'Cormorant Garamond',serif; font-size:0.75rem; color:#6a6258; font-style:italic; }
+  .mw-title { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.12em; color:#f8f2e4; }
+  .mw-sub { font-family:'Cormorant Garamond',serif; font-size:0.75rem; color:#8a8278; font-style:italic; }
   .mw-online { margin-left:auto; width:6px; height:6px; background:rgba(92,184,92,0.8); border-radius:50%; flex-shrink:0; }
   .mw-messages { flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:0.65rem; min-height:180px; }
-  .mw-empty { font-family:'Cormorant Garamond',serif; font-size:0.85rem; color:#4a4238; font-style:italic; text-align:center; margin:auto; }
+  .mw-empty { font-family:'Cormorant Garamond',serif; font-size:0.85rem; color:#6a6258; font-style:italic; text-align:center; margin:auto; }
   .mw-bubble { max-width:88%; padding:0.55rem 0.8rem; font-family:'Cormorant Garamond',serif; font-size:0.85rem; line-height:1.65; }
-  .mw-bubble-user { align-self:flex-end; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.2); color:#e8e0d0; }
-  .mw-bubble-ai { align-self:flex-start; background:rgba(255,255,255,0.02); border:1px solid rgba(212,175,55,0.06); color:#9a9288; font-style:italic; }
+  .mw-bubble-user { align-self:flex-end; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.2); color:#f2ece0; }
+  .mw-bubble-ai { align-self:flex-start; background:rgba(255,255,255,0.02); border:1px solid rgba(212,175,55,0.06); color:#b8b0a4; font-style:italic; }
   .mw-cursor { display:inline-block; width:2px; height:0.85em; background:rgba(212,175,55,0.5); margin-left:2px; vertical-align:middle; animation:mw-blink 0.7s infinite; }
   @keyframes mw-blink { 0%,100%{opacity:1} 50%{opacity:0} }
-  .mw-input-row { border-top:1px solid rgba(212,175,55,0.1); padding:0.6rem 0.75rem; display:flex; gap:0.5rem; background:#050505; }
-  .mw-input { flex:1; background:transparent; border:none; outline:none; font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:#e8e0d0; }
-  .mw-input::placeholder { color:#2a2a2a; }
+  .mw-input-row { border-top:1px solid rgba(212,175,55,0.1); padding:0.6rem 0.75rem; display:flex; gap:0.5rem; background:#141414; }
+  .mw-input { flex:1; background:transparent; border:none; outline:none; font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:#f2ece0; }
+  .mw-input::placeholder { color:#484848; }
   .mw-send { background:none; border:none; font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; color:#d4af37; cursor:pointer; padding:0.25rem 0.5rem; }
-  .mw-send:disabled { color:#2a2a2a; cursor:not-allowed; }
+  .mw-send:disabled { color:#484848; cursor:not-allowed; }
 `;
 
 export default function MistralWidget({ context = "gallery" }: Props) {

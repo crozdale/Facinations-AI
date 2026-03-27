@@ -14,7 +14,7 @@ export default function GalleryCard({ item }: { item: GalleryCardItem }) {
   return (
     <div style={{
       border: "1px solid rgba(212,175,55,0.12)",
-      background: "#0a0a0a",
+      background: "#202020",
       padding: "1.25rem",
       display: "flex",
       flexDirection: "column",
@@ -31,7 +31,7 @@ export default function GalleryCard({ item }: { item: GalleryCardItem }) {
         fontFamily: "'Cinzel',serif",
         fontSize: "0.95rem",
         fontWeight: 400,
-        color: "#f0e8d0",
+        color: "#f8f2e4",
         letterSpacing: "0.06em",
         margin: 0,
       }}>
@@ -52,7 +52,7 @@ export default function GalleryCard({ item }: { item: GalleryCardItem }) {
         <p style={{
           fontFamily: "monospace",
           fontSize: "0.7rem",
-          color: "#4a4238",
+          color: "#6a6258",
           margin: 0,
           overflow: "hidden",
           textOverflow: "ellipsis",

@@ -8,7 +8,7 @@ import { BRAND } from "../brand/brandAssets";
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400&display=swap');
 
-  .home-root { background:#080808; min-height:100vh; display:flex; flex-direction:column; align-items:center; font-family:'Cormorant Garamond',Georgia,serif; overflow-x:hidden; position:relative; }
+  .home-root { background:#1c1c1c; min-height:100vh; display:flex; flex-direction:column; align-items:center; font-family:'Cormorant Garamond',Georgia,serif; overflow-x:hidden; position:relative; }
   .home-bg { position:fixed; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 20%,rgba(212,175,55,0.05) 0%,transparent 70%); pointer-events:none; z-index:0; }
   .home-grid { position:fixed; inset:0; background-image:linear-gradient(rgba(212,175,55,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,0.025) 1px,transparent 1px); background-size:80px 80px; pointer-events:none; z-index:0; mask-image:radial-gradient(ellipse 80% 80% at 50% 30%,black,transparent); }
 
@@ -35,7 +35,7 @@ const css = `
   .cta-primary { font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.25em; text-transform:uppercase; padding:1rem 3rem; background:rgba(212,175,55,0.1); border:1px solid #d4af37; color:#d4af37; cursor:pointer; transition:all 0.3s; display:inline-block; }
   .cta-primary:hover { box-shadow:0 0 40px rgba(212,175,55,0.18); background:rgba(212,175,55,0.18); }
 
-  .home-subtitle { color:#9a9288; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1rem,2vw,1.2rem); text-align:center; max-width:580px; line-height:1.85; margin-top:2.5rem; padding:0 1rem; opacity:0; animation:fadeUp 1s ease 1.3s forwards; }
+  .home-subtitle { color:#b8b0a4; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1rem,2vw,1.2rem); text-align:center; max-width:580px; line-height:1.85; margin-top:2.5rem; padding:0 1rem; opacity:0; animation:fadeUp 1s ease 1.3s forwards; }
 
   .home-nav { display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center; margin-top:3rem; opacity:0; animation:fadeUp 1s ease 1.5s forwards; }
   .nav-pill { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.45rem 1.1rem; background:none; border:1px solid rgba(212,175,55,0.18); color:#888; cursor:pointer; transition:all 0.25s; text-decoration:none; }

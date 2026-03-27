@@ -4,11 +4,11 @@ import { useMeta } from "../hooks/useMeta";
 
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap');
-  .legal-root { background: #080808; min-height: 100vh; font-family: 'Cormorant Garamond', Georgia, serif; color: #e8e0d0; }
+  .legal-root { background: #1c1c1c; min-height: 100vh; font-family: 'Cormorant Garamond', Georgia, serif; color: #f2ece0; }
   .legal-hero { text-align: center; padding: 5rem 2rem 3rem; position: relative; border-bottom: 1px solid rgba(212,175,55,0.08); }
   .legal-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.04) 0%, transparent 70%); pointer-events: none; }
   .legal-eyebrow { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: #d4af37; margin-bottom: 1rem; }
-  .legal-title { font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: #f0e8d0; letter-spacing: 0.1em; margin: 0; }
+  .legal-title { font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: #f8f2e4; letter-spacing: 0.1em; margin: 0; }
   .legal-div { width: 60px; height: 1px; background: linear-gradient(to right, transparent, #d4af37, transparent); margin: 1.5rem auto 0; }
   .legal-risk-banner { background: rgba(212,175,55,0.05); border-bottom: 1px solid rgba(212,175,55,0.15); padding: 0.75rem 2rem; display: flex; align-items: center; gap: 0.75rem; }
   .legal-risk-text { font-size: 0.78rem; color: rgba(212,175,55,0.75); line-height: 1.5; }
@@ -23,8 +23,8 @@ const css = `
   .legal-date { font-size: 0.75rem; color: rgba(212,175,55,0.35); font-style: italic; }
   .legal-item { border-bottom: 1px solid rgba(212,175,55,0.07); padding-bottom: 2rem; margin-bottom: 2rem; }
   .legal-item:last-child { border-bottom: none; }
-  .legal-item-heading { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 400; color: #f0e8d0; letter-spacing: 0.05em; margin: 0 0 0.75rem; }
-  .legal-item-body { font-size: 1rem; line-height: 1.9; color: #9a9288; font-style: italic; margin: 0; }
+  .legal-item-heading { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 400; color: #f8f2e4; letter-spacing: 0.05em; margin: 0 0 0.75rem; }
+  .legal-item-body { font-size: 1rem; line-height: 1.9; color: #b8b0a4; font-style: italic; margin: 0; }
 `;
 
 // Labels and tags are resolved inside the component using t()
@@ -102,7 +102,7 @@ export default function Legal() {
       <div className="legal-hero">
         <div className="legal-eyebrow">{t("legal.eyebrow")}</div>
         <h1 className="legal-title">{t("legal.title")}</h1>
-        <p style={{ fontStyle: "italic", color: "#6a6258", fontSize: "0.85rem", marginTop: "0.5rem" }}>
+        <p style={{ fontStyle: "italic", color: "#8a8278", fontSize: "0.85rem", marginTop: "0.5rem" }}>
           {t("legal.subtitle")}
         </p>
         <div className="legal-div" />

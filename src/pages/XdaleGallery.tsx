@@ -101,19 +101,19 @@ const DEALER = {
 // ── CSS ───────────────────────────────────────────────────────────────────────
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap');
-  .xdale-root { background: #080808; min-height: 100vh; font-family: 'Cormorant Garamond', Georgia, serif; color: #e8e0d0; }
+  .xdale-root { background: #1c1c1c; min-height: 100vh; font-family: 'Cormorant Garamond', Georgia, serif; color: #f2ece0; }
   .xdale-header { border-bottom: 1px solid rgba(212,175,55,0.1); background: rgba(212,175,55,0.02); padding: 3rem 2rem; }
   .xdale-header-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
   @media (min-width: 640px) { .xdale-header-inner { flex-direction: row; align-items: center; } }
-  .xdale-dealer-logo-placeholder { width: 64px; height: 64px; border: 1px solid rgba(212,175,55,0.2); background: #0c0c0c; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Cinzel', serif; font-size: 1.4rem; color: rgba(212,175,55,0.4); }
+  .xdale-dealer-logo-placeholder { width: 64px; height: 64px; border: 1px solid rgba(212,175,55,0.2); background: #242424; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Cinzel', serif; font-size: 1.4rem; color: rgba(212,175,55,0.4); }
   .xdale-eyebrow { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.4em; text-transform: uppercase; color: #d4af37; margin-bottom: 0.5rem; }
-  .xdale-dealer-name { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 400; color: #f0e8d0; letter-spacing: 0.06em; margin: 0 0 0.5rem; }
-  .xdale-dealer-blurb { font-size: 0.92rem; color: #9a9288; line-height: 1.8; max-width: 560px; font-style: italic; }
+  .xdale-dealer-name { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 400; color: #f8f2e4; letter-spacing: 0.06em; margin: 0 0 0.5rem; }
+  .xdale-dealer-blurb { font-size: 0.92rem; color: #b8b0a4; line-height: 1.8; max-width: 560px; font-style: italic; }
   .xdale-dealer-location { font-size: 0.75rem; color: rgba(212,175,55,0.3); margin-top: 0.4rem; letter-spacing: 0.08em; }
   .xdale-attribution { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(212,175,55,0.3); }
   .xdale-tabs { max-width: 1200px; margin: 0 auto; display: flex; border-bottom: 1px solid rgba(212,175,55,0.1); padding: 0 2rem; }
-  .xdale-tab { padding: 0.75rem 1.25rem; font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; background: none; border: none; border-bottom: 2px solid transparent; color: #4a4238; cursor: pointer; transition: color 0.2s; }
-  .xdale-tab:hover { color: #9a9288; }
+  .xdale-tab { padding: 0.75rem 1.25rem; font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; background: none; border: none; border-bottom: 2px solid transparent; color: #6a6258; cursor: pointer; transition: color 0.2s; }
+  .xdale-tab:hover { color: #b8b0a4; }
   .xdale-tab.active { color: #d4af37; border-bottom-color: #d4af37; }
   .xdale-grid { max-width: 1200px; margin: 0 auto; padding: 3.5rem 2rem 6rem; }
   .xdale-grid-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2.5rem; }
@@ -123,14 +123,14 @@ const css = `
   @media (min-width: 640px) { .xdale-artwork-grid { grid-template-columns: repeat(3, 1fr); } }
   @media (min-width: 960px) { .xdale-artwork-grid { grid-template-columns: repeat(4, 1fr); } }
   .xdale-card { cursor: pointer; }
-  .xdale-card-img-wrap { aspect-ratio: 3/4; overflow: hidden; background: #0c0c0c; margin-bottom: 0.75rem; position: relative; border: 1px solid rgba(212,175,55,0.08); }
+  .xdale-card-img-wrap { aspect-ratio: 3/4; overflow: hidden; background: #242424; margin-bottom: 0.75rem; position: relative; border: 1px solid rgba(212,175,55,0.08); }
   .xdale-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
   .xdale-card:hover .xdale-card-img { transform: scale(1.05); }
   .xdale-card-available { position: absolute; bottom: 0.5rem; left: 0.5rem; font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: #d4af37; background: rgba(8,8,8,0.85); border: 1px solid rgba(212,175,55,0.3); padding: 0.2rem 0.5rem; }
   .xdale-card-sold { position: absolute; bottom: 0.5rem; left: 0.5rem; font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: #666; background: rgba(8,8,8,0.85); border: 1px solid #333; padding: 0.2rem 0.5rem; }
-  .xdale-card-title { font-family: 'Cinzel', serif; font-size: 0.85rem; color: #f0e8d0; letter-spacing: 0.04em; margin: 0 0 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.2s; }
+  .xdale-card-title { font-family: 'Cinzel', serif; font-size: 0.85rem; color: #f8f2e4; letter-spacing: 0.04em; margin: 0 0 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.2s; }
   .xdale-card:hover .xdale-card-title { color: #d4af37; }
-  .xdale-card-meta { font-size: 0.78rem; color: #6a6258; }
+  .xdale-card-meta { font-size: 0.78rem; color: #8a8278; }
   .xdale-footer { border-top: 1px solid rgba(212,175,55,0.08); padding: 1.5rem 2rem; text-align: center; }
   .xdale-footer-text { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(212,175,55,0.25); }
   .xdale-footer-link { color: rgba(212,175,55,0.4); text-decoration: none; transition: color 0.2s; }
@@ -139,26 +139,26 @@ const css = `
   .xdale-empty-text { font-family: 'Cinzel', serif; font-size: 1.4rem; color: rgba(212,175,55,0.12); }
   /* Modal */
   .xdale-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 1rem; }
-  .xdale-modal { background: #0a0a0a; border: 1px solid rgba(212,175,55,0.15); max-width: 860px; width: 100%; max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; }
+  .xdale-modal { background: #202020; border: 1px solid rgba(212,175,55,0.15); max-width: 860px; width: 100%; max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; }
   @media (max-width: 640px) { .xdale-modal { grid-template-columns: 1fr; } }
   .xdale-modal-img { width: 100%; height: 100%; object-fit: cover; min-height: 300px; display: block; }
-  .xdale-modal-img-fallback { min-height: 300px; background: #080808; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 3rem; color: rgba(212,175,55,0.08); }
+  .xdale-modal-img-fallback { min-height: 300px; background: #1c1c1c; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 3rem; color: rgba(212,175,55,0.08); }
   .xdale-modal-body { padding: 2rem; display: flex; flex-direction: column; gap: 0.75rem; overflow-y: auto; }
-  .xdale-modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #6a6258; font-size: 1.5rem; cursor: pointer; line-height: 1; }
+  .xdale-modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #8a8278; font-size: 1.5rem; cursor: pointer; line-height: 1; }
   .xdale-modal-close:hover { color: #d4af37; }
-  .xm-input { width: 100%; box-sizing: border-box; padding: 0.55rem 0.75rem; background: #060606; border: 1px solid rgba(212,175,55,0.15); color: #e8e0d0; font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; }
+  .xm-input { width: 100%; box-sizing: border-box; padding: 0.55rem 0.75rem; background: #181818; border: 1px solid rgba(212,175,55,0.15); color: #f2ece0; font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; }
   .xm-input:focus { outline: none; border-color: rgba(212,175,55,0.4); }
-  .xm-input::placeholder { color: #2a2a2a; }
+  .xm-input::placeholder { color: #484848; }
   .xm-label { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(212,175,55,0.4); display: block; margin-bottom: 0.25rem; }
-  .xm-btn { padding: 0.6rem 1.5rem; background: #d4af37; border: none; color: #050505; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
+  .xm-btn { padding: 0.6rem 1.5rem; background: #d4af37; border: none; color: #141414; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
   .xm-btn:hover { background: #c09f27; }
-  .xm-btn-ghost { padding: 0.6rem 1.5rem; background: transparent; border: 1px solid rgba(212,175,55,0.2); color: #6a6258; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
+  .xm-btn-ghost { padding: 0.6rem 1.5rem; background: transparent; border: 1px solid rgba(212,175,55,0.2); color: #8a8278; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
   /* Inventory manager */
   .inv-section { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 6rem; }
   .inv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
-  .inv-card { border: 1px solid rgba(212,175,55,0.12); background: #0a0a0a; padding: 1rem; display: flex; gap: 1rem; align-items: flex-start; }
+  .inv-card { border: 1px solid rgba(212,175,55,0.12); background: #202020; padding: 1rem; display: flex; gap: 1rem; align-items: flex-start; }
   .inv-thumb { width: 64px; height: 80px; object-fit: cover; flex-shrink: 0; border: 1px solid rgba(212,175,55,0.08); }
-  .inv-thumb-fallback { width: 64px; height: 80px; background: #0c0c0c; border: 1px solid rgba(212,175,55,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Cinzel', serif; font-size: 1.2rem; color: rgba(212,175,55,0.1); }
+  .inv-thumb-fallback { width: 64px; height: 80px; background: #242424; border: 1px solid rgba(212,175,55,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Cinzel', serif; font-size: 1.2rem; color: rgba(212,175,55,0.1); }
   .inv-remove { background: none; border: none; color: #333; cursor: pointer; font-size: 1.1rem; margin-left: auto; flex-shrink: 0; padding: 0; line-height: 1; }
   .inv-remove:hover { color: #e05; }
   /* Onboard section */
@@ -238,14 +238,14 @@ function ArtworkModal({ artwork, onClose }: { artwork: Artwork; onClose: () => v
             <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#d4af37", margin: "0 0 0.4rem", textTransform: "uppercase" }}>
               {artwork.available ? t("xdale.status_available") : t("xdale.status_sold")}
             </p>
-            <h2 style={{ fontFamily: "'Cinzel',serif", fontSize: "1.1rem", fontWeight: 400, color: "#f0e8d0", letterSpacing: "0.06em", margin: "0 0 0.2rem" }}>{artwork.title}</h2>
-            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#6a6258", margin: 0 }}>{artwork.artist} · {artwork.year}</p>
+            <h2 style={{ fontFamily: "'Cinzel',serif", fontSize: "1.1rem", fontWeight: 400, color: "#f8f2e4", letterSpacing: "0.06em", margin: "0 0 0.2rem" }}>{artwork.title}</h2>
+            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#8a8278", margin: 0 }}>{artwork.artist} · {artwork.year}</p>
           </div>
 
           <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
             {[[t("xdale.label_medium"), artwork.medium], [t("xdale.label_dimensions"), artwork.dimensions], [t("xdale.label_price"), artwork.priceDisplay]].map(([k, v]) => (
               <div key={k}>
-                <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.52rem", letterSpacing: "0.15em", color: "#4a4238", textTransform: "uppercase", margin: "0 0 0.15rem" }}>{k}</p>
+                <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.52rem", letterSpacing: "0.15em", color: "#6a6258", textTransform: "uppercase", margin: "0 0 0.15rem" }}>{k}</p>
                 <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.88rem", color: "#ccc", margin: 0 }}>{v}</p>
               </div>
             ))}
@@ -264,7 +264,7 @@ function ArtworkModal({ artwork, onClose }: { artwork: Artwork; onClose: () => v
             {sent ? (
               <div style={{ textAlign: "center", padding: "1.5rem 0" }}>
                 <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.85rem", color: "#5cb85c", margin: "0 0 0.4rem" }}>{t("xdale.enquiry_sent")}</p>
-                <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.85rem", color: "#6a6258", fontStyle: "italic", margin: 0 }}>
+                <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.85rem", color: "#8a8278", fontStyle: "italic", margin: 0 }}>
                   {t("xdale.enquiry_followup")}
                 </p>
               </div>
@@ -334,8 +334,8 @@ function InventoryManager({ inventory, setInventory }: {
 
   const F: React.CSSProperties = { display: "flex", flexDirection: "column", gap: "0.5rem" };
   const inputStyle: React.CSSProperties = {
-    padding: "0.5rem 0.7rem", background: "#060606",
-    border: "1px solid rgba(212,175,55,0.15)", color: "#e8e0d0",
+    padding: "0.5rem 0.7rem", background: "#181818",
+    border: "1px solid rgba(212,175,55,0.15)", color: "#f2ece0",
     fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", width: "100%", boxSizing: "border-box",
   };
   const lbl: React.CSSProperties = {
@@ -357,8 +357,8 @@ function InventoryManager({ inventory, setInventory }: {
               : <div className="inv-thumb-fallback">{a.title[0] ?? "?"}</div>
             }
             <div style={{ flex: 1, minWidth: 0 }}>
-              <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.75rem", color: "#f0e8d0", margin: "0 0 0.15rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{a.title}</p>
-              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.78rem", color: "#6a6258", margin: "0 0 0.1rem" }}>{a.artist} · {a.year}</p>
+              <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.75rem", color: "#f8f2e4", margin: "0 0 0.15rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{a.title}</p>
+              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.78rem", color: "#8a8278", margin: "0 0 0.1rem" }}>{a.artist} · {a.year}</p>
               <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.78rem", color: a.available ? "#d4af37" : "#444", margin: 0 }}>{a.available ? a.priceDisplay : t("xdale.status_sold")}</p>
             </div>
             <button className="inv-remove" title="Remove" onClick={() => handleRemove(a.id)}>×</button>
@@ -387,7 +387,7 @@ function InventoryManager({ inventory, setInventory }: {
           <button
             onClick={handleAdd}
             disabled={!form.title.trim()}
-            style={{ padding: "0.6rem 1.75rem", background: form.title.trim() ? "#d4af37" : "#222", border: "none", color: form.title.trim() ? "#050505" : "#444", fontFamily: "'Cinzel',serif", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: form.title.trim() ? "pointer" : "not-allowed" }}>
+            style={{ padding: "0.6rem 1.75rem", background: form.title.trim() ? "#d4af37" : "#222", border: "none", color: form.title.trim() ? "#141414" : "#444", fontFamily: "'Cinzel',serif", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: form.title.trim() ? "pointer" : "not-allowed" }}>
             {t("xdale.btn_add_inventory")}
           </button>
           {added && <span style={{ fontFamily: "'Cinzel',serif", fontSize: "0.58rem", color: "#5cb85c", letterSpacing: "0.1em" }}>{t("xdale.added_confirm")}</span>}
@@ -427,8 +427,8 @@ function DealerOnboarding() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%", boxSizing: "border-box", padding: "0.6rem 0.85rem",
-    background: "#0c0c0c", border: "1px solid rgba(212,175,55,0.15)",
-    color: "#e8e0d0", fontFamily: "'Cormorant Garamond',serif", fontSize: "0.95rem",
+    background: "#242424", border: "1px solid rgba(212,175,55,0.15)",
+    color: "#f2ece0", fontFamily: "'Cormorant Garamond',serif", fontSize: "0.95rem",
   };
   const lbl: React.CSSProperties = {
     display: "block", marginBottom: "0.3rem", fontFamily: "'Cinzel',serif",
@@ -439,15 +439,15 @@ function DealerOnboarding() {
   return (
     <div className="ob-section">
       <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.35em", color: "#d4af37", textTransform: "uppercase", marginBottom: "0.5rem" }}>{t("xdale.ob_eyebrow")}</p>
-      <h2 style={{ fontFamily: "'Cinzel',serif", fontSize: "1.3rem", fontWeight: 400, color: "#f0e8d0", letterSpacing: "0.08em", margin: "0 0 0.75rem" }}>{t("xdale.ob_heading")}</h2>
-      <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.95rem", color: "#6a6258", lineHeight: 1.8, fontStyle: "italic", marginBottom: "2.5rem" }}>
+      <h2 style={{ fontFamily: "'Cinzel',serif", fontSize: "1.3rem", fontWeight: 400, color: "#f8f2e4", letterSpacing: "0.08em", margin: "0 0 0.75rem" }}>{t("xdale.ob_heading")}</h2>
+      <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.95rem", color: "#8a8278", lineHeight: 1.8, fontStyle: "italic", marginBottom: "2.5rem" }}>
         {t("xdale.ob_body")}
       </p>
 
       {submitted ? (
         <div style={{ border: "1px solid rgba(92,184,92,0.2)", background: "rgba(92,184,92,0.03)", padding: "3rem 2rem", textAlign: "center" }}>
           <p style={{ fontFamily: "'Cinzel',serif", fontSize: "1rem", color: "#5cb85c", margin: "0 0 0.5rem", letterSpacing: "0.08em" }}>{t("xdale.ob_received")}</p>
-          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#6a6258", fontStyle: "italic", margin: 0 }}>
+          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#8a8278", fontStyle: "italic", margin: 0 }}>
             {t("xdale.ob_received_body", { galleryName: form.galleryName, email: form.email })}
           </p>
         </div>
@@ -467,7 +467,7 @@ function DealerOnboarding() {
           </div>
 
           {/* What you get */}
-          <div style={{ border: "1px solid rgba(212,175,55,0.1)", padding: "1.25rem", background: "#0a0a0a" }}>
+          <div style={{ border: "1px solid rgba(212,175,55,0.1)", padding: "1.25rem", background: "#202020" }}>
             <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.2em", color: "#d4af37", textTransform: "uppercase", margin: "0 0 0.75rem" }}>{t("xdale.ob_included_heading")}</p>
             <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
               {[t("xdale.ob_include_1"), t("xdale.ob_include_2"), t("xdale.ob_include_3"), t("xdale.ob_include_4"), t("xdale.ob_include_5")].map((item) => (
@@ -482,7 +482,7 @@ function DealerOnboarding() {
           <button
             onClick={handleSubmit}
             disabled={!form.galleryName || !form.email || submitting}
-            style={{ alignSelf: "flex-start", padding: "0.7rem 2rem", background: form.galleryName && form.email && !submitting ? "#d4af37" : "#222", border: "none", color: form.galleryName && form.email && !submitting ? "#050505" : "#444", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: form.galleryName && form.email && !submitting ? "pointer" : "not-allowed" }}>
+            style={{ alignSelf: "flex-start", padding: "0.7rem 2rem", background: form.galleryName && form.email && !submitting ? "#d4af37" : "#222", border: "none", color: form.galleryName && form.email && !submitting ? "#141414" : "#444", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: form.galleryName && form.email && !submitting ? "pointer" : "not-allowed" }}>
             {submitting ? "…" : t("xdale.btn_submit_application")}
           </button>
         </div>

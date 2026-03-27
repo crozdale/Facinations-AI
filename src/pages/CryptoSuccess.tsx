@@ -67,7 +67,7 @@ export default function CryptoSuccess() {
   }, []);
 
   return (
-    <main style={{ background: "#080808", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <main style={{ background: "#1c1c1c", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap');
         @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
@@ -78,10 +78,10 @@ export default function CryptoSuccess() {
         {status === "verifying" && (
           <>
             <div style={{ fontSize: "2rem", color: "rgba(212,175,55,0.4)", marginBottom: "1.5rem", animation: "pulse 1.6s ease-in-out infinite" }}>◈</div>
-            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>
+            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f8f2e4", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>
               {t("checkout.verifying_payment", "Verifying your payment…")}
             </p>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#4a4238", fontSize: "0.85rem", margin: 0 }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#6a6258", fontSize: "0.85rem", margin: 0 }}>
               {t("checkout.just_a_moment", "This takes just a moment.")}
             </p>
           </>
@@ -90,10 +90,10 @@ export default function CryptoSuccess() {
         {status === "success" && (
           <>
             <div style={{ fontSize: "2.5rem", color: "#5cb85c", marginBottom: "1rem" }}>✓</div>
-            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "1rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>
+            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "1rem", color: "#f8f2e4", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>
               {t("checkout.payment_confirmed", "Payment Confirmed")}
             </p>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#6a6258", fontSize: "0.9rem", margin: 0 }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#8a8278", fontSize: "0.9rem", margin: 0 }}>
               {t("checkout.welcome_returning", "Welcome to Facinations Studio. Returning you now…")}
             </p>
           </>
@@ -102,10 +102,10 @@ export default function CryptoSuccess() {
         {status === "pending" && (
           <>
             <div style={{ fontSize: "2rem", color: "#d4af37", marginBottom: "1.5rem", animation: "pulse 2s ease-in-out infinite" }}>⧗</div>
-            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.75rem" }}>
+            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f8f2e4", letterSpacing: "0.1em", margin: "0 0 0.75rem" }}>
               {t("checkout.awaiting_confirmation", "Awaiting Confirmation")}
             </p>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#6a6258", fontSize: "0.85rem", margin: "0 0 1.5rem" }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#8a8278", fontSize: "0.85rem", margin: "0 0 1.5rem" }}>
               {t("checkout.crypto_pending_body", "Your crypto payment has been received and is awaiting blockchain confirmation. This can take a few minutes. You'll gain access as soon as it's confirmed.")}
             </p>
             <button
@@ -130,10 +130,10 @@ export default function CryptoSuccess() {
         {status === "error" && (
           <>
             <div style={{ fontSize: "2rem", color: "#e05", marginBottom: "1rem" }}>✗</div>
-            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.75rem" }}>
+            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f8f2e4", letterSpacing: "0.1em", margin: "0 0 0.75rem" }}>
               {t("checkout.verification_failed", "Verification Failed")}
             </p>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#6a6258", fontSize: "0.85rem", margin: "0 0 1.5rem" }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#8a8278", fontSize: "0.85rem", margin: "0 0 1.5rem" }}>
               {errorMsg}
             </p>
             <button

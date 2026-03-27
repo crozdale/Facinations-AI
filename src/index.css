@@ -10,14 +10,14 @@
 @layer base {
   :root {
     /* Backgrounds */
-    --background:      0 0% 3%;        /* #080808 — near-black gallery bg */
-    --card:            0 0% 4%;        /* #0a0a0a */
-    --card-surface:    0 0% 2%;        /* #050505 — deepest surface */
+    --background:      0 0% 11%;       /* #1c1c1c — charcoal gallery bg */
+    --card:            0 0% 13%;       /* #212121 — elevated surface */
+    --card-surface:    0 0% 8%;        /* #141414 — deep surface */
 
     /* Foregrounds */
-    --foreground:      39 35% 88%;     /* #e8e0d0 — warm off-white */
-    --foreground-muted: 30 8% 56%;     /* #9a9288 — secondary text */
-    --foreground-dim:  30 5% 40%;      /* #6a6258 — tertiary / labels */
+    --foreground:      39 30% 94%;     /* #f5efe3 — bright warm white */
+    --foreground-muted: 30 12% 65%;    /* #b2a898 — secondary text */
+    --foreground-dim:  30 8% 50%;      /* #8a8278 — tertiary / labels */
 
     /* Gold — the primary accent */
     --primary:         47 67% 52%;     /* #d4af37 — gallery gold */
@@ -32,17 +32,17 @@
     /* Semantic */
     --destructive:     0 62% 50%;
     --destructive-foreground: 0 0% 98%;
-    --input:           0 0% 4%;
+    --input:           0 0% 13%;
     --ring:            47 67% 52%;
     --radius:          0px;            /* Musée uses sharp corners throughout */
 
     /* Sidebar (mirrors main) */
-    --sidebar-background: 0 0% 2%;
-    --sidebar-foreground: 39 35% 88%;
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 39 30% 94%;
     --sidebar-primary: 47 67% 52%;
     --sidebar-primary-foreground: 0 0% 2%;
-    --sidebar-accent:  0 0% 4%;
-    --sidebar-accent-foreground: 39 35% 88%;
+    --sidebar-accent:  0 0% 13%;
+    --sidebar-accent-foreground: 39 30% 94%;
     --sidebar-border:  47 20% 18%;
     --sidebar-ring:    47 67% 52%;
 

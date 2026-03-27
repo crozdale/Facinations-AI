@@ -328,7 +328,7 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#060606",
+        background: "#181818",
         cursor: scale > 1 ? "grab" : "default",
         userSelect: "none",
       }}
@@ -436,7 +436,7 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }) {
           position: "absolute",
           top: "0.7rem",
           right: "0.8rem",
-          color: "#6a6258",
+          color: "#8a8278",
           fontFamily: "'Cinzel',serif",
           fontSize: "0.6rem",
           letterSpacing: "0.1em",
@@ -598,7 +598,7 @@ function AiPanel({ filename, allImages, onJump }) {
         width: "320px",
         minWidth: "280px",
         flexShrink: 0,
-        background: "#0c0c0c",
+        background: "#242424",
         borderLeft: "1px solid rgba(212,175,55,0.12)",
         display: "flex",
         flexDirection: "column",
@@ -630,7 +630,7 @@ function AiPanel({ filename, allImages, onJump }) {
         <div
           style={{
             fontSize: "0.58rem",
-            color: "#6a6258",
+            color: "#8a8278",
             marginTop: "0.2rem",
           }}
         >
@@ -681,7 +681,7 @@ function AiPanel({ filename, allImages, onJump }) {
         {status === "loading" && (
           <div
             style={{
-              color: "#6a6258",
+              color: "#8a8278",
               fontSize: "0.8rem",
               fontStyle: "italic",
             }}
@@ -814,7 +814,7 @@ function AiPanel({ filename, allImages, onJump }) {
         {chatBusy && (
           <div
             style={{
-              color: "#2a2a2a",
+              color: "#484848",
               fontSize: "0.72rem",
               fontStyle: "italic",
             }}
@@ -1049,9 +1049,9 @@ export default function Gallery() {
   return (
     <section
       style={{
-        color: "#e8e0d0",
+        color: "#f2ece0",
         minHeight: "100vh",
-        background: "#0a0a0a",
+        background: "#202020",
       }}
     >
       <style>{css}</style>
@@ -1065,7 +1065,7 @@ export default function Gallery() {
         <h1
           style={{
             fontFamily: "'Cinzel',serif",
-            color: "#e8e0d0",
+            color: "#f2ece0",
             fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
             fontWeight: 400,
             letterSpacing: "0.15em",
@@ -1077,7 +1077,7 @@ export default function Gallery() {
         </h1>
         <p
           style={{
-            color: "#9a9288",
+            color: "#b8b0a4",
             fontFamily: "'Cormorant Garamond',serif",
             fontStyle: "italic",
             fontSize: "1.05rem",
@@ -1128,7 +1128,7 @@ export default function Gallery() {
         <span
           style={{
             marginLeft: "auto",
-            color: "#6a6258",
+            color: "#8a8278",
             fontFamily: "'Cinzel',serif",
             fontSize: "0.65rem",
             letterSpacing: "0.1em",

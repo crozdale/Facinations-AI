@@ -32,7 +32,7 @@ export default function BlogazineRedirect() {
         <p
           style={{
             fontSize: "0.9rem",
-            color: "#9a9288",
+            color: "#b8b0a4",
             marginBottom: "1rem",
           }}
         >

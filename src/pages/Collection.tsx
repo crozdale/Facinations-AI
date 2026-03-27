@@ -44,7 +44,7 @@ export default function Collection() {
   return (
     <main
       style={{
-        background: "#080808",
+        background: "#1c1c1c",
         minHeight: "100vh",
         color: "#e6dfd4",
         fontFamily: "'Cormorant Garamond', Georgia, serif",
@@ -84,7 +84,7 @@ export default function Collection() {
           <p
             style={{
               fontSize: "0.95rem",
-              color: "#9a9288",
+              color: "#b8b0a4",
               maxWidth: "34rem",
               lineHeight: 1.7,
             }}
@@ -121,7 +121,7 @@ export default function Collection() {
                 key={idx}
                 style={{
                   fontSize: "0.8rem",
-                  color: "#9a9288",
+                  color: "#b8b0a4",
                   background:
                     "radial-gradient(circle at top left, rgba(212,175,55,0.12), rgba(8,8,8,1))",
                   border: "1px solid rgba(212,175,55,0.18)",
@@ -199,7 +199,7 @@ export default function Collection() {
                 key={work.id}
                 style={{
                   background:
-                    "radial-gradient(circle at top, rgba(212,175,55,0.12), #050505)",
+                    "radial-gradient(circle at top, rgba(212,175,55,0.12), #141414)",
                   border: "1px solid rgba(212,175,55,0.22)",
                   borderRadius: "18px",
                   overflow: "hidden",
@@ -361,7 +361,7 @@ export default function Collection() {
                         padding: "0.45rem 0.6rem",
                         borderRadius: "999px",
                         border: "1px solid rgba(212,175,55,0.25)",
-                        color: "#9a9288",
+                        color: "#b8b0a4",
                         textTransform: "uppercase",
                         letterSpacing: "0.16em",
                         fontFamily: "'Cinzel', serif",

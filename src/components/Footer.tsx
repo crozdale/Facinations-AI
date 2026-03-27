@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "#060606",
+        background: "#181818",
         borderTop: "1px solid rgba(212,175,55,0.1)",
         padding: "2.5rem 2rem",
         display: "flex",
@@ -41,7 +41,7 @@ export default function Footer() {
             fontFamily: "'Cinzel', serif",
             fontSize: "0.5rem",
             letterSpacing: "0.2em",
-            color: "#6a6258",
+            color: "#8a8278",
             textTransform: "uppercase",
           }}
         >
@@ -71,7 +71,7 @@ export default function Footer() {
               fontSize: "0.52rem",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#6a6258",
+              color: "#8a8278",
               textDecoration: "none",
               padding: "0.3rem 0.6rem",
               border: "1px solid transparent",
@@ -82,7 +82,7 @@ export default function Footer() {
               e.currentTarget.style.borderColor = "rgba(212,175,55,0.2)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = "#6a6258";
+              e.currentTarget.style.color = "#8a8278";
               e.currentTarget.style.borderColor = "transparent";
             }}
           >
@@ -96,7 +96,7 @@ export default function Footer() {
           fontFamily: "'Cinzel', serif",
           fontSize: "0.48rem",
           letterSpacing: "0.18em",
-          color: "#4a4238",
+          color: "#6a6258",
           textTransform: "uppercase",
         }}
       >

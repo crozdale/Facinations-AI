@@ -119,14 +119,14 @@ const Swap: React.FC = () => {
   };
 
   return (
-    <main style={{ background: "#080808", minHeight: "100vh" }}>
+    <main style={{ background: "#1c1c1c", minHeight: "100vh" }}>
       {/* Page Hero */}
       <header style={{ textAlign: "center", padding: "4rem 2rem 3rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
         <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#d4af37", marginBottom: "1rem", position: "relative" }}>
           Facinations Protocol
         </p>
-        <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 400, color: "#e8e0d0", letterSpacing: "0.1em", margin: 0, position: "relative" }}>
+        <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 400, color: "#f2ece0", letterSpacing: "0.1em", margin: 0, position: "relative" }}>
           {t("swap.title")}
         </h1>
         <div style={{ width: 60, height: 1, background: "linear-gradient(to right, transparent, #d4af37, transparent)", margin: "1.5rem auto 0" }} />
@@ -149,7 +149,7 @@ const Swap: React.FC = () => {
       )}
 
       <div style={{ padding: "2rem" }}>
-        <p style={{ marginBottom: "2rem", color: "#9a9288", fontStyle: "italic", fontSize: "0.95rem", fontFamily: "'Cormorant Garamond', serif" }}>
+        <p style={{ marginBottom: "2rem", color: "#b8b0a4", fontStyle: "italic", fontSize: "0.95rem", fontFamily: "'Cormorant Garamond', serif" }}>
           {t("swap.subtitle")}
         </p>
 
@@ -158,33 +158,33 @@ const Swap: React.FC = () => {
 
           {/* Vault context card */}
           {vault && (
-            <div style={{ flex: "1 1 260px", maxWidth: 300, border: "1px solid rgba(212,175,55,0.2)", background: "#050505", padding: "1.25rem" }}>
-              <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a4238", margin: "0 0 0.4rem" }}>
+            <div style={{ flex: "1 1 260px", maxWidth: 300, border: "1px solid rgba(212,175,55,0.2)", background: "#141414", padding: "1.25rem" }}>
+              <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6a6258", margin: "0 0 0.4rem" }}>
                 {t("swap.vault_context")}
               </p>
               <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.95rem", color: "#d4af37", letterSpacing: "0.08em", margin: "0 0 0.5rem" }}>
                 {vault.name}
               </p>
               {vault.description && (
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.85rem", color: "#6a6258", fontStyle: "italic", lineHeight: 1.6, margin: "0 0 1rem" }}>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.85rem", color: "#8a8278", fontStyle: "italic", lineHeight: 1.6, margin: "0 0 1rem" }}>
                   {vault.description}
                 </p>
               )}
               <div style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap" }}>
                 {vault.apy !== null && (
                   <div>
-                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.1em", color: "#6a6258", textTransform: "uppercase", margin: "0 0 0.2rem" }}>APY</p>
+                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.1em", color: "#8a8278", textTransform: "uppercase", margin: "0 0 0.2rem" }}>APY</p>
                     <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", color: "#d4af37", margin: 0 }}>{vault.apy}%</p>
                   </div>
                 )}
                 {vault.tvlUsd !== null && vault.tvlUsd > 0 && (
                   <div>
-                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.1em", color: "#6a6258", textTransform: "uppercase", margin: "0 0 0.2rem" }}>TVL</p>
+                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.1em", color: "#8a8278", textTransform: "uppercase", margin: "0 0 0.2rem" }}>TVL</p>
                     <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", color: "#ccc", margin: 0 }}>${vault.tvlUsd.toLocaleString()}</p>
                   </div>
                 )}
                 <div>
-                  <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.1em", color: "#6a6258", textTransform: "uppercase", margin: "0 0 0.2rem" }}>Risk</p>
+                  <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.1em", color: "#8a8278", textTransform: "uppercase", margin: "0 0 0.2rem" }}>Risk</p>
                   <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.75rem", color: vault.riskScore === "Low" ? "#5cb85c" : vault.riskScore === "High" ? "#e05" : "#d4af37", margin: 0 }}>
                     {vault.riskScore}
                   </p>
@@ -197,7 +197,7 @@ const Swap: React.FC = () => {
           )}
 
           {/* Swap form */}
-          <section style={{ flex: "1 1 320px", maxWidth: 480, padding: "1.5rem", border: "1px solid rgba(212,175,55,0.2)", background: "#050505" }}>
+          <section style={{ flex: "1 1 320px", maxWidth: 480, padding: "1.5rem", border: "1px solid rgba(212,175,55,0.2)", background: "#141414" }}>
 
             {/* Token In */}
             <div style={{ marginBottom: "1rem" }}>
@@ -272,7 +272,7 @@ const Swap: React.FC = () => {
               <button
                 type="button"
                 onClick={() => connect().catch(() => {})}
-                style={{ width: "100%", padding: "0.65rem", border: "none", background: "#d4af37", color: "#050505", fontFamily: "'Cinzel', serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer", marginBottom: "0.75rem" }}
+                style={{ width: "100%", padding: "0.65rem", border: "none", background: "#d4af37", color: "#141414", fontFamily: "'Cinzel', serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer", marginBottom: "0.75rem" }}
               >
                 {t("swap.btn_connect_wallet")}
               </button>
@@ -284,7 +284,7 @@ const Swap: React.FC = () => {
                 type="button"
                 onClick={handleGetQuote}
                 disabled={!canRequestQuote || loadingQuote}
-                style={{ width: "100%", padding: "0.65rem", border: "none", background: canRequestQuote ? "#d4af37" : "#333", color: canRequestQuote ? "#050505" : "#666", fontFamily: "'Cinzel', serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: canRequestQuote ? "pointer" : "not-allowed", marginBottom: "0.75rem" }}
+                style={{ width: "100%", padding: "0.65rem", border: "none", background: canRequestQuote ? "#d4af37" : "#333", color: canRequestQuote ? "#141414" : "#666", fontFamily: "'Cinzel', serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", cursor: canRequestQuote ? "pointer" : "not-allowed", marginBottom: "0.75rem" }}
               >
                 {loadingQuote ? t("swap.btn_quote_loading") : t("swap.btn_quote")}
               </button>
@@ -313,7 +313,7 @@ const Swap: React.FC = () => {
                   {t("swap.tx_confirmed")}
                 </p>
                 {txHash && (
-                  <p style={{ margin: "0.3rem 0 0", fontFamily: "monospace", fontSize: "0.7rem", color: "#4a4238", wordBreak: "break-all" }}>
+                  <p style={{ margin: "0.3rem 0 0", fontFamily: "monospace", fontSize: "0.7rem", color: "#6a6258", wordBreak: "break-all" }}>
                     {t("swap.label_tx")}: {txHash}
                   </p>
                 )}

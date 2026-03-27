@@ -43,7 +43,7 @@ const Vaults = () => {
 
   if (loading && safeVaults.length === 0) {
     return (
-      <div style={{ background: "#080808", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ background: "#1c1c1c", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ textAlign: "center" }}>
           <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(212,175,55,0.4)", animation: "pulse 1.6s ease-in-out infinite" }}>
             {t("vaults.loading")}
@@ -57,12 +57,12 @@ const Vaults = () => {
 
   if (error) {
     return (
-      <div style={{ background: "#080808", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ background: "#1c1c1c", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ textAlign: "center", padding: "2rem" }}>
           <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(212,175,55,0.5)", marginBottom: "1rem" }}>
             {t("vaults.error_heading", "Unable to Load Vaults")}
           </div>
-          <p style={{ color: "#9a9288", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1rem" }}>
+          <p style={{ color: "#b8b0a4", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1rem" }}>
             {t("vaults.error")}
           </p>
         </div>
@@ -72,7 +72,7 @@ const Vaults = () => {
 
   return (
     <WalletGate>
-    <main style={{ background: "#080808", minHeight: "100vh", fontFamily: "'Cormorant Garamond', Georgia, serif", color: "#e8e0d0" }}>
+    <main style={{ background: "#1c1c1c", minHeight: "100vh", fontFamily: "'Cormorant Garamond', Georgia, serif", color: "#f2ece0" }}>
 
       {/* Page Hero */}
       <header style={{ textAlign: "center", padding: "4rem 2rem 3rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
@@ -80,7 +80,7 @@ const Vaults = () => {
         <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#d4af37", marginBottom: "1rem", position: "relative" }}>
           {t("vaults.eyebrow", "Facinations Protocol")}
         </p>
-        <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 400, color: "#e8e0d0", letterSpacing: "0.1em", margin: 0, position: "relative" }}>
+        <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 400, color: "#f2ece0", letterSpacing: "0.1em", margin: 0, position: "relative" }}>
           {t("vaults.title")}
         </h1>
         <div style={{ width: 60, height: 1, background: "linear-gradient(to right, transparent, #d4af37, transparent)", margin: "1.5rem auto 0" }} />
@@ -126,7 +126,7 @@ const Vaults = () => {
             fontSize: "0.5rem",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: isLive ? "#5cb85c" : "#4a4238",
+            color: isLive ? "#5cb85c" : "#6a6258",
             border: `1px solid ${isLive ? "rgba(92,184,92,0.25)" : "rgba(212,175,55,0.1)"}`,
             padding: "0.15rem 0.5rem",
           }}>
@@ -142,7 +142,7 @@ const Vaults = () => {
               padding: "0.4rem 0.6rem",
               borderRadius: 4,
               border: "1px solid rgba(212,175,55,0.4)",
-              background: "#050505",
+              background: "#141414",
               color: "#eee",
               fontSize: "0.85rem",
             }}
@@ -165,7 +165,7 @@ const Vaults = () => {
                 border: "1px solid rgba(212,175,55,0.25)",
                 padding: "1.25rem",
                 borderRadius: "6px",
-                background: "#0a0a0a",
+                background: "#202020",
                 color: "#eee",
                 display: "flex",
                 flexDirection: "column",
@@ -178,12 +178,12 @@ const Vaults = () => {
                 </h2>
               </Link>
 
-              <p style={{ margin: 0, fontSize: "0.75rem", color: "#6a6258", fontFamily: "monospace" }}>
+              <p style={{ margin: 0, fontSize: "0.75rem", color: "#8a8278", fontFamily: "monospace" }}>
                 {v.vaultId}
               </p>
 
               {v.description && (
-                <p style={{ margin: 0, fontSize: "0.85rem", color: "#9a9288", lineHeight: 1.6, fontStyle: "italic" }}>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "#b8b0a4", lineHeight: 1.6, fontStyle: "italic" }}>
                   {v.description}
                 </p>
               )}
@@ -214,7 +214,7 @@ const Vaults = () => {
               </div>
 
               <div style={{ display: "flex", gap: "1rem", marginTop: "0.25rem", flexWrap: "wrap" }}>
-                <span style={{ fontSize: "0.72rem", color: "#6a6258", fontFamily: "'Cinzel', serif", letterSpacing: "0.1em" }}>
+                <span style={{ fontSize: "0.72rem", color: "#8a8278", fontFamily: "'Cinzel', serif", letterSpacing: "0.1em" }}>
                   {t("vaults.label_chain", { id: v.chainId })}
                 </span>
                 {v.premiumRequired && (
@@ -241,7 +241,7 @@ const Vaults = () => {
                 {swapsOk ? (
                   <Link
                     to={`/swap?vault=${v.vaultId}`}
-                    style={{ fontSize: "0.7rem", color: "#9a9288", border: "1px solid rgba(212,175,55,0.15)", padding: "0.35rem 0.75rem", textDecoration: "none", letterSpacing: "0.12em", fontFamily: "'Cinzel', serif", textTransform: "uppercase" }}
+                    style={{ fontSize: "0.7rem", color: "#b8b0a4", border: "1px solid rgba(212,175,55,0.15)", padding: "0.35rem 0.75rem", textDecoration: "none", letterSpacing: "0.12em", fontFamily: "'Cinzel', serif", textTransform: "uppercase" }}
                   >
                     {t("vaults.btn_swap")}
                   </Link>

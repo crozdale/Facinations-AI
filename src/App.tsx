@@ -46,7 +46,7 @@ function PageLoader() {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "60vh",
-        background: "#080808",
+        background: "#1c1c1c",
       }}
     >
       <span style={{

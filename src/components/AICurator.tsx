@@ -15,22 +15,22 @@ interface Props {
 const css = `
   .sia-btn { display:flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; border:1px solid rgba(212,175,55,0.4); background:none; color:#d4af37; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; transition:background 0.2s; }
   .sia-btn:hover { background:rgba(212,175,55,0.08); }
-  .sia-panel { position:absolute; right:0; top:calc(100% + 0.5rem); width:320px; border:1px solid rgba(212,175,55,0.2); background:#080808; box-shadow:0 8px 40px rgba(0,0,0,0.8); z-index:50; }
+  .sia-panel { position:absolute; right:0; top:calc(100% + 0.5rem); width:320px; border:1px solid rgba(212,175,55,0.2); background:#1c1c1c; box-shadow:0 8px 40px rgba(0,0,0,0.8); z-index:50; }
   .sia-panel-header { display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; border-bottom:1px solid rgba(212,175,55,0.1); }
-  .sia-panel-title { font-family:'Cinzel',serif; font-size:0.75rem; color:#f0e8d0; letter-spacing:0.12em; }
-  .sia-close { background:none; border:none; color:#6a6258; cursor:pointer; font-size:1rem; line-height:1; padding:0; }
+  .sia-panel-title { font-family:'Cinzel',serif; font-size:0.75rem; color:#f8f2e4; letter-spacing:0.12em; }
+  .sia-close { background:none; border:none; color:#8a8278; cursor:pointer; font-size:1rem; line-height:1; padding:0; }
   .sia-close:hover { color:#d4af37; }
   .sia-messages { height:220px; overflow-y:auto; padding:0.75rem 1rem; display:flex; flex-direction:column; gap:0.5rem; }
   .sia-msg { max-width:90%; padding:0.5rem 0.75rem; font-size:0.82rem; line-height:1.6; font-family:'Cormorant Garamond',serif; }
-  .sia-msg-user { align-self:flex-end; background:rgba(212,175,55,0.12); color:#e8e0d0; border:1px solid rgba(212,175,55,0.2); }
-  .sia-msg-assistant { align-self:flex-start; background:#0c0c0c; color:#9a9288; font-style:italic; border:1px solid rgba(212,175,55,0.06); }
+  .sia-msg-user { align-self:flex-end; background:rgba(212,175,55,0.12); color:#f2ece0; border:1px solid rgba(212,175,55,0.2); }
+  .sia-msg-assistant { align-self:flex-start; background:#242424; color:#b8b0a4; font-style:italic; border:1px solid rgba(212,175,55,0.06); }
   .sia-cursor { display:inline-block; width:2px; height:0.85em; background:rgba(212,175,55,0.5); margin-left:2px; vertical-align:middle; animation:sia-blink 0.7s infinite; }
   @keyframes sia-blink { 0%,100%{opacity:1} 50%{opacity:0} }
   .sia-input-row { display:flex; gap:0.5rem; padding:0.75rem 1rem; border-top:1px solid rgba(212,175,55,0.1); }
-  .sia-input { flex:1; background:#0c0c0c; border:1px solid rgba(212,175,55,0.15); color:#e8e0d0; font-family:'Cormorant Garamond',serif; font-size:0.85rem; padding:0.4rem 0.6rem; }
+  .sia-input { flex:1; background:#242424; border:1px solid rgba(212,175,55,0.15); color:#f2ece0; font-family:'Cormorant Garamond',serif; font-size:0.85rem; padding:0.4rem 0.6rem; }
   .sia-input:focus { outline:none; border-color:rgba(212,175,55,0.4); }
   .sia-input::placeholder { color:#333; }
-  .sia-send { background:#d4af37; border:none; color:#050505; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; padding:0 0.75rem; cursor:pointer; }
+  .sia-send { background:#d4af37; border:none; color:#141414; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; padding:0 0.75rem; cursor:pointer; }
   .sia-send:disabled { background:#333; color:#666; cursor:not-allowed; }
 `;
 

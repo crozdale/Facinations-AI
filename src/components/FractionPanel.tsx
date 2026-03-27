@@ -16,40 +16,40 @@ const ERC1155_ABI = [
 
 // ── CSS ────────────────────────────────────────────────────────────────────────
 const css = `
-  .fp-root { border: 1px solid rgba(212,175,55,0.2); background: #050505; margin-top: 2rem; }
+  .fp-root { border: 1px solid rgba(212,175,55,0.2); background: #141414; margin-top: 2rem; }
   .fp-header { padding: 1.5rem 1.75rem 1rem; border-bottom: 1px solid rgba(212,175,55,0.08); }
   .fp-eyebrow { font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.4em; text-transform:uppercase; color:#d4af37; margin:0 0 0.4rem; }
-  .fp-title { font-family:'Cinzel',serif; font-size:1rem; font-weight:400; color:#f0e8d0; letter-spacing:0.06em; margin:0; }
+  .fp-title { font-family:'Cinzel',serif; font-size:1rem; font-weight:400; color:#f8f2e4; letter-spacing:0.06em; margin:0; }
   .fp-body { padding:1.5rem 1.75rem; display:flex; flex-direction:column; gap:1.5rem; }
   .fp-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:1rem; }
-  .fp-stat-label { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:#4a4238; margin:0 0 0.25rem; }
-  .fp-stat-value { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:#e8e0d0; margin:0; }
+  .fp-stat-label { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:#6a6258; margin:0 0 0.25rem; }
+  .fp-stat-value { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:#f2ece0; margin:0; }
   .fp-stat-value.gold { color:#d4af37; }
   .fp-tabs { display:flex; gap:0; border-bottom:1px solid rgba(212,175,55,0.08); }
   .fp-tab { padding:0.6rem 1.2rem; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; background:none; border:none; border-bottom:2px solid transparent; color:#3a3228; cursor:pointer; transition:color .2s; }
-  .fp-tab:hover { color:#9a9288; }
+  .fp-tab:hover { color:#b8b0a4; }
   .fp-tab.active { color:#d4af37; border-bottom-color:#d4af37; }
   .fp-form { display:flex; flex-direction:column; gap:0.75rem; }
   .fp-row { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
   @media(max-width:540px) { .fp-row { grid-template-columns:1fr; } }
   .fp-label { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(212,175,55,0.4); display:block; margin-bottom:0.25rem; }
-  .fp-input { width:100%; box-sizing:border-box; padding:0.5rem 0.7rem; background:#060606; border:1px solid rgba(212,175,55,0.12); color:#e8e0d0; font-family:'Cormorant Garamond',serif; font-size:0.9rem; }
+  .fp-input { width:100%; box-sizing:border-box; padding:0.5rem 0.7rem; background:#181818; border:1px solid rgba(212,175,55,0.12); color:#f2ece0; font-family:'Cormorant Garamond',serif; font-size:0.9rem; }
   .fp-input:focus { outline:none; border-color:rgba(212,175,55,0.35); }
   .fp-input::placeholder { color:#222; }
-  .fp-textarea { width:100%; box-sizing:border-box; padding:0.5rem 0.7rem; background:#060606; border:1px solid rgba(212,175,55,0.12); color:#e8e0d0; font-family:'Cormorant Garamond',serif; font-size:0.9rem; resize:vertical; }
+  .fp-textarea { width:100%; box-sizing:border-box; padding:0.5rem 0.7rem; background:#181818; border:1px solid rgba(212,175,55,0.12); color:#f2ece0; font-family:'Cormorant Garamond',serif; font-size:0.9rem; resize:vertical; }
   .fp-textarea:focus { outline:none; border-color:rgba(212,175,55,0.35); }
   .fp-textarea::placeholder { color:#222; }
-  .fp-btn { padding:0.6rem 1.75rem; background:#d4af37; border:none; color:#050505; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; transition:background .2s; align-self:flex-start; }
+  .fp-btn { padding:0.6rem 1.75rem; background:#d4af37; border:none; color:#141414; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; transition:background .2s; align-self:flex-start; }
   .fp-btn:hover { background:#c09f27; }
   .fp-btn:disabled { background:#222; color:#444; cursor:not-allowed; }
-  .fp-btn-ghost { padding:0.6rem 1.5rem; background:transparent; border:1px solid rgba(212,175,55,0.2); color:#6a6258; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; }
+  .fp-btn-ghost { padding:0.6rem 1.5rem; background:transparent; border:1px solid rgba(212,175,55,0.2); color:#8a8278; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; }
   .fp-notice { padding:0.75rem 1rem; font-family:'Cormorant Garamond',serif; font-size:0.85rem; line-height:1.7; font-style:italic; }
-  .fp-notice.amber { border-left:2px solid rgba(212,175,55,0.4); color:#9a9288; background:rgba(212,175,55,0.03); }
+  .fp-notice.amber { border-left:2px solid rgba(212,175,55,0.4); color:#b8b0a4; background:rgba(212,175,55,0.03); }
   .fp-notice.green { border-left:2px solid rgba(92,184,92,0.4); color:#5cb85c; background:rgba(92,184,92,0.03); }
   .fp-notice.red { border-left:2px solid rgba(220,80,80,0.4); color:#e07070; background:rgba(220,80,80,0.03); }
   .fp-connect-prompt { text-align:center; padding:2rem 1rem; }
   .fp-balance-badge { display:inline-flex; align-items:center; gap:0.5rem; padding:0.35rem 0.85rem; border:1px solid rgba(212,175,55,0.2); background:rgba(212,175,55,0.04); }
-  .fp-balance-label { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:#4a4238; }
+  .fp-balance-label { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:#6a6258; }
   .fp-balance-value { font-family:'Cormorant Garamond',serif; font-size:1rem; color:#d4af37; }
 `;
 
@@ -206,7 +206,7 @@ export default function FractionPanel({ vault }: Props) {
         {/* Wallet balance or connect prompt */}
         {!account ? (
           <div className="fp-connect-prompt">
-            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#6a6258", fontStyle: "italic", margin: "0 0 1rem" }}>
+            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#8a8278", fontStyle: "italic", margin: "0 0 1rem" }}>
               Connect your wallet to view your fraction balance.
             </p>
             <button className="fp-btn" onClick={connect}>Connect Wallet</button>
@@ -289,7 +289,7 @@ export default function FractionPanel({ vault }: Props) {
                       style={{ maxWidth: 160 }}
                     />
                     {vault.fractionPriceXer != null && Number(acqForm.quantity) > 0 && (
-                      <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.78rem", color: "#6a6258", margin: "0.35rem 0 0", fontStyle: "italic" }}>
+                      <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.78rem", color: "#8a8278", margin: "0.35rem 0 0", fontStyle: "italic" }}>
                         Indicative total: {(Number(acqForm.quantity) * vault.fractionPriceXer).toLocaleString()} XER
                       </p>
                     )}
@@ -365,7 +365,7 @@ export default function FractionPanel({ vault }: Props) {
                       onChange={(e) => setXfrForm(f => ({ ...f, quantity: e.target.value }))}
                       style={{ maxWidth: 160 }}
                     />
-                    <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.78rem", color: "#6a6258", margin: "0.35rem 0 0", fontStyle: "italic" }}>
+                    <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.78rem", color: "#8a8278", margin: "0.35rem 0 0", fontStyle: "italic" }}>
                       Max: {balance?.toString()} fractions
                     </p>
                   </div>

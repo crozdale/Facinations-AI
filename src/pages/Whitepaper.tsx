@@ -7,7 +7,7 @@ export default function Whitepaper() {
   return (
     <main
       style={{
-        background: "#080808",
+        background: "#1c1c1c",
         minHeight: "100vh",
         color: "#e6dfd4",
         fontFamily: "'Cormorant Garamond', Georgia, serif",
@@ -45,7 +45,7 @@ export default function Whitepaper() {
           <p
             style={{
               fontSize: "0.9rem",
-              color: "#9a9288",
+              color: "#b8b0a4",
               maxWidth: "34rem",
               lineHeight: 1.7,
             }}
@@ -94,7 +94,7 @@ export default function Whitepaper() {
               padding: "0.75rem 1.6rem",
               borderRadius: "999px",
               border: "1px solid rgba(212,175,55,0.3)",
-              color: "#9a9288",
+              color: "#b8b0a4",
               fontFamily: "'Cinzel', serif",
               fontSize: "0.7rem",
               letterSpacing: "0.22em",

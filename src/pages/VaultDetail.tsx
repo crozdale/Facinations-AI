@@ -131,7 +131,7 @@ const VaultDetail: React.FC = () => {
           padding: "1.5rem",
           borderRadius: 8,
           border: "1px solid rgba(212,175,55,0.25)",
-          background: "#050505",
+          background: "#141414",
         }}
       >
         <h2
@@ -201,7 +201,7 @@ const VaultDetail: React.FC = () => {
           padding: "1.5rem",
           borderRadius: 8,
           border: "1px solid rgba(212,175,55,0.25)",
-          background: "#050505",
+          background: "#141414",
         }}
       >
         <h2

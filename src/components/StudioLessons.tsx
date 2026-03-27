@@ -99,43 +99,43 @@ interface LessonState {
 const css = `
   .sl-root { max-width:860px; margin:0 auto; padding:0 1rem; }
   .sl-section-title { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:#d4af37; margin:0 0 0.5rem; }
-  .sl-heading { font-family:'Cinzel',serif; font-size:1.1rem; font-weight:400; color:#f0e8d0; letter-spacing:0.08em; margin:0 0 2rem; }
-  .sl-card { border:1px solid rgba(212,175,55,0.15); background:#0a0a0a; margin-bottom:1px; transition:border-color 0.2s; }
+  .sl-heading { font-family:'Cinzel',serif; font-size:1.1rem; font-weight:400; color:#f8f2e4; letter-spacing:0.08em; margin:0 0 2rem; }
+  .sl-card { border:1px solid rgba(212,175,55,0.15); background:#202020; margin-bottom:1px; transition:border-color 0.2s; }
   .sl-card.completed { border-color:rgba(92,184,92,0.25); }
   .sl-card-header { display:flex; align-items:center; gap:1rem; padding:1.25rem 1.5rem; cursor:pointer; }
   .sl-card-header:hover .sl-card-title { color:#d4af37; }
-  .sl-module-num { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.2em; color:#4a4238; min-width:60px; }
+  .sl-module-num { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.2em; color:#6a6258; min-width:60px; }
   .sl-card-meta { flex:1; }
   .sl-card-title { font-family:'Cinzel',serif; font-size:0.9rem; color:#c8c0b0; letter-spacing:0.08em; margin:0 0 0.25rem; transition:color 0.2s; }
-  .sl-card-dur { font-size:0.72rem; color:#4a4238; font-style:italic; }
+  .sl-card-dur { font-size:0.72rem; color:#6a6258; font-style:italic; }
   .sl-card-status { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; }
   .sl-card-status.done { color:#5cb85c; }
   .sl-card-status.todo { color:#333; }
-  .sl-chevron { color:#4a4238; font-size:0.8rem; transition:transform 0.2s; }
+  .sl-chevron { color:#6a6258; font-size:0.8rem; transition:transform 0.2s; }
   .sl-chevron.open { transform:rotate(180deg); }
   .sl-card-body { padding:0 1.5rem 1.5rem; border-top:1px solid rgba(212,175,55,0.08); }
   .sl-intro { font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:#8a8278; line-height:1.8; margin:1rem 0; font-style:italic; }
   .sl-concepts { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.25rem; }
   .sl-concept { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(212,175,55,0.7); border:1px solid rgba(212,175,55,0.2); padding:0.2rem 0.6rem; }
-  .sl-begin-btn { padding:0.55rem 1.5rem; background:#d4af37; border:none; color:#050505; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; }
+  .sl-begin-btn { padding:0.55rem 1.5rem; background:#d4af37; border:none; color:#141414; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; }
   .sl-begin-btn:hover { background:#c09f27; }
   .sl-done-btn { padding:0.55rem 1.5rem; background:transparent; border:1px solid rgba(92,184,92,0.3); color:#5cb85c; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; margin-left:0.75rem; }
   .sl-done-btn:hover { background:rgba(92,184,92,0.06); }
-  .sl-tutor { margin-top:1.25rem; border:1px solid rgba(212,175,55,0.12); background:#060606; }
+  .sl-tutor { margin-top:1.25rem; border:1px solid rgba(212,175,55,0.12); background:#181818; }
   .sl-tutor-header { display:flex; align-items:center; justify-content:space-between; padding:0.6rem 1rem; border-bottom:1px solid rgba(212,175,55,0.08); }
-  .sl-tutor-label { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; color:#6a6258; }
+  .sl-tutor-label { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; color:#8a8278; }
   .sl-messages { height:240px; overflow-y:auto; padding:0.75rem 1rem; display:flex; flex-direction:column; gap:0.5rem; }
   .sl-msg { max-width:88%; padding:0.5rem 0.75rem; font-family:'Cormorant Garamond',serif; font-size:0.88rem; line-height:1.65; }
-  .sl-msg-user { align-self:flex-end; background:rgba(212,175,55,0.1); color:#e8e0d0; border:1px solid rgba(212,175,55,0.18); }
-  .sl-msg-ai { align-self:flex-start; background:#0c0c0c; color:#9a9288; font-style:italic; border:1px solid rgba(212,175,55,0.06); }
+  .sl-msg-user { align-self:flex-end; background:rgba(212,175,55,0.1); color:#f2ece0; border:1px solid rgba(212,175,55,0.18); }
+  .sl-msg-ai { align-self:flex-start; background:#242424; color:#b8b0a4; font-style:italic; border:1px solid rgba(212,175,55,0.06); }
   .sl-typing { font-size:0.78rem; color:rgba(212,175,55,0.35); font-style:italic; font-family:'Cormorant Garamond',serif; padding:0.25rem 0; align-self:flex-start; }
   .sl-cursor { display:inline-block; width:2px; height:0.85em; background:rgba(212,175,55,0.4); margin-left:2px; vertical-align:middle; animation:sl-blink 0.7s infinite; }
   @keyframes sl-blink { 0%,100%{opacity:1} 50%{opacity:0} }
   .sl-input-row { display:flex; gap:0; border-top:1px solid rgba(212,175,55,0.08); }
-  .sl-input { flex:1; background:#060606; border:none; border-right:1px solid rgba(212,175,55,0.1); color:#e8e0d0; font-family:'Cormorant Garamond',serif; font-size:0.88rem; padding:0.6rem 0.85rem; }
+  .sl-input { flex:1; background:#181818; border:none; border-right:1px solid rgba(212,175,55,0.1); color:#f2ece0; font-family:'Cormorant Garamond',serif; font-size:0.88rem; padding:0.6rem 0.85rem; }
   .sl-input:focus { outline:none; }
-  .sl-input::placeholder { color:#2a2a2a; }
-  .sl-send { background:#d4af37; border:none; color:#050505; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; padding:0 1rem; cursor:pointer; white-space:nowrap; }
+  .sl-input::placeholder { color:#484848; }
+  .sl-send { background:#d4af37; border:none; color:#141414; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; padding:0 1rem; cursor:pointer; white-space:nowrap; }
   .sl-send:disabled { background:#222; color:#444; cursor:not-allowed; }
 `;
 
@@ -263,7 +263,7 @@ export default function StudioLessons() {
           <p className="sl-section-title">{t("studioLessons.section_title")}</p>
           <h2 className="sl-heading">{t("studioLessons.heading")}</h2>
         </div>
-        <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.15em", color: completed === LESSONS.length ? "#5cb85c" : "#4a4238" }}>
+        <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.15em", color: completed === LESSONS.length ? "#5cb85c" : "#6a6258" }}>
           {t("studioLessons.progress", { completed, total: LESSONS.length })}
         </span>
       </div>

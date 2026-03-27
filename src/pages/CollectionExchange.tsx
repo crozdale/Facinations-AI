@@ -5,7 +5,7 @@ export default function CollectionExchange() {
   return (
     <main
       style={{
-        background: "#080808",
+        background: "#1c1c1c",
         minHeight: "100vh",
         color: "#e6dfd4",
         fontFamily: "'Cormorant Garamond', Georgia, serif",
@@ -44,7 +44,7 @@ export default function CollectionExchange() {
           <p
             style={{
               fontSize: "0.9rem",
-              color: "#9a9288",
+              color: "#b8b0a4",
               maxWidth: "32rem",
               lineHeight: 1.7,
             }}
@@ -65,7 +65,7 @@ export default function CollectionExchange() {
           <article
             style={{
               background:
-                "radial-gradient(circle at top, rgba(212,175,55,0.15), #050505)",
+                "radial-gradient(circle at top, rgba(212,175,55,0.15), #141414)",
               border: "1px solid rgba(212,175,55,0.28)",
               borderRadius: "18px",
               padding: "1.1rem 1.2rem",

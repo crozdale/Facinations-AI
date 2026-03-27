@@ -12,15 +12,15 @@
 
 export const tk = {
   // ── Backgrounds ──────────────────────────────────────────────────
-  bg:          "#080808",
-  card:        "#0a0a0a",
-  cardSurface: "#050505",
+  bg:          "#1c1c1c",
+  card:        "#202020",
+  cardSurface: "#141414",
 
   // ── Foregrounds ──────────────────────────────────────────────────
-  fg:          "#e8e0d0",
-  fgMuted:     "#9a9288",
-  fgDim:       "#6a6258",
-  fgInverse:   "#050505",
+  fg:          "#f2ece0",
+  fgMuted:     "#b8b0a4",
+  fgDim:       "#8a8278",
+  fgInverse:   "#141414",
 
   // ── Gold (primary accent) ─────────────────────────────────────────
   gold:        "#d4af37",

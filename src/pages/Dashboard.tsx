@@ -146,37 +146,37 @@ function vaultName(vaultId: string) {
 // ── Styles ────────────────────────────────────────────────────────────────────
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap');
-  .dash-root { background:#080808; min-height:100vh; font-family:'Cormorant Garamond',serif; color:#e8e0d0; }
+  .dash-root { background:#1c1c1c; min-height:100vh; font-family:'Cormorant Garamond',serif; color:#f2ece0; }
   .dash-inner { max-width:1040px; margin:0 auto; padding:2.5rem 1.5rem 6rem; }
   .dash-eyebrow { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.4em; text-transform:uppercase; color:#d4af37; margin-bottom:0.4rem; }
-  .dash-heading { font-family:'Cinzel',serif; font-size:1.6rem; font-weight:400; color:#f0e8d0; letter-spacing:0.08em; margin:0 0 0.25rem; }
-  .dash-addr { font-family:monospace; font-size:0.8rem; color:#6a6258; }
+  .dash-heading { font-family:'Cinzel',serif; font-size:1.6rem; font-weight:400; color:#f8f2e4; letter-spacing:0.08em; margin:0 0 0.25rem; }
+  .dash-addr { font-family:monospace; font-size:0.8rem; color:#8a8278; }
   .dash-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; margin:2rem 0; }
-  .dash-card { border:1px solid rgba(212,175,55,0.15); background:#0a0a0a; padding:1.25rem 1.5rem; }
-  .dash-card-label { font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:#6a6258; margin:0 0 0.4rem; }
+  .dash-card { border:1px solid rgba(212,175,55,0.15); background:#202020; padding:1.25rem 1.5rem; }
+  .dash-card-label { font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:#8a8278; margin:0 0 0.4rem; }
   .dash-card-value { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:#d4af37; margin:0; line-height:1.1; }
-  .dash-card-sub { font-size:0.72rem; color:#6a6258; margin:0.2rem 0 0; font-style:italic; }
+  .dash-card-sub { font-size:0.72rem; color:#8a8278; margin:0.2rem 0 0; font-style:italic; }
   .dash-section { margin-top:2.5rem; }
   .dash-section-title { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:#d4af37; margin:0 0 1rem; }
   .dash-table { width:100%; border-collapse:collapse; }
-  .dash-th { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; color:#6a6258; padding:0.5rem 0.75rem; text-align:left; border-bottom:1px solid rgba(212,175,55,0.1); }
+  .dash-th { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; color:#8a8278; padding:0.5rem 0.75rem; text-align:left; border-bottom:1px solid rgba(212,175,55,0.1); }
   .dash-td { font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:#ccc; padding:0.55rem 0.75rem; border-bottom:1px solid rgba(255,255,255,0.03); }
   .dash-td-gold { color:#d4af37; }
-  .dash-td-mono { font-family:monospace; font-size:0.75rem; color:#6a6258; }
-  .dash-empty { font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:#6a6258; font-style:italic; padding:1.5rem 0; text-align:center; border:1px solid rgba(212,175,55,0.06); }
+  .dash-td-mono { font-family:monospace; font-size:0.75rem; color:#8a8278; }
+  .dash-empty { font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:#8a8278; font-style:italic; padding:1.5rem 0; text-align:center; border:1px solid rgba(212,175,55,0.06); }
   .dash-status-row { display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem; }
-  .dash-status-card { flex:1; min-width:220px; border:1px solid rgba(212,175,55,0.12); background:#0a0a0a; padding:1.25rem; }
+  .dash-status-card { flex:1; min-width:220px; border:1px solid rgba(212,175,55,0.12); background:#202020; padding:1.25rem; }
   .dash-badge { display:inline-block; font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.2rem 0.6rem; border:1px solid; }
   .dash-badge-green { color:#5cb85c; border-color:rgba(92,184,92,0.3); }
   .dash-badge-amber { color:#d4af37; border-color:rgba(212,175,55,0.3); }
   .dash-badge-red   { color:#e05; border-color:rgba(220,0,80,0.3); }
-  .dash-badge-grey  { color:#4a4238; border-color:#222; }
-  .dash-cta { display:inline-block; margin-top:0.75rem; padding:0.45rem 1.25rem; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; background:#d4af37; color:#050505; border:none; cursor:pointer; }
-  .dash-cta-ghost { display:inline-block; margin-top:0.75rem; padding:0.45rem 1.25rem; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; background:transparent; color:#6a6258; border:1px solid rgba(212,175,55,0.2); cursor:pointer; }
+  .dash-badge-grey  { color:#6a6258; border-color:#222; }
+  .dash-cta { display:inline-block; margin-top:0.75rem; padding:0.45rem 1.25rem; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; background:#d4af37; color:#141414; border:none; cursor:pointer; }
+  .dash-cta-ghost { display:inline-block; margin-top:0.75rem; padding:0.45rem 1.25rem; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; background:transparent; color:#8a8278; border:1px solid rgba(212,175,55,0.2); cursor:pointer; }
   /* Gate */
   .dash-gate { display:flex; align-items:center; justify-content:center; min-height:60vh; }
   .dash-gate-inner { text-align:center; max-width:400px; }
-  .dash-connect-btn { padding:0.75rem 2.5rem; background:#d4af37; border:none; color:#050505; font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; margin-top:1.5rem; }
+  .dash-connect-btn { padding:0.75rem 2.5rem; background:#d4af37; border:none; color:#141414; font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; margin-top:1.5rem; }
   .dash-connect-btn:disabled { background:#333; color:#555; cursor:not-allowed; }
 `;
 
@@ -187,17 +187,17 @@ function ConnectGate({ onConnect, connecting }: { onConnect: () => void; connect
     <div className="dash-gate">
       <div className="dash-gate-inner">
         <div style={{ fontSize: "2rem", marginBottom: "1rem", color: "rgba(212,175,55,0.3)" }}>◈</div>
-        <h1 style={{ fontFamily: "'Cinzel',serif", fontSize: "1.1rem", fontWeight: 400, color: "#f0e8d0", letterSpacing: "0.08em", margin: "0 0 0.5rem" }}>
+        <h1 style={{ fontFamily: "'Cinzel',serif", fontSize: "1.1rem", fontWeight: 400, color: "#f8f2e4", letterSpacing: "0.08em", margin: "0 0 0.5rem" }}>
           {t("dashboard.connect_heading")}
         </h1>
-        <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#6a6258", lineHeight: 1.7, fontStyle: "italic", margin: 0 }}>
+        <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#8a8278", lineHeight: 1.7, fontStyle: "italic", margin: 0 }}>
           {t("dashboard.connect_body")}
         </p>
         <button className="dash-connect-btn" onClick={onConnect} disabled={connecting}>
           {connecting ? t("wallet.connecting") : t("wallet.connect")}
         </button>
         {!window.ethereum && (
-          <p style={{ marginTop: "1rem", fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.1em", color: "#6a6258" }}>
+          <p style={{ marginTop: "1rem", fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.1em", color: "#8a8278" }}>
             {t("wallet.metamask_required")}
           </p>
         )}
@@ -252,7 +252,7 @@ export default function Dashboard() {
         <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#d4af37", marginBottom: "1rem", position: "relative" }}>
           Facinations Protocol
         </p>
-        <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 400, color: "#e8e0d0", letterSpacing: "0.1em", margin: 0, position: "relative" }}>
+        <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 400, color: "#f2ece0", letterSpacing: "0.1em", margin: 0, position: "relative" }}>
           {t("dashboard.title")}
         </h1>
         <div style={{ width: 60, height: 1, background: "linear-gradient(to right, transparent, #d4af37, transparent)", margin: "1.5rem auto 0" }} />
@@ -298,7 +298,7 @@ export default function Dashboard() {
 
           {/* Subgraph unavailable notice */}
           {subgraphUnavailable && (
-            <div style={{ marginBottom: "1.5rem", padding: "0.65rem 1rem", border: "1px solid rgba(212,175,55,0.12)", background: "rgba(212,175,55,0.03)", fontSize: "0.78rem", color: "#4a4238", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}>
+            <div style={{ marginBottom: "1.5rem", padding: "0.65rem 1rem", border: "1px solid rgba(212,175,55,0.12)", background: "rgba(212,175,55,0.03)", fontSize: "0.78rem", color: "#6a6258", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}>
               On-chain data is temporarily unavailable — the subgraph may be syncing. Wallet balances and status are unaffected.
             </div>
           )}
@@ -307,7 +307,7 @@ export default function Dashboard() {
           <div className="dash-section">
             <p className="dash-section-title">{t("dashboard.section_positions")}</p>
             {posLoading ? (
-              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.85rem", color: "#2a2a2a", fontStyle: "italic" }}>{t("dashboard.positions_loading")}</p>
+              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.85rem", color: "#484848", fontStyle: "italic" }}>{t("dashboard.positions_loading")}</p>
             ) : positions.length === 0 ? (
               <div className="dash-empty">{t("dashboard.positions_empty")}</div>
             ) : (
@@ -344,7 +344,7 @@ export default function Dashboard() {
           <div className="dash-section">
             <p className="dash-section-title">{t("dashboard.section_trades")}</p>
             {tradeLoading ? (
-              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.85rem", color: "#2a2a2a", fontStyle: "italic" }}>{t("dashboard.trades_loading")}</p>
+              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.85rem", color: "#484848", fontStyle: "italic" }}>{t("dashboard.trades_loading")}</p>
             ) : trades.length === 0 ? (
               <div className="dash-empty">{t("dashboard.trades_empty")}</div>
             ) : (
@@ -389,7 +389,7 @@ export default function Dashboard() {
                 trades.length > 0 ? `${trades.length} trade${trades.length !== 1 ? "s" : ""} on record` : "",
                 tier !== "none" ? `Subscription tier: ${tier}` : "No active subscription",
               ].filter(Boolean).join(". ")} />
-              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#4a4238", fontStyle: "italic", margin: 0, alignSelf: "center" }}>
+              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#6a6258", fontStyle: "italic", margin: 0, alignSelf: "center" }}>
                 Ask SIA about your portfolio, strategy, or fractional ownership.
               </p>
             </div>
@@ -402,20 +402,20 @@ export default function Dashboard() {
 
               {/* KYC */}
               <div className="dash-status-card">
-                <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a4238", margin: "0 0 0.6rem" }}>
+                <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6a6258", margin: "0 0 0.6rem" }}>
                   {t("dashboard.kyc_label")}
                 </p>
                 <span className={`dash-badge ${kycBadge.cls}`}>{kycBadge.label}</span>
                 {kycStatus === "idle" && (
                   <>
-                    <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#6a6258", fontStyle: "italic", margin: "0.6rem 0 0" }}>
+                    <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#8a8278", fontStyle: "italic", margin: "0.6rem 0 0" }}>
                       {t("dashboard.kyc_required_note")}
                     </p>
                     <Link to="/kyc" className="dash-cta">{t("dashboard.kyc_start")}</Link>
                   </>
                 )}
                 {kycStatus === "pending" && (
-                  <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#6a6258", fontStyle: "italic", margin: "0.6rem 0 0" }}>
+                  <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#8a8278", fontStyle: "italic", margin: "0.6rem 0 0" }}>
                     {t("dashboard.kyc_review_note")}
                   </p>
                 )}
@@ -431,7 +431,7 @@ export default function Dashboard() {
 
               {/* Subscription */}
               <div className="dash-status-card">
-                <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a4238", margin: "0 0 0.6rem" }}>
+                <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6a6258", margin: "0 0 0.6rem" }}>
                   {t("dashboard.subscription_label")}
                 </p>
                 <span className={`dash-badge ${tier !== "none" ? "dash-badge-green" : "dash-badge-grey"}`}>
@@ -439,7 +439,7 @@ export default function Dashboard() {
                 </span>
                 {tier === "none" ? (
                   <>
-                    <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#6a6258", fontStyle: "italic", margin: "0.6rem 0 0" }}>
+                    <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#8a8278", fontStyle: "italic", margin: "0.6rem 0 0" }}>
                       {t("dashboard.subscription_note")}
                     </p>
                     <Link to="/studio" className="dash-cta">{t("dashboard.subscription_plans")}</Link>
@@ -447,7 +447,7 @@ export default function Dashboard() {
                 ) : (
                   <>
                     {activePlan?.priceMonthly && (
-                      <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#6a6258", fontStyle: "italic", margin: "0.6rem 0 0" }}>
+                      <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#8a8278", fontStyle: "italic", margin: "0.6rem 0 0" }}>
                         {t("dashboard.subscription_price", { price: activePlan.priceMonthly })}
                       </p>
                     )}
@@ -458,11 +458,11 @@ export default function Dashboard() {
 
               {/* Wallet */}
               <div className="dash-status-card">
-                <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a4238", margin: "0 0 0.6rem" }}>
+                <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6a6258", margin: "0 0 0.6rem" }}>
                   {t("dashboard.wallet_label")}
                 </p>
                 <span className="dash-badge dash-badge-green">{t("dashboard.wallet_connected")}</span>
-                <p style={{ fontFamily: "monospace", fontSize: "0.72rem", color: "#4a4238", margin: "0.6rem 0 0", wordBreak: "break-all" }}>
+                <p style={{ fontFamily: "monospace", fontSize: "0.72rem", color: "#6a6258", margin: "0.6rem 0 0", wordBreak: "break-all" }}>
                   {short(address)}
                 </p>
                 <Link to="/swap" className="dash-cta-ghost">{t("dashboard.wallet_go_swap")}</Link>
