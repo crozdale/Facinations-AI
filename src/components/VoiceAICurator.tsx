@@ -33,9 +33,6 @@ async function askClaude(
 }
 
 const css = `
-  .voice-fab { position:fixed; bottom:2rem; right:2rem; z-index:50; width:3.5rem; height:3.5rem; border-radius:50%; border:2px solid rgba(212,175,55,0.4); background:#080808; color:#d4af37; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:border-color 0.2s, background 0.2s; box-shadow:0 4px 24px rgba(0,0,0,0.7); }
-  .voice-fab.listening { border-color:#d4af37; background:rgba(212,175,55,0.1); }
-  .voice-fab:hover { border-color:#d4af37; }
   .voice-btn { display:flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; border:1px solid rgba(212,175,55,0.4); background:none; color:#d4af37; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; transition:background 0.2s; }
   .voice-btn:hover, .voice-btn.speaking { background:rgba(212,175,55,0.08); }
   .voice-panel { position:absolute; right:0; top:calc(100% + 0.5rem); width:360px; border:1px solid rgba(212,175,55,0.2); background:#080808; box-shadow:0 8px 40px rgba(0,0,0,0.8); z-index:50; }
@@ -50,6 +47,7 @@ const css = `
   .voice-status-dot { width:0.5rem; height:0.5rem; border-radius:50%; background:#d4af37; animation:pulse-dot 0.7s infinite alternate; }
   @keyframes pulse-dot { from { transform:scale(1); opacity:0.7; } to { transform:scale(1.4); opacity:1; } }
   .voice-status-text { font-size:0.72rem; color:#d4af37; font-family:'Cinzel',serif; letter-spacing:0.1em; }
+  .voice-unsupported { padding:0.5rem 1rem; background:rgba(220,80,30,0.06); border-bottom:1px solid rgba(220,80,30,0.2); font-family:'Cormorant Garamond',serif; font-size:0.82rem; color:rgba(220,140,80,0.9); font-style:italic; line-height:1.5; }
   .voice-messages { height:256px; overflow-y:auto; padding:0.75rem 1rem; display:flex; flex-direction:column; gap:0.5rem; }
   .voice-msg { max-width:90%; padding:0.5rem 0.75rem; font-size:0.82rem; line-height:1.6; font-family:'Cormorant Garamond',serif; }
   .voice-msg-user { align-self:flex-end; background:rgba(212,175,55,0.12); color:#e8e0d0; border:1px solid rgba(212,175,55,0.2); }
@@ -71,20 +69,34 @@ Respond as SIA — elegant, precise, slightly poetic. Optimise for voice: short,
 
 export default function VoiceAICurator({ context = "" }: Props) {
   const { t } = useTranslation();
+  const storageKey = `voice_msgs_${context || "default"}`;
+
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>(() => [
-    { role: "assistant", content: t("sia.greeting") },
-  ]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    try {
+      const saved = sessionStorage.getItem(storageKey);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {}
+    return [{ role: "assistant", content: t("sia.greeting") }];
+  });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [listening, setListening] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [muted, setMuted] = useState(false);
+  const [voiceUnsupported, setVoiceUnsupported] = useState(false);
   const recognitionRef = useRef<any>(null);
   const synthRef = useRef<SpeechSynthesis | null>(
     typeof window !== "undefined" ? window.speechSynthesis : null
   );
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    try { sessionStorage.setItem(storageKey, JSON.stringify(messages)); } catch {}
+  }, [messages, storageKey]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -119,9 +131,10 @@ export default function VoiceAICurator({ context = "" }: Props) {
     const SpeechRecognition =
       (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      alert(t("sia.voice_unsupported"));
+      setVoiceUnsupported(true);
       return;
     }
+    setVoiceUnsupported(false);
     stopSpeaking();
     if (!open) setOpen(true);
     const rec = new SpeechRecognition();
@@ -197,6 +210,12 @@ export default function VoiceAICurator({ context = "" }: Props) {
                 <button className="voice-close" onClick={() => setOpen(false)}>×</button>
               </div>
             </div>
+
+            {voiceUnsupported && (
+              <div className="voice-unsupported">
+                {t("sia.voice_unsupported", "Voice input is not supported in this browser. Use Chrome, Safari, or Edge — or type below.")}
+              </div>
+            )}
 
             {(listening || speaking) && (
               <div className="voice-status-bar">

@@ -1,6 +1,7 @@
 // src/components/AICurator.tsx
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { streamClaude } from "../utils/askClaude";
 
 interface Message {
   role: "user" | "assistant";
@@ -9,27 +10,6 @@ interface Message {
 
 interface Props {
   context?: string;
-}
-
-async function askClaude(
-  systemPrompt: string,
-  userMsg: string,
-  history: { role: string; content: string }[] = []
-): Promise<string> {
-  const res = await fetch("/api/claude/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-6",
-      max_tokens: 450,
-      system: systemPrompt,
-      messages: [...history, { role: "user", content: userMsg }],
-    }),
-  });
-  const raw = await res.text();
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${raw}`);
-  const d = JSON.parse(raw);
-  return d.content?.find((b: any) => b.type === "text")?.text ?? "No response.";
 }
 
 const css = `
@@ -44,7 +24,8 @@ const css = `
   .sia-msg { max-width:90%; padding:0.5rem 0.75rem; font-size:0.82rem; line-height:1.6; font-family:'Cormorant Garamond',serif; }
   .sia-msg-user { align-self:flex-end; background:rgba(212,175,55,0.12); color:#e8e0d0; border:1px solid rgba(212,175,55,0.2); }
   .sia-msg-assistant { align-self:flex-start; background:#0c0c0c; color:#9a9288; font-style:italic; border:1px solid rgba(212,175,55,0.06); }
-  .sia-typing { align-self:flex-start; font-size:0.78rem; color:rgba(212,175,55,0.4); font-style:italic; font-family:'Cormorant Garamond',serif; padding:0.25rem 0; }
+  .sia-cursor { display:inline-block; width:2px; height:0.85em; background:rgba(212,175,55,0.5); margin-left:2px; vertical-align:middle; animation:sia-blink 0.7s infinite; }
+  @keyframes sia-blink { 0%,100%{opacity:1} 50%{opacity:0} }
   .sia-input-row { display:flex; gap:0.5rem; padding:0.75rem 1rem; border-top:1px solid rgba(212,175,55,0.1); }
   .sia-input { flex:1; background:#0c0c0c; border:1px solid rgba(212,175,55,0.15); color:#e8e0d0; font-family:'Cormorant Garamond',serif; font-size:0.85rem; padding:0.4rem 0.6rem; }
   .sia-input:focus { outline:none; border-color:rgba(212,175,55,0.4); }
@@ -55,42 +36,74 @@ const css = `
 
 export default function AICurator({ context = "" }: Props) {
   const { t } = useTranslation();
+  const storageKey = `sia_msgs_${context || "default"}`;
+
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>(() => [
-    { role: "assistant", content: t("aiCurator.greeting") },
-  ]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    try {
+      const saved = sessionStorage.getItem(storageKey);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {}
+    return [{ role: "assistant", content: t("aiCurator.greeting") }];
+  });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    try { sessionStorage.setItem(storageKey, JSON.stringify(messages)); } catch {}
+  }, [messages, storageKey]);
+
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+  }, [messages]);
 
   async function send() {
     const msg = input.trim();
     if (!msg || loading) return;
     setInput("");
-    setMessages((m) => [...m, { role: "user", content: msg }]);
+
+    const history = messages.map((m) => ({ role: m.role, content: m.content }));
+
+    setMessages((m) => [
+      ...m,
+      { role: "user", content: msg },
+      { role: "assistant", content: "" },
+    ]);
     setLoading(true);
 
     const systemPrompt = `You are SIA — the Synthetic Intelligence Analyst and principal curator at Musée-Crosdale, a luxury fine-art institution built on the Facinations protocol. You have deep expertise in art history, aesthetics, on-chain provenance, fractional ownership, XER token economics, and collector strategy.${context ? `\n\nCurrent context: ${context}` : ""}
 
 Respond as SIA — elegant, precise, slightly poetic. Under 3 sentences unless the visitor asks for more. Speak as if narrating a private view at a world-class gallery. Never fabricate auction results or valuations.`;
 
-    const history = messages.map((m) => ({
-      role: m.role,
-      content: m.content,
-    }));
-
     try {
-      const reply = await askClaude(systemPrompt, msg, history);
-      setMessages((m) => [...m, { role: "assistant", content: reply }]);
+      await streamClaude(
+        {
+          model: "claude-sonnet-4-6",
+          max_tokens: 450,
+          system: systemPrompt,
+          messages: [...history, { role: "user", content: msg }],
+        },
+        (chunk) => {
+          setMessages((m) => {
+            const updated = [...m];
+            updated[updated.length - 1] = {
+              role: "assistant",
+              content: updated[updated.length - 1].content + chunk,
+            };
+            return updated;
+          });
+        }
+      );
     } catch {
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: t("aiCurator.error") },
-      ]);
+      setMessages((m) => {
+        const updated = [...m];
+        updated[updated.length - 1] = { role: "assistant", content: t("aiCurator.error") };
+        return updated;
+      });
     } finally {
       setLoading(false);
     }
@@ -117,9 +130,11 @@ Respond as SIA — elegant, precise, slightly poetic. Under 3 sentences unless t
                 className={`sia-msg ${m.role === "user" ? "sia-msg-user" : "sia-msg-assistant"}`}
               >
                 {m.content}
+                {loading && i === messages.length - 1 && m.role === "assistant" && (
+                  <span className="sia-cursor" />
+                )}
               </div>
             ))}
-            {loading && <div className="sia-typing">{t("aiCurator.typing")}</div>}
             <div ref={messagesEndRef} />
           </div>
 

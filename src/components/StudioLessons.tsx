@@ -4,28 +4,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
-// ── Claude helper ─────────────────────────────────────────────────────────────
-async function askClaude(
-  systemPrompt: string,
-  userMsg: string,
-  history: { role: string; content: string }[] = []
-): Promise<string> {
-  const res = await fetch("/api/claude/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-5",
-      max_tokens: 500,
-      system: systemPrompt,
-      messages: [...history, { role: "user", content: userMsg }],
-    }),
-  });
-  const raw = await res.text();
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${raw}`);
-  const d = JSON.parse(raw);
-  return d.content?.find((b: any) => b.type === "text")?.text ?? "No response.";
-}
+import { streamClaude } from "../utils/askClaude";
 
 // ── Lesson definitions ────────────────────────────────────────────────────────
 interface Lesson {
@@ -150,6 +129,8 @@ const css = `
   .sl-msg-user { align-self:flex-end; background:rgba(212,175,55,0.1); color:#e8e0d0; border:1px solid rgba(212,175,55,0.18); }
   .sl-msg-ai { align-self:flex-start; background:#0c0c0c; color:#9a9288; font-style:italic; border:1px solid rgba(212,175,55,0.06); }
   .sl-typing { font-size:0.78rem; color:rgba(212,175,55,0.35); font-style:italic; font-family:'Cormorant Garamond',serif; padding:0.25rem 0; align-self:flex-start; }
+  .sl-cursor { display:inline-block; width:2px; height:0.85em; background:rgba(212,175,55,0.4); margin-left:2px; vertical-align:middle; animation:sl-blink 0.7s infinite; }
+  @keyframes sl-blink { 0%,100%{opacity:1} 50%{opacity:0} }
   .sl-input-row { display:flex; gap:0; border-top:1px solid rgba(212,175,55,0.08); }
   .sl-input { flex:1; background:#060606; border:none; border-right:1px solid rgba(212,175,55,0.1); color:#e8e0d0; font-family:'Cormorant Garamond',serif; font-size:0.88rem; padding:0.6rem 0.85rem; }
   .sl-input:focus { outline:none; }
@@ -161,14 +142,21 @@ const css = `
 // ── Component ─────────────────────────────────────────────────────────────────
 export default function StudioLessons() {
   const { t } = useTranslation();
-  const [states, setStates] = useState<Record<string, LessonState>>(() =>
-    Object.fromEntries(
+
+  const [states, setStates] = useState<Record<string, LessonState>>(() => {
+    let savedCompleted: Record<string, boolean> = {};
+    let savedMessages: Record<string, Message[]> = {};
+    try {
+      savedCompleted = JSON.parse(sessionStorage.getItem("sl_completed") || "{}");
+      savedMessages = JSON.parse(sessionStorage.getItem("sl_messages") || "{}");
+    } catch {}
+    return Object.fromEntries(
       LESSONS.map((l) => [
         l.id,
         {
           open: false,
-          completed: false,
-          messages: [
+          completed: savedCompleted[l.id] ?? false,
+          messages: savedMessages[l.id] ?? [
             {
               role: "assistant",
               content: l.starterQuestion
@@ -180,10 +168,20 @@ export default function StudioLessons() {
           loading: false,
         },
       ])
-    )
-  );
+    );
+  });
 
   const endRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  // Persist completed status and messages to sessionStorage
+  useEffect(() => {
+    try {
+      const completed = Object.fromEntries(Object.entries(states).map(([k, v]) => [k, v.completed]));
+      const messages = Object.fromEntries(Object.entries(states).map(([k, v]) => [k, v.messages]));
+      sessionStorage.setItem("sl_completed", JSON.stringify(completed));
+      sessionStorage.setItem("sl_messages", JSON.stringify(messages));
+    } catch {}
+  }, [states]);
 
   function patch(id: string, update: Partial<LessonState>) {
     setStates((s) => ({ ...s, [id]: { ...s[id], ...update } }));
@@ -208,34 +206,51 @@ export default function StudioLessons() {
     const msg = st.input.trim();
     if (!msg || st.loading) return;
 
-    const updated: Message[] = [...st.messages, { role: "user", content: msg }];
-    patch(lesson.id, { messages: updated, input: "", loading: true });
-
     const history = st.messages.map((m) => ({ role: m.role, content: m.content }));
 
+    setStates((s) => ({
+      ...s,
+      [lesson.id]: {
+        ...s[lesson.id],
+        messages: [
+          ...s[lesson.id].messages,
+          { role: "user", content: msg },
+          { role: "assistant", content: "" },
+        ],
+        input: "",
+        loading: true,
+      },
+    }));
+
     try {
-      const reply = await askClaude(lesson.systemPrompt, msg, history);
-      setStates((s) => ({
-        ...s,
-        [lesson.id]: {
-          ...s[lesson.id],
-          messages: [...s[lesson.id].messages.filter((_, i) => i < updated.length), { role: "assistant", content: reply }],
-          loading: false,
+      await streamClaude(
+        {
+          model: "claude-sonnet-4-6",
+          max_tokens: 500,
+          system: lesson.systemPrompt,
+          messages: [...history, { role: "user", content: msg }],
         },
-      }));
+        (chunk) => {
+          setStates((s) => {
+            const msgs = [...s[lesson.id].messages];
+            msgs[msgs.length - 1] = {
+              role: "assistant",
+              content: msgs[msgs.length - 1].content + chunk,
+            };
+            return { ...s, [lesson.id]: { ...s[lesson.id], messages: msgs } };
+          });
+        }
+      );
     } catch {
-      setStates((s) => ({
-        ...s,
-        [lesson.id]: {
-          ...s[lesson.id],
-          messages: [
-            ...s[lesson.id].messages,
-            { role: "assistant", content: t("studioLessons.tutor_error") },
-          ],
-          loading: false,
-        },
-      }));
+      setStates((s) => {
+        const msgs = [...s[lesson.id].messages];
+        msgs[msgs.length - 1] = { role: "assistant", content: t("studioLessons.tutor_error") };
+        return { ...s, [lesson.id]: { ...s[lesson.id], messages: msgs, loading: false } };
+      });
+      return;
     }
+
+    setStates((s) => ({ ...s, [lesson.id]: { ...s[lesson.id], loading: false } }));
   }
 
   const completed = LESSONS.filter((l) => states[l.id].completed).length;
@@ -307,9 +322,11 @@ export default function StudioLessons() {
                         className={`sl-msg ${m.role === "user" ? "sl-msg-user" : "sl-msg-ai"}`}
                       >
                         {m.content}
+                        {st.loading && i === st.messages.length - 1 && m.role === "assistant" && (
+                          <span className="sl-cursor" />
+                        )}
                       </div>
                     ))}
-                    {st.loading && <div className="sl-typing">{t("studioLessons.tutor_thinking")}</div>}
                     <div ref={(el) => { endRefs.current[lesson.id] = el; }} />
                   </div>
 

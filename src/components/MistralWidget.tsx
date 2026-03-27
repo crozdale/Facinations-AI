@@ -1,6 +1,7 @@
 // src/components/MistralWidget.tsx
 // Context-aware SIA floating widget — routes through /api/claude (no exposed keys).
 import React, { useState, useRef, useEffect } from "react";
+import { streamClaude } from "../utils/askClaude";
 
 type Context = "gallery" | "studio" | "vaults";
 
@@ -45,7 +46,8 @@ const css = `
   .mw-bubble { max-width:88%; padding:0.55rem 0.8rem; font-family:'Cormorant Garamond',serif; font-size:0.85rem; line-height:1.65; }
   .mw-bubble-user { align-self:flex-end; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.2); color:#e8e0d0; }
   .mw-bubble-ai { align-self:flex-start; background:rgba(255,255,255,0.02); border:1px solid rgba(212,175,55,0.06); color:#9a9288; font-style:italic; }
-  .mw-thinking { align-self:flex-start; font-family:'Cinzel',serif; font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(212,175,55,0.3); padding:0.25rem 0; }
+  .mw-cursor { display:inline-block; width:2px; height:0.85em; background:rgba(212,175,55,0.5); margin-left:2px; vertical-align:middle; animation:mw-blink 0.7s infinite; }
+  @keyframes mw-blink { 0%,100%{opacity:1} 50%{opacity:0} }
   .mw-input-row { border-top:1px solid rgba(212,175,55,0.1); padding:0.6rem 0.75rem; display:flex; gap:0.5rem; background:#050505; }
   .mw-input { flex:1; background:transparent; border:none; outline:none; font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:#e8e0d0; }
   .mw-input::placeholder { color:#2a2a2a; }
@@ -54,41 +56,74 @@ const css = `
 `;
 
 export default function MistralWidget({ context = "gallery" }: Props) {
+  const ctx = context as Context;
+  const storageKey = `mw_msgs_${ctx}`;
+
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    try {
+      const saved = sessionStorage.getItem(storageKey);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {}
+    return [];
+  });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    try { sessionStorage.setItem(storageKey, JSON.stringify(messages)); } catch {}
+  }, [messages, storageKey]);
+
+  useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+  }, [messages]);
 
   async function send() {
     const msg = input.trim();
     if (!msg || loading) return;
-    const next: Message[] = [...messages, { role: "user", content: msg }];
-    setMessages(next);
     setInput("");
+
+    const history = messages.map((m) => ({ role: m.role, content: m.content }));
+
+    setMessages((prev) => [
+      ...prev,
+      { role: "user", content: msg },
+      { role: "assistant", content: "" },
+    ]);
     setLoading(true);
 
     try {
-      const res = await fetch("/api/claude/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await streamClaude(
+        {
           model: "claude-sonnet-4-6",
           max_tokens: 350,
-          system: SYSTEM_PROMPTS[context as Context],
-          messages: next.map((m) => ({ role: m.role, content: m.content })),
-        }),
-      });
-      const d = await res.json();
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const reply = d.content?.find((b: { type: string; text?: string }) => b.type === "text")?.text ?? "No response.";
-      setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+          system: SYSTEM_PROMPTS[ctx],
+          messages: [...history, { role: "user", content: msg }],
+        },
+        (chunk) => {
+          setMessages((prev) => {
+            const updated = [...prev];
+            updated[updated.length - 1] = {
+              role: "assistant",
+              content: updated[updated.length - 1].content + chunk,
+            };
+            return updated;
+          });
+        }
+      );
     } catch {
-      setMessages((prev) => [...prev, { role: "assistant", content: "Unable to reach SIA. Please try again." }]);
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = {
+          role: "assistant",
+          content: "Unable to reach SIA. Please try again.",
+        };
+        return updated;
+      });
     } finally {
       setLoading(false);
     }
@@ -101,7 +136,7 @@ export default function MistralWidget({ context = "gallery" }: Props) {
       <button
         className="mw-fab"
         onClick={() => setOpen((o) => !o)}
-        title={`Ask SIA — ${LABELS[context as Context]}`}
+        title={`Ask SIA — ${LABELS[ctx]}`}
       >
         {open ? "✕" : "SIA"}
       </button>
@@ -112,21 +147,23 @@ export default function MistralWidget({ context = "gallery" }: Props) {
             <div className="mw-dot" />
             <div>
               <div className="mw-title">SIA · Facinations</div>
-              <div className="mw-sub">{LABELS[context as Context]}</div>
+              <div className="mw-sub">{LABELS[ctx]}</div>
             </div>
             <div className="mw-online" title="Online" />
           </div>
 
           <div className="mw-messages">
             {messages.length === 0 && (
-              <p className="mw-empty">{PLACEHOLDERS[context as Context]}</p>
+              <p className="mw-empty">{PLACEHOLDERS[ctx]}</p>
             )}
             {messages.map((m, i) => (
               <div key={i} className={`mw-bubble ${m.role === "user" ? "mw-bubble-user" : "mw-bubble-ai"}`}>
                 {m.content}
+                {loading && i === messages.length - 1 && m.role === "assistant" && (
+                  <span className="mw-cursor" />
+                )}
               </div>
             ))}
-            {loading && <div className="mw-thinking">Analysing…</div>}
             <div ref={endRef} />
           </div>
 

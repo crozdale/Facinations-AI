@@ -1,5 +1,11 @@
 // src/components/DealerIntelligencePanel.tsx
 import React, { useState, useRef, useEffect } from "react";
+import { streamClaude } from "../utils/askClaude";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
 
 const S = {
   section: {
@@ -77,15 +83,6 @@ const S = {
     lineHeight: 1.6,
     fontStyle: "italic",
   } as React.CSSProperties,
-  thinking: {
-    alignSelf: "flex-start" as const,
-    fontFamily: "'Cinzel',serif",
-    fontSize: "0.5rem",
-    letterSpacing: "0.2em",
-    textTransform: "uppercase" as const,
-    color: "rgba(212,175,55,0.3)",
-    padding: "0.5rem 0",
-  } as React.CSSProperties,
   form: {
     borderTop: "1px solid rgba(212,175,55,0.08)",
     background: "#030303",
@@ -113,7 +110,15 @@ const S = {
     border: "none",
     cursor: "pointer",
     padding: "0.25rem 0",
-    opacity: 1,
+  } as React.CSSProperties,
+  cursor: {
+    display: "inline-block",
+    width: "2px",
+    height: "0.85em",
+    background: "rgba(212,175,55,0.5)",
+    marginLeft: "2px",
+    verticalAlign: "middle",
+    animation: "dealer-blink 0.7s infinite",
   } as React.CSSProperties,
 };
 
@@ -129,51 +134,77 @@ You advise gallery owners, dealer principals, art consultants, and serious colle
 
 Be concise (4 sentences max unless asked to expand), data-oriented, and authoritative. Where precise figures are unavailable, give directional guidance. Never fabricate auction results or specific price histories. Treat the user as a sophisticated principal.`;
 
+const GREETING =
+  "Dealer Intelligence is your Synthetic Intelligence Analyst for Fine Art. Ask about inventory strategy, fractional ownership, XER economics, or market performance.";
+
+const STORAGE_KEY = "dealer_msgs";
+
 export default function DealerIntelligencePanel() {
+  const [messages, setMessages] = useState<Message[]>(() => {
+    try {
+      const saved = sessionStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {}
+    return [{ role: "assistant", content: GREETING }];
+  });
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      text: "Dealer Intelligence is your Synthetic Intelligence Analyst for Fine Art. Ask about inventory strategy, fractional ownership, XER economics, or market performance.",
-    },
-  ]);
   const [loading, setLoading] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages)); } catch {}
+  }, [messages]);
+
+  useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+  }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = input.trim();
-    if (!trimmed) return;
-
-    const history = messages
-      .slice(1)
-      .map((m) => ({ role: m.role === "user" ? "user" : "assistant", content: m.text }));
-
-    setMessages((prev) => [...prev, { role: "user", text: trimmed }]);
+    if (!trimmed || loading) return;
     setInput("");
+
+    const history = messages.map((m) => ({ role: m.role, content: m.content }));
+
+    setMessages((prev) => [
+      ...prev,
+      { role: "user", content: trimmed },
+      { role: "assistant", content: "" },
+    ]);
     setLoading(true);
 
     try {
-      const res = await fetch("/api/claude/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await streamClaude(
+        {
           model: "claude-sonnet-4-6",
           max_tokens: 500,
           system: SYSTEM,
           messages: [...history, { role: "user", content: trimmed }],
-        }),
-      });
-      const d = await res.json();
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const reply = d.content?.find((b: { type: string; text?: string }) => b.type === "text")?.text ?? "No response.";
-      setMessages((prev) => [...prev, { role: "assistant", text: reply }]);
+        },
+        (chunk) => {
+          setMessages((prev) => {
+            const updated = [...prev];
+            updated[updated.length - 1] = {
+              role: "assistant",
+              content: updated[updated.length - 1].content + chunk,
+            };
+            return updated;
+          });
+        }
+      );
     } catch (err: unknown) {
-      setMessages((prev) => [...prev, { role: "assistant", text: `Error: ${err instanceof Error ? err.message : "Unknown error"}` }]);
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = {
+          role: "assistant",
+          content: `Error: ${err instanceof Error ? err.message : "Unknown error"}`,
+        };
+        return updated;
+      });
     } finally {
       setLoading(false);
     }
@@ -181,6 +212,7 @@ export default function DealerIntelligencePanel() {
 
   return (
     <section style={S.section}>
+      <style>{`@keyframes dealer-blink { 0%,100%{opacity:1} 50%{opacity:0} }`}</style>
       <div style={S.header}>
         <div>
           <p style={S.eyebrow}>Facinations · SIA</p>
@@ -195,12 +227,12 @@ export default function DealerIntelligencePanel() {
         <div style={S.messages}>
           {messages.map((m, idx) => (
             <div key={idx} style={m.role === "user" ? S.bubbleUser : S.bubbleAi}>
-              {m.text}
+              {m.content}
+              {loading && idx === messages.length - 1 && m.role === "assistant" && (
+                <span style={S.cursor} />
+              )}
             </div>
           ))}
-          {loading && (
-            <div style={S.thinking}>Analysing…</div>
-          )}
           <div ref={endRef} />
         </div>
 
