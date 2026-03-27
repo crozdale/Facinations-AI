@@ -1,10 +1,19 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/api/checkout/verify",     "destination": "/api/checkout"              },
+    { "source": "/api/paypal/capture",      "destination": "/api/paypal?_action=capture" },
+    { "source": "/api/coinbase/verify",     "destination": "/api/coinbase"              },
+    { "source": "/api/kyc/status",          "destination": "/api/kyc"                   },
+    { "source": "/api/admin/artworks",      "destination": "/api/admin?resource=artworks"     },
+    { "source": "/api/admin/galleries",     "destination": "/api/admin?resource=galleries"    },
+    { "source": "/api/admin/subscribers",   "destination": "/api/admin?resource=subscribers"  },
+    { "source": "/api/galleries",           "destination": "/api/gallery?_list=true"     },
+    { "source": "/api/analytics",           "destination": "/api/marketing?action=analytics"  },
+    { "source": "/api/hubspot",             "destination": "/api/marketing?action=hubspot"     },
+    { "source": "/api/mailchimp",           "destination": "/api/marketing?action=mailchimp"   },
+    { "source": "/api/waitlist",            "destination": "/api/marketing?action=waitlist"    },
+    { "source": "/(.*)",                    "destination": "/index.html"                }
   ],
   "crons": [
     {
