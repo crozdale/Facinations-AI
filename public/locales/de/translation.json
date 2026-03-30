@@ -66,7 +66,12 @@
     "newsletter_placeholder": "Ihre E-Mail-Adresse",
     "newsletter_btn": "Abonnieren",
     "newsletter_error": "Ein Fehler ist aufgetreten — bitte versuchen Sie es erneut.",
-    "protocol_tagline": "Dezentralisiertes Kunstprotokoll"
+    "protocol_tagline": "Dezentralisiertes Kunstprotokoll",
+    "brand": "Façinations",
+    "legal": "Rechtliches",
+    "about": "Über uns",
+    "whitepaper": "Whitepaper",
+    "architecture": "Architektur"
   },
   "landing": {
     "eyebrow": "Facinations-Protokoll",
@@ -124,7 +129,8 @@
     "related_works": "Verwandte Werke",
     "zoom_reset": "zurücksetzen",
     "zoom_hint": "scrollen · zusammenkneifen · +/- zum Zoomen verwenden",
-    "royalty": "Royalty: {{percent}}%"
+    "royalty": "Royalty: {{percent}}%",
+    "eyebrow": "Musée-Crosdale · Originalwerke"
   },
   "vaults": {
     "title": "Tresore",
@@ -722,6 +728,16 @@
     "submitting_proposal": "Vorschlag wird eingereicht…",
     "proposal_submitted": "Vorschlag eingereicht",
     "failed": "Fehlgeschlagen"
+  },
+  "home": {
+    "eyebrow": "Dezentralisiertes Kunstprotokoll · Ethereum",
+    "moving_image": "Bewegtbild",
+    "artwork_caption": "Ein auf Facinations präsentiertes Werk",
+    "use_controls": "Steuerelemente zum Abspielen verwenden",
+    "enter_gallery": "✦ Galerie betreten",
+    "nav_collection": "Sammlung",
+    "nav_exchange": "Sammlungsbörse",
+    "nav_whitepaper": "Whitepaper"
   },
   "theme": {
     "dark": "🌙 Dark",

@@ -66,7 +66,12 @@
     "newsletter_placeholder": "Ваш адрес электронной почты",
     "newsletter_btn": "Подписаться",
     "newsletter_error": "Что-то пошло не так — попробуйте снова.",
-    "protocol_tagline": "Децентрализованный Арт-Протокол"
+    "protocol_tagline": "Децентрализованный Арт-Протокол",
+    "brand": "Façinations",
+    "legal": "Правовая информация",
+    "about": "О нас",
+    "whitepaper": "Белая книга",
+    "architecture": "Архитектура"
   },
   "landing": {
     "eyebrow": "Протокол Facinations",
@@ -124,7 +129,8 @@
     "related_works": "Связанные работы",
     "zoom_reset": "сбросить",
     "zoom_hint": "прокрутка · жест щипка · используйте +/- для масштабирования",
-    "royalty": "Royalty: {{percent}}%"
+    "royalty": "Royalty: {{percent}}%",
+    "eyebrow": "Музей-Кросдейл · Оригинальные Работы"
   },
   "vaults": {
     "title": "Хранилища",
@@ -720,6 +726,16 @@
     "submitting_proposal": "Отправка предложения…",
     "proposal_submitted": "Предложение отправлено",
     "failed": "Ошибка"
+  },
+  "home": {
+    "eyebrow": "Децентрализованный Арт-Протокол · Ethereum",
+    "moving_image": "Движущееся Изображение",
+    "artwork_caption": "Работа, представленная на Facinations",
+    "use_controls": "Используйте элементы управления для воспроизведения",
+    "enter_gallery": "✦ Войти в Галерею",
+    "nav_collection": "Коллекция",
+    "nav_exchange": "Биржа Коллекций",
+    "nav_whitepaper": "Белая книга"
   },
   "theme": {
     "dark": "🌙 Dark",

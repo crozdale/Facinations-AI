@@ -66,7 +66,12 @@
     "newsletter_placeholder": "Votre adresse e-mail",
     "newsletter_btn": "S'abonner",
     "newsletter_error": "Une erreur s'est produite — veuillez réessayer.",
-    "protocol_tagline": "Protocole d'Art Décentralisé"
+    "protocol_tagline": "Protocole d'Art Décentralisé",
+    "brand": "Façinations",
+    "legal": "Légal",
+    "about": "À propos",
+    "whitepaper": "Livre Blanc",
+    "architecture": "Architecture"
   },
   "landing": {
     "eyebrow": "Protocole Facinations",
@@ -124,7 +129,8 @@
     "related_works": "Œuvres connexes",
     "zoom_reset": "réinitialiser",
     "zoom_hint": "défilement · pincement · utilisez +/- pour zoomer",
-    "royalty": "Royalty: {{percent}}%"
+    "royalty": "Royalty: {{percent}}%",
+    "eyebrow": "Musée-Crosdale · Œuvres Originales"
   },
   "vaults": {
     "title": "Coffres",
@@ -722,6 +728,16 @@
     "submitting_proposal": "Soumission de la proposition…",
     "proposal_submitted": "Proposition soumise",
     "failed": "Échec"
+  },
+  "home": {
+    "eyebrow": "Protocole d'Art Décentralisé · Ethereum",
+    "moving_image": "Image en Mouvement",
+    "artwork_caption": "Une œuvre présentée sur Facinations",
+    "use_controls": "Utiliser les commandes pour jouer",
+    "enter_gallery": "✦ Entrer dans la Galerie",
+    "nav_collection": "Collection",
+    "nav_exchange": "Échange de Collection",
+    "nav_whitepaper": "Livre Blanc"
   },
   "theme": {
     "dark": "🌙 Dark",

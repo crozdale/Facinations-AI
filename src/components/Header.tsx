@@ -1,4 +1,4 @@
-﻿// src/components/Header.jsx
+// src/components/Header.tsx
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import { BRAND } from "../brand/brandAssets";
@@ -6,52 +6,134 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import WalletConnect from "./WalletConnect";
 
+const NAV_SECTIONS = [
+  {
+    label: "Collectors",
+    key: "nav.collectorsSection",
+    items: [
+      { path: "/gallery",   label: "Gallery",     key: "nav.gallery",   desc: "Browse & acquire artworks" },
+      { path: "/vaults",    label: "Vaults",      key: "nav.vaults",    desc: "Secure art custody" },
+      { path: "/dashboard", label: "Dashboard",   key: "nav.dashboard", desc: "Your vaulted assets" },
+    ],
+  },
+  {
+    label: "Speculators",
+    key: "nav.speculatorsSection",
+    items: [
+      { path: "/swap",  label: "Swap",    key: "nav.swap",  desc: "Swap art-fraction tokens" },
+      { path: "/swapp", label: "P2P Swapp", key: "nav.swapp", desc: "Peer-to-peer trades" },
+    ],
+  },
+  {
+    label: "Community",
+    key: "nav.communitySection",
+    items: [
+      { path: "/xdale",    label: "Xdale Gallery", key: "nav.xdale",    desc: "Curated exhibitions" },
+      { path: "/galleries", label: "Galleries",    key: "nav.galleries", desc: "All gallery spaces" },
+    ],
+  },
+  {
+    label: "Platform",
+    key: "nav.platformSection",
+    items: [
+      { path: "/about",        label: "About",        key: "nav.about",     desc: "Protocol overview" },
+      { path: "/architecture", label: "Whitepaper",   key: "nav.arch",      desc: "Technical architecture" },
+      { path: "/analytics",    label: "Analytics",    key: "nav.analytics", desc: "Portfolio insights" },
+      { path: "/legal",        label: "Legal",        key: "nav.legal",     desc: "Terms & disclosures" },
+    ],
+  },
+  {
+    label: "Partners",
+    key: "nav.partnersSection",
+    items: [
+      { path: "/studio",            label: "Artist Studio",     key: "nav.studio",           desc: "Publish & mint artwork" },
+      { path: "/curator",           label: "AI Curator",        key: "nav.aiCurator",        desc: "Intelligent art insights" },
+      { path: "/dealer-crm",        label: "Dealer CRM",        key: "nav.dealerCrm",        desc: "Client & deal management" },
+      { path: "/partner-dashboard", label: "Consultant Portal", key: "nav.consultantPortal", desc: "Affiliate commissions · USD" },
+      { path: "/marketing",         label: "Sales & Marketing", key: "nav.marketing",        desc: "Campaign & affiliate docs" },
+    ],
+  },
+];
+
+const LANGS = [
+  ["en","EN"],["es","ES"],["fr","FR"],["pt-BR","PT"],
+  ["it","IT"],["de","DE"],["ko","KO"],["zh-CN","ZH"],
+  ["ja","JA"],["ru","RU"],["ar","AR"],["hi","HI"],
+] as const;
+
 export default function Header() {
   const { t, i18n } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openSection, setOpenSection] = useState<string | null>(null);
   const location = useLocation();
 
-  const handleLanguageChange = (e) => {
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     i18n.changeLanguage(e.target.value);
     localStorage.setItem("facinations_lang", e.target.value);
   };
 
-  const links = [
-    ["/", "nav.home", "Home"],
-    ["/about", "nav.about", "About"],
-    ["/gallery", "nav.gallery", "Gallery"],
-    ["/vaults", "nav.vaults", "Vaults"],
-    ["/swap", "nav.swap", "Swap"],
-    ["/studio", "nav.studio", "Studio"],
-    ["/dashboard", "nav.dashboard", "Dashboard"],
-    ["/architecture", "nav.arch", "Docs"],
-    ["/legal", "nav.legal", "Legal"],
-  ];
+  const isActive = (items: any[]) =>
+    items.some((i) => i.path && location.pathname === i.path);
 
   return (
     <>
       <header className="site-header">
+        {/* Logo */}
         <div className="logo">
           <Link to="/" onClick={() => setMenuOpen(false)}>
-            <img
-              src={BRAND.FACINATIONS.WORDMARK}
-              alt="Musee Crosdale"
-              style={{ height: "38px", objectFit: "contain" }}
-            />
+            <img src={BRAND.FACINATIONS.WORDMARK} alt="Musee Crosdale" style={{ height: "38px", objectFit: "contain" }} />
           </Link>
         </div>
+
+        {/* Desktop grouped nav */}
         <nav className="nav" aria-label="Main navigation">
-          {links.map(([path, key, fallback]) => (
-            <Link
-              key={path}
-              to={path}
-              className={location.pathname === path ? "nav-active" : ""}
-              aria-current={location.pathname === path ? "page" : undefined}
+          {NAV_SECTIONS.map((section) => (
+            <div
+              key={section.key}
+              className={`nav-group${isActive(section.items) ? " nav-group-active" : ""}`}
+              onMouseEnter={() => setOpenSection(section.key)}
+              onMouseLeave={() => setOpenSection(null)}
             >
-              {t(key, fallback)}
-            </Link>
+              <button className="nav-group-btn" aria-haspopup="true" aria-expanded={openSection === section.key}>
+                {t(section.key, section.label)}
+                <span className="nav-chevron">▾</span>
+              </button>
+              {openSection === section.key && (
+                <div className="nav-dropdown" role="menu">
+                  {section.items.map((item) =>
+                    (item as any).href ? (
+                      <a
+                        key={(item as any).href}
+                        href={(item as any).href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        role="menuitem"
+                        className="nav-dropdown-item"
+                        onClick={() => setOpenSection(null)}
+                      >
+                        <span className="nav-dropdown-label">{t(item.key, item.label)}</span>
+                        <span className="nav-dropdown-desc">{item.desc}</span>
+                      </a>
+                    ) : (
+                      <Link
+                        key={(item as any).path}
+                        to={(item as any).path}
+                        role="menuitem"
+                        className={`nav-dropdown-item${location.pathname === (item as any).path ? " active" : ""}`}
+                        onClick={() => setOpenSection(null)}
+                      >
+                        <span className="nav-dropdown-label">{t(item.key, item.label)}</span>
+                        <span className="nav-dropdown-desc">{item.desc}</span>
+                      </Link>
+                    )
+                  )}
+                </div>
+              )}
+            </div>
           ))}
         </nav>
+
+        {/* Right controls */}
         <div className="header-right">
           <select
             className="lang-select"
@@ -59,24 +141,7 @@ export default function Header() {
             onChange={handleLanguageChange}
             aria-label={t("common.select_language", "Select language")}
           >
-            {[
-              ["en", "EN"],
-              ["es", "ES"],
-              ["fr", "FR"],
-              ["pt-BR", "PT"],
-              ["it", "IT"],
-              ["de", "DE"],
-              ["ko", "KO"],
-              ["zh-CN", "ZH"],
-              ["ja", "JA"],
-              ["ru", "RU"],
-              ["ar", "AR"],
-              ["hi", "HI"],
-            ].map(([v, l]) => (
-              <option key={v} value={v}>
-                {l}
-              </option>
-            ))}
+            {LANGS.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
           </select>
           <WalletConnect />
           <button
@@ -92,21 +157,39 @@ export default function Header() {
           </button>
         </div>
       </header>
+
+      {/* Mobile menu */}
       {menuOpen && (
         <nav id="mobile-menu" className="mobile-menu" aria-label="Mobile navigation">
           <div className="mobile-menu-inner">
-            {links.map(([path, key, fallback]) => (
-              <Link
-                key={path}
-                to={path}
-                className={`mobile-link ${
-                  location.pathname === path ? "mobile-link-active" : ""
-                }`}
-                onClick={() => setMenuOpen(false)}
-                aria-current={location.pathname === path ? "page" : undefined}
-              >
-                {t(key, fallback)}
-              </Link>
+            {NAV_SECTIONS.map((section) => (
+              <div key={section.key} className="mobile-section">
+                <p className="mobile-section-label">{t(section.key, section.label)}</p>
+                {section.items.map((item: any) =>
+                  item.href ? (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mobile-link"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {t(item.key, item.label)}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className={`mobile-link${location.pathname === item.path ? " mobile-link-active" : ""}`}
+                      onClick={() => setMenuOpen(false)}
+                      aria-current={location.pathname === item.path ? "page" : undefined}
+                    >
+                      {t(item.key, item.label)}
+                    </Link>
+                  )
+                )}
+              </div>
             ))}
             <div className="mobile-lang">
               <select
@@ -115,24 +198,7 @@ export default function Header() {
                 onChange={handleLanguageChange}
                 aria-label={t("common.select_language", "Select language")}
               >
-                {[
-                  ["en", "EN"],
-                  ["es", "ES"],
-                  ["fr", "FR"],
-                  ["pt-BR", "PT"],
-                  ["it", "IT"],
-                  ["de", "DE"],
-                  ["ko", "KO"],
-                  ["zh-CN", "ZH"],
-                  ["ja", "JA"],
-                  ["ru", "RU"],
-                  ["ar", "AR"],
-                  ["hi", "HI"],
-                ].map(([v, l]) => (
-                  <option key={v} value={v}>
-                    {l}
-                  </option>
-                ))}
+                {LANGS.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
               </select>
             </div>
           </div>

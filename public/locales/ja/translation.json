@@ -66,7 +66,12 @@
     "newsletter_placeholder": "メールアドレス",
     "newsletter_btn": "登録",
     "newsletter_error": "エラーが発生しました。再度お試しください。",
-    "protocol_tagline": "分散型アートプロトコル"
+    "protocol_tagline": "分散型アートプロトコル",
+    "brand": "Façinations",
+    "legal": "法的事項",
+    "about": "概要",
+    "whitepaper": "ホワイトペーパー",
+    "architecture": "アーキテクチャ"
   },
   "landing": {
     "eyebrow": "Facinations プロトコル",
@@ -124,7 +129,8 @@
     "related_works": "関連作品",
     "zoom_reset": "リセット",
     "zoom_hint": "スクロール · ピンチ · +/- でズーム",
-    "royalty": "Royalty: {{percent}}%"
+    "royalty": "Royalty: {{percent}}%",
+    "eyebrow": "ミュゼ・クロスデール · オリジナル作品"
   },
   "vaults": {
     "title": "ヴォルト",
@@ -722,6 +728,16 @@
     "failed": "失敗",
     "vote_yes": "Vote YES",
     "vote_no": "Vote NO"
+  },
+  "home": {
+    "eyebrow": "分散型アートプロトコル · イーサリアム",
+    "moving_image": "動画作品",
+    "artwork_caption": "Facinations で展示されている作品",
+    "use_controls": "コントロールで再生",
+    "enter_gallery": "✦ ギャラリーへ",
+    "nav_collection": "コレクション",
+    "nav_exchange": "コレクション取引所",
+    "nav_whitepaper": "ホワイトペーパー"
   },
   "theme": {
     "dark": "🌙 Dark",

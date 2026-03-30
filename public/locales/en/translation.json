@@ -66,7 +66,12 @@
     "newsletter_placeholder": "Your email address",
     "newsletter_btn": "Subscribe",
     "newsletter_error": "Something went wrong — please try again.",
-    "protocol_tagline": "Decentralised Fine-Art Protocol"
+    "protocol_tagline": "Decentralised Fine-Art Protocol",
+    "brand": "Façinations",
+    "legal": "Legal",
+    "about": "About",
+    "whitepaper": "Whitepaper",
+    "architecture": "Architecture"
   },
   "landing": {
     "eyebrow": "Facinations Protocol",
@@ -124,7 +129,8 @@
     "placeholder_ask": "Ask anything…",
     "related_works": "Related Works",
     "zoom_reset": "reset",
-    "zoom_hint": "scroll · pinch · use +/- to zoom"
+    "zoom_hint": "scroll · pinch · use +/- to zoom",
+    "eyebrow": "Musée-Crosdale · Original Works"
   },
   "vaults": {
     "title": "Vaults",
@@ -722,6 +728,16 @@
     "submitting_proposal": "Submitting proposal…",
     "proposal_submitted": "Proposal submitted",
     "failed": "Failed"
+  },
+  "home": {
+    "eyebrow": "Decentralised Fine-Art Protocol · Ethereum",
+    "moving_image": "Moving Image",
+    "artwork_caption": "A work presented on Facinations",
+    "use_controls": "Use controls to play",
+    "enter_gallery": "✦ Enter Gallery",
+    "nav_collection": "Collection",
+    "nav_exchange": "Collection Exchange",
+    "nav_whitepaper": "Whitepaper"
   },
   "theme": {
     "dark": "🌙 Dark",

@@ -23,6 +23,10 @@ const Legal        = React.lazy(() => import("./pages/Legal"));
 const XdaleGallery = React.lazy(() => import("./pages/XdaleGallery"));
 const Swapp        = React.lazy(() => import("./pages/Swapp"));
 const Analytics    = React.lazy(() => import("./pages/Analytics"));
+const Curator      = React.lazy(() => import("./pages/Curator"));
+const DealerCRM    = React.lazy(() => import("./pages/DealerCRM"));
+const PartnerDashboard = React.lazy(() => import("./pages/PartnerDashboard"));
+const Marketing    = React.lazy(() => import("./pages/Marketing"));
 const KycVerify    = React.lazy(() => import("./pages/KycVerify"));
 const Dashboard    = React.lazy(() => import("./pages/Dashboard"));
 const CheckoutSuccess = React.lazy(() => import("./pages/CheckoutSuccess"));
@@ -87,6 +91,10 @@ export default function App() {
                 <Route path="/xdale"          element={<XdaleGallery />} />
                 <Route path="/swapp"          element={<Swapp />} />
                 <Route path="/analytics"      element={<Analytics />} />
+                <Route path="/curator"        element={<Curator />} />
+                <Route path="/dealer-crm"     element={<DealerCRM />} />
+                <Route path="/partner-dashboard" element={<PartnerDashboard />} />
+                <Route path="/marketing"      element={<Marketing />} />
                 <Route path="/kyc"            element={<KycVerify />} />
                 <Route path="/dashboard"      element={<Dashboard />} />
                 <Route path="/checkout/success"        element={<CheckoutSuccess />} />

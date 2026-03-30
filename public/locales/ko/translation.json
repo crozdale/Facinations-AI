@@ -66,7 +66,12 @@
     "newsletter_placeholder": "이메일 주소",
     "newsletter_btn": "구독",
     "newsletter_error": "문제가 발생했습니다. 다시 시도해 주세요.",
-    "protocol_tagline": "탈중앙화 미술 프로토콜"
+    "protocol_tagline": "탈중앙화 미술 프로토콜",
+    "brand": "Façinations",
+    "legal": "법적 고지",
+    "about": "소개",
+    "whitepaper": "백서",
+    "architecture": "아키텍처"
   },
   "landing": {
     "eyebrow": "Facinations 프로토콜",
@@ -124,7 +129,8 @@
     "related_works": "관련 작품",
     "zoom_reset": "초기화",
     "zoom_hint": "스크롤 · 핀치 · +/- 버튼으로 확대/축소",
-    "royalty": "Royalty: {{percent}}%"
+    "royalty": "Royalty: {{percent}}%",
+    "eyebrow": "뮤제-크로스데일 · 원본 작품"
   },
   "vaults": {
     "title": "볼트",
@@ -722,6 +728,16 @@
     "failed": "실패",
     "vote_yes": "Vote YES",
     "vote_no": "Vote NO"
+  },
+  "home": {
+    "eyebrow": "탈중앙화 미술 프로토콜 · 이더리움",
+    "moving_image": "움직이는 이미지",
+    "artwork_caption": "Facinations에서 소개된 작품",
+    "use_controls": "재생하려면 컨트롤을 사용하세요",
+    "enter_gallery": "✦ 갤러리 입장",
+    "nav_collection": "컬렉션",
+    "nav_exchange": "컬렉션 거래소",
+    "nav_whitepaper": "백서"
   },
   "theme": {
     "dark": "🌙 Dark",

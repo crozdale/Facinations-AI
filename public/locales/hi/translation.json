@@ -66,7 +66,12 @@
     "newsletter_placeholder": "आपका ईमेल पता",
     "newsletter_btn": "सब्सक्राइब करें",
     "newsletter_error": "कुछ गलत हो गया — कृपया पुनः प्रयास करें।",
-    "protocol_tagline": "विकेंद्रीकृत कला प्रोटोकॉल"
+    "protocol_tagline": "विकेंद्रीकृत कला प्रोटोकॉल",
+    "brand": "Façinations",
+    "legal": "कानूनी",
+    "about": "हमारे बारे में",
+    "whitepaper": "श्वेत पत्र",
+    "architecture": "आर्किटेक्चर"
   },
   "landing": {
     "eyebrow": "Facinations प्रोटोकॉल",
@@ -124,7 +129,8 @@
     "related_works": "संबंधित कार्य",
     "zoom_reset": "रीसेट करें",
     "zoom_hint": "स्क्रॉल · पिंच · ज़ूम के लिए +/- उपयोग करें",
-    "royalty": "Royalty: {{percent}}%"
+    "royalty": "Royalty: {{percent}}%",
+    "eyebrow": "म्यूज़े-क्रोसडेल · मूल कार्य"
   },
   "vaults": {
     "title": "वॉल्ट",
@@ -720,6 +726,16 @@
     "submitting_proposal": "प्रस्ताव सबमिट हो रहा है…",
     "proposal_submitted": "प्रस्ताव सबमिट हुआ",
     "failed": "विफल"
+  },
+  "home": {
+    "eyebrow": "विकेंद्रीकृत ललित कला प्रोटोकॉल · एथेरियम",
+    "moving_image": "चलती छवि",
+    "artwork_caption": "Facinations पर प्रस्तुत एक कार्य",
+    "use_controls": "चलाने के लिए नियंत्रण का उपयोग करें",
+    "enter_gallery": "✦ गैलरी में प्रवेश करें",
+    "nav_collection": "संग्रह",
+    "nav_exchange": "संग्रह एक्सचेंज",
+    "nav_whitepaper": "श्वेत पत्र"
   },
   "theme": {
     "dark": "🌙 Dark",

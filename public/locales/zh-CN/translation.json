@@ -66,7 +66,12 @@
     "newsletter_placeholder": "您的电子邮件地址",
     "newsletter_btn": "订阅",
     "newsletter_error": "出现错误，请重试。",
-    "protocol_tagline": "去中心化艺术协议"
+    "protocol_tagline": "去中心化艺术协议",
+    "brand": "Façinations",
+    "legal": "法律",
+    "about": "关于",
+    "whitepaper": "白皮书",
+    "architecture": "架构"
   },
   "landing": {
     "eyebrow": "Facinations 协议",
@@ -124,7 +129,8 @@
     "related_works": "相关作品",
     "zoom_reset": "重置",
     "zoom_hint": "滚动 · 捏合 · 使用 +/- 缩放",
-    "royalty": "Royalty: {{percent}}%"
+    "royalty": "Royalty: {{percent}}%",
+    "eyebrow": "克罗斯代尔博物馆 · 原创作品"
   },
   "vaults": {
     "title": "金库",
@@ -722,6 +728,16 @@
     "failed": "失败",
     "vote_yes": "Vote YES",
     "vote_no": "Vote NO"
+  },
+  "home": {
+    "eyebrow": "去中心化艺术协议 · 以太坊",
+    "moving_image": "动态影像",
+    "artwork_caption": "在 Facinations 上展示的作品",
+    "use_controls": "使用控件播放",
+    "enter_gallery": "✦ 进入画廊",
+    "nav_collection": "藏品",
+    "nav_exchange": "藏品交易所",
+    "nav_whitepaper": "白皮书"
   },
   "theme": {
     "dark": "🌙 Dark",

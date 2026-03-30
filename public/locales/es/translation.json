@@ -66,7 +66,12 @@
     "newsletter_placeholder": "Tu dirección de correo electrónico",
     "newsletter_btn": "Suscribirse",
     "newsletter_error": "Algo salió mal — por favor inténtalo de nuevo.",
-    "protocol_tagline": "Protocolo de Arte Descentralizado"
+    "protocol_tagline": "Protocolo de Arte Descentralizado",
+    "brand": "Façinations",
+    "legal": "Legal",
+    "about": "Acerca de",
+    "whitepaper": "Libro Blanco",
+    "architecture": "Arquitectura"
   },
   "landing": {
     "eyebrow": "Protocolo Facinations",
@@ -124,7 +129,8 @@
     "related_works": "Obras relacionadas",
     "zoom_reset": "restablecer",
     "zoom_hint": "desplaza · pellizca · usa +/- para acercar",
-    "royalty": "Royalty: {{percent}}%"
+    "royalty": "Royalty: {{percent}}%",
+    "eyebrow": "Musée-Crosdale · Obras Originales"
   },
   "vaults": {
     "title": "Bóvedas",
@@ -722,6 +728,16 @@
     "submitting_proposal": "Enviando propuesta…",
     "proposal_submitted": "Propuesta enviada",
     "failed": "Fallido"
+  },
+  "home": {
+    "eyebrow": "Protocolo de Arte Descentralizado · Ethereum",
+    "moving_image": "Imagen en Movimiento",
+    "artwork_caption": "Una obra presentada en Facinations",
+    "use_controls": "Usar controles para reproducir",
+    "enter_gallery": "✦ Entrar a la Galería",
+    "nav_collection": "Colección",
+    "nav_exchange": "Intercambio de Colección",
+    "nav_whitepaper": "Libro Blanco"
   },
   "theme": {
     "dark": "🌙 Dark",

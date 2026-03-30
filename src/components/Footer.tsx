@@ -34,7 +34,7 @@ export default function Footer() {
             letterSpacing: "0.15em",
           }}
         >
-          Façinations
+          {t("footer.brand", "Façinations")}
         </span>
         <span
           style={{
@@ -45,7 +45,7 @@ export default function Footer() {
             textTransform: "uppercase",
           }}
         >
-          © {year} · Decentralised Fine-Art Protocol
+          {t("footer.copyright", { year })}
         </span>
       </div>
 
@@ -58,10 +58,10 @@ export default function Footer() {
         }}
       >
         {[
-          ["Legal", "/legal"],
-          ["About", "/about"],
-          ["Whitepaper", "/whitepaper"],
-          ["Architecture", "/architecture"],
+          [t("footer.legal", "Legal"), "/legal"],
+          [t("footer.about", "About"), "/about"],
+          [t("footer.whitepaper", "Whitepaper"), "/whitepaper"],
+          [t("footer.architecture", "Architecture"), "/architecture"],
         ].map(([label, path]) => (
           <Link
             key={label}

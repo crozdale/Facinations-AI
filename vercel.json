@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "pnpm install",
   "rewrites": [
     { "source": "/api/checkout/verify",     "destination": "/api/checkout"              },
     { "source": "/api/paypal/capture",      "destination": "/api/paypal?_action=capture" },

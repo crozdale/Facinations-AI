@@ -31,6 +31,24 @@ const css = `
   .video-corner.bl { bottom:-4px; left:-4px; border-width:0 0 1px 1px; }
   .video-corner.br { bottom:-4px; right:-4px; border-width:0 1px 1px 0; }
 
+  /* Dionysus Section */
+  .dionysus-section { width:700px; max-width:95%; margin-bottom:3.5rem; opacity:0; animation:fadeUp 1.2s ease 0.95s forwards; }
+  .dionysus-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:1rem; }
+  .dionysus-eyebrow { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.38em; text-transform:uppercase; color:rgba(212,175,55,0.45); }
+  .dionysus-title { font-family:'Cinzel',serif; font-size:0.82rem; letter-spacing:0.18em; color:rgba(212,175,55,0.75); font-weight:400; font-style:italic; margin:0; }
+  .dionysus-rule { width:100%; height:1px; background:linear-gradient(to right,rgba(212,175,55,0.25),transparent); margin-bottom:1rem; }
+  .dionysus-frame { position:relative; width:100%; background:#0e0e0e; border:1px solid rgba(212,175,55,0.15); box-shadow:0 20px 60px rgba(0,0,0,0.9); }
+  .dionysus-frame::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(212,175,55,0.45),transparent); z-index:1; pointer-events:none; }
+  .dionysus-corner { position:absolute; width:14px; height:14px; border-color:rgba(212,175,55,0.35); border-style:solid; z-index:2; }
+  .dionysus-corner.tl { top:-3px; left:-3px; border-width:1px 0 0 1px; }
+  .dionysus-corner.tr { top:-3px; right:-3px; border-width:1px 1px 0 0; }
+  .dionysus-corner.bl { bottom:-3px; left:-3px; border-width:0 0 1px 1px; }
+  .dionysus-corner.br { bottom:-3px; right:-3px; border-width:0 1px 1px 0; }
+  .dionysus-video { width:100%; display:block; max-height:520px; object-fit:contain; background:#0e0e0e; }
+  .dionysus-caption { display:flex; align-items:center; justify-content:space-between; margin-top:0.75rem; padding:0 0.1rem; }
+  .dionysus-caption-text { font-family:'Cormorant Garamond',serif; font-size:0.82rem; color:rgba(212,175,55,0.25); font-style:italic; margin:0; letter-spacing:0.04em; }
+  .dionysus-hint { font-family:'Cinzel',serif; font-size:0.44rem; letter-spacing:0.22em; color:rgba(212,175,55,0.18); text-transform:uppercase; white-space:nowrap; }
+
   .home-cta { opacity:0; animation:fadeUp 1s ease 1.1s forwards; }
   .cta-primary { font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.25em; text-transform:uppercase; padding:1rem 3rem; background:rgba(212,175,55,0.1); border:1px solid #d4af37; color:#d4af37; cursor:pointer; transition:all 0.3s; display:inline-block; }
   .cta-primary:hover { box-shadow:0 0 40px rgba(212,175,55,0.18); background:rgba(212,175,55,0.18); }
@@ -84,10 +102,11 @@ export default function Home() {
         />
 
         <div className="home-eyebrow">
-          Decentralised Fine-Art Protocol · Ethereum
+          {t("home.eyebrow", "Decentralised Fine-Art Protocol · Ethereum")}
         </div>
         <div className="home-div" />
 
+        {/* Hero video */}
         <div className="home-video-wrap">
           <div className="video-corner tl" />
           <div className="video-corner tr" />
@@ -105,13 +124,40 @@ export default function Home() {
           </video>
         </div>
 
+        {/* Dionysus */}
+        <div className="dionysus-section">
+          <div className="dionysus-header">
+            <span className="dionysus-eyebrow">{t("home.moving_image", "Moving Image")}</span>
+            <h2 className="dionysus-title">Dionysus</h2>
+          </div>
+          <div className="dionysus-rule" />
+          <div className="dionysus-frame">
+            <div className="dionysus-corner tl" />
+            <div className="dionysus-corner tr" />
+            <div className="dionysus-corner bl" />
+            <div className="dionysus-corner br" />
+            <video
+              controls
+              preload="metadata"
+              playsInline
+              className="dionysus-video"
+            >
+              <source src="/Dionysus.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div className="dionysus-caption">
+            <p className="dionysus-caption-text">{t("home.artwork_caption", "A work presented on Facinations")}</p>
+            <span className="dionysus-hint">{t("home.use_controls", "Use controls to play")}</span>
+          </div>
+        </div>
+
         <div className="home-cta">
           <a
             onClick={() => navigate("/gallery")}
             className="cta-primary"
             style={{ cursor: "pointer" }}
           >
-            ✦ Enter Gallery
+            {t("home.enter_gallery", "✦ Enter Gallery")}
           </a>
         </div>
 
@@ -119,12 +165,12 @@ export default function Home() {
 
         <nav className="home-nav">
           {[
-            ["About", "/about"],
-            ["Studio", "/studio"],
-            ["Vaults", "/vaults"],
-            ["Collection", "/collection"],
-            ["Collection Exchange", "/exchange"],
-            ["Whitepaper", "/whitepaper"],
+            [t("nav.about", "About"), "/about"],
+            [t("nav.studio", "Studio"), "/studio"],
+            [t("nav.vaults", "Vaults"), "/vaults"],
+            [t("home.nav_collection", "Collection"), "/collection"],
+            [t("home.nav_exchange", "Collection Exchange"), "/exchange"],
+            [t("home.nav_whitepaper", "Whitepaper"), "/whitepaper"],
           ].map(([label, path]) => (
             <a
               key={label}

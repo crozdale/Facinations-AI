@@ -66,7 +66,12 @@
     "newsletter_placeholder": "عنوان بريدك الإلكتروني",
     "newsletter_btn": "اشتراك",
     "newsletter_error": "حدث خطأ ما — يرجى المحاولة مرة أخرى.",
-    "protocol_tagline": "بروتوكول فني لا مركزي"
+    "protocol_tagline": "بروتوكول فني لا مركزي",
+    "brand": "Façinations",
+    "legal": "قانوني",
+    "about": "حول",
+    "whitepaper": "الورقة البيضاء",
+    "architecture": "البنية"
   },
   "landing": {
     "eyebrow": "بروتوكول Facinations",
@@ -124,7 +129,8 @@
     "related_works": "أعمال ذات صلة",
     "zoom_reset": "إعادة تعيين",
     "zoom_hint": "تمرير · قرصة · استخدم +/- للتكبير",
-    "royalty": "Royalty: {{percent}}%"
+    "royalty": "Royalty: {{percent}}%",
+    "eyebrow": "متحف كروسديل · أعمال أصلية"
   },
   "vaults": {
     "title": "الخزائن",
@@ -720,6 +726,16 @@
     "submitting_proposal": "جارٍ إرسال المقترح…",
     "proposal_submitted": "تم إرسال المقترح",
     "failed": "فشل"
+  },
+  "home": {
+    "eyebrow": "بروتوكول فن لامركزي · إيثيريوم",
+    "moving_image": "صورة متحركة",
+    "artwork_caption": "عمل فني مقدَّم على Facinations",
+    "use_controls": "استخدم عناصر التحكم للتشغيل",
+    "enter_gallery": "✦ ادخل المعرض",
+    "nav_collection": "المجموعة",
+    "nav_exchange": "تبادل المجموعة",
+    "nav_whitepaper": "الورقة البيضاء"
   },
   "theme": {
     "dark": "🌙 Dark",
