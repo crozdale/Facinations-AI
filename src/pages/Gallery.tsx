@@ -1166,48 +1166,6 @@ export default function Gallery() {
         </span>
       </div>
 
-      <div className="g-marquee" key={`marquee-${filter}`}>
-        {/* Row 1 — drifts left */}
-        <div className="g-track left" style={{ marginBottom: "3px" }}>
-          {[...filtered, ...filtered].map((file, i) => (
-            <div
-              key={`r1-${i}`}
-              className="g-item"
-              onClick={() => setLbIdx(filtered.indexOf(file))}
-            >
-              <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
-              <div className="g-item-ov">
-                <span className="g-lbl">{getLabel(file)}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        {/* Row 2 — drifts right */}
-        <div className="g-track right">
-          {[...[...filtered].reverse(), ...[...filtered].reverse()].map((file, i) => (
-            <div
-              key={`r2-${i}`}
-              className="g-item"
-              onClick={() => setLbIdx(filtered.indexOf(file))}
-            >
-              <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
-              <div className="g-item-ov">
-                <span className="g-lbl">{getLabel(file)}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {lbIdx !== null && (
-        <Lightbox
-          filtered={filtered}
-          index={lbIdx}
-          setIndex={setLbIdx}
-          onClose={() => setLbIdx(null)}
-        />
-      )}
-
       {/* Dionysus — Moving Image */}
       <div className="dion-section">
         <div className="dion-header">
@@ -1250,6 +1208,48 @@ export default function Gallery() {
           </div>
         </div>
       </div>
+
+      <div className="g-marquee" key={`marquee-${filter}`}>
+        {/* Row 1 — drifts left */}
+        <div className="g-track left" style={{ marginBottom: "3px" }}>
+          {[...filtered, ...filtered].map((file, i) => (
+            <div
+              key={`r1-${i}`}
+              className="g-item"
+              onClick={() => setLbIdx(filtered.indexOf(file))}
+            >
+              <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
+              <div className="g-item-ov">
+                <span className="g-lbl">{getLabel(file)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* Row 2 — drifts right */}
+        <div className="g-track right">
+          {[...[...filtered].reverse(), ...[...filtered].reverse()].map((file, i) => (
+            <div
+              key={`r2-${i}`}
+              className="g-item"
+              onClick={() => setLbIdx(filtered.indexOf(file))}
+            >
+              <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
+              <div className="g-item-ov">
+                <span className="g-lbl">{getLabel(file)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {lbIdx !== null && (
+        <Lightbox
+          filtered={filtered}
+          index={lbIdx}
+          setIndex={setLbIdx}
+          onClose={() => setLbIdx(null)}
+        />
+      )}
 
       <div
         style={{
