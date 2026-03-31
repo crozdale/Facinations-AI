@@ -1015,8 +1015,14 @@ function Lightbox({ filtered, index, setIndex, onClose }) {
 // ───────── Gallery page ─────────
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
-  .g-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2px;background:#1a1609}
-  .g-item{position:relative;overflow:hidden;aspect-ratio:1/1;cursor:pointer;background:#111}
+  .g-marquee{overflow:hidden;width:100%;background:#111}
+  .g-track{display:flex;gap:3px;width:max-content}
+  .g-track.left{animation:gLeft 90s linear infinite}
+  .g-track.right{animation:gRight 70s linear infinite}
+  .g-marquee:hover .g-track{animation-play-state:paused}
+  @keyframes gLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  @keyframes gRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+  .g-item{position:relative;width:260px;height:260px;flex-shrink:0;overflow:hidden;cursor:pointer;background:#111}
   .g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.25,.46,.45,.94),filter .4s;filter:brightness(.88) saturate(.9)}
   .g-item:hover img{transform:scale(1.07);filter:brightness(1) saturate(1.1)}
   .g-item-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%);opacity:0;transition:opacity .35s;display:flex;align-items:flex-end;padding:1rem}
@@ -1160,23 +1166,37 @@ export default function Gallery() {
         </span>
       </div>
 
-      <div className="g-grid">
-        {filtered.map((file, i) => (
-          <div
-            key={file}
-            className="g-item"
-            onClick={() => setLbIdx(i)}
-          >
-            <img
-              src={`/images/${encodeURIComponent(file)}`}
-              alt={getLabel(file)}
-              loading="lazy"
-            />
-            <div className="g-item-ov">
-              <span className="g-lbl">{getLabel(file)}</span>
+      <div className="g-marquee" key={`marquee-${filter}`}>
+        {/* Row 1 — drifts left */}
+        <div className="g-track left" style={{ marginBottom: "3px" }}>
+          {[...filtered, ...filtered].map((file, i) => (
+            <div
+              key={`r1-${i}`}
+              className="g-item"
+              onClick={() => setLbIdx(filtered.indexOf(file))}
+            >
+              <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
+              <div className="g-item-ov">
+                <span className="g-lbl">{getLabel(file)}</span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        {/* Row 2 — drifts right */}
+        <div className="g-track right">
+          {[...[...filtered].reverse(), ...[...filtered].reverse()].map((file, i) => (
+            <div
+              key={`r2-${i}`}
+              className="g-item"
+              onClick={() => setLbIdx(filtered.indexOf(file))}
+            >
+              <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
+              <div className="g-item-ov">
+                <span className="g-lbl">{getLabel(file)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {lbIdx !== null && (
