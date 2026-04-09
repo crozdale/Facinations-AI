@@ -7,29 +7,29 @@ const TOOLS = [
   {
     category: "CRM & Contact Management",
     items: [
-      { name: "HubSpot CRM", desc: "Primary CRM for Fine Art Collectors and Art Community. Full pipeline, email sequences, lead scoring, and activity timeline. Free tier usable at launch; upgrade to Starter ($20/mo) at month 2." },
-      { name: "Attio", desc: "Lightweight CRM for Crypto Speculator segment. Better suited for fast-moving, data-enriched outreach. Native Segment integration." },
-      { name: "Apollo.io", desc: "Contact list building. Search by job title (gallery director, art fund manager, crypto fund principal). Export to HubSpot via Zapier." },
-      { name: "Hunter.io", desc: "Email verification layer. Run every exported list through Hunter before sending. Reduces bounce rate below 2%." },
-      { name: "LinkedIn Sales Navigator", desc: "Institutional outreach to collectors, family offices, and crypto funds. $100/mo but high ROI for enterprise deals." },
+      { name: "HubSpot CRM", href: "https://www.hubspot.com/products/crm", desc: "Primary CRM for Fine Art Collectors and Art Community. Full pipeline, email sequences, lead scoring, and activity timeline. Free tier usable at launch; upgrade to Starter ($20/mo) at month 2." },
+      { name: "Attio", href: "https://attio.com", desc: "Lightweight CRM for Crypto Speculator segment. Better suited for fast-moving, data-enriched outreach. Native Segment integration." },
+      { name: "Apollo.io", href: "https://www.apollo.io", desc: "Contact list building. Search by job title (gallery director, art fund manager, crypto fund principal). Export to HubSpot via Zapier." },
+      { name: "Hunter.io", href: "https://hunter.io", desc: "Email verification layer. Run every exported list through Hunter before sending. Reduces bounce rate below 2%." },
+      { name: "LinkedIn Sales Navigator", href: "https://business.linkedin.com/sales-solutions/sales-navigator", desc: "Institutional outreach to collectors, family offices, and crypto funds. $100/mo but high ROI for enterprise deals." },
     ],
   },
   {
     category: "Media & Content",
     items: [
-      { name: "Mailchimp", desc: "Email marketing for Art Community (high frequency, nurture-led). Start with Mailchimp free tier. USD-billed." },
-      { name: "Later or Buffer", desc: "Social scheduling across Instagram, TikTok, X, Pinterest. Batch schedule one week at a time. Later has native TikTok support." },
-      { name: "Canva Pro", desc: "Design layer for social posts, newsletter headers, event invites. Maintain brand consistency across all four audiences from one workspace." },
-      { name: "Descript or CapCut", desc: "Short-form video editing for TikTok and Reels. Descript for team workflows with transcript-based editing. CapCut for fast solo turnaround." },
+      { name: "Mailchimp", href: "https://mailchimp.com", desc: "Email marketing for Art Community (high frequency, nurture-led). Start with Mailchimp free tier. USD-billed." },
+      { name: "Later or Buffer", href: "https://later.com", desc: "Social scheduling across Instagram, TikTok, X, Pinterest. Batch schedule one week at a time. Later has native TikTok support." },
+      { name: "Canva Pro", href: "https://www.canva.com/pro", desc: "Design layer for social posts, newsletter headers, event invites. Maintain brand consistency across all four audiences from one workspace." },
+      { name: "Descript or CapCut", href: "https://www.descript.com", desc: "Short-form video editing for TikTok and Reels. Descript for team workflows with transcript-based editing. CapCut for fast solo turnaround." },
     ],
   },
   {
     category: "Analytics & Data",
     items: [
-      { name: "Segment", desc: "Customer data platform. Routes all in-app events (trade placed, referral clicked, artwork viewed) to HubSpot, Amplitude, and email tools simultaneously." },
-      { name: "Amplitude", desc: "Product analytics. Tracks funnel conversion from signup to first trade. Identify drop-off points by audience segment." },
-      { name: "Google Analytics 4", desc: "Website and landing page performance. UTM tagging for all paid and influencer traffic sources." },
-      { name: "FirstPromoter", desc: "Affiliate tracking for influencer programme. Real-time commission calculation and payout scheduling. USD-billed, $49/mo Starter." },
+      { name: "Segment", href: "https://segment.com", desc: "Customer data platform. Routes all in-app events (trade placed, referral clicked, artwork viewed) to HubSpot, Amplitude, and email tools simultaneously." },
+      { name: "Amplitude", href: "https://amplitude.com", desc: "Product analytics. Tracks funnel conversion from signup to first trade. Identify drop-off points by audience segment." },
+      { name: "Google Analytics 4", href: "https://analytics.google.com", desc: "Website and landing page performance. UTM tagging for all paid and influencer traffic sources." },
+      { name: "FirstPromoter", href: "https://firstpromoter.com", desc: "Affiliate tracking for influencer programme. Real-time commission calculation and payout scheduling. USD-billed, $49/mo Starter." },
     ],
   },
 ];
@@ -127,7 +127,18 @@ export default function Marketing() {
                   <tbody>
                     {section.items.map(item => (
                       <tr key={item.name}>
-                        <td style={S.tdName}>{item.name}</td>
+                        <td style={S.tdName}>
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: "#d4af37", textDecoration: "none", borderBottom: "1px solid rgba(212,175,55,0.3)", paddingBottom: "1px", transition: "border-color 0.2s" }}
+                            onMouseEnter={e => (e.currentTarget.style.borderColor = "#d4af37")}
+                            onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(212,175,55,0.3)")}
+                          >
+                            {item.name}
+                          </a>
+                        </td>
                         <td style={S.td}>{item.desc}</td>
                       </tr>
                     ))}

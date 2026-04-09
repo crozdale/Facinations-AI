@@ -1,7 +1,7 @@
 ﻿// src/pages/Home.jsx
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import xCoinLogo from "../assets/x-coin-logo.png";
 import { BRAND } from "../brand/brandAssets";
 
@@ -58,7 +58,6 @@ const css = `
 
 export default function Home() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   return (
     <main className="home-root">
@@ -119,13 +118,9 @@ export default function Home() {
         </div>
 
         <div className="home-cta">
-          <a
-            onClick={() => navigate("/gallery")}
-            className="cta-primary"
-            style={{ cursor: "pointer" }}
-          >
+          <Link to="/gallery" className="cta-primary">
             {t("home.enter_gallery", "✦ Enter Gallery")}
-          </a>
+          </Link>
         </div>
 
         <p className="home-subtitle">{t("hero.subtitle")}</p>
@@ -135,18 +130,17 @@ export default function Home() {
             [t("nav.about", "About"), "/about"],
             [t("nav.studio", "Studio"), "/studio"],
             [t("nav.vaults", "Vaults"), "/vaults"],
-            [t("home.nav_collection", "Collection"), "/collection"],
-            [t("home.nav_exchange", "Collection Exchange"), "/exchange"],
-            [t("home.nav_whitepaper", "Whitepaper"), "/whitepaper"],
+            [t("home.nav_collection", "Collection"), "/galleries"],
+            [t("home.nav_exchange", "Collection Exchange"), "/swapp"],
+            [t("home.nav_whitepaper", "Whitepaper"), "/architecture"],
           ].map(([label, path]) => (
-            <a
+            <Link
               key={label}
-              onClick={() => navigate(path)}
+              to={path}
               className="nav-pill"
-              style={{ cursor: "pointer" }}
             >
               {label}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>

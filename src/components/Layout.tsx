@@ -162,10 +162,16 @@ function SiteFooter() {
           {([
             [t("nav.gallery", "Gallery"),      "/gallery"],
             [t("nav.vaults", "Vaults"),        "/vaults"],
+            [t("nav.swap", "Swap"),            "/swap"],
+            [t("nav.swapp", "P2P Swapp"),      "/swapp"],
+            [t("nav.dashboard", "Dashboard"),  "/dashboard"],
             [t("nav.studio", "Studio"),        "/studio"],
+            [t("nav.galleries", "Galleries"),  "/galleries"],
+            [t("nav.aiCurator", "AI Curator"), "/curator"],
+            [t("nav.analytics", "Analytics"),  "/analytics"],
             [t("nav.about", "About"),          "/about"],
             [t("nav.legal", "Legal"),          "/legal"],
-            [t("nav.arch", "Architecture"),    "/architecture"],
+            [t("nav.arch", "Whitepaper"),      "/architecture"],
           ] as [string, string][]).map(([label, path]) => (
             <Link
               key={label}

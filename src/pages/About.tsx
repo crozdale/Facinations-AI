@@ -77,8 +77,10 @@ export default function About() {
         </section>
 
         <div style={{ borderTop: `1px solid ${tk.borderFaint}`, paddingTop: "2.5rem" }}>
-          <button
+          <a
+            href="mailto:founder@facinations.app?subject=Investor%20Inquiry"
             style={{
+              display: "inline-block",
               fontFamily: tk.fontDisplay,
               fontSize: "0.6rem",
               letterSpacing: "0.2em",
@@ -87,16 +89,14 @@ export default function About() {
               border: `1px solid ${tk.borderMid}`,
               background: "transparent",
               padding: "0.65rem 1.5rem",
-              cursor: "pointer",
+              textDecoration: "none",
               transition: `border-color 0.2s ${tk.ease}`,
             }}
-            onClick={() => {
-              window.location.href =
-                "mailto:founder@facinations.app?subject=Investor%20Inquiry";
-            }}
+            onMouseEnter={e => (e.currentTarget.style.borderColor = tk.gold)}
+            onMouseLeave={e => (e.currentTarget.style.borderColor = tk.borderMid)}
           >
             {t("about.btn_investor")}
-          </button>
+          </a>
         </div>
       </article>
     </main>
