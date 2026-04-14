@@ -6,6 +6,6 @@ export const GALLERY_ITEMS = [
     year: 2024,
     medium: "Mixed Media",
     image: null,
-    externalUrl: "https://xdalegallery.com/artwork/untitled-study-1",
+    externalUrl: "https://xdale.net/artwork/untitled-study-1",
   },
 ];

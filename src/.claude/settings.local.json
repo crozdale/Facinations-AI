@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l /c/Users/crozd/musee-crosdale/src/**/*.tsx)",
+      "Bash(xargs grep:*)"
+    ]
+  }
+}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useXerVaultRef } from "../hooks/useXerVaultRef";
 
 /**
@@ -6,6 +7,7 @@ import { useXerVaultRef } from "../hooks/useXerVaultRef";
  * Sits above the WalletGate so it's visible before wallet connection.
  */
 export default function XerVaultBanner() {
+  const { t } = useTranslation();
   const isXerVault = useXerVaultRef();
   const [dismissed, setDismissed] = useState(false);
 
@@ -49,7 +51,7 @@ export default function XerVaultBanner() {
           fontStyle: "italic",
           lineHeight: 1.4,
         }}>
-          Connect the same wallet you use on XerVault — instant access, no subscription required.
+          {t("xervaultBanner.tagline")}
         </p>
       </div>
       <button

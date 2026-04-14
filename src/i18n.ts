@@ -11,6 +11,7 @@ i18n
     supportedLngs: ["en", "es", "fr", "it", "de", "ko", "zh-CN", "pt-BR", "ja", "ru", "ar", "hi"],
     backend: {
       loadPath: "/locales/{{lng}}/translation.json",
+      queryStringParams: { v: "20260330" },
     },
     interpolation: { escapeValue: false },
     react: { useSuspense: false },

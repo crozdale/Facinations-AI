@@ -5,7 +5,8 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSubscription, PLANS, PlanTier, tierMeets } from "../context/SubscriptionContext";
+import { useSubscription, PLANS, tierMeets } from "../context/SubscriptionContext";
+import type { PlanTier } from "../context/SubscriptionContext";
 
 interface Props {
   required: PlanTier;

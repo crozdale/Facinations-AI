@@ -1,0 +1,190 @@
+from pathlib import Path
+root = Path('output/facinations-foundry-v2-hardened')
+unit = '''// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+
+import {Test} from "forge-std/Test.sol";
+import {FacinationsPlatformLicenseV2Hardened} from "../src/FacinationsPlatformLicenseV2Hardened.sol";
+import {MockUSDC} from "./mocks/MockUSDC.sol";
+import {MockBadToken} from "./mocks/MockBadToken.sol";
+import {MockRoyaltyNFT} from "./mocks/MockRoyaltyNFT.sol";
+
+contract FacinationsPlatformLicenseV2HardenedUnitTest is Test {
+    FacinationsPlatformLicenseV2Hardened internal license;
+    MockUSDC internal usdc;
+    MockBadToken internal badToken;
+    MockRoyaltyNFT internal nft;
+
+    uint256 internal ownerPk = 0xA11CE;
+    uint256 internal clientPk = 0xB0B;
+    uint256 internal otherPk = 0xCAFE;
+
+    address internal owner;
+    address internal treasury;
+    address internal client;
+    address internal other;
+    address internal seller;
+    address internal royaltyReceiver;
+    address internal buyer;
+
+    function setUp() public {
+        owner = vm.addr(ownerPk);
+        client = vm.addr(clientPk);
+        other = vm.addr(otherPk);
+        treasury = makeAddr("treasury");
+        seller = makeAddr("seller");
+        royaltyReceiver = makeAddr("artist");
+        buyer = makeAddr("buyer");
+
+        vm.startPrank(owner);
+        usdc = new MockUSDC();
+        badToken = new MockBadToken();
+        nft = new MockRoyaltyNFT();
+        license = new FacinationsPlatformLicenseV2Hardened(owner, treasury, address(usdc));
+        license.grantRole(license.OPERATOR_ROLE(), owner);
+        license.grantRole(license.SETTLEMENT_ROLE(), owner);
+        license.setAllowedNFTContract(address(nft), true);
+        vm.stopPrank();
+
+        usdc.mint(client, 1_000_000e6);
+        vm.prank(client);
+        usdc.approve(address(license), type(uint256).max);
+    }
+
+    function testRevert_IssueStandardLicenseWhenCurrentLicenseAlreadyExists() public {
+        _issueStarter();
+        vm.expectRevert(FacinationsPlatformLicenseV2Hardened.InvalidStateTransition.selector);
+        vm.prank(owner);
+        license.issueStandardLicense(
+            client,
+            FacinationsPlatformLicenseV2Hardened.Tier.GalleryStarter,
+            "Crosdale Client LLC",
+            "ipfs://meta-2",
+            "New York",
+            "Standard SLA",
+            client
+        );
+    }
+
+    function testRevert_AcceptNDAWithExpiredDeadline() public {
+        uint256 deadline = block.timestamp;
+        bytes32 digest = license.getNDADigest(client, "Crosdale Client LLC", "New York", "ipfs://nda-v2", 0, deadline);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(clientPk, digest);
+
+        vm.expectRevert(FacinationsPlatformLicenseV2Hardened.SignatureExpired.selector);
+        license.acceptNDABySignature(client, "Crosdale Client LLC", "New York", "ipfs://nda-v2", deadline, abi.encodePacked(r, s, v));
+    }
+
+    function testRevert_AcceptNDAWithWrongSigner() public {
+        uint256 deadline = block.timestamp + 1 days;
+        bytes32 digest = license.getNDADigest(client, "Crosdale Client LLC", "New York", "ipfs://nda-v2", 0, deadline);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(otherPk, digest);
+
+        vm.expectRevert(FacinationsPlatformLicenseV2Hardened.InvalidSignature.selector);
+        license.acceptNDABySignature(client, "Crosdale Client LLC", "New York", "ipfs://nda-v2", deadline, abi.encodePacked(r, s, v));
+    }
+
+    function testRevert_SettleWithUnsupportedNFTContract() public {
+        _activateClient();
+        MockRoyaltyNFT rogue = new MockRoyaltyNFT();
+        uint256 tokenId = rogue.mint(seller, royaltyReceiver, 500);
+        vm.prank(seller);
+        rogue.approve(address(license), tokenId);
+        usdc.mint(buyer, 10_000e6);
+        vm.prank(buyer);
+        usdc.approve(address(license), type(uint256).max);
+
+        vm.expectRevert(FacinationsPlatformLicenseV2Hardened.UnsupportedNFTContract.selector);
+        vm.prank(owner);
+        license.settleNFTSale(keccak256("rogue-nft"), client, address(rogue), tokenId, seller, buyer, 1_000e6, usdc, true);
+    }
+
+    function testRevert_SettleWithUnsupportedPaymentToken() public {
+        _activateClient();
+        uint256 tokenId = nft.mint(seller, royaltyReceiver, 500);
+        vm.prank(seller);
+        nft.approve(address(license), tokenId);
+        badToken.mint(buyer, 10_000e6);
+        vm.prank(buyer);
+        badToken.approve(address(license), type(uint256).max);
+
+        vm.expectRevert(FacinationsPlatformLicenseV2Hardened.UnsupportedPaymentToken.selector);
+        vm.prank(owner);
+        license.settleNFTSale(keccak256("bad-token"), client, address(nft), tokenId, seller, buyer, 1_000e6, badToken, true);
+    }
+
+    function testRevert_SettleWhenSellerNotOwner() public {
+        _activateClient();
+        uint256 tokenId = nft.mint(other, royaltyReceiver, 500);
+        vm.prank(other);
+        nft.approve(address(license), tokenId);
+        usdc.mint(buyer, 10_000e6);
+        vm.prank(buyer);
+        usdc.approve(address(license), type(uint256).max);
+
+        vm.expectRevert(FacinationsPlatformLicenseV2Hardened.NotTokenOwner.selector);
+        vm.prank(owner);
+        license.settleNFTSale(keccak256("not-owner"), client, address(nft), tokenId, seller, buyer, 1_000e6, usdc, true);
+    }
+
+    function testRevert_SettleWithoutApproval() public {
+        _activateClient();
+        uint256 tokenId = nft.mint(seller, royaltyReceiver, 500);
+        usdc.mint(buyer, 10_000e6);
+        vm.prank(buyer);
+        usdc.approve(address(license), type(uint256).max);
+
+        vm.expectRevert(FacinationsPlatformLicenseV2Hardened.MissingApproval.selector);
+        vm.prank(owner);
+        license.settleNFTSale(keccak256("no-approval"), client, address(nft), tokenId, seller, buyer, 1_000e6, usdc, true);
+    }
+
+    function testRevert_SettleWithBuyerEqualsSeller() public {
+        _activateClient();
+        uint256 tokenId = nft.mint(seller, royaltyReceiver, 500);
+        vm.prank(seller);
+        nft.approve(address(license), tokenId);
+        usdc.mint(seller, 10_000e6);
+        vm.prank(seller);
+        usdc.approve(address(license), type(uint256).max);
+
+        vm.expectRevert(FacinationsPlatformLicenseV2Hardened.InvalidBuyer.selector);
+        vm.prank(owner);
+        license.settleNFTSale(keccak256("same-buyer-seller"), client, address(nft), tokenId, seller, seller, 1_000e6, usdc, true);
+    }
+
+    function testRevert_SettleWithExcessiveRoyalty() public {
+        _activateClient();
+        uint256 tokenId = nft.mint(seller, royaltyReceiver, 3000);
+        vm.prank(seller);
+        nft.approve(address(license), tokenId);
+        usdc.mint(buyer, 10_000e6);
+        vm.prank(buyer);
+        usdc.approve(address(license), type(uint256).max);
+
+        vm.expectRevert(FacinationsPlatformLicenseV2Hardened.ExcessiveRoyalty.selector);
+        vm.prank(owner);
+        license.settleNFTSale(keccak256("high-royalty"), client, address(nft), tokenId, seller, buyer, 1_000e6, usdc, true);
+    }
+
+    function testOnlyOperatorCanToggleAllowlists() public {
+        vm.expectRevert();
+        vm.prank(other);
+        license.setAllowedPaymentToken(address(badToken), true);
+
+        vm.prank(owner);
+        license.setAllowedPaymentToken(address(badToken), true);
+        assertTrue(license.allowedPaymentTokens(address(badToken)));
+    }
+
+    function _issueStarter() internal {
+        vm.prank(owner);
+        license.issueStandardLicense(
+            client,
+            FacinationsPlatformLicenseV2Hardened.Tier.GalleryStarter,
+            "Crosdale Client LLC",
+            "ipfs://client-metadata",
+            "New York",
+            "Standard SLA",
+            client
+        );

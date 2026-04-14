@@ -88,18 +88,7 @@
     "blogazine": "Zum Blogazine klicken"
   },
   "footer": {
-    "copyright": "© {{year}} Façinations. Alle Rechte vorbehalten.",
-    "newsletter_eyebrow": "Private View · Musée-Crosdale",
-    "newsletter_confirmed": "Sie stehen auf der Liste.",
-    "newsletter_placeholder": "Ihre E-Mail-Adresse",
-    "newsletter_btn": "Abonnieren",
-    "newsletter_error": "Ein Fehler ist aufgetreten — bitte versuchen Sie es erneut.",
-    "protocol_tagline": "Dezentralisiertes Kunstprotokoll",
-    "brand": "Façinations",
-    "legal": "Rechtliches",
-    "about": "Über uns",
-    "whitepaper": "Whitepaper",
-    "architecture": "Architektur"
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
   },
   "landing": {
     "eyebrow": "Facinations-Protokoll",
@@ -135,30 +124,7 @@
     "body": "Facinations ist ein DeFi-nativer Kunsttresor, der mithilfe sicherer On-Chain-Tresore Bruchteilseigentum an seltenen Kunstwerken ermöglicht."
   },
   "gallery": {
-    "title": "Galerie",
-    "subtitle": "Kuratierte digitale Werke und Sammlungen.",
-    "filter_all": "Alle",
-    "filter_derain": "Derain",
-    "filter_matisse": "Matisse",
-    "filter_medieval": "Mittelalterlich",
-    "filter_renaissance": "Renaissance",
-    "filter_originals": "Originale",
-    "works_count": "{{count}} Werke",
-    "ai_subtitle": "KI-Kurator · Chat · Verwandte",
-    "curators_eye": "Kuratorenblick",
-    "btn_invoke": "✦ KI-Kurator aufrufen",
-    "analysing": "Wird analysiert…",
-    "ai_error": "KI nicht erreichbar. Prüfen Sie die Netzwerkregisterkarte in DevTools auf /api/claude-Fehler.",
-    "btn_retry": "Erneut versuchen",
-    "ask_curator": "Kurator befragen",
-    "ask_hint": "Fragen Sie nach Technik, Geschichte, Symbolik…",
-    "thinking": "Wird gedacht…",
-    "placeholder_ask": "Stellen Sie eine Frage…",
-    "related_works": "Verwandte Werke",
-    "zoom_reset": "zurücksetzen",
-    "zoom_hint": "scrollen · zusammenkneifen · +/- zum Zoomen verwenden",
-    "royalty": "Royalty: {{percent}}%",
-    "eyebrow": "Musée-Crosdale · Originalwerke"
+    "speed": "Geschwindigkeit"
   },
   "vaults": {
     "title": "Tresore",
@@ -478,7 +444,7 @@
     "ob_placeholder_inventory": "z. B. 40–80 Werke",
     "ob_placeholder_about": "Erzählen Sie uns von Ihrem Programm, Ihren Künstlern und was Sie on-chain erreichen möchten…",
     "ob_included_heading": "Was enthalten ist",
-    "ob_include_1": "Gehostete Galerieseite unter facinations.art/[Ihr-Slug]",
+    "ob_include_1": "Gehostete Galerieseite unter xdale.art/[Ihr-Slug]",
     "ob_include_2": "On-Chain-Provenienz­zertifikate für jedes gelistete Werk",
     "ob_include_3": "Berechtigung zur Tresor-Fraktionalisierung für hochwertige Werke",
     "ob_include_4": "Direktes Routing von Sammleranfragen",
@@ -502,7 +468,7 @@
     "tutor_thinking": "Tutor denkt nach…",
     "btn_send": "Senden",
     "tutor_error": "Tutor ist derzeit nicht verfügbar. Bitte versuchen Sie es in Kürze erneut.",
-    "welcome_starter": "Willkommen in Modul {{module}}: {{title}}. Ein guter Einstieg: \u201e{{starter}}\u201c",
+    "welcome_starter": "Willkommen in Modul {{module}}: {{title}}. Ein guter Einstieg: „{{starter}}“",
     "welcome_default": "Willkommen in Modul {{module}}: {{title}}. Stellen Sie mir beliebige Fragen zu diesem Thema.",
     "placeholder_ask": "Fragen Sie nach {{topic}}…"
   },
@@ -767,9 +733,6 @@
     "nav_exchange": "Sammlungsbörse",
     "nav_whitepaper": "Whitepaper"
   },
-  "footer": {
-    "contract": "0x33d1de58…157f · Ethereum Sepolia"
-  },
   "galleries": {
     "meta_title": "Galerien — Musée-Crosdale",
     "meta_description": "Entdecken Sie kuratierte Galerien auf der Facinations-Plattform — zeitgenössische und aufstrebende Künstler mit On-Chain-Provenienz.",
@@ -851,11 +814,63 @@
     "eyebrow": "Galerie · Musée-Crosdale",
     "powered_by": "Betrieben von Facinations"
   },
-  "gallery": {
-    "speed": "Geschwindigkeit"
-  },
   "theme": {
     "dark": "🌙 Dark",
     "light": "☀️ Light"
+  },
+  "community": {
+    "eyebrow": "Façinations-Protokoll",
+    "title": "Gemeinschaft",
+    "tagline": "Verbinden Sie sich mit dem Musée-Crosdale-Netzwerk — nehmen Sie an der Unterhaltung auf Discord teil oder erreichen Sie das Team direkt über die Ende-zu-Ende-Verschlüsselung von Threema.",
+    "tab_discord": "Discord",
+    "tab_threema": "Threema",
+    "badge_live_chat": "Live-Chat",
+    "badge_encrypted": "Verschlüsselt"
+  },
+  "communityPortal": {
+    "eyebrow": "Community-Portal",
+    "title": "Mit dem Façinations-Netzwerk verbinden",
+    "tagline": "Nehmen Sie an der Unterhaltung auf Discord teil oder senden Sie eine private, verschlüsselte Nachricht über Threema."
+  },
+  "discord": {
+    "label": "Live-Server",
+    "iframe_title": "Discord-Community-Server",
+    "join": "Server beitreten",
+    "setup_heading": "Discord-Server — Einrichtung erforderlich",
+    "setup_body": "Verbinden Sie Ihren Discord-Server, um das Live-Widget und die Anzahl der Community-Mitglieder hier anzuzeigen.",
+    "setup_step_1": "Erstellen Sie einen Discord-Server auf discord.com",
+    "setup_step_2": "Aktivieren Sie das Widget in Servereinstellungen → Widget",
+    "setup_step_3": "Kopieren Sie die Server-ID und fügen Sie sie als VITE_DISCORD_SERVER_ID zu Ihrer .env hinzu",
+    "setup_step_4": "Fügen Sie optional Ihren Einladungslink als VITE_DISCORD_INVITE_URL hinzu"
+  },
+  "threema": {
+    "id_label": "Threema-ID",
+    "encrypted_badge": "Ende-zu-Ende-verschlüsselt",
+    "id_body": "Fügen Sie diese ID direkt in der Threema-App für private, verschlüsselte Nachrichten mit dem Façinations-Team hinzu. Keine Telefonnummer oder E-Mail-Adresse erforderlich.",
+    "open_app": "In Threema öffnen",
+    "form_title": "Sichere Nachricht senden",
+    "name_placeholder": "Ihr Name (optional)",
+    "email_placeholder": "E-Mail für Antwort (optional)",
+    "message_placeholder": "Ihre Nachricht…",
+    "submit": "Über Threema Gateway senden",
+    "sending": "Wird gesendet…",
+    "send_another": "Weitere senden",
+    "sent": "Ihre Nachricht wurde über Threema Gateway zugestellt — Ende-zu-Ende-verschlüsselt. Das Team wird über die App antworten.",
+    "notice": "Nachrichten werden über das Threema Gateway zugestellt und in der Threema-App des Teams empfangen. Ihre Nachricht ist während der Übertragung verschlüsselt. Die Angabe einer E-Mail-Adresse ist optional und wird nur verwendet, um eine Antwort zu ermöglichen."
+  },
+  "collectionExchange": {
+    "eyebrow": "Sammlungsaustausch",
+    "title": "Liquiditätsmotor für bildende Kunst",
+    "description": "Angebote kommen als Vorschläge anderer Sammler, nicht als Auftragsbücher. Jeder Austausch trägt zur Provenienz, Ausstellungssichtbarkeit und kultureller Bedeutung bei.",
+    "proposal_eyebrow": "Austauschvorschlag",
+    "proposal_title": "Sammler in Genf schlägt Austausch vor",
+    "proposal_body": "Tauschen Sie Ihre „Narrative Abstraktion #3“ gegen „Frühperiodenstudie in Blau“, geleitet durch einen kuratierten Austausch und institutionellen Tresor.",
+    "provenance_aligned": "Provenienz ausgerichtet",
+    "review_proposal": "Vorschlag prüfen",
+    "escrow_notice_title": "Physical asset escrow required.",
+    "escrow_notice_body": "Once a partner is accepted for any exchange transaction, both parties must escrow their physical asset with the platform before the trade is released. Do not transfer your item until escrow is confirmed by Musée-Crosdale."
+  },
+  "xervaultBanner": {
+    "tagline": "Verbinden Sie dasselbe Wallet, das Sie auf XerVault verwenden — sofortiger Zugang, kein Abonnement erforderlich."
   }
 }

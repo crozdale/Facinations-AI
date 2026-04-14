@@ -3,9 +3,9 @@
 //
 // Requires: RESEND_API_KEY (from resend.com — free tier: 3,000 emails/month)
 // From address must be a verified domain in Resend.
-// Set RESEND_FROM to e.g. "Musée-Crosdale <studio@facinations.art>"
+// Set RESEND_FROM to e.g. "Musée-Crosdale <studio@xdale.art>"
 
-const FROM = process.env.RESEND_FROM || "Musée-Crosdale <studio@facinations.art>";
+const FROM = process.env.RESEND_FROM || "Musée-Crosdale <studio@xdale.art>";
 
 /** Send a transactional email via Resend. Throws on failure. */
 export async function sendEmail({ to, subject, html }) {
@@ -72,8 +72,8 @@ export function tplWelcome({ tier, periodEnd }) {
       ${date ? `<br/><br/>Your next billing date is <strong style="color:#d4af37">${date}</strong>.` : ""}
     </p>
     <hr class="divider"/>
-    <a href="https://facinations.art/studio" class="btn">Enter Studio</a>
-    <p class="footer">Musée-Crosdale &nbsp;·&nbsp; facinations.art</p>
+    <a href="https://xdale.art/studio" class="btn">Enter Studio</a>
+    <p class="footer">Musée-Crosdale &nbsp;·&nbsp; xdale.art</p>
   `);
 }
 
@@ -89,8 +89,8 @@ export function tplReceipt({ tier, amount, periodEnd }) {
       ${date ? `Your subscription renews on <strong style="color:#d4af37">${date}</strong>.` : ""}
     </p>
     <hr class="divider"/>
-    <a href="https://facinations.art/studio" class="btn">Go to Studio</a>
-    <p class="footer">Musée-Crosdale &nbsp;·&nbsp; facinations.art</p>
+    <a href="https://xdale.art/studio" class="btn">Go to Studio</a>
+    <p class="footer">Musée-Crosdale &nbsp;·&nbsp; xdale.art</p>
   `);
 }
 
@@ -103,8 +103,8 @@ export function tplPaymentFailed() {
       Please update your payment method to retain access.
     </p>
     <hr class="divider"/>
-    <a href="https://facinations.art/studio" class="btn">Update Payment</a>
-    <p class="footer">Musée-Crosdale &nbsp;·&nbsp; facinations.art</p>
+    <a href="https://xdale.art/studio" class="btn">Update Payment</a>
+    <p class="footer">Musée-Crosdale &nbsp;·&nbsp; xdale.art</p>
   `);
 }
 
@@ -118,8 +118,8 @@ export function tplCancelled({ tier }) {
       You're welcome to resubscribe at any time.
     </p>
     <hr class="divider"/>
-    <a href="https://facinations.art/studio" class="btn">Resubscribe</a>
-    <p class="footer">Musée-Crosdale &nbsp;·&nbsp; facinations.art</p>
+    <a href="https://xdale.art/studio" class="btn">Resubscribe</a>
+    <p class="footer">Musée-Crosdale &nbsp;·&nbsp; xdale.art</p>
   `);
 }
 
@@ -132,7 +132,7 @@ export function tplWaitlist() {
       details as we approach launch. In the meantime, explore the gallery.
     </p>
     <hr class="divider"/>
-    <a href="https://facinations.art/xdale" class="btn">Visit the Gallery</a>
-    <p class="footer">Musée-Crosdale &nbsp;·&nbsp; facinations.art</p>
+    <a href="https://xdale.art/xdale" class="btn">Visit the Gallery</a>
+    <p class="footer">Musée-Crosdale &nbsp;·&nbsp; xdale.art</p>
   `);
 }

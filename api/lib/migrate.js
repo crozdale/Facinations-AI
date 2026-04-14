@@ -137,6 +137,27 @@ export async function runMigrations() {
     ) ON CONFLICT (slug) DO NOTHING;
   `);
 
+  // PayPal subscription ID column (added after initial schema)
+  await query(`
+    ALTER TABLE subscriptions
+      ADD COLUMN IF NOT EXISTS paypal_subscription_id TEXT UNIQUE;
+  `).catch(() => {});
+
+  await query(`
+    CREATE TABLE IF NOT EXISTS usage_events (
+      id               SERIAL PRIMARY KEY,
+      subscriber_email TEXT NOT NULL,
+      event_type       TEXT NOT NULL,
+      metadata         JSONB,
+      created_at       TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await query(`
+    CREATE INDEX IF NOT EXISTS idx_usage_email_type
+      ON usage_events (subscriber_email, event_type, created_at);
+  `);
+
   await query(`
     CREATE TABLE IF NOT EXISTS vaults_meta (
       vault_id             TEXT PRIMARY KEY,

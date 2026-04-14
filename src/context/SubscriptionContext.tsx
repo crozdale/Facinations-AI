@@ -1,10 +1,11 @@
 // src/context/SubscriptionContext.tsx
 // Holds the user's active Studio subscription tier.
-// Persists to localStorage. In production, replace stub actions with Stripe Checkout calls.
+// Persists to localStorage; syncs from server on mount via Stripe customer ID.
 
 import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
 
 export type PlanTier = "none" | "starter" | "gallery" | "institutional";
+export type SubStatus = "active" | "past_due" | "cancelled" | null;
 
 export interface Plan {
   tier: PlanTier;
@@ -75,17 +76,21 @@ export function tierMeets(current: PlanTier, required: PlanTier): boolean {
 
 interface SubscriptionCtx {
   tier: PlanTier;
+  status: SubStatus;
   activePlan: Plan | null;
+  currentPeriodEnd: string | null;
+  /** @deprecated Use currentPeriodEnd */
+  nextBillingDate: string | null;
   subscribe: (tier: PlanTier) => void;
   cancel: () => void;
-  /** Redirects to Stripe Checkout for the given tier. Resolves before redirect. */
+  /** Redirects to Stripe Checkout for the given tier. */
   startCheckout: (tier: PlanTier, email?: string) => Promise<void>;
   /** Redirects to Coinbase Commerce for the given tier (crypto payment). */
   startCryptoCheckout: (tier: PlanTier) => Promise<void>;
-  /** Redirects to PayPal Checkout for the given tier. */
+  /** Redirects to PayPal Subscriptions for the given tier. */
   startPayPalCheckout: (tier: PlanTier) => Promise<void>;
-  /** Billing details for display — stub values until Stripe is wired */
-  nextBillingDate: string | null;
+  /** Opens Stripe Customer Portal for billing management (cancel, update card, view invoices). */
+  openBillingPortal: () => Promise<void>;
 }
 
 const LS_KEY = "facinations_sub_tier";
@@ -102,26 +107,28 @@ function saveTier(t: PlanTier) {
   try { localStorage.setItem(LS_KEY, t); } catch {}
 }
 
-/** Stub next billing date: first of next month */
-function nextMonthFirst(): string {
-  const d = new Date();
-  d.setMonth(d.getMonth() + 1, 1);
-  return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+function fmtDate(iso: string | null): string | null {
+  if (!iso) return null;
+  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 }
 
 const SubscriptionContext = createContext<SubscriptionCtx | null>(null);
 
 export function SubscriptionProvider({ children }: { children: React.ReactNode }) {
   const [tier, setTier] = useState<PlanTier>(loadTier);
+  const [status, setStatus] = useState<SubStatus>(null);
+  const [currentPeriodEnd, setCurrentPeriodEnd] = useState<string | null>(null);
 
   const subscribe = useCallback((t: PlanTier) => {
     setTier(t);
     saveTier(t);
+    setStatus("active");
   }, []);
 
   const cancel = useCallback(() => {
     setTier("none");
     saveTier("none");
+    setStatus("cancelled");
   }, []);
 
   const startCheckout = useCallback(async (t: PlanTier, email?: string) => {
@@ -149,7 +156,6 @@ export function SubscriptionProvider({ children }: { children: React.ReactNode }
       throw new Error(error ?? "Failed to start crypto checkout");
     }
     const { url, chargeId } = await res.json();
-    // Persist chargeId so CryptoSuccess can verify after redirect
     try { localStorage.setItem("facinations_cb_charge", chargeId); } catch {}
     window.location.href = url;
   }, []);
@@ -168,7 +174,24 @@ export function SubscriptionProvider({ children }: { children: React.ReactNode }
     window.location.href = url;
   }, []);
 
-  // Sync tier from server on mount (if Stripe customer ID is stored locally)
+  const openBillingPortal = useCallback(async () => {
+    const customerId = (() => {
+      try { return localStorage.getItem("facinations_stripe_cid"); } catch { return null; }
+    })();
+    const res = await fetch("/api/subscription/portal", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ customer_id: customerId }),
+    });
+    if (!res.ok) {
+      const { error } = await res.json().catch(() => ({ error: "Unknown error" }));
+      throw new Error(error ?? "Could not open billing portal");
+    }
+    const { url } = await res.json();
+    window.location.href = url;
+  }, []);
+
+  // Sync tier + status from server on mount (if Stripe customer ID is stored locally)
   useEffect(() => {
     const customerId = (() => {
       try { return localStorage.getItem("facinations_stripe_cid"); } catch { return null; }
@@ -178,32 +201,34 @@ export function SubscriptionProvider({ children }: { children: React.ReactNode }
     fetch(`/api/subscription/status?customer_id=${encodeURIComponent(customerId)}`)
       .then((r) => r.json())
       .then((data) => {
-        if (!data.configured) return; // DB not set up — keep localStorage value
+        if (!data.configured) return;
         const serverTier: PlanTier = (data.tier as PlanTier) ?? "none";
-        // Only update if server disagrees with local state (avoids flicker on match)
         setTier((local) => {
-          if (local !== serverTier) {
-            saveTier(serverTier);
-            return serverTier;
-          }
+          if (local !== serverTier) { saveTier(serverTier); return serverTier; }
           return local;
         });
+        setStatus(data.status ?? null);
+        setCurrentPeriodEnd(data.currentPeriodEnd ?? null);
       })
-      .catch(() => {}); // network failure — keep local state
+      .catch(() => {});
   }, []);
 
   const activePlan = PLANS.find((p) => p.tier === tier) ?? null;
+  const periodEndFormatted = fmtDate(currentPeriodEnd);
 
   return (
     <SubscriptionContext.Provider value={{
       tier,
+      status,
       activePlan,
+      currentPeriodEnd: periodEndFormatted,
+      nextBillingDate: periodEndFormatted,
       subscribe,
       cancel,
       startCheckout,
       startCryptoCheckout,
       startPayPalCheckout,
-      nextBillingDate: tier !== "none" ? nextMonthFirst() : null,
+      openBillingPortal,
     }}>
       {children}
     </SubscriptionContext.Provider>

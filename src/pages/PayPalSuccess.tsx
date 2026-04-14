@@ -1,7 +1,7 @@
 // src/pages/PayPalSuccess.tsx
-// Landing page after PayPal buyer approves the order.
-// PayPal redirects here with ?token={orderId}&PayerID=xxx&tier=starter|gallery
-// We POST to /api/paypal/capture to complete the payment and activate the plan.
+// Landing page after PayPal buyer approves a subscription.
+// PayPal redirects here with ?subscription_id=I-xxx&ba_token=xxx&tier=starter|gallery
+// We POST to /api/paypal/capture to verify the subscription is ACTIVE and activate the plan.
 
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
@@ -23,11 +23,10 @@ export default function PayPalSuccess() {
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
-    // PayPal appends ?token=ORDER_ID&PayerID=xxx; we pass tier in our return_url
-    const orderId = searchParams.get("token");
-    const tier    = searchParams.get("tier");
+    const subscriptionId = searchParams.get("subscription_id");
+    const tier           = searchParams.get("tier");
 
-    if (!orderId || !tier || !VALID_TIERS.has(tier)) {
+    if (!subscriptionId || !tier || !VALID_TIERS.has(tier)) {
       setErrorMsg(t("common.invalid_link", "Invalid checkout link."));
       setStatus("error");
       return;
@@ -38,7 +37,7 @@ export default function PayPalSuccess() {
         const res  = await fetch("/api/paypal/capture", {
           method:  "POST",
           headers: { "Content-Type": "application/json" },
-          body:    JSON.stringify({ orderId, tier }),
+          body:    JSON.stringify({ subscriptionId, tier }),
         });
         const data = await res.json();
 
@@ -50,13 +49,13 @@ export default function PayPalSuccess() {
 
         subscribe(data.tier as PlanTier);
         setStatus("success");
-        setTimeout(() => navigate("/studio"), 2500);
+        setTimeout(() => navigate("/billing"), 2500);
       } catch {
         setErrorMsg(t("common.service_unreachable", "Could not reach the verification service. Please contact support."));
         setStatus("error");
       }
     })();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <main style={{ background: "#1c1c1c", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -71,7 +70,7 @@ export default function PayPalSuccess() {
           <>
             <div style={{ fontSize: "2rem", color: "rgba(212,175,55,0.4)", marginBottom: "1.5rem", animation: "pulse 1.6s ease-in-out infinite" }}>◈</div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f8f2e4", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>
-              {t("checkout.confirming_paypal", "Confirming your PayPal payment…")}
+              {t("checkout.confirming_paypal", "Confirming your PayPal subscription…")}
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#6a6258", fontSize: "0.85rem", margin: 0 }}>
               {t("checkout.just_a_moment", "This takes just a moment.")}
@@ -83,7 +82,7 @@ export default function PayPalSuccess() {
           <>
             <div style={{ fontSize: "2.5rem", color: "#5cb85c", marginBottom: "1rem" }}>✓</div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "1rem", color: "#f8f2e4", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>
-              {t("checkout.payment_confirmed", "Payment Confirmed")}
+              {t("checkout.payment_confirmed", "Subscription Activated")}
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#8a8278", fontSize: "0.9rem", margin: 0 }}>
               {t("checkout.welcome_returning", "Welcome to Facinations Studio. Returning you now…")}
@@ -95,13 +94,13 @@ export default function PayPalSuccess() {
           <>
             <div style={{ fontSize: "2rem", color: "#e05", marginBottom: "1rem" }}>✗</div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f8f2e4", letterSpacing: "0.1em", margin: "0 0 0.75rem" }}>
-              {t("checkout.payment_failed", "Payment Failed")}
+              {t("checkout.payment_failed", "Activation Failed")}
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#8a8278", fontSize: "0.85rem", margin: "0 0 1.5rem" }}>
               {errorMsg}
             </p>
             <button
-              onClick={() => navigate("/studio")}
+              onClick={() => navigate("/pricing")}
               style={{
                 padding: "0.6rem 1.75rem",
                 background: "transparent",
@@ -114,7 +113,7 @@ export default function PayPalSuccess() {
                 cursor: "pointer",
               }}
             >
-              {t("common.return_to_studio", "Return to Studio")}
+              {t("common.return_to_pricing", "Return to Pricing")}
             </button>
           </>
         )}

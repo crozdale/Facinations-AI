@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crosdale, Inc. — Pro-Forma Financial Statements FY 2025</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    padding: 0.5in 0.75in;
+    max-width: 8.5in;
+    margin: 0 auto;
+  }
+  @media print {
+    body { padding: 0.5in; }
+    .page-break { page-break-before: always; }
+    .no-break { page-break-inside: avoid; }
+  }
+
+  /* ── HEADER ── */
+  .corp-header {
+    text-align: center;
+    border-bottom: 3px double #000;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  .corp-name {
+    font-size: 18pt;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .corp-sub {
+    font-size: 10pt;
+    margin-top: 3px;
+    color: #333;
+  }
+  .corp-address {
+    font-size: 10pt;
+    margin-top: 4px;
+  }
+  .corp-bank {
+    font-size: 9pt;
+    margin-top: 3px;
+    color: #444;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── STATEMENT HEADER ── */
+  .stmt-title {
+    text-align: center;
+    font-size: 13pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 24px 0 4px;
+  }
+  .stmt-period {
+    text-align: center;
+    font-size: 10pt;
+    font-style: italic;
+    margin-bottom: 16px;
+    color: #333;
+  }
+  .stmt-note {
+    text-align: center;
+    font-size: 8.5pt;
+    color: #555;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+
+  /* ── TABLES ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    font-size: 10.5pt;
+  }
+  th {
+    background: #1a1a1a;
+    color: #fff;
+    text-align: left;
+    padding: 5px 8px;
+    font-size: 9pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  th.right { text-align: right; }
+  td {
+    padding: 3px 8px;
+    border-bottom: 1px solid #e8e8e8;
+    vertical-align: top;
+  }
+  td.right { text-align: right; white-space: nowrap; }
+  td.pct { text-align: right; color: #555; font-size: 9.5pt; white-space: nowrap; }
+
+  tr.section-head td {
+    background: #f0f0f0;
+    font-weight: bold;
+    font-size: 9pt;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    padding: 4px 8px;
+  }
+  tr.sub-item td { padding-left: 24px; }
+  tr.sub-sub td { padding-left: 40px; }
+  tr.total-row td {
+    font-weight: bold;
+    border-top: 2px solid #000;
+    border-bottom: 3px double #000;
+    background: #fafafa;
+  }
+  tr.subtotal td {
+    font-weight: bold;
+    border-top: 1px solid #999;
+    background: #f7f7f7;
+  }
+  tr.grand-total td {
+    font-weight: bold;
+    font-size: 11pt;
+    background: #1a1a1a;
+    color: #fff;
+    border-top: 3px solid #000;
+  }
+  tr.spacer td { padding: 3px; border: none; background: #fff; }
+  tr.net-income td {
+    font-weight: bold;
+    font-size: 11.5pt;
+    background: #e8f4e8;
+    border-top: 3px double #000;
+  }
+  tr.net-loss td {
+    font-weight: bold;
+    font-size: 11.5pt;
+    background: #f4e8e8;
+    border-top: 3px double #000;
+  }
+
+  /* ── FOOTER NOTE ── */
+  .footnote {
+    font-size: 8.5pt;
+    color: #555;
+    border-top: 1px solid #ccc;
+    margin-top: 18px;
+    padding-top: 8px;
+    font-style: italic;
+  }
+  .divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 28px 0 24px;
+  }
+  .certification {
+    margin-top: 40px;
+    font-size: 9.5pt;
+    border: 1px solid #999;
+    padding: 14px 18px;
+    background: #fafafa;
+  }
+  .sig-line {
+    display: inline-block;
+    width: 200px;
+    border-bottom: 1px solid #000;
+    margin: 24px 40px 0 0;
+    vertical-align: bottom;
+  }
+  .sig-label { font-size: 8.5pt; color: #555; margin-top: 3px; }
+  .highlight-box {
+    background: #f9f6ee;
+    border: 1px solid #c8b87a;
+    padding: 10px 16px;
+    margin: 16px 0;
+    font-size: 9.5pt;
+  }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     CORPORATE HEADER
+══════════════════════════════════════════════════ -->
+<div class="corp-header">
+  <div class="corp-name">Crosdale, Inc.</div>
+  <div class="corp-sub">C Corporation &nbsp;·&nbsp; State of New York &nbsp;·&nbsp; EIN: Applied For</div>
+  <div class="corp-address">4499 Henry Hudson Parkway West, Suite 2-D &nbsp;·&nbsp; Bronx, New York 10471</div>
+  <div class="corp-bank">Principal Bank: JPMorgan Chase Bank, N.A. &nbsp;·&nbsp; <em>Facinations™ · Musée-Crosdale™ Protocol</em></div>
+</div>
+
+<div class="highlight-box">
+  <strong>PRO-FORMA FINANCIAL STATEMENTS &mdash; Fiscal Year 2025</strong><br/>
+  These statements are prepared on an accrual basis in accordance with U.S. Generally Accepted Accounting Principles (GAAP).
+  All figures are projected estimates. Intellectual Property (Source Code) declared at <strong>$500,000</strong> per founder valuation.
+  Total declared liabilities: <strong>$10,000</strong>. Statements prepared for planning, investor, and banking purposes only.
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     1. INCOME STATEMENT
+══════════════════════════════════════════════════ -->
+<div class="stmt-title">Statement of Operations (Profit &amp; Loss)</div>
+<div class="stmt-period">For the Fiscal Year Ending December 31, 2025</div>
+<div class="stmt-note">Accrual Basis · Amounts in USD</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:52%">Account</th>
+      <th class="right" style="width:24%">Amount (USD)</th>
+      <th class="right" style="width:12%">% Revenue</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr class="section-head"><td colspan="3">Revenue</td></tr>
+    <tr class="sub-item"><td>IP &amp; Software Licensing Revenue</td><td class="right">$180,000</td><td class="pct">45.0%</td></tr>
+    <tr class="sub-item"><td>Art &amp; Digital Asset Sales</td><td class="right">$120,000</td><td class="pct">30.0%</td></tr>
+    <tr class="sub-item"><td>Platform Subscription Revenue (Facinations™)</td><td class="right">$60,000</td><td class="pct">15.0%</td></tr>
+    <tr class="sub-item"><td>Consulting &amp; Development Services</td><td class="right">$40,000</td><td class="pct">10.0%</td></tr>
+    <tr class="subtotal"><td><strong>Total Revenue</strong></td><td class="right"><strong>$400,000</strong></td><td class="pct"><strong>100.0%</strong></td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Cost of Revenue</td></tr>
+    <tr class="sub-item"><td>Platform Infrastructure &amp; Hosting</td><td class="right">$20,000</td><td class="pct">5.0%</td></tr>
+    <tr class="sub-item"><td>Art Production &amp; Fabrication Costs</td><td class="right">$30,000</td><td class="pct">7.5%</td></tr>
+    <tr class="subtotal"><td><strong>Total Cost of Revenue</strong></td><td class="right"><strong>$50,000</strong></td><td class="pct"><strong>12.5%</strong></td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="subtotal" style="background:#e8f4e8"><td><strong>Gross Profit</strong></td><td class="right"><strong>$350,000</strong></td><td class="pct"><strong>87.5%</strong></td></tr>
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Operating Expenses &mdash; Compensation</td></tr>
+    <tr class="sub-item"><td>Executive Salary (Officer Compensation)</td><td class="right">$120,000</td><td class="pct">30.0%</td></tr>
+    <tr class="sub-item"><td>Payroll &mdash; Staff &amp; Contractors</td><td class="right">$60,000</td><td class="pct">15.0%</td></tr>
+    <tr class="subtotal"><td>Subtotal — Compensation</td><td class="right">$180,000</td><td class="pct">45.0%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Operating Expenses &mdash; Occupancy</td></tr>
+    <tr class="sub-item"><td>Office / Studio Rent &amp; Utilities</td><td class="right">$36,000</td><td class="pct">9.0%</td></tr>
+    <tr class="sub-item"><td>Showroom Rent &amp; Maintenance</td><td class="right">$18,000</td><td class="pct">4.5%</td></tr>
+    <tr class="subtotal"><td>Subtotal — Occupancy</td><td class="right">$54,000</td><td class="pct">13.5%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Operating Expenses &mdash; Professional Services</td></tr>
+    <tr class="sub-item"><td>Legal Retainer</td><td class="right">$18,000</td><td class="pct">4.5%</td></tr>
+    <tr class="sub-item"><td>Accounting &amp; Bookkeeping</td><td class="right">$12,000</td><td class="pct">3.0%</td></tr>
+    <tr class="subtotal"><td>Subtotal — Professional Services</td><td class="right">$30,000</td><td class="pct">7.5%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Operating Expenses &mdash; Travel &amp; Transportation</td></tr>
+    <tr class="sub-item"><td>Travel (Airfare, Hotels, Per Diem)</td><td class="right">$12,000</td><td class="pct">3.0%</td></tr>
+    <tr class="sub-item"><td>Automobile (Lease / Insurance / Maintenance)</td><td class="right">$9,600</td><td class="pct">2.4%</td></tr>
+    <tr class="sub-item"><td>Transportation (Local / Rideshare / Freight)</td><td class="right">$4,800</td><td class="pct">1.2%</td></tr>
+    <tr class="subtotal"><td>Subtotal — Travel &amp; Transportation</td><td class="right">$26,400</td><td class="pct">6.6%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Operating Expenses &mdash; General &amp; Administrative</td></tr>
+    <tr class="sub-item"><td>Entertainment (Client / Business Development)</td><td class="right">$9,600</td><td class="pct">2.4%</td></tr>
+    <tr class="sub-item"><td>Computers &amp; Other Devices (Depreciation / Subscriptions)</td><td class="right">$8,400</td><td class="pct">2.1%</td></tr>
+    <tr class="sub-item"><td>Art Tools &amp; Supplies</td><td class="right">$4,800</td><td class="pct">1.2%</td></tr>
+    <tr class="sub-item"><td>Leisure &amp; Hospitality (Business Purposes)</td><td class="right">$3,600</td><td class="pct">0.9%</td></tr>
+    <tr class="subtotal"><td>Subtotal — G&amp;A</td><td class="right">$26,400</td><td class="pct">6.6%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Operating Expenses &mdash; Depreciation &amp; Amortization</td></tr>
+    <tr class="sub-item"><td>Depreciation — Fixed Assets</td><td class="right">$18,500</td><td class="pct">4.6%</td></tr>
+    <tr class="subtotal"><td>Subtotal — D&amp;A</td><td class="right">$18,500</td><td class="pct">4.6%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="subtotal"><td><strong>Total Operating Expenses</strong></td><td class="right"><strong>$335,300</strong></td><td class="pct"><strong>83.8%</strong></td></tr>
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="subtotal" style="background:#e8f4e8"><td><strong>Operating Income (EBIT)</strong></td><td class="right"><strong>$14,700</strong></td><td class="pct"><strong>3.7%</strong></td></tr>
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Other Income</td></tr>
+    <tr class="sub-item"><td>Interest Income (JPMorgan Chase)</td><td class="right">$1,500</td><td class="pct">0.4%</td></tr>
+    <tr class="subtotal"><td>Total Other Income</td><td class="right">$1,500</td><td class="pct">0.4%</td></tr>
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="subtotal"><td><strong>Income Before Taxes (EBT)</strong></td><td class="right"><strong>$16,200</strong></td><td class="pct"><strong>4.1%</strong></td></tr>
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Provision for Income Taxes</td></tr>
+    <tr class="sub-item"><td>Federal Corporate Income Tax (21%)</td><td class="right">$3,402</td><td class="pct">0.9%</td></tr>
+    <tr class="sub-item"><td>New York State Corporation Tax (6.5%)</td><td class="right">$1,053</td><td class="pct">0.3%</td></tr>
+    <tr class="sub-item"><td>New York City General Corporation Tax (8.85%)</td><td class="right">$1,434</td><td class="pct">0.4%</td></tr>
+    <tr class="subtotal"><td>Total Provision for Income Taxes</td><td class="right">$5,889</td><td class="pct">1.5%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="net-income"><td><strong>Net Income</strong></td><td class="right"><strong>$10,311</strong></td><td class="pct"><strong>2.6%</strong></td></tr>
+
+  </tbody>
+</table>
+
+<div class="highlight-box">
+  <strong>Key Metrics (FY 2025):</strong> &nbsp;
+  EBITDA: $33,200 &nbsp;|&nbsp;
+  EBITDA Margin: 8.3% &nbsp;|&nbsp;
+  Gross Margin: 87.5% &nbsp;|&nbsp;
+  Net Margin: 2.6% &nbsp;|&nbsp;
+  Total Compensation as % of Revenue: 45.0%
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     2. BALANCE SHEET
+══════════════════════════════════════════════════ -->
+<div class="page-break"></div>
+
+<div class="corp-header" style="margin-top:0">
+  <div class="corp-name">Crosdale, Inc.</div>
+  <div class="corp-sub">C Corporation &nbsp;·&nbsp; State of New York</div>
+  <div class="corp-address">4499 Henry Hudson Parkway West, Suite 2-D &nbsp;·&nbsp; Bronx, New York 10471</div>
+</div>
+
+<div class="stmt-title">Balance Sheet</div>
+<div class="stmt-period">As of December 31, 2025</div>
+<div class="stmt-note">Accrual Basis · Amounts in USD</div>
+
+<div class="two-col">
+
+<!-- LEFT: ASSETS -->
+<div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:62%">Assets</th>
+      <th class="right">Amount (USD)</th>
+      <th class="right" style="width:13%">%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="section-head"><td colspan="3">Current Assets</td></tr>
+    <tr class="sub-item"><td>Cash &amp; Cash Equivalents (JPMorgan Chase)</td><td class="right">$85,000</td><td class="pct">8.6%</td></tr>
+    <tr class="sub-item"><td>Accounts Receivable</td><td class="right">$25,000</td><td class="pct">2.5%</td></tr>
+    <tr class="sub-item"><td>Prepaid Expenses</td><td class="right">$5,000</td><td class="pct">0.5%</td></tr>
+    <tr class="subtotal"><td>Total Current Assets</td><td class="right">$115,000</td><td class="pct">11.6%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Fixed Assets (at Cost)</td></tr>
+    <tr class="sub-item"><td>Automobile</td><td class="right">$45,000</td><td class="pct"></td></tr>
+    <tr class="sub-item"><td>Computers &amp; Other Devices</td><td class="right">$30,000</td><td class="pct"></td></tr>
+    <tr class="sub-item"><td>Artwork (at Appraised Value)</td><td class="right">$250,000</td><td class="pct"></td></tr>
+    <tr class="sub-item"><td>Art Tools &amp; Equipment</td><td class="right">$8,000</td><td class="pct"></td></tr>
+    <tr class="sub-item"><td>Office / Studio Equipment &amp; Furnishings</td><td class="right">$25,000</td><td class="pct"></td></tr>
+    <tr class="sub-item"><td>Showroom Leasehold Improvements</td><td class="right">$35,000</td><td class="pct"></td></tr>
+    <tr class="sub-item"><td style="font-style:italic">Less: Accumulated Depreciation</td><td class="right" style="font-style:italic">($18,500)</td><td class="pct"></td></tr>
+    <tr class="subtotal"><td>Total Fixed Assets (Net)</td><td class="right">$374,500</td><td class="pct">37.6%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Intangible Assets</td></tr>
+    <tr class="sub-item"><td>Intellectual Property — Source Code (Facinations™ Protocol)</td><td class="right">$500,000</td><td class="pct"></td></tr>
+    <tr class="sub-item"><td style="font-style:italic">Less: Accumulated Amortization</td><td class="right" style="font-style:italic">$—</td><td class="pct"></td></tr>
+    <tr class="subtotal"><td>Total Intangible Assets</td><td class="right">$500,000</td><td class="pct">50.3%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Other Assets</td></tr>
+    <tr class="sub-item"><td>Security Deposits</td><td class="right">$5,000</td><td class="pct">0.5%</td></tr>
+    <tr class="subtotal"><td>Total Other Assets</td><td class="right">$5,000</td><td class="pct">0.5%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="grand-total"><td>TOTAL ASSETS</td><td class="right">$994,500</td><td class="right" style="color:#fff">100.0%</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- RIGHT: LIABILITIES & EQUITY -->
+<div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:62%">Liabilities &amp; Equity</th>
+      <th class="right">Amount (USD)</th>
+      <th class="right" style="width:13%">%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="section-head"><td colspan="3">Current Liabilities</td></tr>
+    <tr class="sub-item"><td>Accounts Payable</td><td class="right">$7,500</td><td class="pct">0.8%</td></tr>
+    <tr class="sub-item"><td>Accrued Liabilities</td><td class="right">$2,500</td><td class="pct">0.3%</td></tr>
+    <tr class="subtotal"><td>Total Current Liabilities</td><td class="right">$10,000</td><td class="pct">1.0%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="section-head"><td colspan="3">Long-Term Liabilities</td></tr>
+    <tr class="sub-item"><td>Long-Term Debt</td><td class="right">$—</td><td class="pct">—</td></tr>
+    <tr class="subtotal"><td>Total Long-Term Liabilities</td><td class="right">$—</td><td class="pct">—</td></tr>
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="subtotal"><td><strong>Total Liabilities</strong></td><td class="right"><strong>$10,000</strong></td><td class="pct"><strong>1.0%</strong></td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Stockholders' Equity</td></tr>
+    <tr class="sub-item"><td>Common Stock — 1,000,000 shares authorized<br/><small>10,000 shares issued &amp; outstanding @ $1.00 par</small></td><td class="right">$10,000</td><td class="pct">1.0%</td></tr>
+    <tr class="sub-item"><td>Additional Paid-In Capital — Cash Contributions</td><td class="right">$464,189</td><td class="pct">46.7%</td></tr>
+    <tr class="sub-item"><td>Additional Paid-In Capital — IP Contribution (Source Code)</td><td class="right">$500,000</td><td class="pct">50.3%</td></tr>
+    <tr class="sub-item"><td>Retained Earnings (Current Year Net Income)</td><td class="right">$10,311</td><td class="pct">1.0%</td></tr>
+    <tr class="subtotal"><td>Total Stockholders' Equity</td><td class="right">$984,500</td><td class="pct">99.0%</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="grand-total"><td>TOTAL LIABILITIES &amp; EQUITY</td><td class="right">$994,500</td><td class="right" style="color:#fff">100.0%</td></tr>
+  </tbody>
+</table>
+
+<div class="highlight-box" style="margin-top:12px;font-size:9pt">
+  <strong>Balance Sheet Ratios:</strong><br/>
+  Current Ratio: 11.5x &nbsp;|&nbsp;
+  Debt-to-Equity: 0.010 &nbsp;|&nbsp;
+  Debt-to-Assets: 1.0% &nbsp;|&nbsp;
+  Equity Ratio: 99.0% &nbsp;|&nbsp;
+  Book Value per Share: $98.45
+</div>
+</div>
+
+</div><!-- end two-col -->
+
+
+<!-- ══════════════════════════════════════════════════
+     3. STATEMENT OF CASH FLOWS
+══════════════════════════════════════════════════ -->
+<div class="page-break"></div>
+
+<div class="corp-header" style="margin-top:0">
+  <div class="corp-name">Crosdale, Inc.</div>
+  <div class="corp-sub">C Corporation &nbsp;·&nbsp; State of New York</div>
+  <div class="corp-address">4499 Henry Hudson Parkway West, Suite 2-D &nbsp;·&nbsp; Bronx, New York 10471</div>
+</div>
+
+<div class="stmt-title">Statement of Cash Flows</div>
+<div class="stmt-period">For the Fiscal Year Ending December 31, 2025</div>
+<div class="stmt-note">Indirect Method · Amounts in USD</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:64%">Activity</th>
+      <th class="right">Amount (USD)</th>
+      <th class="right" style="width:18%">Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr class="section-head"><td colspan="3">I. Cash Flows from Operating Activities</td></tr>
+    <tr class="sub-item"><td>Net Income</td><td class="right">$10,311</td><td></td></tr>
+    <tr class="section-head" style="font-size:8.5pt;font-weight:normal"><td colspan="3" style="padding-left:24px;font-style:italic;background:#f9f9f9">Adjustments to reconcile net income to net cash:</td></tr>
+    <tr class="sub-sub"><td>Depreciation &amp; Amortization</td><td class="right">$18,500</td><td></td></tr>
+    <tr class="section-head" style="font-size:8.5pt;font-weight:normal"><td colspan="3" style="padding-left:24px;font-style:italic;background:#f9f9f9">Changes in working capital:</td></tr>
+    <tr class="sub-sub"><td>Increase in Accounts Receivable</td><td class="right">($25,000)</td><td></td></tr>
+    <tr class="sub-sub"><td>Increase in Prepaid Expenses</td><td class="right">($5,000)</td><td></td></tr>
+    <tr class="sub-sub"><td>Increase in Accounts Payable</td><td class="right">$7,500</td><td></td></tr>
+    <tr class="sub-sub"><td>Increase in Accrued Liabilities</td><td class="right">$2,500</td><td></td></tr>
+    <tr class="subtotal"><td colspan="2">Net Cash Provided by Operating Activities</td><td class="right">$8,811</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">II. Cash Flows from Investing Activities</td></tr>
+    <tr class="sub-item"><td>Purchase of Automobile</td><td class="right">($45,000)</td><td></td></tr>
+    <tr class="sub-item"><td>Purchase of Computers &amp; Other Devices</td><td class="right">($30,000)</td><td></td></tr>
+    <tr class="sub-item"><td>Acquisition of Artwork (at cost)</td><td class="right">($250,000)</td><td></td></tr>
+    <tr class="sub-item"><td>Purchase of Art Tools &amp; Equipment</td><td class="right">($8,000)</td><td></td></tr>
+    <tr class="sub-item"><td>Purchase of Office / Studio Equipment</td><td class="right">($25,000)</td><td></td></tr>
+    <tr class="sub-item"><td>Showroom Leasehold Improvements</td><td class="right">($35,000)</td><td></td></tr>
+    <tr class="sub-item"><td>Security Deposits Paid</td><td class="right">($5,000)</td><td></td></tr>
+    <tr class="subtotal"><td colspan="2">Net Cash Used in Investing Activities</td><td class="right">($398,000)</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">III. Cash Flows from Financing Activities</td></tr>
+    <tr class="sub-item"><td>Proceeds from Issuance of Common Stock (par value)</td><td class="right">$10,000</td><td></td></tr>
+    <tr class="sub-item"><td>Additional Paid-In Capital — Cash Contributions</td><td class="right">$464,189</td><td></td></tr>
+    <tr class="sub-item"><td>Repayment of Notes Payable</td><td class="right">$—</td><td></td></tr>
+    <tr class="subtotal"><td colspan="2">Net Cash Provided by Financing Activities</td><td class="right">$474,189</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="subtotal"><td colspan="2"><strong>Net Increase in Cash &amp; Cash Equivalents</strong></td><td class="right"><strong>$85,000</strong></td></tr>
+    <tr class="sub-item"><td colspan="2">Cash &amp; Cash Equivalents — Beginning of Year</td><td class="right">$—</td></tr>
+    <tr class="grand-total"><td colspan="2">Cash &amp; Cash Equivalents — End of Year (JPMorgan Chase)</td><td class="right">$85,000</td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="section-head"><td colspan="3">Supplemental Disclosure — Non-Cash Transactions</td></tr>
+    <tr class="sub-item"><td>Intellectual Property (Source Code) contributed as paid-in capital</td><td class="right">$500,000</td><td></td></tr>
+    <tr class="sub-item"><td>Income taxes paid in cash</td><td class="right">$5,889</td><td></td></tr>
+    <tr class="sub-item"><td>Interest received</td><td class="right">$1,500</td><td></td></tr>
+
+  </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════════
+     4. WORKING CAPITAL STATEMENT
+══════════════════════════════════════════════════ -->
+<div class="page-break"></div>
+
+<div class="corp-header" style="margin-top:0">
+  <div class="corp-name">Crosdale, Inc.</div>
+  <div class="corp-sub">C Corporation &nbsp;·&nbsp; State of New York</div>
+  <div class="corp-address">4499 Henry Hudson Parkway West, Suite 2-D &nbsp;·&nbsp; Bronx, New York 10471</div>
+</div>
+
+<div class="stmt-title">Statement of Working Capital</div>
+<div class="stmt-period">As of December 31, 2025</div>
+<div class="stmt-note">Amounts in USD</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:64%">Account</th>
+      <th class="right">Amount (USD)</th>
+      <th class="right" style="width:13%">%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="section-head"><td colspan="3">Current Assets</td></tr>
+    <tr class="sub-item"><td>Cash &amp; Cash Equivalents (JPMorgan Chase)</td><td class="right">$85,000</td><td class="pct">73.9%</td></tr>
+    <tr class="sub-item"><td>Accounts Receivable (net)</td><td class="right">$25,000</td><td class="pct">21.7%</td></tr>
+    <tr class="sub-item"><td>Prepaid Expenses</td><td class="right">$5,000</td><td class="pct">4.4%</td></tr>
+    <tr class="subtotal"><td><strong>Total Current Assets</strong></td><td class="right"><strong>$115,000</strong></td><td class="pct"><strong>100.0%</strong></td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="section-head"><td colspan="3">Current Liabilities</td></tr>
+    <tr class="sub-item"><td>Accounts Payable</td><td class="right">$7,500</td><td class="pct">75.0%</td></tr>
+    <tr class="sub-item"><td>Accrued Liabilities</td><td class="right">$2,500</td><td class="pct">25.0%</td></tr>
+    <tr class="subtotal"><td><strong>Total Current Liabilities</strong></td><td class="right"><strong>$10,000</strong></td><td class="pct"><strong>100.0%</strong></td></tr>
+
+    <tr class="spacer"><td colspan="3"></td></tr>
+    <tr class="net-income"><td><strong>Net Working Capital</strong></td><td class="right"><strong>$105,000</strong></td><td class="pct"></td></tr>
+    <tr class="spacer"><td colspan="3"></td></tr>
+
+    <tr class="section-head"><td colspan="3">Working Capital Ratios</td></tr>
+    <tr class="sub-item"><td>Current Ratio (Current Assets ÷ Current Liabilities)</td><td class="right"><strong>11.50x</strong></td><td class="pct">Excellent</td></tr>
+    <tr class="sub-item"><td>Quick Ratio (Cash + AR ÷ Current Liabilities)</td><td class="right"><strong>11.00x</strong></td><td class="pct">Excellent</td></tr>
+    <tr class="sub-item"><td>Cash Ratio (Cash Only ÷ Current Liabilities)</td><td class="right"><strong>8.50x</strong></td><td class="pct">Excellent</td></tr>
+    <tr class="sub-item"><td>Working Capital as % of Total Assets</td><td class="right"><strong>10.6%</strong></td><td class="pct"></td></tr>
+    <tr class="sub-item"><td>Days Sales Outstanding (DSO)</td><td class="right"><strong>22.8 days</strong></td><td class="pct"></td></tr>
+    <tr class="sub-item"><td>Days Payable Outstanding (DPO)</td><td class="right"><strong>6.8 days</strong></td><td class="pct"></td></tr>
+    <tr class="sub-item"><td>Cash Conversion Cycle</td><td class="right"><strong>16.0 days</strong></td><td class="pct"></td></tr>
+  </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════════
+     5. STATEMENT OF STOCKHOLDERS' EQUITY
+══════════════════════════════════════════════════ -->
+<hr class="divider"/>
+
+<div class="stmt-title">Statement of Stockholders' Equity</div>
+<div class="stmt-period">For the Fiscal Year Ending December 31, 2025</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th class="right">Common Stock</th>
+      <th class="right">APIC — Cash</th>
+      <th class="right">APIC — IP</th>
+      <th class="right">Retained Earnings</th>
+      <th class="right">Total Equity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="sub-item"><td>Balance — January 1, 2025 (Inception)</td><td class="right">$—</td><td class="right">$—</td><td class="right">$—</td><td class="right">$—</td><td class="right">$—</td></tr>
+    <tr class="sub-item"><td>Issuance of Common Stock (10,000 shares @ $1.00 par)</td><td class="right">$10,000</td><td class="right">—</td><td class="right">—</td><td class="right">—</td><td class="right">$10,000</td></tr>
+    <tr class="sub-item"><td>Cash Capital Contributions</td><td class="right">—</td><td class="right">$464,189</td><td class="right">—</td><td class="right">—</td><td class="right">$464,189</td></tr>
+    <tr class="sub-item"><td>IP Contribution — Source Code (non-cash)</td><td class="right">—</td><td class="right">—</td><td class="right">$500,000</td><td class="right">—</td><td class="right">$500,000</td></tr>
+    <tr class="sub-item"><td>Net Income — FY 2025</td><td class="right">—</td><td class="right">—</td><td class="right">—</td><td class="right">$10,311</td><td class="right">$10,311</td></tr>
+    <tr class="sub-item"><td>Dividends Declared</td><td class="right">—</td><td class="right">—</td><td class="right">—</td><td class="right">$—</td><td class="right">$—</td></tr>
+    <tr class="grand-total">
+      <td>Balance — December 31, 2025</td>
+      <td class="right">$10,000</td>
+      <td class="right">$464,189</td>
+      <td class="right">$500,000</td>
+      <td class="right">$10,311</td>
+      <td class="right">$984,500</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════════
+     6. CHART OF ACCOUNTS
+══════════════════════════════════════════════════ -->
+<hr class="divider"/>
+
+<div class="stmt-title">Chart of Accounts</div>
+<div class="stmt-period">Crosdale, Inc. &mdash; Account Schedule</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:10%">Acct #</th>
+      <th>Account Name</th>
+      <th class="right">Type</th>
+      <th class="right">FY 2025 Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="section-head"><td colspan="4">1000s — Assets</td></tr>
+    <tr><td>1010</td><td>Cash — JPMorgan Chase Checking</td><td class="right">Asset</td><td class="right">$85,000</td></tr>
+    <tr><td>1200</td><td>Accounts Receivable</td><td class="right">Asset</td><td class="right">$25,000</td></tr>
+    <tr><td>1300</td><td>Prepaid Expenses</td><td class="right">Asset</td><td class="right">$5,000</td></tr>
+    <tr><td>1510</td><td>Automobile</td><td class="right">Fixed Asset</td><td class="right">$45,000</td></tr>
+    <tr><td>1520</td><td>Computers &amp; Other Devices</td><td class="right">Fixed Asset</td><td class="right">$30,000</td></tr>
+    <tr><td>1530</td><td>Artwork (Appraised Value)</td><td class="right">Fixed Asset</td><td class="right">$250,000</td></tr>
+    <tr><td>1540</td><td>Art Tools &amp; Equipment</td><td class="right">Fixed Asset</td><td class="right">$8,000</td></tr>
+    <tr><td>1550</td><td>Office / Studio Equipment</td><td class="right">Fixed Asset</td><td class="right">$25,000</td></tr>
+    <tr><td>1560</td><td>Showroom Leasehold Improvements</td><td class="right">Fixed Asset</td><td class="right">$35,000</td></tr>
+    <tr><td>1590</td><td>Accumulated Depreciation</td><td class="right">Contra Asset</td><td class="right">($18,500)</td></tr>
+    <tr><td>1700</td><td>Intellectual Property — Source Code (Facinations™)</td><td class="right">Intangible</td><td class="right">$500,000</td></tr>
+    <tr><td>1900</td><td>Security Deposits</td><td class="right">Other Asset</td><td class="right">$5,000</td></tr>
+
+    <tr class="section-head"><td colspan="4">2000s — Liabilities</td></tr>
+    <tr><td>2010</td><td>Accounts Payable</td><td class="right">Liability</td><td class="right">$7,500</td></tr>
+    <tr><td>2050</td><td>Accrued Liabilities</td><td class="right">Liability</td><td class="right">$2,500</td></tr>
+
+    <tr class="section-head"><td colspan="4">3000s — Stockholders' Equity</td></tr>
+    <tr><td>3010</td><td>Common Stock (par value)</td><td class="right">Equity</td><td class="right">$10,000</td></tr>
+    <tr><td>3020</td><td>Additional Paid-In Capital — Cash</td><td class="right">Equity</td><td class="right">$464,189</td></tr>
+    <tr><td>3030</td><td>Additional Paid-In Capital — IP Contribution</td><td class="right">Equity</td><td class="right">$500,000</td></tr>
+    <tr><td>3900</td><td>Retained Earnings</td><td class="right">Equity</td><td class="right">$10,311</td></tr>
+
+    <tr class="section-head"><td colspan="4">4000s — Revenue</td></tr>
+    <tr><td>4010</td><td>IP &amp; Software Licensing Revenue</td><td class="right">Revenue</td><td class="right">$180,000</td></tr>
+    <tr><td>4020</td><td>Art &amp; Digital Asset Sales</td><td class="right">Revenue</td><td class="right">$120,000</td></tr>
+    <tr><td>4030</td><td>Platform Subscription Revenue</td><td class="right">Revenue</td><td class="right">$60,000</td></tr>
+    <tr><td>4040</td><td>Consulting &amp; Development Services</td><td class="right">Revenue</td><td class="right">$40,000</td></tr>
+    <tr><td>4900</td><td>Interest Income</td><td class="right">Other Income</td><td class="right">$1,500</td></tr>
+
+    <tr class="section-head"><td colspan="4">5000s — Cost of Revenue</td></tr>
+    <tr><td>5010</td><td>Platform Infrastructure &amp; Hosting</td><td class="right">COGS</td><td class="right">$20,000</td></tr>
+    <tr><td>5020</td><td>Art Production Costs</td><td class="right">COGS</td><td class="right">$30,000</td></tr>
+
+    <tr class="section-head"><td colspan="4">6000s — Operating Expenses</td></tr>
+    <tr><td>6010</td><td>Executive Salary</td><td class="right">Expense</td><td class="right">$120,000</td></tr>
+    <tr><td>6020</td><td>Payroll — Staff &amp; Contractors</td><td class="right">Expense</td><td class="right">$60,000</td></tr>
+    <tr><td>6030</td><td>Office / Studio Rent</td><td class="right">Expense</td><td class="right">$36,000</td></tr>
+    <tr><td>6040</td><td>Showroom</td><td class="right">Expense</td><td class="right">$18,000</td></tr>
+    <tr><td>6050</td><td>Legal Retainer</td><td class="right">Expense</td><td class="right">$18,000</td></tr>
+    <tr><td>6060</td><td>Accounting &amp; Bookkeeping</td><td class="right">Expense</td><td class="right">$12,000</td></tr>
+    <tr><td>6070</td><td>Travel</td><td class="right">Expense</td><td class="right">$12,000</td></tr>
+    <tr><td>6080</td><td>Automobile</td><td class="right">Expense</td><td class="right">$9,600</td></tr>
+    <tr><td>6090</td><td>Entertainment</td><td class="right">Expense</td><td class="right">$9,600</td></tr>
+    <tr><td>6100</td><td>Computers &amp; Other Devices</td><td class="right">Expense</td><td class="right">$8,400</td></tr>
+    <tr><td>6110</td><td>Transportation</td><td class="right">Expense</td><td class="right">$4,800</td></tr>
+    <tr><td>6120</td><td>Art Tools &amp; Supplies</td><td class="right">Expense</td><td class="right">$4,800</td></tr>
+    <tr><td>6130</td><td>Leisure (Business Development)</td><td class="right">Expense</td><td class="right">$3,600</td></tr>
+    <tr><td>6200</td><td>Depreciation &amp; Amortization</td><td class="right">Expense</td><td class="right">$18,500</td></tr>
+
+    <tr class="section-head"><td colspan="4">7000s — Taxes</td></tr>
+    <tr><td>7010</td><td>Federal Corporate Income Tax (21%)</td><td class="right">Tax</td><td class="right">$3,402</td></tr>
+    <tr><td>7020</td><td>New York State Tax (6.5%)</td><td class="right">Tax</td><td class="right">$1,053</td></tr>
+    <tr><td>7030</td><td>New York City Tax (8.85%)</td><td class="right">Tax</td><td class="right">$1,434</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════════
+     FINANCIAL SUMMARY
+══════════════════════════════════════════════════ -->
+<hr class="divider"/>
+
+<div class="stmt-title" style="font-size:11pt">Executive Financial Summary</div>
+<div class="stmt-period">Crosdale, Inc. &mdash; Fiscal Year 2025</div>
+
+<table style="margin-top:12px">
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th class="right">Value</th>
+      <th>Benchmark / Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Total Revenue</td><td class="right">$400,000</td><td>Year 1 blended: IP + Art + SaaS + Services</td></tr>
+    <tr><td>Gross Profit</td><td class="right">$350,000</td><td>87.5% gross margin — high-value IP/licensing model</td></tr>
+    <tr><td>EBITDA</td><td class="right">$33,200</td><td>8.3% EBITDA margin — positive in Year 1</td></tr>
+    <tr><td>Operating Income (EBIT)</td><td class="right">$14,700</td><td>3.7% operating margin</td></tr>
+    <tr><td>Net Income</td><td class="right">$10,311</td><td>2.6% net margin — profitable Year 1</td></tr>
+    <tr><td>Total Assets</td><td class="right">$994,500</td><td>IP-heavy balance sheet; strong intangible base</td></tr>
+    <tr><td>Total Liabilities</td><td class="right">$10,000</td><td>1.0% of assets — near-zero leverage</td></tr>
+    <tr><td>Stockholders' Equity</td><td class="right">$984,500</td><td>99.0% equity-financed; strong solvency</td></tr>
+    <tr><td>Net Working Capital</td><td class="right">$105,000</td><td>Current ratio 11.5x — highly liquid</td></tr>
+    <tr><td>Cash (JPMorgan Chase)</td><td class="right">$85,000</td><td>8.5x coverage of current liabilities</td></tr>
+    <tr><td>Book Value per Share</td><td class="right">$98.45</td><td>10,000 shares issued</td></tr>
+    <tr><td>IP as % of Total Assets</td><td class="right">50.3%</td><td>Core intangible asset — Facinations™ source code</td></tr>
+    <tr><td>Artwork as % of Total Assets</td><td class="right">25.1%</td><td>Appraised value; subject to independent appraisal</td></tr>
+    <tr><td>Effective Tax Rate</td><td class="right">36.4%</td><td>Federal + NY State + NYC combined</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════════
+     CERTIFICATION
+══════════════════════════════════════════════════ -->
+<div class="certification no-break">
+  <strong>Management Certification</strong><br/><br/>
+  The undersigned officer of Crosdale, Inc., a C Corporation duly organized and existing under the laws of the
+  State of New York, hereby certifies that the foregoing pro-forma financial statements have been prepared in
+  good faith on an accrual basis in accordance with U.S. Generally Accepted Accounting Principles (GAAP), and
+  represent management's best estimates for the fiscal year ending December 31, 2025. These statements have
+  not been audited by an independent certified public accountant. Intellectual Property (Source Code) declared
+  at $500,000 reflects founder valuation of the Facinations™ Protocol.
+
+  <div style="margin-top:30px">
+    <div style="display:inline-block;margin-right:60px">
+      <div class="sig-line"></div>
+      <div class="sig-label">Signature — Chief Executive Officer</div>
+      <div class="sig-label">Date: ___________________</div>
+    </div>
+    <div style="display:inline-block">
+      <div class="sig-line"></div>
+      <div class="sig-label">Signature — Chief Financial Officer / Controller</div>
+      <div class="sig-label">Date: ___________________</div>
+    </div>
+  </div>
+</div>
+
+<div class="footnote">
+  <strong>Notes &amp; Disclosures:</strong> (1) These are pro-forma (projected) financial statements prepared for planning and presentation purposes only and do not constitute audited financial statements.
+  (2) Intellectual Property valued at $500,000 reflects founder's declared value of the Facinations™ Protocol source code; independent valuation recommended for financing or M&amp;A purposes.
+  (3) Artwork valued at cost/appraised value; subject to periodic independent appraisal.
+  (4) New York City General Corporation Tax (GCT) rate of 8.85% applies to C Corporations operating within NYC.
+  (5) Depreciation computed on straight-line basis; useful lives: Automobile 5 yrs, Computers 3 yrs, Equipment 7 yrs, Leasehold Improvements 10 yrs.
+  (6) These statements should be reviewed by a licensed CPA before submission to financial institutions or investors.
+  &nbsp;&nbsp;<strong>Prepared:</strong> March 2025 &nbsp;·&nbsp; <strong>Crosdale, Inc.</strong> &nbsp;·&nbsp; 4499 Henry Hudson Pkwy West, Suite 2-D, Bronx, NY 10471 &nbsp;·&nbsp; Bank: JPMorgan Chase
+</div>
+
+</body>
+</html>

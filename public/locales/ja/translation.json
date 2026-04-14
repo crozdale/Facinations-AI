@@ -88,18 +88,7 @@
     "blogazine": "Blogazineを見る"
   },
   "footer": {
-    "copyright": "© {{year}} Façinations. All rights reserved.",
-    "newsletter_eyebrow": "プライベートビュー · Musée-Crosdale",
-    "newsletter_confirmed": "リストに登録されました。",
-    "newsletter_placeholder": "メールアドレス",
-    "newsletter_btn": "登録",
-    "newsletter_error": "エラーが発生しました。再度お試しください。",
-    "protocol_tagline": "分散型アートプロトコル",
-    "brand": "Façinations",
-    "legal": "法的事項",
-    "about": "概要",
-    "whitepaper": "ホワイトペーパー",
-    "architecture": "アーキテクチャ"
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
   },
   "landing": {
     "eyebrow": "Facinations プロトコル",
@@ -135,30 +124,7 @@
     "body": "Facinations は DeFi ネイティブのファインアート・ヴォルトで、安全なオンチェーン・ヴォルトを通じて希少な芸術作品の分割所有権を実現します。"
   },
   "gallery": {
-    "title": "ギャラリー",
-    "subtitle": "キュレーションされたデジタル作品とコレクション。",
-    "filter_all": "すべて",
-    "filter_derain": "Derain",
-    "filter_matisse": "Matisse",
-    "filter_medieval": "中世",
-    "filter_renaissance": "ルネサンス",
-    "filter_originals": "オリジナル",
-    "works_count": "{{count}} 作品",
-    "ai_subtitle": "AI キュレーター · チャット · 関連作品",
-    "curators_eye": "キュレーターの目",
-    "btn_invoke": "✦ AI キュレーターを呼び出す",
-    "analysing": "分析中…",
-    "ai_error": "AI に接続できませんでした。DevTools のネットワークタブで /api/claude エラーを確認してください。",
-    "btn_retry": "再試行",
-    "ask_curator": "キュレーターに聞く",
-    "ask_hint": "技法、歴史、象徴主義について何でも質問してください…",
-    "thinking": "考え中…",
-    "placeholder_ask": "何でも質問してください…",
-    "related_works": "関連作品",
-    "zoom_reset": "リセット",
-    "zoom_hint": "スクロール · ピンチ · +/- でズーム",
-    "royalty": "Royalty: {{percent}}%",
-    "eyebrow": "ミュゼ・クロスデール · オリジナル作品"
+    "speed": "スピード"
   },
   "vaults": {
     "title": "ヴォルト",
@@ -478,7 +444,7 @@
     "ob_placeholder_inventory": "例：40〜80 点",
     "ob_placeholder_about": "プログラム、アーティスト、オンチェーンで達成したいことについてお聞かせください…",
     "ob_included_heading": "含まれるもの",
-    "ob_include_1": "facinations.art/[あなたのスラッグ] でホストされたギャラリーページ",
+    "ob_include_1": "xdale.art/[あなたのスラッグ] でホストされたギャラリーページ",
     "ob_include_2": "登録されたすべての作品のオンチェーン来歴証明書",
     "ob_include_3": "高価値作品のヴォルト分割化資格",
     "ob_include_4": "直接コレクター問い合わせルーティング",
@@ -767,9 +733,6 @@
     "nav_exchange": "コレクション取引所",
     "nav_whitepaper": "ホワイトペーパー"
   },
-  "footer": {
-    "contract": "0x33d1de58…157f · Ethereum Sepolia"
-  },
   "galleries": {
     "meta_title": "ギャラリー — Musée-Crosdale",
     "meta_description": "Facinationsプラットフォームでキュレーションされたギャラリーを発見 — オンチェーン出所を持つ現代・新進アーティスト。",
@@ -851,11 +814,63 @@
     "eyebrow": "ギャラリー · Musée-Crosdale",
     "powered_by": "Facinationsによって提供"
   },
-  "gallery": {
-    "speed": "スピード"
-  },
   "theme": {
     "dark": "🌙 Dark",
     "light": "☀️ Light"
+  },
+  "community": {
+    "eyebrow": "Façinations プロトコル",
+    "title": "コミュニティ",
+    "tagline": "Musée-Crosdale ネットワークに参加しましょう — Discord で会話に参加するか、Threema のエンドツーエンド暗号化を通じてチームに直接連絡してください。",
+    "tab_discord": "Discord",
+    "tab_threema": "Threema",
+    "badge_live_chat": "ライブチャット",
+    "badge_encrypted": "暗号化済み"
+  },
+  "communityPortal": {
+    "eyebrow": "コミュニティポータル",
+    "title": "Façinations ネットワークとつながる",
+    "tagline": "Discord で会話に参加するか、Threema でプライベートな暗号化メッセージを送信してください。"
+  },
+  "discord": {
+    "label": "ライブサーバー",
+    "iframe_title": "Discord コミュニティサーバー",
+    "join": "サーバーに参加",
+    "setup_heading": "Discord サーバー — セットアップが必要",
+    "setup_body": "Discord サーバーを接続して、ライブウィジェットとコミュニティメンバー数をここに表示してください。",
+    "setup_step_1": "discord.com で Discord サーバーを作成する",
+    "setup_step_2": "サーバー設定 → ウィジェットでウィジェットを有効にする",
+    "setup_step_3": "サーバー ID をコピーして、VITE_DISCORD_SERVER_ID として .env に追加する",
+    "setup_step_4": "オプションで招待リンクを VITE_DISCORD_INVITE_URL として追加する"
+  },
+  "threema": {
+    "id_label": "Threema ID",
+    "encrypted_badge": "エンドツーエンド暗号化",
+    "id_body": "Threema アプリでこの ID を直接追加して、Façinations チームとプライベートな暗号化メッセージを交わしましょう。電話番号やメールアドレスは不要です。",
+    "open_app": "Threema で開く",
+    "form_title": "安全なメッセージを送信",
+    "name_placeholder": "お名前（任意）",
+    "email_placeholder": "返信用メール（任意）",
+    "message_placeholder": "メッセージ…",
+    "submit": "Threema Gateway 経由で送信",
+    "sending": "送信中…",
+    "send_another": "別のメッセージを送る",
+    "sent": "メッセージが Threema Gateway 経由で配信されました — エンドツーエンド暗号化済み。チームはアプリを通じて返信します。",
+    "notice": "メッセージは Threema Gateway 経由で配信され、チームの Threema アプリで受信されます。メッセージは転送中に暗号化されます。メールアドレスの提供は任意で、返信を可能にするためにのみ使用されます。"
+  },
+  "collectionExchange": {
+    "eyebrow": "コレクション交換",
+    "title": "ファインアート流動性エンジン",
+    "description": "オファーは注文書ではなく、他のコレクターからの提案として届きます。各交換はプロヴェナンス、展示の可視性、文化的重みに貢献します。",
+    "proposal_eyebrow": "交換提案",
+    "proposal_title": "ジュネーブのコレクターが交換を提案",
+    "proposal_body": "「ナラティブ・アブストラクション #3」を「初期青の研究」と交換し、キュレーションされた取引所と機関金庫を通じて処理されます。",
+    "provenance_aligned": "プロヴェナンス整合済み",
+    "review_proposal": "提案を確認",
+    "escrow_notice_title": "Physical asset escrow required.",
+    "escrow_notice_body": "Once a partner is accepted for any exchange transaction, both parties must escrow their physical asset with the platform before the trade is released. Do not transfer your item until escrow is confirmed by Musée-Crosdale."
+  },
+  "xervaultBanner": {
+    "tagline": "XerVault で使用しているのと同じウォレットを接続してください — 即時アクセス、サブスクリプション不要。"
   }
 }

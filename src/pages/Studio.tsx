@@ -223,7 +223,7 @@ export default function Studio() {
                 {!isCurrent && (
                   plan.tier === "institutional" ? (
                     <a
-                      href="mailto:studio@facinations.art"
+                      href="mailto:studio@xdale.art"
                       style={{
                         display: "block", marginTop: "1.25rem", width: "100%", padding: "0.55rem",
                         background: "transparent", border: "1px solid rgba(212,175,55,0.3)",

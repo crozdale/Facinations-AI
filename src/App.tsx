@@ -32,6 +32,7 @@ const Dashboard    = React.lazy(() => import("./pages/Dashboard"));
 const CheckoutSuccess = React.lazy(() => import("./pages/CheckoutSuccess"));
 const CryptoSuccess   = React.lazy(() => import("./pages/CryptoSuccess"));
 const PayPalSuccess   = React.lazy(() => import("./pages/PayPalSuccess"));
+const Community    = React.lazy(() => import("./pages/Community"));
 const Admin        = React.lazy(() => import("./pages/Admin"));
 const Galleries    = React.lazy(() => import("./pages/Galleries"));
 const GalleryPage  = React.lazy(() => import("./pages/GalleryPage"));
@@ -100,6 +101,7 @@ export default function App() {
                 <Route path="/checkout/success"        element={<CheckoutSuccess />} />
                 <Route path="/checkout/crypto-success"  element={<CryptoSuccess />} />
                 <Route path="/checkout/paypal-success"  element={<PayPalSuccess />} />
+                <Route path="/community"      element={<Community />} />
                 <Route path="/admin"          element={<Admin />} />
                 <Route path="/galleries"     element={<Galleries />} />
                 <Route path="/gallery/:slug" element={<GalleryPage />} />

@@ -1,10 +1,10 @@
-﻿import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import MistralWidget from "../components/MistralWidget";
 import VoiceAICurator from "../components/VoiceAICurator";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
 
-// ── VideoHero: tries mp4, falls back to a still image ─────────────────────────
+// -- VideoHero: tries mp4, falls back to a still image -------------------------
 function VideoHero() {
   const [failed, setFailed] = useState(false);
 
@@ -33,7 +33,7 @@ function VideoHero() {
   );
 }
 
-// ───────────────────────── Image list ─────────────────────────
+// ------------------------- Image list -------------------------
 const images = [
   "Abiaat.jpg","Angie-eye-_2023-01-11_17-29-08.jpg",
   "ARANCAME La VIDA-438093283_418377434483858_7953622244752444593_n.jpg",
@@ -161,7 +161,7 @@ const SERIES_TESTS = [
   (f: string) => !/\d{15,}/.test(f),
 ] as const;
 
-// ───────── AI via Claude (kept) ─────────
+// --------- AI via Claude (kept) ---------
 async function askClaude(system, userMsg, history = []) {
   const res = await fetch("/api/claude/v1/messages", {
     method: "POST",
@@ -179,7 +179,7 @@ async function askClaude(system, userMsg, history = []) {
   return d.content?.find((b) => b.type === "text")?.text ?? "No response.";
 }
 
-// ───────── ZoomPane (with simple < > arrows) ─────────
+// --------- ZoomPane (with simple < > arrows) ---------
 const zoomBtnStyle = {
   background: "rgba(0,0,0,0.7)",
   border: "1px solid rgba(212,175,55,0.4)",
@@ -503,9 +503,9 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }) {
   );
 }
 
-// ───────── simple Markdown ─────────
-// ───────── Claude “Curator” panel ─────────
-const SYSTEM = `You are a world-class art curator and critic for Facinations — a bold, emotionally charged contemporary gallery.
+// --------- simple Markdown ---------
+// --------- Claude �Curator� panel ---------
+const SYSTEM = `You are a world-class art curator and critic for Facinations � a bold, emotionally charged contemporary gallery.
 Write with authority, warmth, and poetic precision. Cover: subject/composition, palette and technique, mood and symbolism.
 Keep responses under 120 words unless asked for more. Never mention filenames or numeric IDs.`;
 function Markdown({ text }) {
@@ -865,7 +865,7 @@ function AiPanel({ filename, allImages, onJump }) {
             fontSize: "0.72rem",
           }}
         >
-          →
+          ?
         </button>
       </div>
 
@@ -933,7 +933,7 @@ function AiPanel({ filename, allImages, onJump }) {
   );
 }
 
-// ───────── Lightbox shell ─────────
+// --------- Lightbox shell ---------
 function Lightbox({ filtered, index, setIndex, onClose }) {
   const file = filtered[index];
   const prev = useCallback(
@@ -1006,13 +1006,13 @@ function Lightbox({ filtered, index, setIndex, onClose }) {
           zIndex: 1010,
         }}
       >
-        ×
+        �
       </button>
     </div>
   );
 }
 
-// ───────── Gallery page ─────────
+// --------- Gallery page ---------
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
   .g-marquee{overflow:hidden;width:100%;background:#111}
@@ -1053,7 +1053,7 @@ export default function Gallery() {
   const { t } = useTranslation();
   useMeta({
     title: t("gallery.title"),
-    description: "Browse the Musée-Crosdale collection — original works by Crosdale and invited artists, each with on-chain provenance secured by the Facinations protocol.",
+    description: "Browse the Mus�e-Crosdale collection � original works by Crosdale and invited artists, each with on-chain provenance secured by the Facinations protocol.",
     image: "/images/Alchemist-of-Light.jpg",
   });
   const SERIES = [
@@ -1088,7 +1088,7 @@ export default function Gallery() {
       <header style={{ textAlign: "center", padding: "4rem 2rem 3rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
         <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#d4af37", marginBottom: "1rem", position: "relative" }}>
-          {t("gallery.eyebrow", "Musée-Crosdale · Original Works")}
+          {t("gallery.eyebrow", "Mus�e-Crosdale � Original Works")}
         </p>
         <h1
           style={{
@@ -1166,7 +1166,7 @@ export default function Gallery() {
         </span>
       </div>
 
-      {/* Dionysus — Moving Image */}
+      {/* Dionysus � Moving Image */}
       <div className="dion-section">
         <div className="dion-header">
           <span className="dion-eyebrow">{t("home.moving_image", "Moving Image")}</span>
@@ -1202,7 +1202,7 @@ export default function Gallery() {
                   transition: "all 0.2s",
                 }}
               >
-                {r === 1 ? "1×" : `${r}×`}
+                {r === 1 ? "1�" : `${r}�`}
               </button>
             ))}
           </div>
@@ -1210,7 +1210,7 @@ export default function Gallery() {
       </div>
 
       <div className="g-marquee" key={`marquee-${filter}`}>
-        {/* Row 1 — drifts left */}
+        {/* Row 1 � drifts left */}
         <div className="g-track left" style={{ marginBottom: "3px" }}>
           {[...filtered, ...filtered].map((file, i) => (
             <div
@@ -1225,7 +1225,7 @@ export default function Gallery() {
             </div>
           ))}
         </div>
-        {/* Row 2 — drifts right */}
+        {/* Row 2 � drifts right */}
         <div className="g-track right">
           {[...[...filtered].reverse(), ...[...filtered].reverse()].map((file, i) => (
             <div
@@ -1264,7 +1264,7 @@ export default function Gallery() {
         }}
       >
         <MistralWidget context="gallery" />
-        <VoiceAICurator context="Musée-Crosdale Gallery — fine art collection by Crosdale" />
+        <VoiceAICurator context="Mus�e-https://xervault.com/gallery � fine art collection by Crosdale" />
       </div>
       </div>
     </section>

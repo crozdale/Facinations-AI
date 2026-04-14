@@ -88,18 +88,7 @@
     "blogazine": "Blogazine के लिए क्लिक करें"
   },
   "footer": {
-    "copyright": "© {{year}} Façinations. सर्वाधिकार सुरक्षित।",
-    "newsletter_eyebrow": "प्राइवेट व्यू · Musée-Crosdale",
-    "newsletter_confirmed": "आप सूची में हैं।",
-    "newsletter_placeholder": "आपका ईमेल पता",
-    "newsletter_btn": "सब्सक्राइब करें",
-    "newsletter_error": "कुछ गलत हो गया — कृपया पुनः प्रयास करें।",
-    "protocol_tagline": "विकेंद्रीकृत कला प्रोटोकॉल",
-    "brand": "Façinations",
-    "legal": "कानूनी",
-    "about": "हमारे बारे में",
-    "whitepaper": "श्वेत पत्र",
-    "architecture": "आर्किटेक्चर"
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
   },
   "landing": {
     "eyebrow": "Facinations प्रोटोकॉल",
@@ -135,30 +124,7 @@
     "body": "Facinations एक DeFi-नेटिव ललित कला वॉल्ट है, जो सुरक्षित ऑन-चेन वॉल्ट के माध्यम से दुर्लभ कलाकृतियों के आंशिक स्वामित्व को सक्षम बनाता है।"
   },
   "gallery": {
-    "title": "गैलरी",
-    "subtitle": "क्यूरेटेड डिजिटल कार्य और संग्रह।",
-    "filter_all": "सभी",
-    "filter_derain": "Derain",
-    "filter_matisse": "Matisse",
-    "filter_medieval": "मध्यकालीन",
-    "filter_renaissance": "पुनर्जागरण",
-    "filter_originals": "मूल कृतियाँ",
-    "works_count": "{{count}} कार्य",
-    "ai_subtitle": "AI क्यूरेटर · चैट · संबंधित कार्य",
-    "curators_eye": "क्यूरेटर की नज़र",
-    "btn_invoke": "✦ AI क्यूरेटर को आमंत्रित करें",
-    "analysing": "विश्लेषण हो रहा है…",
-    "ai_error": "AI तक नहीं पहुँचा जा सका। /api/claude त्रुटियों के लिए DevTools Network टैब जाँचें।",
-    "btn_retry": "पुनः प्रयास करें",
-    "ask_curator": "क्यूरेटर से पूछें",
-    "ask_hint": "तकनीक, इतिहास, प्रतीकवाद के बारे में कुछ भी पूछें…",
-    "thinking": "सोच रहा है…",
-    "placeholder_ask": "कुछ भी पूछें…",
-    "related_works": "संबंधित कार्य",
-    "zoom_reset": "रीसेट करें",
-    "zoom_hint": "स्क्रॉल · पिंच · ज़ूम के लिए +/- उपयोग करें",
-    "royalty": "Royalty: {{percent}}%",
-    "eyebrow": "म्यूज़े-क्रोसडेल · मूल कार्य"
+    "speed": "गति"
   },
   "vaults": {
     "title": "वॉल्ट",
@@ -478,7 +444,7 @@
     "ob_placeholder_inventory": "जैसे 40–80 कार्य",
     "ob_placeholder_about": "अपने कार्यक्रम, कलाकारों और ऑन-चेन पर आप क्या हासिल करना चाहते हैं, इसके बारे में बताएँ…",
     "ob_included_heading": "क्या शामिल है",
-    "ob_include_1": "facinations.art/[आपका-स्लग] पर होस्टेड गैलरी पृष्ठ",
+    "ob_include_1": "xdale.art/[आपका-स्लग] पर होस्टेड गैलरी पृष्ठ",
     "ob_include_2": "प्रत्येक सूचीबद्ध कार्य के लिए ऑन-चेन प्रोवेनेंस प्रमाणपत्र",
     "ob_include_3": "उच्च मूल्य के कार्यों के लिए वॉल्ट फ्रैक्शनलाइज़ेशन पात्रता",
     "ob_include_4": "प्रत्यक्ष कलेक्टर पूछताछ रूटिंग",
@@ -765,9 +731,6 @@
     "nav_exchange": "संग्रह एक्सचेंज",
     "nav_whitepaper": "श्वेत पत्र"
   },
-  "footer": {
-    "contract": "0x33d1de58…157f · Ethereum Sepolia"
-  },
   "galleries": {
     "meta_title": "गैलरी — Musée-Crosdale",
     "meta_description": "Facinations प्लेटफ़ॉर्म पर क्यूरेटेड गैलरी खोजें — ऑन-चेन उद्गम के साथ समकालीन और उभरते कलाकार।",
@@ -849,11 +812,63 @@
     "eyebrow": "गैलरी · Musée-Crosdale",
     "powered_by": "Facinations द्वारा संचालित"
   },
-  "gallery": {
-    "speed": "गति"
-  },
   "theme": {
     "dark": "🌙 Dark",
     "light": "☀️ Light"
+  },
+  "community": {
+    "eyebrow": "Façinations प्रोटोकॉल",
+    "title": "समुदाय",
+    "tagline": "Musée-Crosdale नेटवर्क से जुड़ें — Discord पर बातचीत में भाग लें या Threema के एंड-टू-एंड एन्क्रिप्शन के माध्यम से सीधे टीम से संपर्क करें।",
+    "tab_discord": "Discord",
+    "tab_threema": "Threema",
+    "badge_live_chat": "लाइव चैट",
+    "badge_encrypted": "एन्क्रिप्टेड"
+  },
+  "communityPortal": {
+    "eyebrow": "सामुदायिक पोर्टल",
+    "title": "Façinations नेटवर्क से कनेक्ट करें",
+    "tagline": "Discord पर बातचीत में भाग लें या Threema के माध्यम से निजी, एन्क्रिप्टेड संदेश भेजें।"
+  },
+  "discord": {
+    "label": "लाइव सर्वर",
+    "iframe_title": "Discord सामुदायिक सर्वर",
+    "join": "सर्वर से जुड़ें",
+    "setup_heading": "Discord सर्वर — सेटअप आवश्यक",
+    "setup_body": "यहां लाइव विजेट और सामुदायिक सदस्य संख्या प्रदर्शित करने के लिए अपने Discord सर्वर को कनेक्ट करें।",
+    "setup_step_1": "discord.com पर Discord सर्वर बनाएं",
+    "setup_step_2": "सर्वर सेटिंग्स → विजेट में विजेट सक्षम करें",
+    "setup_step_3": "सर्वर ID कॉपी करें और इसे VITE_DISCORD_SERVER_ID के रूप में .env में जोड़ें",
+    "setup_step_4": "वैकल्पिक रूप से अपना आमंत्रण लिंक VITE_DISCORD_INVITE_URL के रूप में जोड़ें"
+  },
+  "threema": {
+    "id_label": "Threema ID",
+    "encrypted_badge": "एंड-टू-एंड एन्क्रिप्टेड",
+    "id_body": "Façinations टीम के साथ निजी, एन्क्रिप्टेड संदेश के लिए इस ID को सीधे Threema ऐप में जोड़ें। फ़ोन नंबर या ईमेल पता आवश्यक नहीं है।",
+    "open_app": "Threema में खोलें",
+    "form_title": "सुरक्षित संदेश भेजें",
+    "name_placeholder": "आपका नाम (वैकल्पिक)",
+    "email_placeholder": "जवाब के लिए ईमेल (वैकल्पिक)",
+    "message_placeholder": "आपका संदेश…",
+    "submit": "Threema Gateway के माध्यम से भेजें",
+    "sending": "भेजा जा रहा है…",
+    "send_another": "दूसरा भेजें",
+    "sent": "आपका संदेश Threema Gateway के माध्यम से वितरित किया गया — एंड-टू-एंड एन्क्रिप्टेड। टीम ऐप के माध्यम से जवाब देगी।",
+    "notice": "संदेश Threema Gateway के माध्यम से वितरित किए जाते हैं और टीम के Threema ऐप में प्राप्त होते हैं। आपका संदेश ट्रांज़िट में एन्क्रिप्टेड है। ईमेल पता प्रदान करना वैकल्पिक है और केवल जवाब सक्षम करने के लिए उपयोग किया जाता है।"
+  },
+  "collectionExchange": {
+    "eyebrow": "संग्रह विनिमय",
+    "title": "ललित कला तरलता इंजन",
+    "description": "ऑफर ऑर्डर बुक के बजाय अन्य संग्राहकों के प्रस्तावों के रूप में आते हैं। प्रत्येक विनिमय उद्गम, प्रदर्शनी दृश्यता और सांस्कृतिक महत्व में योगदान देता है।",
+    "proposal_eyebrow": "विनिमय प्रस्ताव",
+    "proposal_title": "जिनेवा में संग्राहक ने विनिमय का प्रस्ताव दिया",
+    "proposal_body": "अपनी \"नैरेटिव एब्स्ट्रैक्शन #3\" को \"प्रारंभिक काल की नीली अध्ययन\" से बदलें, एक क्यूरेटेड एक्सचेंज और संस्थागत वॉल्ट के माध्यम से।",
+    "provenance_aligned": "उद्गम संरेखित",
+    "review_proposal": "प्रस्ताव की समीक्षा करें",
+    "escrow_notice_title": "Physical asset escrow required.",
+    "escrow_notice_body": "Once a partner is accepted for any exchange transaction, both parties must escrow their physical asset with the platform before the trade is released. Do not transfer your item until escrow is confirmed by Musée-Crosdale."
+  },
+  "xervaultBanner": {
+    "tagline": "XerVault पर उपयोग किए जाने वाले समान वॉलेट को कनेक्ट करें — तत्काल पहुंच, कोई सदस्यता आवश्यक नहीं।"
   }
 }

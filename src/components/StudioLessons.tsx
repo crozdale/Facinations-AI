@@ -299,7 +299,7 @@ export default function StudioLessons() {
 
                 {/* CTA row */}
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <button className="sl-begin-btn" onClick={() => {}}>
+                  <button className="sl-begin-btn" onClick={() => { if(!states[lesson.id].open) toggleOpen(lesson.id); setTimeout(()=>endRefs.current[lesson.id]?.scrollIntoView({behavior:"smooth"}),100); if(states[lesson.id].messages.length===1){ patch(lesson.id,{input:lesson.starterQuestion}); setTimeout(()=>send(lesson),50); } }}>
                     {st.messages.length > 1 ? t("studioLessons.btn_continue") : t("studioLessons.btn_begin")}
                   </button>
                   {!st.completed && (

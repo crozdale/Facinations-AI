@@ -6,7 +6,7 @@
 import { useEffect } from "react";
 
 const SITE_NAME  = "Musée-Crosdale";
-const SITE_URL   = "https://facinations.art";
+const SITE_URL   = "https://xdale.art";
 const DEFAULT_IMG = "/images/Alchemist-of-Light.jpg";
 
 const DEFAULTS = {

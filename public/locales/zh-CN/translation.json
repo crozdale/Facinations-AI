@@ -88,18 +88,7 @@
     "blogazine": "点击访问 Blogazine"
   },
   "footer": {
-    "copyright": "© {{year}} Façinations。保留所有权利。",
-    "newsletter_eyebrow": "私人预览 · Musée-Crosdale",
-    "newsletter_confirmed": "您已加入订阅列表。",
-    "newsletter_placeholder": "您的电子邮件地址",
-    "newsletter_btn": "订阅",
-    "newsletter_error": "出现错误，请重试。",
-    "protocol_tagline": "去中心化艺术协议",
-    "brand": "Façinations",
-    "legal": "法律",
-    "about": "关于",
-    "whitepaper": "白皮书",
-    "architecture": "架构"
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
   },
   "landing": {
     "eyebrow": "Facinations 协议",
@@ -135,30 +124,7 @@
     "body": "Facinations 是一个 DeFi 原生精细艺术金库，通过安全的链上金库实现稀有艺术作品的分级所有权。"
   },
   "gallery": {
-    "title": "画廊",
-    "subtitle": "精选数字作品与藏品。",
-    "filter_all": "全部",
-    "filter_derain": "Derain",
-    "filter_matisse": "Matisse",
-    "filter_medieval": "中世纪",
-    "filter_renaissance": "文艺复兴",
-    "filter_originals": "原作",
-    "works_count": "{{count}} 件作品",
-    "ai_subtitle": "AI 策展人 · 聊天 · 相关作品",
-    "curators_eye": "策展人之眼",
-    "btn_invoke": "✦ 调用 AI 策展人",
-    "analysing": "分析中…",
-    "ai_error": "无法连接 AI。请在 DevTools 网络选项卡中检查 /api/claude 错误。",
-    "btn_retry": "重试",
-    "ask_curator": "询问策展人",
-    "ask_hint": "询问有关技法、历史、象征主义的任何问题…",
-    "thinking": "思考中…",
-    "placeholder_ask": "随便问点什么…",
-    "related_works": "相关作品",
-    "zoom_reset": "重置",
-    "zoom_hint": "滚动 · 捏合 · 使用 +/- 缩放",
-    "royalty": "Royalty: {{percent}}%",
-    "eyebrow": "克罗斯代尔博物馆 · 原创作品"
+    "speed": "速度"
   },
   "vaults": {
     "title": "金库",
@@ -478,7 +444,7 @@
     "ob_placeholder_inventory": "例：40–80 件",
     "ob_placeholder_about": "请介绍您的项目、艺术家以及您希望在链上实现的目标…",
     "ob_included_heading": "包含内容",
-    "ob_include_1": "托管于 facinations.art/[您的-标识] 的画廊页面",
+    "ob_include_1": "托管于 xdale.art/[您的-标识] 的画廊页面",
     "ob_include_2": "每件登记作品的链上溯源证书",
     "ob_include_3": "高价值作品的金库分级资格",
     "ob_include_4": "直接藏家询价路由",
@@ -502,7 +468,7 @@
     "tutor_thinking": "导师思考中…",
     "btn_send": "发送",
     "tutor_error": "导师目前不可用。请稍后重试。",
-    "welcome_starter": "欢迎来到模块 {{module}}：{{title}}。不妨从这里开始：\u201c{{starter}}\u201d",
+    "welcome_starter": "欢迎来到模块 {{module}}：{{title}}。不妨从这里开始：“{{starter}}”",
     "welcome_default": "欢迎来到模块 {{module}}：{{title}}。有关此主题，请随时提问。",
     "placeholder_ask": "询问有关 {{topic}} 的问题…"
   },
@@ -767,9 +733,6 @@
     "nav_exchange": "藏品交易所",
     "nav_whitepaper": "白皮书"
   },
-  "footer": {
-    "contract": "0x33d1de58…157f · Ethereum Sepolia"
-  },
   "galleries": {
     "meta_title": "画廊 — Musée-Crosdale",
     "meta_description": "在 Facinations 平台探索精选画廊 — 具有链上溯源的当代及新兴艺术家。",
@@ -851,11 +814,63 @@
     "eyebrow": "画廊 · Musée-Crosdale",
     "powered_by": "由 Facinations 驱动"
   },
-  "gallery": {
-    "speed": "速度"
-  },
   "theme": {
     "dark": "🌙 Dark",
     "light": "☀️ Light"
+  },
+  "community": {
+    "eyebrow": "Façinations 协议",
+    "title": "社区",
+    "tagline": "与 Musée-Crosdale 网络连接 — 在 Discord 上加入对话，或通过 Threema 的端对端加密直接联系团队。",
+    "tab_discord": "Discord",
+    "tab_threema": "Threema",
+    "badge_live_chat": "实时聊天",
+    "badge_encrypted": "已加密"
+  },
+  "communityPortal": {
+    "eyebrow": "社区门户",
+    "title": "与 Façinations 网络连接",
+    "tagline": "在 Discord 上加入对话，或通过 Threema 发送私密加密消息。"
+  },
+  "discord": {
+    "label": "实时服务器",
+    "iframe_title": "Discord 社区服务器",
+    "join": "加入服务器",
+    "setup_heading": "Discord 服务器 — 需要设置",
+    "setup_body": "连接您的 Discord 服务器以在此处显示实时小部件和社区成员数量。",
+    "setup_step_1": "在 discord.com 创建 Discord 服务器",
+    "setup_step_2": "在服务器设置 → 小部件中启用小部件",
+    "setup_step_3": "复制服务器 ID 并将其作为 VITE_DISCORD_SERVER_ID 添加到您的 .env",
+    "setup_step_4": "可选择将您的邀请链接添加为 VITE_DISCORD_INVITE_URL"
+  },
+  "threema": {
+    "id_label": "Threema ID",
+    "encrypted_badge": "端对端加密",
+    "id_body": "直接在 Threema 应用中添加此 ID，与 Façinations 团队进行私密加密通信。无需电话号码或电子邮件。",
+    "open_app": "在 Threema 中打开",
+    "form_title": "发送安全消息",
+    "name_placeholder": "您的姓名（可选）",
+    "email_placeholder": "回复邮箱（可选）",
+    "message_placeholder": "您的消息…",
+    "submit": "通过 Threema Gateway 发送",
+    "sending": "发送中…",
+    "send_another": "发送另一条",
+    "sent": "您的消息已通过 Threema Gateway 发送 — 端对端加密。团队将通过应用回复您。",
+    "notice": "消息通过 Threema Gateway 传递，在团队的 Threema 应用中接收。您的消息在传输过程中已加密。提供电子邮件地址是可选的，仅用于启用回复。"
+  },
+  "collectionExchange": {
+    "eyebrow": "藏品交换",
+    "title": "艺术品流动性引擎",
+    "description": "报价以其他收藏家的提案形式到来，而非订单簿。每次交换都有助于出处、展览可见性和文化分量。",
+    "proposal_eyebrow": "交换提案",
+    "proposal_title": "日内瓦收藏家提出交换",
+    "proposal_body": "将您的《叙事抽象 #3》与《早期蓝色研究》交换，通过精心策划的交易所和机构金库进行。",
+    "provenance_aligned": "出处对齐",
+    "review_proposal": "审查提案",
+    "escrow_notice_title": "Physical asset escrow required.",
+    "escrow_notice_body": "Once a partner is accepted for any exchange transaction, both parties must escrow their physical asset with the platform before the trade is released. Do not transfer your item until escrow is confirmed by Musée-Crosdale."
+  },
+  "xervaultBanner": {
+    "tagline": "连接您在 XerVault 上使用的同一钱包 — 即时访问，无需订阅。"
   }
 }

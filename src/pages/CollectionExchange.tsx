@@ -1,7 +1,9 @@
 // src/pages/CollectionExchange.jsx
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function CollectionExchange() {
+  const { t } = useTranslation();
   return (
     <main
       style={{
@@ -18,6 +20,26 @@ export default function CollectionExchange() {
           padding: "3rem 2rem 4rem",
         }}
       >
+        {/* Escrow policy notice */}
+        <div
+          style={{
+            border: "1px solid rgba(212,175,55,0.45)",
+            borderRadius: "12px",
+            background: "rgba(212,175,55,0.07)",
+            padding: "0.9rem 1.2rem",
+            marginBottom: "2rem",
+            display: "flex",
+            gap: "0.75rem",
+            alignItems: "flex-start",
+          }}
+        >
+          <span style={{ fontSize: "1rem", marginTop: "1px" }}>⚠️</span>
+          <p style={{ fontSize: "0.82rem", color: "#d4af7a", lineHeight: 1.65, margin: 0 }}>
+            <strong>{t("collectionExchange.escrow_notice_title")}</strong>{" "}
+            {t("collectionExchange.escrow_notice_body")}
+          </p>
+        </div>
+
         <header style={{ marginBottom: "2.4rem", textAlign: "left" }}>
           <div
             style={{
@@ -29,7 +51,7 @@ export default function CollectionExchange() {
               marginBottom: "0.7rem",
             }}
           >
-            Collection exchange
+            {t("collectionExchange.eyebrow")}
           </div>
           <h1
             style={{
@@ -39,7 +61,7 @@ export default function CollectionExchange() {
               marginBottom: "0.7rem",
             }}
           >
-            Fine art liquidity engine
+            {t("collectionExchange.title")}
           </h1>
           <p
             style={{
@@ -49,9 +71,7 @@ export default function CollectionExchange() {
               lineHeight: 1.7,
             }}
           >
-            Offers arrive as proposals from other collectors, not as order
-            books. Each exchange contributes to provenance, exhibition
-            visibility, and cultural gravity.
+            {t("collectionExchange.description")}
           </p>
         </header>
 
@@ -82,51 +102,50 @@ export default function CollectionExchange() {
                 marginBottom: "0.35rem",
               }}
             >
-              Exchange proposal
+              {t(“collectionExchange.proposal_eyebrow”)}
             </div>
             <h2
               style={{
-                fontSize: "1.1rem",
+                fontSize: “1.1rem”,
                 fontWeight: 600,
-                marginBottom: "0.4rem",
+                marginBottom: “0.4rem”,
               }}
             >
-              Collector in Geneva proposes exchange
+              {t(“collectionExchange.proposal_title”)}
             </h2>
             <p
               style={{
-                fontSize: "0.82rem",
-                color: "#1b150e",
-                marginBottom: "0.7rem",
+                fontSize: “0.82rem”,
+                color: “#1b150e”,
+                marginBottom: “0.7rem”,
               }}
             >
-              Trade your “Narrative Abstraction #3” for “Early Period Study in
-              Blue”, routed through a curated exchange and institutional vault.
+              {t(“collectionExchange.proposal_body”)}
             </p>
             <div
               style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                fontSize: "0.78rem",
-                color: "#1b150e",
+                display: “flex”,
+                justifyContent: “space-between”,
+                alignItems: “center”,
+                fontSize: “0.78rem”,
+                color: “#1b150e”,
               }}
             >
-              <span>Provenance aligned</span>
+              <span>{t(“collectionExchange.provenance_aligned”)}</span>
               <button
                 style={{
-                  padding: "0.45rem 0.9rem",
-                  borderRadius: "999px",
-                  border: "1px solid rgba(8,8,8,0.75)",
-                  background: "rgba(8,8,8,0.04)",
-                  fontFamily: "'Cinzel', serif",
-                  fontSize: "0.6rem",
-                  letterSpacing: "0.16em",
-                  textTransform: "uppercase",
-                  cursor: "pointer",
+                  padding: “0.45rem 0.9rem”,
+                  borderRadius: “999px”,
+                  border: “1px solid rgba(8,8,8,0.75)”,
+                  background: “rgba(8,8,8,0.04)”,
+                  fontFamily: “'Cinzel', serif”,
+                  fontSize: “0.6rem”,
+                  letterSpacing: “0.16em”,
+                  textTransform: “uppercase”,
+                  cursor: “pointer”,
                 }}
               >
-                Review proposal
+                {t(“collectionExchange.review_proposal”)}
               </button>
             </div>
           </article>

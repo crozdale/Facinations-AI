@@ -12,6 +12,8 @@ import { useSubscription } from "../context/SubscriptionContext";
 import { useMeta } from "../hooks/useMeta";
 import { VAULTS } from "../features/vaults/registry/vaultRegistry";
 import AICurator from "../components/AICurator";
+import SubscriptionGate from "../components/SubscriptionGate";
+import CommunityPortal from "../components/community/CommunityPortal";
 
 // ── Subgraph queries ──────────────────────────────────────────────────────────
 const USER_POSITIONS_QUERY = gql`
@@ -393,6 +395,14 @@ export default function Dashboard() {
                 Ask SIA about your portfolio, strategy, or fractional ownership.
               </p>
             </div>
+          </div>
+
+          {/* Community Portal — Gallery tier+ */}
+          <div className="dash-section">
+            <p className="dash-section-title">Community Portal</p>
+            <SubscriptionGate required="gallery" featureName="Community Portal">
+              <CommunityPortal />
+            </SubscriptionGate>
           </div>
 
           {/* Account status: KYC + Subscription */}

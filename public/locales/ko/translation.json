@@ -88,18 +88,7 @@
     "blogazine": "Blogazine 보러 가기"
   },
   "footer": {
-    "copyright": "© {{year}} Façinations. 모든 권리 보유.",
-    "newsletter_eyebrow": "프라이빗 뷰 · Musée-Crosdale",
-    "newsletter_confirmed": "목록에 추가되었습니다.",
-    "newsletter_placeholder": "이메일 주소",
-    "newsletter_btn": "구독",
-    "newsletter_error": "문제가 발생했습니다. 다시 시도해 주세요.",
-    "protocol_tagline": "탈중앙화 미술 프로토콜",
-    "brand": "Façinations",
-    "legal": "법적 고지",
-    "about": "소개",
-    "whitepaper": "백서",
-    "architecture": "아키텍처"
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
   },
   "landing": {
     "eyebrow": "Facinations 프로토콜",
@@ -135,30 +124,7 @@
     "body": "Facinations는 DeFi 네이티브 순수 예술 볼트로, 안전한 온체인 볼트를 통해 희귀 예술 작품의 분할 소유권을 가능하게 합니다."
   },
   "gallery": {
-    "title": "갤러리",
-    "subtitle": "큐레이션된 디지털 작품 및 컬렉션.",
-    "filter_all": "전체",
-    "filter_derain": "Derain",
-    "filter_matisse": "Matisse",
-    "filter_medieval": "중세",
-    "filter_renaissance": "르네상스",
-    "filter_originals": "오리지널",
-    "works_count": "{{count}}점의 작품",
-    "ai_subtitle": "AI 큐레이터 · 채팅 · 관련 작품",
-    "curators_eye": "큐레이터의 시선",
-    "btn_invoke": "✦ AI 큐레이터 호출",
-    "analysing": "분석 중…",
-    "ai_error": "AI에 연결할 수 없습니다. DevTools 네트워크 탭에서 /api/claude 오류를 확인하세요.",
-    "btn_retry": "다시 시도",
-    "ask_curator": "큐레이터에게 묻기",
-    "ask_hint": "기법, 역사, 상징주의에 대해 무엇이든 질문하세요…",
-    "thinking": "생각 중…",
-    "placeholder_ask": "무엇이든 질문하세요…",
-    "related_works": "관련 작품",
-    "zoom_reset": "초기화",
-    "zoom_hint": "스크롤 · 핀치 · +/- 버튼으로 확대/축소",
-    "royalty": "Royalty: {{percent}}%",
-    "eyebrow": "뮤제-크로스데일 · 원본 작품"
+    "speed": "속도"
   },
   "vaults": {
     "title": "볼트",
@@ -478,7 +444,7 @@
     "ob_placeholder_inventory": "예: 40–80점",
     "ob_placeholder_about": "프로그램, 작가, 온체인에서 달성하고자 하는 것에 대해 알려주세요…",
     "ob_included_heading": "포함된 내용",
-    "ob_include_1": "facinations.art/[귀하의-슬러그]에 호스팅된 갤러리 페이지",
+    "ob_include_1": "xdale.art/[귀하의-슬러그]에 호스팅된 갤러리 페이지",
     "ob_include_2": "모든 등록 작품에 대한 온체인 출처 인증서",
     "ob_include_3": "고가 작품에 대한 볼트 분할화 자격",
     "ob_include_4": "직접 컬렉터 문의 라우팅",
@@ -767,9 +733,6 @@
     "nav_exchange": "컬렉션 거래소",
     "nav_whitepaper": "백서"
   },
-  "footer": {
-    "contract": "0x33d1de58…157f · Ethereum Sepolia"
-  },
   "galleries": {
     "meta_title": "갤러리 — Musée-Crosdale",
     "meta_description": "Facinations 플랫폼에서 큐레이션된 갤러리를 발견하세요 — 온체인 출처가 있는 현대 및 신진 작가.",
@@ -851,11 +814,63 @@
     "eyebrow": "갤러리 · Musée-Crosdale",
     "powered_by": "Facinations 제공"
   },
-  "gallery": {
-    "speed": "속도"
-  },
   "theme": {
     "dark": "🌙 Dark",
     "light": "☀️ Light"
+  },
+  "community": {
+    "eyebrow": "Façinations 프로토콜",
+    "title": "커뮤니티",
+    "tagline": "Musée-Crosdale 네트워크와 연결하세요 — Discord에서 대화에 참여하거나 Threema의 종단간 암호화를 통해 팀에 직접 연락하세요.",
+    "tab_discord": "Discord",
+    "tab_threema": "Threema",
+    "badge_live_chat": "라이브 채팅",
+    "badge_encrypted": "암호화됨"
+  },
+  "communityPortal": {
+    "eyebrow": "커뮤니티 포털",
+    "title": "Façinations 네트워크와 연결",
+    "tagline": "Discord에서 대화에 참여하거나 Threema를 통해 비공개 암호화 메시지를 보내세요."
+  },
+  "discord": {
+    "label": "라이브 서버",
+    "iframe_title": "Discord 커뮤니티 서버",
+    "join": "서버 참가",
+    "setup_heading": "Discord 서버 — 설정 필요",
+    "setup_body": "Discord 서버를 연결하여 라이브 위젯과 커뮤니티 멤버 수를 여기에 표시하세요.",
+    "setup_step_1": "discord.com에서 Discord 서버 만들기",
+    "setup_step_2": "서버 설정 → 위젯에서 위젯 활성화",
+    "setup_step_3": "서버 ID를 복사하여 .env에 VITE_DISCORD_SERVER_ID로 추가",
+    "setup_step_4": "선택적으로 초대 링크를 VITE_DISCORD_INVITE_URL로 추가"
+  },
+  "threema": {
+    "id_label": "Threema ID",
+    "encrypted_badge": "종단간 암호화",
+    "id_body": "Threema 앱에서 이 ID를 직접 추가하여 Façinations 팀과 비공개 암호화 메시지를 주고받으세요. 전화번호나 이메일 주소가 필요하지 않습니다.",
+    "open_app": "Threema에서 열기",
+    "form_title": "보안 메시지 보내기",
+    "name_placeholder": "이름 (선택사항)",
+    "email_placeholder": "답장용 이메일 (선택사항)",
+    "message_placeholder": "메시지…",
+    "submit": "Threema Gateway를 통해 보내기",
+    "sending": "전송 중…",
+    "send_another": "다른 메시지 보내기",
+    "sent": "메시지가 Threema Gateway를 통해 전달되었습니다 — 종단간 암호화됨. 팀이 앱을 통해 응답할 것입니다.",
+    "notice": "메시지는 Threema Gateway를 통해 전달되고 팀의 Threema 앱에서 수신됩니다. 메시지는 전송 중 암호화됩니다. 이메일 주소 제공은 선택 사항이며 답장을 위해서만 사용됩니다."
+  },
+  "collectionExchange": {
+    "eyebrow": "컬렉션 교환",
+    "title": "파인아트 유동성 엔진",
+    "description": "제안은 주문서가 아닌 다른 수집가들의 제안으로 도착합니다. 각 교환은 출처, 전시 가시성 및 문화적 중력에 기여합니다.",
+    "proposal_eyebrow": "교환 제안",
+    "proposal_title": "제네바의 수집가가 교환을 제안합니다",
+    "proposal_body": "「서사적 추상 #3」을 「초기 시대 청색 연구」와 교환하세요. 큐레이션된 교환소와 기관 금고를 통해 처리됩니다.",
+    "provenance_aligned": "출처 정렬됨",
+    "review_proposal": "제안 검토",
+    "escrow_notice_title": "Physical asset escrow required.",
+    "escrow_notice_body": "Once a partner is accepted for any exchange transaction, both parties must escrow their physical asset with the platform before the trade is released. Do not transfer your item until escrow is confirmed by Musée-Crosdale."
+  },
+  "xervaultBanner": {
+    "tagline": "XerVault에서 사용하는 동일한 지갑을 연결하세요 — 즉각적인 액세스, 구독 불필요."
   }
 }

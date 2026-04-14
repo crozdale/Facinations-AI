@@ -28,8 +28,9 @@ const NAV_SECTIONS = [
     label: "Community",
     key: "nav.communitySection",
     items: [
-      { path: "/xdale",     label: "Xdale Gallery", key: "nav.xdale",     descKey: "nav.xdale_desc",     desc: "Curated exhibitions" },
-      { path: "/galleries", label: "Galleries",     key: "nav.galleries", descKey: "nav.galleries_desc", desc: "All gallery spaces" },
+      { path: "/community", label: "Discord & Threema", key: "nav.community",  descKey: "nav.community_desc",  desc: "Live chat · Encrypted messaging" },
+      { path: "/xdale",     label: "Xdale Gallery",  key: "nav.xdale",      descKey: "nav.xdale_desc",      desc: "Curated exhibitions" },
+      { path: "/galleries", label: "Galleries",      key: "nav.galleries",  descKey: "nav.galleries_desc",  desc: "All gallery spaces" },
     ],
   },
   {

@@ -63,7 +63,7 @@ const SECTIONS = [
       { heading: "4. On-Chain Data", body: "Blockchain transactions are public by nature. Wallet addresses and transaction hashes visible on-chain are not considered private information." },
       { heading: "5. Cookies and Analytics", body: "The Platform uses analytics tools to measure usage. You may opt out of non-essential analytics. Essential cookies are required for platform functionality." },
       { heading: "6. Data Retention", body: "We retain your data for as long as your account is active or as required by law. You may request deletion of your personal data subject to legal retention obligations." },
-      { heading: "7. Your Rights", body: "Depending on your jurisdiction, you may have rights to access, correct, delete, or port your personal data. Contact privacy@facinations.io to exercise these rights." },
+      { heading: "7. Your Rights", body: "Depending on your jurisdiction, you may have rights to access, correct, delete, or port your personal data. Contact privacy@xdale.io to exercise these rights." },
       { heading: "8. Security", body: "We implement industry-standard security measures including encryption, access controls, and regular audits. No system is completely secure; use the Platform at your own risk." },
     ],
   },

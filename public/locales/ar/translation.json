@@ -88,18 +88,7 @@
     "blogazine": "انقر للدخول إلى Blogazine"
   },
   "footer": {
-    "copyright": "© {{year}} Façinations. جميع الحقوق محفوظة.",
-    "newsletter_eyebrow": "عرض خاص · Musée-Crosdale",
-    "newsletter_confirmed": "أنت في القائمة.",
-    "newsletter_placeholder": "عنوان بريدك الإلكتروني",
-    "newsletter_btn": "اشتراك",
-    "newsletter_error": "حدث خطأ ما — يرجى المحاولة مرة أخرى.",
-    "protocol_tagline": "بروتوكول فني لا مركزي",
-    "brand": "Façinations",
-    "legal": "قانوني",
-    "about": "حول",
-    "whitepaper": "الورقة البيضاء",
-    "architecture": "البنية"
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
   },
   "landing": {
     "eyebrow": "بروتوكول Facinations",
@@ -135,30 +124,7 @@
     "body": "Facinations خزينة فنون جميلة أصيلة في DeFi، تُتيح الملكية الجزئية للأعمال النادرة عبر خزائن آمنة على السلسلة."
   },
   "gallery": {
-    "title": "المعرض",
-    "subtitle": "أعمال رقمية ومجموعات منتقاة.",
-    "filter_all": "الكل",
-    "filter_derain": "Derain",
-    "filter_matisse": "Matisse",
-    "filter_medieval": "العصور الوسطى",
-    "filter_renaissance": "عصر النهضة",
-    "filter_originals": "الأصول",
-    "works_count": "{{count}} عمل",
-    "ai_subtitle": "قيّم AI · محادثة · أعمال ذات صلة",
-    "curators_eye": "عين القيّم",
-    "btn_invoke": "✦ استدعاء قيّم AI",
-    "analysing": "جارٍ التحليل…",
-    "ai_error": "تعذّر الوصول إلى AI. تحقق من علامة تبويب الشبكة في DevTools بحثًا عن أخطاء /api/claude.",
-    "btn_retry": "إعادة المحاولة",
-    "ask_curator": "اسأل القيّم",
-    "ask_hint": "اسأل عن الأسلوب والتاريخ والرمزية…",
-    "thinking": "يفكّر…",
-    "placeholder_ask": "اسأل أي شيء…",
-    "related_works": "أعمال ذات صلة",
-    "zoom_reset": "إعادة تعيين",
-    "zoom_hint": "تمرير · قرصة · استخدم +/- للتكبير",
-    "royalty": "Royalty: {{percent}}%",
-    "eyebrow": "متحف كروسديل · أعمال أصلية"
+    "speed": "السرعة"
   },
   "vaults": {
     "title": "الخزائن",
@@ -478,7 +444,7 @@
     "ob_placeholder_inventory": "مثال: 40–80 عملًا",
     "ob_placeholder_about": "أخبرنا عن برنامجك وفنانيك وما تأمل في تحقيقه على السلسلة…",
     "ob_included_heading": "ما الذي يتضمّنه العرض",
-    "ob_include_1": "صفحة معرض مستضافة على facinations.art/[رابطك]",
+    "ob_include_1": "صفحة معرض مستضافة على xdale.art/[رابطك]",
     "ob_include_2": "شهادات سجل ملكية على السلسلة لكل عمل مُدرج",
     "ob_include_3": "أهلية تجزئة الخزينة للأعمال عالية القيمة",
     "ob_include_4": "توجيه استفسارات الجامعين مباشرةً",
@@ -765,9 +731,6 @@
     "nav_exchange": "تبادل المجموعة",
     "nav_whitepaper": "الورقة البيضاء"
   },
-  "footer": {
-    "contract": "0x33d1de58…157f · Ethereum Sepolia"
-  },
   "galleries": {
     "meta_title": "المعارض — Musée-Crosdale",
     "meta_description": "اكتشف المعارض المنسَّقة على منصة Facinations — فنانون معاصرون وناشئون بسجل ملكية على السلسلة.",
@@ -849,11 +812,63 @@
     "eyebrow": "المعرض · Musée-Crosdale",
     "powered_by": "مُشغَّل بواسطة Facinations"
   },
-  "gallery": {
-    "speed": "السرعة"
-  },
   "theme": {
     "dark": "🌙 Dark",
     "light": "☀️ Light"
+  },
+  "community": {
+    "eyebrow": "بروتوكول Façinations",
+    "title": "المجتمع",
+    "tagline": "تواصل مع شبكة Musée-Crosdale — انضم إلى المحادثة على Discord أو تواصل مع الفريق مباشرةً عبر تشفير Threema من طرف إلى طرف.",
+    "tab_discord": "Discord",
+    "tab_threema": "Threema",
+    "badge_live_chat": "دردشة مباشرة",
+    "badge_encrypted": "مشفّر"
+  },
+  "communityPortal": {
+    "eyebrow": "بوابة المجتمع",
+    "title": "تواصل مع شبكة Façinations",
+    "tagline": "انضم إلى المحادثة على Discord أو أرسل رسالة خاصة مشفّرة عبر Threema."
+  },
+  "discord": {
+    "label": "السيرفر المباشر",
+    "iframe_title": "سيرفر مجتمع Discord",
+    "join": "الانضمام إلى السيرفر",
+    "setup_heading": "سيرفر Discord — الإعداد مطلوب",
+    "setup_body": "قم بتوصيل سيرفر Discord الخاص بك لعرض الأداة المباشرة وعدد أعضاء المجتمع هنا.",
+    "setup_step_1": "أنشئ سيرفر Discord على discord.com",
+    "setup_step_2": "فعّل الأداة في إعدادات السيرفر → الأداة",
+    "setup_step_3": "انسخ معرّف السيرفر وأضفه إلى .env كـ VITE_DISCORD_SERVER_ID",
+    "setup_step_4": "اختيارياً أضف رابط الدعوة كـ VITE_DISCORD_INVITE_URL"
+  },
+  "threema": {
+    "id_label": "معرّف Threema",
+    "encrypted_badge": "تشفير من طرف إلى طرف",
+    "id_body": "أضف هذا المعرّف مباشرةً في تطبيق Threema للمراسلة الخاصة المشفّرة مع فريق Façinations. لا يلزم رقم هاتف أو بريد إلكتروني.",
+    "open_app": "فتح في Threema",
+    "form_title": "إرسال رسالة آمنة",
+    "name_placeholder": "اسمك (اختياري)",
+    "email_placeholder": "البريد الإلكتروني للرد (اختياري)",
+    "message_placeholder": "رسالتك…",
+    "submit": "إرسال عبر Threema Gateway",
+    "sending": "جارٍ الإرسال…",
+    "send_another": "إرسال رسالة أخرى",
+    "sent": "تم تسليم رسالتك عبر Threema Gateway — مشفّرة من طرف إلى طرف. سيرد الفريق عبر التطبيق.",
+    "notice": "يتم تسليم الرسائل عبر Threema Gateway واستلامها في تطبيق Threema الخاص بالفريق. رسالتك مشفّرة أثناء النقل. تقديم عنوان بريد إلكتروني اختياري ويُستخدم فقط لتمكين الرد."
+  },
+  "collectionExchange": {
+    "eyebrow": "تبادل المجموعات",
+    "title": "محرك سيولة الفنون الجميلة",
+    "description": "تصل العروض كمقترحات من جامعي التحف الآخرين، وليس كدفاتر أوامر. يُسهم كل تبادل في المصدر والمنشأ وظهور المعرض والثقل الثقافي.",
+    "proposal_eyebrow": "مقترح تبادل",
+    "proposal_title": "جامع تحف في جنيف يقترح تبادلاً",
+    "proposal_body": "تبادل «التجريد السردي رقم 3» مقابل «دراسة المرحلة المبكرة باللون الأزرق»، عبر تبادل مُنسَّق وخزينة مؤسسية.",
+    "provenance_aligned": "المنشأ متوافق",
+    "review_proposal": "مراجعة المقترح",
+    "escrow_notice_title": "Physical asset escrow required.",
+    "escrow_notice_body": "Once a partner is accepted for any exchange transaction, both parties must escrow their physical asset with the platform before the trade is released. Do not transfer your item until escrow is confirmed by Musée-Crosdale."
+  },
+  "xervaultBanner": {
+    "tagline": "اربط نفس المحفظة التي تستخدمها على XerVault — وصول فوري، لا يلزم اشتراك."
   }
 }

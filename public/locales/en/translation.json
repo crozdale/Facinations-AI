@@ -88,18 +88,7 @@
     "blogazine": "Click for Blogazine"
   },
   "footer": {
-    "copyright": "© {{year}} Façinations. All rights reserved.",
-    "newsletter_eyebrow": "Private View · Musée-Crosdale",
-    "newsletter_confirmed": "You're on the list.",
-    "newsletter_placeholder": "Your email address",
-    "newsletter_btn": "Subscribe",
-    "newsletter_error": "Something went wrong — please try again.",
-    "protocol_tagline": "Decentralised Fine-Art Protocol",
-    "brand": "Façinations",
-    "legal": "Legal",
-    "about": "About",
-    "whitepaper": "Whitepaper",
-    "architecture": "Architecture"
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
   },
   "landing": {
     "eyebrow": "Facinations Protocol",
@@ -135,30 +124,7 @@
     "body": "Facinations is a DeFi-native fine art vault, enabling fractional ownership of rare artworks through secure on-chain vaults."
   },
   "gallery": {
-    "title": "Gallery",
-    "subtitle": "Curated digital works and collections.",
-    "filter_all": "All",
-    "filter_derain": "Derain",
-    "filter_matisse": "Matisse",
-    "filter_medieval": "Medieval",
-    "filter_renaissance": "Renaissance",
-    "filter_originals": "Originals",
-    "works_count": "{{count}} works",
-    "royalty": "Royalty: {{percent}}%",
-    "ai_subtitle": "AI Curator · Chat · Related",
-    "curators_eye": "Curator's Eye",
-    "btn_invoke": "✦ Invoke AI Curator",
-    "analysing": "Analysing…",
-    "ai_error": "Could not reach AI. Check DevTools Network tab for /api/claude errors.",
-    "btn_retry": "Retry",
-    "ask_curator": "Ask the Curator",
-    "ask_hint": "Ask anything about technique, history, symbolism…",
-    "thinking": "thinking…",
-    "placeholder_ask": "Ask anything…",
-    "related_works": "Related Works",
-    "zoom_reset": "reset",
-    "zoom_hint": "scroll · pinch · use +/- to zoom",
-    "eyebrow": "Musée-Crosdale · Original Works"
+    "speed": "Speed"
   },
   "vaults": {
     "title": "Vaults",
@@ -478,7 +444,7 @@
     "ob_placeholder_inventory": "e.g. 40–80 works",
     "ob_placeholder_about": "Tell us about your programme, artists, and what you're hoping to achieve on-chain…",
     "ob_included_heading": "What's included",
-    "ob_include_1": "Hosted gallery page at facinations.art/[your-slug]",
+    "ob_include_1": "Hosted gallery page at xdale.art/[your-slug]",
     "ob_include_2": "On-chain provenance certificates for every listed work",
     "ob_include_3": "Vault fractionalization eligibility for high-value works",
     "ob_include_4": "Direct collector enquiry routing",
@@ -771,9 +737,6 @@
     "dark": "🌙 Dark",
     "light": "☀️ Light"
   },
-  "footer": {
-    "contract": "0x33d1de58…157f · Ethereum Sepolia"
-  },
   "galleries": {
     "meta_title": "Galleries — Musée-Crosdale",
     "meta_description": "Discover curated galleries on the Facinations platform — contemporary and emerging artists with on-chain provenance.",
@@ -855,7 +818,59 @@
     "eyebrow": "Gallery · Musée-Crosdale",
     "powered_by": "Powered by Facinations"
   },
-  "gallery": {
-    "speed": "Speed"
+  "community": {
+    "eyebrow": "Façinations Protocol",
+    "title": "Community",
+    "tagline": "Connect with the Musée-Crosdale network — join the conversation on Discord or reach the team directly via Threema's end-to-end encryption.",
+    "tab_discord": "Discord",
+    "tab_threema": "Threema",
+    "badge_live_chat": "Live Chat",
+    "badge_encrypted": "Encrypted"
+  },
+  "communityPortal": {
+    "eyebrow": "Community Portal",
+    "title": "Connect with the Façinations Network",
+    "tagline": "Join the conversation on Discord or send a private, encrypted message via Threema."
+  },
+  "discord": {
+    "label": "Live Server",
+    "iframe_title": "Discord Community Server",
+    "join": "Join Server",
+    "setup_heading": "Discord Server — Setup Required",
+    "setup_body": "Connect your Discord server to display the live widget and community member count here.",
+    "setup_step_1": "Create a Discord server at discord.com",
+    "setup_step_2": "Enable the Widget in Server Settings → Widget",
+    "setup_step_3": "Copy the Server ID and add it to your .env as VITE_DISCORD_SERVER_ID",
+    "setup_step_4": "Optionally add your invite link as VITE_DISCORD_INVITE_URL"
+  },
+  "threema": {
+    "id_label": "Threema ID",
+    "encrypted_badge": "End-to-end encrypted",
+    "id_body": "Add this ID directly in the Threema app for private, encrypted messaging with the Façinations team. No phone number or email required.",
+    "open_app": "Open in Threema",
+    "form_title": "Send a Secure Message",
+    "name_placeholder": "Your name (optional)",
+    "email_placeholder": "Email for reply (optional)",
+    "message_placeholder": "Your message…",
+    "submit": "Send via Threema Gateway",
+    "sending": "Sending…",
+    "send_another": "Send Another",
+    "sent": "Your message has been delivered via Threema Gateway — encrypted end-to-end. The team will respond through the app.",
+    "notice": "Messages are delivered via the Threema Gateway and received in the team's Threema app. Your message is encrypted in transit. Providing an email address is optional and is only used to enable a reply."
+  },
+  "collectionExchange": {
+    "eyebrow": "Collection exchange",
+    "title": "Fine art liquidity engine",
+    "description": "Offers arrive as proposals from other collectors, not as order books. Each exchange contributes to provenance, exhibition visibility, and cultural gravity.",
+    "proposal_eyebrow": "Exchange proposal",
+    "proposal_title": "Collector in Geneva proposes exchange",
+    "proposal_body": "Trade your \"Narrative Abstraction #3\" for \"Early Period Study in Blue\", routed through a curated exchange and institutional vault.",
+    "provenance_aligned": "Provenance aligned",
+    "review_proposal": "Review proposal",
+    "escrow_notice_title": "Physical asset escrow required.",
+    "escrow_notice_body": "Once a partner is accepted for any exchange transaction, both parties must escrow their physical asset with the platform before the trade is released. Do not transfer your item until escrow is confirmed by Musée-Crosdale."
+  },
+  "xervaultBanner": {
+    "tagline": "Connect the same wallet you use on XerVault — instant access, no subscription required."
   }
 }

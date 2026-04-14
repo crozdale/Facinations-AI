@@ -17,7 +17,7 @@ const Home = (props) => {
           <meta property="og:title" content="Informal Dizzy Tapir" />
           <link
             rel="canonical"
-            href="https://informal-dizzy-tapir-m7svrm.teleporthq.app/"
+            href="https://xdale.net/"
           />
         </Head>
         <Navigation locale={props?.locale ?? ''}></Navigation>

@@ -1,19 +1,21 @@
 // api/paypal.js
-// Consolidated PayPal handler — replaces paypal.js + paypal/capture.js
+// Consolidated PayPal Subscriptions handler (recurring billing).
 //
-// POST /api/paypal                      → create a PayPal order
-// POST /api/paypal?_action=capture      → capture an approved order
+// POST /api/paypal                         → create a PayPal subscription
+// POST /api/paypal?_action=capture         → verify an approved subscription
 //
-// (capture requests routed here via Vercel rewrite from /api/paypal/capture)
-//
-// Requires: PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PAYPAL_ENV ("sandbox" | "live")
+// Requires env vars:
+//   PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET
+//   PAYPAL_ENV ("sandbox" | "live")
+//   PAYPAL_STARTER_PLAN_ID  — billing plan ID from PayPal dashboard for $29/mo
+//   PAYPAL_GALLERY_PLAN_ID  — billing plan ID from PayPal dashboard for $99/mo
 
 import { query } from "./lib/db.js";
 import { sendEmail, tplWelcome, tplReceipt } from "./lib/email.js";
 
-const PLAN_PRICES = {
-  starter: { amount: "29.00", label: "Starter Studio — 1 Month" },
-  gallery: { amount: "99.00", label: "Gallery Studio — 1 Month" },
+const PLAN_IDS = {
+  starter: () => process.env.PAYPAL_STARTER_PLAN_ID,
+  gallery: () => process.env.PAYPAL_GALLERY_PLAN_ID,
 };
 
 const TIER_PRICE = { starter: "29.00", gallery: "99.00" };
@@ -44,99 +46,110 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "PayPal is not configured on this server" });
   }
 
-  // ── Capture order ─────────────────────────────────────────────────────────
+  // ── Verify approved subscription ──────────────────────────────────────────
   if (req.query._action === "capture") {
-    const { orderId, tier } = req.body ?? {};
-    if (!orderId || !tier) return res.status(400).json({ error: "orderId and tier are required" });
+    const { subscriptionId, tier } = req.body ?? {};
+    if (!subscriptionId || !tier) return res.status(400).json({ error: "subscriptionId and tier are required" });
 
     try {
       const { token, base } = await getAccessToken();
 
-      const captureRes = await fetch(`${base}/v2/checkout/orders/${orderId}/capture`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      const subRes = await fetch(`${base}/v1/billing/subscriptions/${encodeURIComponent(subscriptionId)}`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (!captureRes.ok) {
-        const body = await captureRes.text();
-        console.error(`[paypal/capture] ${captureRes.status}: ${body}`);
-        return res.status(502).json({ error: "PayPal capture failed" });
+      if (!subRes.ok) {
+        const body = await subRes.text();
+        console.error(`[paypal/capture] ${subRes.status}: ${body}`);
+        return res.status(502).json({ error: "Could not retrieve PayPal subscription" });
       }
 
-      const order    = await captureRes.json();
-      const completed  = order.status === "COMPLETED";
-      const unitTier   = order.purchase_units?.[0]?.custom_id;
-      const tiersMatch = unitTier === tier;
-      const success    = completed && tiersMatch;
+      const sub     = await subRes.json();
+      const active  = sub.status === "ACTIVE";
+      const planId  = sub.plan_id;
+      const expPlan = PLAN_IDS[tier]?.();
+      const match   = expPlan ? planId === expPlan : true; // if plan IDs not configured, trust tier param
 
-      if (success) {
-        const email = order.payer?.email_address ?? null;
-
-        if (process.env.DATABASE_URL && email) {
-          query(
-            `INSERT INTO subscriptions (email, tier, status, updated_at)
-             VALUES ($1, $2, 'active', NOW())
-             ON CONFLICT (email) DO UPDATE SET tier = EXCLUDED.tier, status = 'active', updated_at = NOW()`,
-            [email, tier]
-          ).catch((e) => console.warn("[paypal/capture] DB upsert failed:", e.message));
-        }
-
-        if (email) {
-          const amount = TIER_PRICE[tier] ?? "—";
-          const tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1);
-          Promise.all([
-            sendEmail({ to: email, subject: `Welcome to ${tierLabel} Studio — Musée-Crosdale`, html: tplWelcome({ tier, periodEnd: null }) }),
-            sendEmail({ to: email, subject: "Your Musée-Crosdale Studio receipt", html: tplReceipt({ tier, amount, periodEnd: null }) }),
-          ]).catch(() => {});
-        }
+      if (!active || !match) {
+        return res.status(400).json({ error: "PayPal subscription is not active or plan mismatch", verified: false });
       }
 
-      return res.status(200).json({ verified: success, tier: success ? tier : null });
+      const email        = sub.subscriber?.email_address ?? null;
+      const periodEnd    = sub.billing_info?.next_billing_time
+        ? new Date(sub.billing_info.next_billing_time)
+        : null;
+
+      if (process.env.DATABASE_URL) {
+        query(
+          `INSERT INTO subscriptions
+             (email, paypal_subscription_id, tier, status, current_period_end, updated_at)
+           VALUES ($1, $2, $3, 'active', $4, NOW())
+           ON CONFLICT (email) DO UPDATE SET
+             paypal_subscription_id = EXCLUDED.paypal_subscription_id,
+             tier                   = EXCLUDED.tier,
+             status                 = 'active',
+             current_period_end     = EXCLUDED.current_period_end,
+             updated_at             = NOW()`,
+          [email, subscriptionId, tier, periodEnd]
+        ).catch((e) => console.warn("[paypal/capture] DB upsert failed:", e.message));
+      }
+
+      if (email) {
+        const amount = TIER_PRICE[tier] ?? "—";
+        const label  = tier.charAt(0).toUpperCase() + tier.slice(1);
+        Promise.all([
+          sendEmail({ to: email, subject: `Welcome to ${label} Studio — Musée-Crosdale`, html: tplWelcome({ tier, periodEnd }) }),
+          sendEmail({ to: email, subject: "Your Musée-Crosdale Studio receipt", html: tplReceipt({ tier, amount, periodEnd }) }),
+        ]).catch(() => {});
+      }
+
+      return res.status(200).json({ verified: true, tier });
     } catch (err) {
       console.error("[paypal/capture] error:", err.message);
-      return res.status(500).json({ error: "PayPal capture error" });
+      return res.status(500).json({ error: "PayPal subscription verification error" });
     }
   }
 
-  // ── Create order ──────────────────────────────────────────────────────────
+  // ── Create subscription ───────────────────────────────────────────────────
   const { tier } = req.body ?? {};
-  if (!tier || !PLAN_PRICES[tier]) return res.status(400).json({ error: "Invalid plan tier" });
+  const planId   = PLAN_IDS[tier]?.();
+
+  if (!tier || !PLAN_IDS[tier]) return res.status(400).json({ error: "Invalid plan tier" });
+  if (!planId) return res.status(500).json({ error: `PayPal plan ID for tier "${tier}" is not configured (set PAYPAL_${tier.toUpperCase()}_PLAN_ID)` });
 
   const origin = req.headers.origin || process.env.VITE_APP_BASE_URL || "http://localhost:5173";
-  const plan   = PLAN_PRICES[tier];
 
   try {
     const { token, base } = await getAccessToken();
 
-    const orderRes = await fetch(`${base}/v2/checkout/orders`, {
+    const subRes = await fetch(`${base}/v1/billing/subscriptions`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json", Prefer: "return=representation" },
       body: JSON.stringify({
-        intent: "CAPTURE",
-        purchase_units: [{ description: plan.label, custom_id: tier, amount: { currency_code: "USD", value: plan.amount } }],
+        plan_id:     planId,
         application_context: {
           brand_name:  "Musée-Crosdale Studio",
-          user_action: "PAY_NOW",
+          user_action: "SUBSCRIBE_NOW",
           return_url:  `${origin}/checkout/paypal-success?tier=${tier}`,
           cancel_url:  `${origin}/studio`,
         },
       }),
     });
 
-    if (!orderRes.ok) {
-      const body = await orderRes.text();
-      console.error(`[paypal] order creation ${orderRes.status}: ${body}`);
-      return res.status(502).json({ error: "Failed to create PayPal order" });
+    if (!subRes.ok) {
+      const body = await subRes.text();
+      console.error(`[paypal] subscription creation ${subRes.status}: ${body}`);
+      return res.status(502).json({ error: "Failed to create PayPal subscription" });
     }
 
-    const order    = await orderRes.json();
-    const approval = order.links?.find((l) => l.rel === "approve");
+    const sub      = await subRes.json();
+    const approval = sub.links?.find((l) => l.rel === "approve");
     if (!approval) {
-      console.error("[paypal] no approve link in order:", JSON.stringify(order));
+      console.error("[paypal] no approve link in subscription:", JSON.stringify(sub));
       return res.status(502).json({ error: "PayPal did not return an approval URL" });
     }
 
-    return res.status(200).json({ url: approval.href, orderId: order.id });
+    return res.status(200).json({ url: approval.href, subscriptionId: sub.id });
   } catch (err) {
     console.error("[paypal] error:", err.message);
     return res.status(500).json({ error: "PayPal error" });
