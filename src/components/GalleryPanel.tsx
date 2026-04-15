@@ -120,7 +120,7 @@ export default function GalleryPanel() {
                 style={{ fontSize: "0.8rem", color: "#d4af37", textDecoration: "underline" }}>
                 View on XdaleGallery
               </a>
-              <Link to={`/vault/${selected.id}`}
+              <Link to={`/vaults/${selected.id}`}
                 style={{ fontSize: "0.8rem", color: "#d4af37", textDecoration: "underline" }}>
                 Open Vault
               </Link>

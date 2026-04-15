@@ -40,7 +40,7 @@ export default function OnChainVaultList() {
             {locked ? (
               <button disabled>{t("vaults.locked", "Locked")}</button>
             ) : (
-              <Link to={`/vault/${vault.vaultId}`}>
+              <Link to={`/vaults/${vault.vaultId}`}>
                 <button>{t("vaults.open_vault", "Open Vault")}</button>
               </Link>
             )}

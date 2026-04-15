@@ -49,7 +49,7 @@ export default function PayPalSuccess() {
 
         subscribe(data.tier as PlanTier);
         setStatus("success");
-        setTimeout(() => navigate("/billing"), 2500);
+        setTimeout(() => navigate("/studio"), 2500);
       } catch {
         setErrorMsg(t("common.service_unreachable", "Could not reach the verification service. Please contact support."));
         setStatus("error");
@@ -100,7 +100,7 @@ export default function PayPalSuccess() {
               {errorMsg}
             </p>
             <button
-              onClick={() => navigate("/pricing")}
+              onClick={() => navigate("/studio")}
               style={{
                 padding: "0.6rem 1.75rem",
                 background: "transparent",

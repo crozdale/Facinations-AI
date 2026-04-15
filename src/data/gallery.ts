@@ -6,7 +6,7 @@ export const GALLERY_ITEMS = [
     year: 2024,
     medium: "Mixed Media",
     image: null,
-    externalUrl: "https://xdale.net/artwork/untitled-study-1",
+    externalUrl: "https://xdale.net/gallery",
     sceneId: "scene-untitled-study-1",
     splatCount: "2.1M",
     vimeoUrl: "https://player.vimeo.com/video/868157670",
