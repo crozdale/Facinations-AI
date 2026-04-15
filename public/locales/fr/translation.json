@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "home": "Accueil",
     "about": "À propos",
@@ -124,7 +124,31 @@
     "body": "Facinations est un coffre d'art natif DeFi, permettant la propriété fractionnée d'œuvres rares via des coffres on-chain sécurisés."
   },
   "gallery": {
-    "speed": "Vitesse"
+    "speed": "Vitesse",
+    "title": "MusÃ©e-Crosdale",
+    "eyebrow": "MusÃ©e-Crosdale â€” Å’uvres Originales",
+    "subtitle": "Une collection d'art raffinÃ©e avec provenance on-chain.",
+    "works_count": "{{count}} Å“uvres",
+    "filter_all": "Tout",
+    "filter_derain": "Derain",
+    "filter_matisse": "Matisse",
+    "filter_medieval": "MÃ©diÃ©val",
+    "filter_renaissance": "Renaissance",
+    "filter_originals": "Originaux",
+    "zoom_hint": "Faites dÃ©filer ou pincez pour zoomer",
+    "zoom_reset": "RÃ©initialiser le zoom",
+    "royalty": "Redevance : {{percent}}%",
+    "curators_eye": "Å’il du Commissaire",
+    "btn_invoke": "Interroger le Commissaire",
+    "btn_retry": "RÃ©essayer",
+    "ai_error": "Impossible de joindre le commissaire pour le moment.",
+    "ai_thinking": "Ã‰laboration d'une rÃ©ponseâ€¦",
+    "placeholder_ask": "Posez une question sur cette Å“uvreâ€¦",
+    "related_works": "Å’uvres associÃ©es",
+    "immersive_label": "Entrer dans l'espace immersif",
+    "btn_enter_space": "Entrer",
+    "hypsoverse": "Voir dans Hypsoverse",
+    "vimeo": "Regarder sur Vimeo"
   },
   "vaults": {
     "title": "Coffres",

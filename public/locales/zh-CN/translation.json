@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "home": "首页",
     "about": "关于",
@@ -124,7 +124,31 @@
     "body": "Facinations 是一个 DeFi 原生精细艺术金库，通过安全的链上金库实现稀有艺术作品的分级所有权。"
   },
   "gallery": {
-    "speed": "速度"
+    "speed": "é€Ÿåº¦",
+    "title": "MusÃ©e-Crosdale",
+    "eyebrow": "MusÃ©e-Crosdale â€” åŽŸåˆ›ä½œå“",
+    "subtitle": "ç²¾å¿ƒç­–åˆ’çš„è‰ºæœ¯æ”¶è—ï¼Œå…·æœ‰é“¾ä¸Šæº¯æºã€‚",
+    "works_count": "{{count}} ä»¶ä½œå“",
+    "filter_all": "å…¨éƒ¨",
+    "filter_derain": "å¾·å…°",
+    "filter_matisse": "é©¬è’‚æ–¯",
+    "filter_medieval": "ä¸­ä¸–çºª",
+    "filter_renaissance": "æ–‡è‰ºå¤å…´",
+    "filter_originals": "åŽŸä½œ",
+    "zoom_hint": "æ»šåŠ¨æˆ–æåˆä»¥ç¼©æ”¾",
+    "zoom_reset": "é‡ç½®ç¼©æ”¾",
+    "royalty": "ç‰ˆç¨Žï¼š{{percent}}%",
+    "curators_eye": "ç­–å±•äººè§†è§’",
+    "btn_invoke": "è¯¢é—®ç­–å±•äºº",
+    "btn_retry": "é‡è¯•",
+    "ai_error": "ç›®å‰æ— æ³•è”ç³»ç­–å±•äººã€‚",
+    "ai_thinking": "æ­£åœ¨ç”Ÿæˆå›žå¤â€¦",
+    "placeholder_ask": "è¯¢é—®å…³äºŽæ­¤ä½œå“çš„é—®é¢˜â€¦",
+    "related_works": "ç›¸å…³ä½œå“",
+    "immersive_label": "è¿›å…¥æ²‰æµ¸å¼ç©ºé—´",
+    "btn_enter_space": "è¿›å…¥",
+    "hypsoverse": "åœ¨ Hypsoverse ä¸­æŸ¥çœ‹",
+    "vimeo": "åœ¨ Vimeo ä¸Šè§‚çœ‹"
   },
   "vaults": {
     "title": "金库",

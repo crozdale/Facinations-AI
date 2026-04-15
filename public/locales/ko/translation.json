@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "home": "홈",
     "about": "소개",
@@ -124,7 +124,31 @@
     "body": "Facinations는 DeFi 네이티브 순수 예술 볼트로, 안전한 온체인 볼트를 통해 희귀 예술 작품의 분할 소유권을 가능하게 합니다."
   },
   "gallery": {
-    "speed": "속도"
+    "speed": "ì†ë„",
+    "title": "MusÃ©e-Crosdale",
+    "eyebrow": "MusÃ©e-Crosdale â€” ì˜¤ë¦¬ì§€ë„ ìž‘í’ˆ",
+    "subtitle": "ì˜¨ì²´ì¸ ì¶œì²˜ë¥¼ ê°–ì¶˜ íë ˆì´ì…˜ëœ ë¯¸ìˆ  ì»¬ë ‰ì…˜.",
+    "works_count": "{{count}}ê°œ ìž‘í’ˆ",
+    "filter_all": "ì „ì²´",
+    "filter_derain": "ë“œëž­",
+    "filter_matisse": "ë§ˆí‹°ìŠ¤",
+    "filter_medieval": "ì¤‘ì„¸",
+    "filter_renaissance": "ë¥´ë„¤ìƒìŠ¤",
+    "filter_originals": "ì˜¤ë¦¬ì§€ë„",
+    "zoom_hint": "ìŠ¤í¬ë¡¤í•˜ê±°ë‚˜ í•€ì¹˜í•˜ì—¬ í™•ëŒ€",
+    "zoom_reset": "í™•ëŒ€ ì´ˆê¸°í™”",
+    "royalty": "ë¡œì—´í‹°: {{percent}}%",
+    "curators_eye": "íë ˆì´í„°ì˜ ëˆˆ",
+    "btn_invoke": "íë ˆì´í„°ì—ê²Œ ë¬»ê¸°",
+    "btn_retry": "ë‹¤ì‹œ ì‹œë„",
+    "ai_error": "í˜„ìž¬ íë ˆì´í„°ì— ì—°ê²°í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.",
+    "ai_thinking": "ì‘ë‹µ ìƒì„± ì¤‘â€¦",
+    "placeholder_ask": "ì´ ìž‘í’ˆì— ëŒ€í•´ ì§ˆë¬¸í•˜ì„¸ìš”â€¦",
+    "related_works": "ê´€ë ¨ ìž‘í’ˆ",
+    "immersive_label": "ëª°ìž…í˜• ê³µê°„ ìž…ìž¥",
+    "btn_enter_space": "ìž…ìž¥",
+    "hypsoverse": "Hypsoverseì—ì„œ ë³´ê¸°",
+    "vimeo": "Vimeoì—ì„œ ë³´ê¸°"
   },
   "vaults": {
     "title": "볼트",

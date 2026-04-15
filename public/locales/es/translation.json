@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "home": "Inicio",
     "about": "Acerca de",
@@ -124,7 +124,31 @@
     "body": "Facinations es una bóveda de arte nativa de DeFi que permite la propiedad fraccionada de obras raras a través de bóvedas on-chain seguras."
   },
   "gallery": {
-    "speed": "Velocidad"
+    "speed": "Velocidad",
+    "title": "MusÃ©e-Crosdale",
+    "eyebrow": "MusÃ©e-Crosdale â€” Obras Originales",
+    "subtitle": "Una colecciÃ³n de arte curada con procedencia on-chain.",
+    "works_count": "{{count}} obras",
+    "filter_all": "Todo",
+    "filter_derain": "Derain",
+    "filter_matisse": "Matisse",
+    "filter_medieval": "Medieval",
+    "filter_renaissance": "Renacimiento",
+    "filter_originals": "Originales",
+    "zoom_hint": "DesplÃ¡zate o pellizca para hacer zoom",
+    "zoom_reset": "Restablecer zoom",
+    "royalty": "RegalÃ­a: {{percent}}%",
+    "curators_eye": "Ojo del Comisario",
+    "btn_invoke": "Consultar al Comisario",
+    "btn_retry": "Reintentar",
+    "ai_error": "No se puede contactar al comisario en este momento.",
+    "ai_thinking": "Elaborando una respuestaâ€¦",
+    "placeholder_ask": "Pregunta sobre esta obraâ€¦",
+    "related_works": "Obras relacionadas",
+    "immersive_label": "Entrar al espacio inmersivo",
+    "btn_enter_space": "Entrar",
+    "hypsoverse": "Ver en Hypsoverse",
+    "vimeo": "Ver en Vimeo"
   },
   "vaults": {
     "title": "Bóvedas",

@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "home": "Início",
     "about": "Sobre",
@@ -124,7 +124,31 @@
     "body": "Facinations é um cofre de arte fina nativo DeFi, permitindo a propriedade fracionada de obras de arte raras por meio de cofres on-chain seguros."
   },
   "gallery": {
-    "speed": "Velocidade"
+    "speed": "Velocidade",
+    "title": "MusÃ©e-Crosdale",
+    "eyebrow": "MusÃ©e-Crosdale â€” Obras Originais",
+    "subtitle": "Uma coleÃ§Ã£o de arte curada com proveniÃªncia on-chain.",
+    "works_count": "{{count}} obras",
+    "filter_all": "Tudo",
+    "filter_derain": "Derain",
+    "filter_matisse": "Matisse",
+    "filter_medieval": "Medieval",
+    "filter_renaissance": "RenascenÃ§a",
+    "filter_originals": "Originais",
+    "zoom_hint": "Role ou faÃ§a pinÃ§a para ampliar",
+    "zoom_reset": "Redefinir zoom",
+    "royalty": "Royalty: {{percent}}%",
+    "curators_eye": "Olhar do Curador",
+    "btn_invoke": "Perguntar ao Curador",
+    "btn_retry": "Tentar novamente",
+    "ai_error": "NÃ£o foi possÃ­vel contactar o curador agora.",
+    "ai_thinking": "A elaborar uma respostaâ€¦",
+    "placeholder_ask": "Pergunte sobre esta obraâ€¦",
+    "related_works": "Obras relacionadas",
+    "immersive_label": "Entrar no espaÃ§o imersivo",
+    "btn_enter_space": "Entrar",
+    "hypsoverse": "Ver no Hypsoverse",
+    "vimeo": "Ver no Vimeo"
   },
   "vaults": {
     "title": "Cofres",

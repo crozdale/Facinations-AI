@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "home": "Home",
     "about": "About",
@@ -124,7 +124,31 @@
     "body": "Facinations is a DeFi-native fine art vault, enabling fractional ownership of rare artworks through secure on-chain vaults."
   },
   "gallery": {
-    "speed": "Speed"
+    "speed": "Speed",
+    "title": "MusÃ©e-Crosdale",
+    "eyebrow": "MusÃ©e-Crosdale â€” Original Works",
+    "subtitle": "A curated collection of fine art with on-chain provenance.",
+    "works_count": "{{count}} works",
+    "filter_all": "All",
+    "filter_derain": "Derain",
+    "filter_matisse": "Matisse",
+    "filter_medieval": "Medieval",
+    "filter_renaissance": "Renaissance",
+    "filter_originals": "Originals",
+    "zoom_hint": "Scroll or pinch to zoom",
+    "zoom_reset": "Reset zoom",
+    "royalty": "Royalty: {{percent}}%",
+    "curators_eye": "Curator's Eye",
+    "btn_invoke": "Ask the Curator",
+    "btn_retry": "Try Again",
+    "ai_error": "Unable to reach the curator right now.",
+    "ai_thinking": "Curating a responseâ€¦",
+    "placeholder_ask": "Ask about this artworkâ€¦",
+    "related_works": "Related Works",
+    "immersive_label": "Enter immersive space",
+    "btn_enter_space": "Enter space",
+    "hypsoverse": "View in Hypsoverse",
+    "vimeo": "Watch on Vimeo"
   },
   "vaults": {
     "title": "Vaults",

@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "home": "Startseite",
     "about": "Über uns",
@@ -124,7 +124,31 @@
     "body": "Facinations ist ein DeFi-nativer Kunsttresor, der mithilfe sicherer On-Chain-Tresore Bruchteilseigentum an seltenen Kunstwerken ermöglicht."
   },
   "gallery": {
-    "speed": "Geschwindigkeit"
+    "speed": "Geschwindigkeit",
+    "title": "MusÃ©e-Crosdale",
+    "eyebrow": "MusÃ©e-Crosdale â€” Originalwerke",
+    "subtitle": "Eine kuratierte Kunstsammlung mit On-Chain-Provenienz.",
+    "works_count": "{{count}} Werke",
+    "filter_all": "Alle",
+    "filter_derain": "Derain",
+    "filter_matisse": "Matisse",
+    "filter_medieval": "Mittelalter",
+    "filter_renaissance": "Renaissance",
+    "filter_originals": "Originale",
+    "zoom_hint": "Scrollen oder zoomen",
+    "zoom_reset": "Zoom zurÃ¼cksetzen",
+    "royalty": "LizenzgebÃ¼hr: {{percent}}%",
+    "curators_eye": "Kuratorenblick",
+    "btn_invoke": "Kurator befragen",
+    "btn_retry": "Erneut versuchen",
+    "ai_error": "Kurator derzeit nicht erreichbar.",
+    "ai_thinking": "Antwort wird zusammengestelltâ€¦",
+    "placeholder_ask": "Frage zu diesem Werkâ€¦",
+    "related_works": "Verwandte Werke",
+    "immersive_label": "Immersiven Raum betreten",
+    "btn_enter_space": "Betreten",
+    "hypsoverse": "In Hypsoverse ansehen",
+    "vimeo": "Auf Vimeo ansehen"
   },
   "vaults": {
     "title": "Tresore",
