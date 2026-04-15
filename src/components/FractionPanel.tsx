@@ -4,6 +4,7 @@
 // and a peer-to-peer transfer form (if the user holds fractions).
 
 import React, { useState, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { BrowserProvider, Contract, toUtf8Bytes } from "ethers";
 import { useWeb3 } from "../providers/Web3Provider";
 import type { RegistryVault } from "../features/vaults/registry/vaultRegistry";
@@ -60,6 +61,7 @@ interface Props {
 }
 
 export default function FractionPanel({ vault }: Props) {
+  const { t } = useTranslation();
   const { provider, account, connect } = useWeb3();
   const [tab, setTab] = useState<PanelTab>("acquire");
 
@@ -175,7 +177,7 @@ export default function FractionPanel({ vault }: Props) {
       <style>{css}</style>
 
       <div className="fp-header">
-        <p className="fp-eyebrow">Fractional Ownership</p>
+        <p className="fp-eyebrow">{t("fractionPanel.title")}</p>
         <h3 className="fp-title">{vault.name} — Fractions</h3>
       </div>
 
@@ -184,19 +186,19 @@ export default function FractionPanel({ vault }: Props) {
         {/* Stats */}
         <div className="fp-stats">
           <div>
-            <p className="fp-stat-label">Total Fractions</p>
+            <p className="fp-stat-label">{t("fractionPanel.total")}</p>
             <p className="fp-stat-value">{vault.totalFractions.toLocaleString()}</p>
           </div>
           <div>
-            <p className="fp-stat-label">Available</p>
+            <p className="fp-stat-label">{t("fractionPanel.available")}</p>
             <p className="fp-stat-value gold">{vault.availableFractions.toLocaleString()}</p>
           </div>
           <div>
-            <p className="fp-stat-label">Price / Fraction</p>
+            <p className="fp-stat-label">{t("fractionPanel.price_per")}</p>
             <p className="fp-stat-value">{priceDisplay}</p>
           </div>
           <div>
-            <p className="fp-stat-label">Token ID</p>
+            <p className="fp-stat-label">{t("fractionPanel.token_id")}</p>
             <p className="fp-stat-value" style={{ fontFamily: "monospace", fontSize: "0.85rem" }}>
               ERC1155 #{vault.fractionTokenId}
             </p>
@@ -207,15 +209,15 @@ export default function FractionPanel({ vault }: Props) {
         {!account ? (
           <div className="fp-connect-prompt">
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#8a8278", fontStyle: "italic", margin: "0 0 1rem" }}>
-              Connect your wallet to view your fraction balance.
+              {t("fractionPanel.connect_prompt")}
             </p>
             <button className="fp-btn" onClick={connect}>Connect Wallet</button>
           </div>
         ) : (
           <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
             <div className="fp-balance-badge">
-              <span className="fp-balance-label">Your Balance</span>
-              <span className="fp-balance-value">{balanceDisplay} fractions</span>
+              <span className="fp-balance-label">{t("fractionPanel.your_balance")}</span>
+              <span className="fp-balance-value">{balanceDisplay} {t("fractionPanel.fractions_owned")}</span>
             </div>
             <span style={{ fontFamily: "monospace", fontSize: "0.7rem", color: "#3a3228" }}>
               {account.slice(0, 6)}…{account.slice(-4)}
@@ -229,16 +231,12 @@ export default function FractionPanel({ vault }: Props) {
             <button
               className={`fp-tab${tab === "acquire" ? " active" : ""}`}
               onClick={() => setTab("acquire")}
-            >
-              Acquire Fractions
-            </button>
+            >{t("fractionPanel.acquire")}</button>
             {hasBalance && (
               <button
                 className={`fp-tab${tab === "transfer" ? " active" : ""}`}
                 onClick={() => setTab("transfer")}
-              >
-                Transfer
-              </button>
+              >{t("fractionPanel.transfer")}</button>
             )}
           </div>
 
@@ -247,17 +245,17 @@ export default function FractionPanel({ vault }: Props) {
             <div style={{ paddingTop: "1.25rem" }}>
               {acqState === "done" ? (
                 <div className="fp-notice green">
-                  Enquiry submitted. A curator will be in touch within two business days to discuss provenance documentation and on-chain settlement.
+                  {t("fractionPanel.enquiry_submitted")}
                 </div>
               ) : (
                 <div className="fp-form">
                   <div className="fp-notice amber">
-                    Fraction acquisition is a curated process. Submit your expression of interest and our team will complete the on-chain transfer after verification.
+                    {t("fractionPanel.acquire_notice")}
                   </div>
 
                   <div className="fp-row">
                     <div>
-                      <label className="fp-label">Full Name</label>
+                      <label className="fp-label">{t("fractionPanel.full_name")}</label>
                       <input
                         className="fp-input"
                         value={acqForm.name}
@@ -266,7 +264,7 @@ export default function FractionPanel({ vault }: Props) {
                       />
                     </div>
                     <div>
-                      <label className="fp-label">Email *</label>
+                      <label className="fp-label">{t("fractionPanel.email_required")}</label>
                       <input
                         className="fp-input"
                         type="email"
@@ -278,7 +276,7 @@ export default function FractionPanel({ vault }: Props) {
                   </div>
 
                   <div>
-                    <label className="fp-label">Fractions Requested *</label>
+                    <label className="fp-label">{t("fractionPanel.fractions_req")}</label>
                     <input
                       className="fp-input"
                       type="number"
@@ -290,13 +288,13 @@ export default function FractionPanel({ vault }: Props) {
                     />
                     {vault.fractionPriceXer != null && Number(acqForm.quantity) > 0 && (
                       <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.78rem", color: "#8a8278", margin: "0.35rem 0 0", fontStyle: "italic" }}>
-                        Indicative total: {(Number(acqForm.quantity) * vault.fractionPriceXer).toLocaleString()} XER
+                        {t("fractionPanel.indicative_total")} {(Number(acqForm.quantity) * vault.fractionPriceXer).toLocaleString()} XER
                       </p>
                     )}
                   </div>
 
                   <div>
-                    <label className="fp-label">Message (optional)</label>
+                    <label className="fp-label">{t("fractionPanel.message_opt")}</label>
                     <textarea
                       className="fp-textarea"
                       rows={3}
@@ -327,7 +325,7 @@ export default function FractionPanel({ vault }: Props) {
             <div style={{ paddingTop: "1.25rem" }}>
               {xfrState === "done" ? (
                 <div className="fp-notice green">
-                  Transfer confirmed.{" "}
+                  {t("fractionPanel.transfer_confirmed")}{" "}
                   <a
                     href={`https://sepolia.etherscan.io/tx/${xfrTx}`}
                     target="_blank"
@@ -340,11 +338,11 @@ export default function FractionPanel({ vault }: Props) {
               ) : (
                 <div className="fp-form">
                   <div className="fp-notice amber">
-                    Transfer fractions to another wallet via ERC1155 safeTransferFrom. Ensure your wallet is connected to Sepolia.
+                    {t("fractionPanel.transfer_notice")}
                   </div>
 
                   <div>
-                    <label className="fp-label">Recipient Address *</label>
+                    <label className="fp-label">{t("fractionPanel.recipient")}</label>
                     <input
                       className="fp-input"
                       value={xfrForm.to}
@@ -355,7 +353,7 @@ export default function FractionPanel({ vault }: Props) {
                   </div>
 
                   <div>
-                    <label className="fp-label">Quantity *</label>
+                    <label className="fp-label">{t("fractionPanel.quantity")}</label>
                     <input
                       className="fp-input"
                       type="number"
@@ -366,7 +364,7 @@ export default function FractionPanel({ vault }: Props) {
                       style={{ maxWidth: 160 }}
                     />
                     <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.78rem", color: "#8a8278", margin: "0.35rem 0 0", fontStyle: "italic" }}>
-                      Max: {balance?.toString()} fractions
+                      {t("fractionPanel.max_label")} {balance?.toString()} {t("fractionPanel.fractions_owned")}
                     </p>
                   </div>
 

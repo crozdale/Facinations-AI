@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function VaultLegalSection({ vault }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   return (
@@ -8,28 +10,27 @@ export default function VaultLegalSection({ vault }) {
       {/* Header */}
       <div className="flex items-baseline justify-between">
         <h3 className="text-sm tracking-wide uppercase text-black/70">
-          Legal Summary
+          {t("vaultLegal.summary_title")}
         </h3>
 
         <span className="text-xs tracking-widest uppercase text-black/40">
-          Revenue Participation Only
+          {t("vaultLegal.revenue_only")}
         </span>
       </div>
 
       {/* Always-visible statement */}
       <p className="mt-4 max-w-3xl text-[15px] leading-relaxed text-black/80">
-        Owner retains legal title and physical possession of the artwork.
-        Vault tokens represent contractual economic and governance interests only.
+        {t("vaultLegal.statement")}
       </p>
 
       {/* Expandable detail */}
       {open && (
         <ul className="mt-6 max-w-3xl space-y-2 text-[14px] text-black/70 list-disc list-inside">
-          <li>No ownership, custody, or possessory rights</li>
-          <li>No copyright or intellectual property rights</li>
-          <li>No right to force sale or access the artwork</li>
-          <li>Custody and insurance maintained by third parties</li>
-          <li>Blockchain records are evidentiary only</li>
+          <li>{t("vaultLegal.no_ownership")}</li>
+          <li>{t("vaultLegal.no_copyright")}</li>
+          <li>{t("vaultLegal.no_force_sale")}</li>
+          <li>{t("vaultLegal.third_party")}</li>
+          <li>{t("vaultLegal.blockchain_only")}</li>
         </ul>
       )}
 
@@ -39,7 +40,7 @@ export default function VaultLegalSection({ vault }) {
           onClick={() => setOpen(!open)}
           className="text-sm tracking-wide text-black/70 hover:text-black transition"
         >
-          {open ? "Hide legal summary" : "View legal summary"}
+          {open ? t("vaultLegal.hide_summary") : t("vaultLegal.view_summary")}
         </button>
 
         <a
@@ -48,7 +49,7 @@ export default function VaultLegalSection({ vault }) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-5 py-2 text-sm tracking-wide bg-black text-white hover:bg-black/90 transition"
         >
-          View Legal Pack
+          {t("vaultLegal.view_legal_pack")}
         </a>
       </div>
 

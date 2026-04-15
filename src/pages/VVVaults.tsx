@@ -1,17 +1,19 @@
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FACINATIONS_FEATURES } from "../config/features";
 import { getVaultById } from "../registry/vaultRegistry";
 
 export default function Vault() {
+  const { t } = useTranslation();
   const { vaultId } = useParams();
   const vault = getVaultById(vaultId);
 
   if (!vault) {
     return (
       <div className="px-6 py-12 text-center">
-        <h2 className="text-xl font-semibold">Vault Not Found</h2>
+        <h2 className="text-xl font-semibold">{t("vvvaults.not_found_title")}</h2>
         <p className="mt-2 text-gray-600">
-          This vault is not registered in the Canonical Vault Registry.
+          {t("vvvaults.not_registered")}
         </p>
       </div>
     );
@@ -48,7 +50,7 @@ export default function Vault() {
 
       {/* ARTWORK */}
       <section className="mb-10">
-        <h2 className="mb-2 text-lg font-semibold">Artwork</h2>
+        <h2 className="mb-2 text-lg font-semibold">{t("vvvaults.artwork_section")}</h2>
         <ul className="text-sm text-gray-700">
           <li>
             <strong>Title:</strong> {vault.artwork.title}
@@ -67,9 +69,9 @@ export default function Vault() {
 
       {/* LEGAL */}
       <section className="mb-10">
-        <h2 className="mb-2 text-lg font-semibold">Legal Documentation</h2>
+        <h2 className="mb-2 text-lg font-semibold">{t("vvvaults.legal_section")}</h2>
         <p className="mb-2 text-sm text-gray-600">
-          The following legal documentation governs this vault.
+          {t("vvvaults.legal_desc")}
         </p>
         <a
           href={vault.legal.pdfPath}
@@ -77,13 +79,13 @@ export default function Vault() {
           rel="noopener noreferrer"
           className="inline-block rounded-md bg-gray-800 px-4 py-2 text-sm font-semibold text-white"
         >
-          View Legal Pack
+          {t("vvvaults.view_legal_pack")}
         </a>
       </section>
 
       {/* CHAIN */}
       <section className="mb-10">
-        <h2 className="mb-2 text-lg font-semibold">On-Chain Binding</h2>
+        <h2 className="mb-2 text-lg font-semibold">{t("vvvaults.chain_section")}</h2>
         <ul className="text-sm text-gray-700">
           <li>
             <strong>Network:</strong> {vault.chain.name} (Chain ID{" "}
@@ -91,7 +93,7 @@ export default function Vault() {
           </li>
           <li>
             <strong>Vault Contract:</strong>{" "}
-            {vault.contracts.vault || "Not yet deployed"}
+            {vault.contracts.vault || t("vvvaults.not_deployed")}
           </li>
         </ul>
       </section>
@@ -100,16 +102,11 @@ export default function Vault() {
       {FACINATIONS_FEATURES.MINT_ENABLED &&
         vault.status === "active" && (
           <section className="mt-12 rounded-lg border border-blue-200 bg-blue-50 p-6">
-            <h2 className="mb-2 text-lg font-semibold">
-              Mint Fractional Interests
-            </h2>
+            <h2 className="mb-2 text-lg font-semibold">{t("vvvaults.mint_section")}</h2>
             <p className="mb-4 text-sm text-gray-700">
-              Minting constitutes acquisition of a fractional interest governed
-              by the attached legal documentation.
+              {t("vvvaults.mint_notice")}
             </p>
-            <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white">
-              Mint
-            </button>
+            <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white">{t("vvvaults.mint_btn")}</button>
           </section>
         )}
     </div>

@@ -1,4 +1,5 @@
 ﻿import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface TeleportViewerProps {
   sceneId: string;
@@ -28,10 +29,10 @@ export function TeleportViewer({ sceneId, splatCount, artworkTitle }: TeleportVi
         <div style={{ width: "16px", height: "16px", borderRadius: "3px", background: "#1D9E75", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#9FE1CB" }} />
         </div>
-        <span style={{ fontSize: "13px", fontWeight: 500, color: "#9FE1CB" }}>Varjo Teleport</span>
+        <span style={{ fontSize: "13px", fontWeight: 500, color: "#9FE1CB" }}>{t("teleport.varjo")}</span>
         {splatCount && (
           <span style={{ marginLeft: "auto", fontSize: "10px", padding: "2px 6px", borderRadius: "999px", background: "#0F6E56", color: "#9FE1CB" }}>
-            {splatCount} splats
+            {splatCount} {t("teleport.splats")}
           </span>
         )}
       </div>
@@ -47,16 +48,16 @@ export function TeleportViewer({ sceneId, splatCount, artworkTitle }: TeleportVi
             <div style={{ color: "#1D9E75", fontSize: "10px", marginTop: "8px" }}>â— LIVE Â· Gaussian Splat</div>
           </div>
         ) : loading ? (
-          <div style={{ color: "#5DCAA5", fontSize: "12px" }}>Loadingâ€¦</div>
+          <div style={{ color: "#5DCAA5", fontSize: "12px" }}>{t("teleport.loading")}</div>
         ) : error ? (
-          <div style={{ color: "#E24B4A", fontSize: "12px" }}>Scene unavailable</div>
+          <div style={{ color: "#E24B4A", fontSize: "12px" }}>{t("teleport.scene_unavailable")}</div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
             <div style={{ width: "44px", height: "44px", borderRadius: "50%", border: "1.5px solid #5DCAA5", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <div style={{ width: 0, height: 0, borderTop: "8px solid transparent", borderBottom: "8px solid transparent", borderLeft: "14px solid #9FE1CB", marginLeft: "3px" }} />
             </div>
             <span style={{ fontSize: "11px", color: "#5DCAA5", textAlign: "center" }}>
-              Enter immersive space<br />
+              {t("teleport.enter_space")}<br />
               <span style={{ opacity: 0.6, fontSize: "10px" }}>{sceneId}</span>
             </span>
           </div>
@@ -68,10 +69,10 @@ export function TeleportViewer({ sceneId, splatCount, artworkTitle }: TeleportVi
           onClick={() => tpOn ? setTpOn(false) : handleEnter()}
           style={{ fontSize: "11px", padding: "4px 10px", borderRadius: "6px", border: "1px solid #1D9E75", color: "#9FE1CB", background: tpOn ? "#1D9E75" : "transparent", cursor: "pointer" }}
         >
-          {tpOn ? "Exit space" : "Enter space"}
+          {tpOn ? t("teleport.exit_space") : t("teleport.enter_space")}
         </button>
         <span style={{ marginLeft: "auto", fontSize: "10px", color: "#5DCAA5", alignSelf: "center" }}>
-          {tpOn ? "ready" : "idle"}
+          {tpOn ? t("teleport.ready") : t("teleport.idle")}
         </span>
       </div>
     </div>

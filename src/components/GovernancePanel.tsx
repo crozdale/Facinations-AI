@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ethers } from "ethers";
 import { GOVERNANCE_ABI } from "../contracts/Governance";
 import { useGovernance } from "../hooks/useGovernance";
 import { useChain } from "../hooks/useChain";
 
 export default function GovernancePanel() {
+  const { t } = useTranslation();
   const { governor, emergency } = useGovernance();
   const chainId = useChain();
 
@@ -88,22 +90,22 @@ export default function GovernancePanel() {
 
   return (
     <section style={{ marginTop: "60px" }}>
-      <h3>Governance</h3>
+      <h3>{t("governance.title")}</h3>
 
       {governor && (
         <>
-          <h4>Register Vault</h4>
+          <h4>{t("governance.register_vault")}</h4>
 
           <input
-            placeholder="Vault ID"
+            placeholder={t("governance.vault_id_ph")}
             onChange={e => setForm({ ...form, vaultId: e.target.value })}
           />
           <input
-            placeholder="Vault Contract"
+            placeholder={t("governance.vault_contract_ph")}
             onChange={e => setForm({ ...form, vaultContract: e.target.value })}
           />
           <input
-            placeholder="Swap Contract"
+            placeholder={t("governance.swap_contract_ph")}
             onChange={e => setForm({ ...form, swapContract: e.target.value })}
           />
 
@@ -114,18 +116,18 @@ export default function GovernancePanel() {
                 setForm({ ...form, premiumRequired: e.target.checked })
               }
             />
-            Premium Required
+            {t("governance.premium_required")}
           </label>
 
-          <button onClick={submitVault}>Register Vault</button>
+          <button onClick={submitVault}>{t("governance.register_btn")}</button>
         </>
       )}
 
       {emergency && (
         <>
-          <h4>Emergency Controls</h4>
-          <button onClick={pause}>Pause Protocol</button>
-          <button onClick={unpause}>Unpause Protocol</button>
+          <h4>{t("governance.emergency")}</h4>
+          <button onClick={pause}>{t("governance.pause")}</button>
+          <button onClick={unpause}>{t("governance.unpause")}</button>
         </>
       )}
 

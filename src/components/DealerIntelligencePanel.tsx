@@ -1,5 +1,6 @@
 // src/components/DealerIntelligencePanel.tsx
 import React, { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { streamClaude } from "../utils/askClaude";
 
 interface Message {
@@ -140,6 +141,7 @@ const GREETING =
 const STORAGE_KEY = "dealer_msgs";
 
 export default function DealerIntelligencePanel() {
+  const { t } = useTranslation();
   const [messages, setMessages] = useState<Message[]>(() => {
     try {
       const saved = sessionStorage.getItem(STORAGE_KEY);
@@ -216,9 +218,9 @@ export default function DealerIntelligencePanel() {
       <div style={S.header}>
         <div>
           <p style={S.eyebrow}>Facinations · SIA</p>
-          <h2 style={S.title}>Dealer Intelligence</h2>
+          <h2 style={S.title}>{t("dealerIntel.title")}</h2>
           <p style={S.subtitle}>
-            AI partner for gallery owners, dealer principals, and collectors.
+            {t("dealerIntel.subtitle")}
           </p>
         </div>
       </div>
@@ -243,9 +245,7 @@ export default function DealerIntelligencePanel() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <button type="submit" disabled={loading} style={{ ...S.sendBtn, opacity: loading ? 0.35 : 1 }}>
-            Send
-          </button>
+          <button type="submit" disabled={loading} style={{ ...S.sendBtn, opacity: loading ? 0.35 : 1 }}>{t("dealerIntel.send")}</button>
         </form>
       </div>
     </section>
