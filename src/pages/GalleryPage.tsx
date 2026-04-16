@@ -3,7 +3,8 @@
 // Handles any gallery registered in the galleries table.
 
 import React, { useState, useEffect } from "react";
-import GalleryPanel from "../components/GalleryPanel";`r`nimport { useParams, Link } from "react-router-dom";
+import GalleryPanel from "../components/GalleryPanel";
+import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
 
