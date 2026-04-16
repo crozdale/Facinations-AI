@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { GALLERY_ITEMS } from "../data/gallery";
 import { HypsoverseViewer } from "./teleport";
@@ -6,6 +7,7 @@ import { HypsoverseViewer } from "./teleport";
 type GalleryItem = typeof GALLERY_ITEMS[number];
 
 export default function GalleryPanel() {
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<GalleryItem | null>(null);
   const [showVimeo, setshowVimeo] = useState(false);
 
@@ -131,3 +133,4 @@ export default function GalleryPanel() {
     </>
   );
 }
+

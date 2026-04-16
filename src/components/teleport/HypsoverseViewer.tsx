@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface HypsoverseViewerProps {
@@ -97,3 +97,5 @@ export function HypsoverseViewer({ splatCount, artworkTitle }: HypsoverseViewerP
     </div>
   );
 }
+
+

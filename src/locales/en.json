@@ -1,8 +1,21 @@
-{
-  "siteTitle": "Facinations",
-  "nav": {
-    "home": "Home",
-    "about": "About",
-    "contact": "Contact"
-  }
+﻿{
+    "siteTitle":  "Facinations",
+    "nav":  {
+                "home":  "Home",
+                "about":  "About",
+                "contact":  "Contact"
+            },
+    "hypsoverse":  {
+                       "enter":  "Enter Hypsoverse",
+                       "powered_by":  "Powered by Varjo Teleport"
+                   },
+    "galleryPanel":  {
+                         "view_on_xdale":  "View Gallery",
+                         "hide_doc":  "Hide Documentary",
+                         "watch_doc":  "Watch Documentary"
+                     },
+    "teleport":  {
+                     "splats":  "splats",
+                     "immersive_3d":  "Immersive 3D"
+                 }
 }
