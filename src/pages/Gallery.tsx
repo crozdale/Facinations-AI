@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+﻿import { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import MistralWidget from "../components/MistralWidget";
 import VoiceAICurator from "../components/VoiceAICurator";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
-import { HypsoverseViewer } from "../components/teleport";
 
 // ------------------------- Image list -------------------------
 const images = [
@@ -101,22 +101,14 @@ function getLabel(f: string) {
 }
 
 function getRelated(filename: string, all: string[], n = 4) {
-  const tokens = getLabel(filename)
-    .toLowerCase()
-    .split(" ")
-    .filter((w) => w.length > 3);
+  const tokens = getLabel(filename).toLowerCase().split(" ").filter((w) => w.length > 3);
   const scored = all
     .filter((f) => f !== filename)
-    .map((f) => ({
-      f,
-      score: tokens.filter((t) => getLabel(f).toLowerCase().includes(t)).length,
-    }))
+    .map((f) => ({ f, score: tokens.filter((t) => getLabel(f).toLowerCase().includes(t)).length }))
     .sort((a, b) => b.score - a.score);
   const out = scored.slice(0, n).map((x) => x.f);
   if (out.length < n) {
-    const rest = all
-      .filter((f) => f !== filename && !out.includes(f))
-      .sort(() => Math.random() - 0.5);
+    const rest = all.filter((f) => f !== filename && !out.includes(f)).sort(() => Math.random() - 0.5);
     out.push(...rest.slice(0, n - out.length));
   }
   return out;
@@ -131,17 +123,11 @@ const SERIES_TESTS = [
   (f: string) => !/\d{15,}/.test(f),
 ] as const;
 
-// --------- AI via Claude ---------
 async function askClaude(system: string, userMsg: string, history: {role:string;content:string}[] = []) {
   const res = await fetch("/api/claude/v1/messages", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-5",
-      max_tokens: 600,
-      system,
-      messages: [...history, { role: "user", content: userMsg }],
-    }),
+    body: JSON.stringify({ model: "claude-sonnet-4-5", max_tokens: 600, system, messages: [...history, { role: "user", content: userMsg }] }),
   });
   const raw = await res.text();
   if (!res.ok) throw new Error(`HTTP ${res.status}: ${raw}`);
@@ -149,25 +135,14 @@ async function askClaude(system: string, userMsg: string, history: {role:string;
   return d.content?.find((b: {type:string;text?:string}) => b.type === "text")?.text ?? "No response.";
 }
 
-// --------- ZoomPane ---------
 const zoomBtnStyle: React.CSSProperties = {
-  background: "rgba(0,0,0,0.7)",
-  border: "1px solid rgba(212,175,55,0.4)",
-  color: "#d4af37",
-  width: "2rem",
-  height: "2rem",
-  borderRadius: "50%",
-  fontSize: "1rem",
-  cursor: "pointer",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontFamily: "monospace",
+  background: "rgba(0,0,0,0.7)", border: "1px solid rgba(212,175,55,0.4)", color: "#d4af37",
+  width: "2rem", height: "2rem", borderRadius: "50%", fontSize: "1rem", cursor: "pointer",
+  display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "monospace",
 };
 
 function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }: {
-  src: string; alt: string; onClose: ()=>void;
-  onPrev: ()=>void; onNext: ()=>void; index: number; total: number;
+  src: string; alt: string; onClose: ()=>void; onPrev: ()=>void; onNext: ()=>void; index: number; total: number;
 }) {
   const { t } = useTranslation();
   const [scale, setScale] = useState(1);
@@ -180,19 +155,14 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }: {
 
   useEffect(() => { scaleRef.current = scale; }, [scale]);
   useEffect(() => { panRef.current = pan; }, [pan]);
-
-  useEffect(() => {
-    setScale(1); setPan({ x: 0, y: 0 });
-    scaleRef.current = 1; panRef.current = { x: 0, y: 0 };
-  }, [src]);
+  useEffect(() => { setScale(1); setPan({ x:0, y:0 }); scaleRef.current=1; panRef.current={x:0,y:0}; }, [src]);
 
   const attachWheel = useCallback((el: HTMLDivElement | null) => {
     if (!el) return;
     divRef.current = el;
     const handler = (e: WheelEvent) => {
       e.preventDefault(); e.stopPropagation();
-      const factor = e.deltaY < 0 ? 1.1 : 0.909;
-      const next = Math.min(10, Math.max(1, scaleRef.current * factor));
+      const next = Math.min(10, Math.max(1, scaleRef.current * (e.deltaY < 0 ? 1.1 : 0.909)));
       scaleRef.current = next; setScale(next);
     };
     el.addEventListener("wheel", handler, { passive: false });
@@ -201,27 +171,13 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }: {
 
   useEffect(() => () => (divRef.current as any)?._wheelCleanup?.(), []);
 
-  const onMouseDown = (e: React.MouseEvent) => {
-    if (scaleRef.current <= 1) return;
-    e.preventDefault();
-    dragging.current = { sx: e.clientX - panRef.current.x, sy: e.clientY - panRef.current.y };
-  };
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!dragging.current) return;
-    const p = { x: e.clientX - dragging.current.sx, y: e.clientY - dragging.current.sy };
-    panRef.current = p; setPan(p);
-  };
+  const onMouseDown = (e: React.MouseEvent) => { if (scaleRef.current <= 1) return; e.preventDefault(); dragging.current = { sx: e.clientX - panRef.current.x, sy: e.clientY - panRef.current.y }; };
+  const onMouseMove = (e: React.MouseEvent) => { if (!dragging.current) return; const p = { x: e.clientX - dragging.current.sx, y: e.clientY - dragging.current.sy }; panRef.current = p; setPan(p); };
   const onMouseUp = () => { dragging.current = null; };
 
   const onTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 2) {
-      pinchRef.current = Math.hypot(
-        e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
-      );
-    } else {
-      dragging.current = { sx: e.touches[0].clientX - panRef.current.x, sy: e.touches[0].clientY - panRef.current.y };
-    }
+    if (e.touches.length === 2) pinchRef.current = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    else dragging.current = { sx: e.touches[0].clientX - panRef.current.x, sy: e.touches[0].clientY - panRef.current.y };
   };
   const onTouchMove = (e: React.TouchEvent) => {
     e.preventDefault();
@@ -237,69 +193,32 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }: {
   const onTouchEnd = () => { dragging.current = null; pinchRef.current = null; };
 
   useEffect(() => {
-    const h = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") onNext();
-      if (e.key === "ArrowLeft") onPrev();
-      if (e.key === "Escape") onClose();
-    };
+    const h = (e: KeyboardEvent) => { if (e.key === "ArrowRight") onNext(); if (e.key === "ArrowLeft") onPrev(); if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
   }, [onNext, onPrev, onClose]);
 
-  const reset = () => {
-    setScale(1); setPan({ x: 0, y: 0 });
-    scaleRef.current = 1; panRef.current = { x: 0, y: 0 };
-  };
+  const reset = () => { setScale(1); setPan({ x:0, y:0 }); scaleRef.current=1; panRef.current={x:0,y:0}; };
 
   return (
-    <div
-      ref={attachWheel}
-      onMouseDown={onMouseDown} onMouseMove={onMouseMove}
-      onMouseUp={onMouseUp} onMouseLeave={onMouseUp}
+    <div ref={attachWheel} onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onMouseUp} onMouseLeave={onMouseUp}
       onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}
-      style={{
-        flex: 1, position: "relative", overflow: "hidden",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        background: "#181818", cursor: scale > 1 ? "grab" : "default", userSelect: "none",
-      }}
-    >
-      <img
-        key={src} src={src} alt={alt} draggable={false}
-        style={{
-          display: "block", maxWidth: "100%", maxHeight: "92vh", objectFit: "contain",
-          transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
-          transformOrigin: "center center",
-          transition: dragging.current ? "none" : "transform 0.12s ease",
-          pointerEvents: "none",
-          border: "1px solid rgba(212,175,55,0.15)",
-          animation: "lbIn 0.25s ease",
-        }}
-      />
-      <div style={{ position: "absolute", bottom: "1.2rem", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "0.5rem", zIndex: 10 }}>
-        <button onClick={() => { const n = Math.max(1, scaleRef.current * 0.8); scaleRef.current = n; setScale(n); }} style={zoomBtnStyle}>-</button>
-        <span style={{ color: scale > 1 ? "#d4af37" : "#333", fontFamily: "'Cinzel',serif", fontSize: "0.62rem", letterSpacing: "0.1em", minWidth: "3rem", textAlign: "center" }}>
-          {Math.round(scale * 100)}%
-        </span>
-        <button onClick={() => { const n = Math.min(10, scaleRef.current * 1.25); scaleRef.current = n; setScale(n); }} style={zoomBtnStyle}>+</button>
-        {scale > 1 && (
-          <button onClick={reset} style={{ ...zoomBtnStyle, fontSize: "0.55rem", padding: "0.3rem 0.6rem", width: "auto" }}>
-            {t("gallery.zoom_reset")}
-          </button>
-        )}
+      style={{ flex:1, position:"relative", overflow:"hidden", display:"flex", alignItems:"center", justifyContent:"center", background:"#181818", cursor:scale>1?"grab":"default", userSelect:"none" }}>
+      <img key={src} src={src} alt={alt} draggable={false} style={{ display:"block", maxWidth:"100%", maxHeight:"92vh", objectFit:"contain", transform:`translate(${pan.x}px,${pan.y}px) scale(${scale})`, transformOrigin:"center center", transition:dragging.current?"none":"transform 0.12s ease", pointerEvents:"none", border:"1px solid rgba(212,175,55,0.15)", animation:"lbIn 0.25s ease" }} />
+      <div style={{ position:"absolute", bottom:"1.2rem", left:"50%", transform:"translateX(-50%)", display:"flex", alignItems:"center", gap:"0.5rem", zIndex:10 }}>
+        <button onClick={() => { const n=Math.max(1,scaleRef.current*0.8); scaleRef.current=n; setScale(n); }} style={zoomBtnStyle}>-</button>
+        <span style={{ color:scale>1?"#d4af37":"#333", fontFamily:"'Cinzel',serif", fontSize:"0.62rem", letterSpacing:"0.1em", minWidth:"3rem", textAlign:"center" }}>{Math.round(scale*100)}%</span>
+        <button onClick={() => { const n=Math.min(10,scaleRef.current*1.25); scaleRef.current=n; setScale(n); }} style={zoomBtnStyle}>+</button>
+        {scale>1 && <button onClick={reset} style={{ ...zoomBtnStyle, fontSize:"0.55rem", padding:"0.3rem 0.6rem", width:"auto" }}>{t("gallery.zoom_reset")}</button>}
       </div>
-      <div style={{ position: "absolute", top: "0.7rem", left: "50%", transform: "translateX(-50%)", color: "#222", fontFamily: "'Cinzel',serif", fontSize: "0.58rem", letterSpacing: "0.08em", pointerEvents: "none", whiteSpace: "nowrap" }}>
-        {t("gallery.zoom_hint")}
-      </div>
-      <div style={{ position: "absolute", top: "0.7rem", right: "0.8rem", color: "#8a8278", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.1em" }}>
-        {index + 1} / {total}
-      </div>
-      <button onClick={(e) => { e.stopPropagation(); onPrev(); }} style={{ position: "absolute", top: "50%", left: "0.8rem", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(212,175,55,0.4)", color: "#d4af37", width: "2.8rem", height: "2.8rem", borderRadius: "50%", fontSize: "1.5rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>{"<"}</button>
-      <button onClick={(e) => { e.stopPropagation(); onNext(); }} style={{ position: "absolute", top: "50%", right: "0.8rem", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(212,175,55,0.4)", color: "#d4af37", width: "2.8rem", height: "2.8rem", borderRadius: "50%", fontSize: "1.5rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>{">"}</button>
+      <div style={{ position:"absolute", top:"0.7rem", left:"50%", transform:"translateX(-50%)", color:"#222", fontFamily:"'Cinzel',serif", fontSize:"0.58rem", letterSpacing:"0.08em", pointerEvents:"none", whiteSpace:"nowrap" }}>{t("gallery.zoom_hint")}</div>
+      <div style={{ position:"absolute", top:"0.7rem", right:"0.8rem", color:"#8a8278", fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.1em" }}>{index+1} / {total}</div>
+      <button onClick={(e) => { e.stopPropagation(); onPrev(); }} style={{ position:"absolute", top:"50%", left:"0.8rem", transform:"translateY(-50%)", background:"rgba(0,0,0,0.55)", border:"1px solid rgba(212,175,55,0.4)", color:"#d4af37", width:"2.8rem", height:"2.8rem", borderRadius:"50%", fontSize:"1.5rem", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", zIndex:10 }}>{"<"}</button>
+      <button onClick={(e) => { e.stopPropagation(); onNext(); }} style={{ position:"absolute", top:"50%", right:"0.8rem", transform:"translateY(-50%)", background:"rgba(0,0,0,0.55)", border:"1px solid rgba(212,175,55,0.4)", color:"#d4af37", width:"2.8rem", height:"2.8rem", borderRadius:"50%", fontSize:"1.5rem", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", zIndex:10 }}>{">"}</button>
     </div>
   );
 }
 
-// --------- Markdown ---------
 function Markdown({ text }: { text: string }) {
   const html = text
     .replace(/^### (.+)$/gm, "<h4 style=\"color:#d4af37;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.1em;margin:0.6rem 0 0.2rem\">$1</h4>")
@@ -307,18 +226,17 @@ function Markdown({ text }: { text: string }) {
     .replace(/^# (.+)$/gm,   "<h3 style=\"color:#d4af37;font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.1em;margin:0 0 0.4rem\">$1</h3>")
     .replace(/\*\*(.+?)\*\*/g, '<strong style="color:#d4c97a">$1</strong>')
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
-    .replace(/\n\n/g, "<br/><br/>")
-    .replace(/\n/g, " ");
+    .replace(/\n\n/g, "<br/><br/>").replace(/\n/g, " ");
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-// --------- AI Curator panel ---------
 const SYSTEM = `You are a world-class art curator and critic for Facinations — a bold, emotionally charged contemporary gallery.
 Write with authority, warmth, and poetic precision. Cover: subject/composition, palette and technique, mood and symbolism.
 Keep responses under 120 words unless asked for more. Never mention filenames or numeric IDs.`;
 
 function AiPanel({ filename, allImages, onJump }: { filename: string; allImages: string[]; onJump: (f:string)=>void }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const label = getLabel(filename);
   const related = useRef(getRelated(filename, allImages)).current;
   const [status, setStatus] = useState<"idle"|"loading"|"done"|"error">("idle");
@@ -357,101 +275,113 @@ function AiPanel({ filename, allImages, onJump }: { filename: string; allImages:
   };
 
   return (
-    <div style={{ width: "320px", minWidth: "280px", flexShrink: 0, background: "#242424", borderLeft: "1px solid rgba(212,175,55,0.12)", display: "flex", flexDirection: "column", height: "100vh", overflowY: "auto", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-      <div style={{ padding: "1rem 1rem 0.6rem", borderBottom: "1px solid rgba(212,175,55,0.1)", flexShrink: 0 }}>
-        <div style={{ fontFamily: "'Cinzel',serif", color: "#d4af37", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", lineHeight: 1.4 }}>{label}</div>
-        <div style={{ fontSize: "0.58rem", color: "#8a8278", marginTop: "0.2rem" }}>{t("gallery.ai_subtitle")}</div>
+    <div style={{ width:"320px", minWidth:"280px", flexShrink:0, background:"#242424", borderLeft:"1px solid rgba(212,175,55,0.12)", display:"flex", flexDirection:"column", height:"100vh", overflowY:"auto", fontFamily:"'Cormorant Garamond', Georgia, serif" }}>
+
+      {/* Title */}
+      <div style={{ padding:"1rem 1rem 0.6rem", borderBottom:"1px solid rgba(212,175,55,0.1)", flexShrink:0 }}>
+        <div style={{ fontFamily:"'Cinzel',serif", color:"#d4af37", fontSize:"0.68rem", letterSpacing:"0.14em", textTransform:"uppercase", lineHeight:1.4 }}>{label}</div>
+        <div style={{ fontSize:"0.58rem", color:"#8a8278", marginTop:"0.2rem" }}>{t("gallery.ai_subtitle")}</div>
       </div>
 
-      {/* Teleport 3D viewer */}
-      <div style={{ padding: "0.75rem", borderBottom: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
-        <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.5rem" }}>{t("teleport.immersive_3d")}</div>
-        <HypsoverseViewer artworkTitle={label} />
+      {/* ── Enter Hypsoverse ── */}
+      <div style={{ padding:"0.85rem", borderBottom:"1px solid rgba(212,175,55,0.07)", flexShrink:0 }}>
+        <div style={{ fontSize:"0.55rem", color:"rgba(74,222,128,0.5)", letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"0.55rem" }}>
+          {t("gallery.hypsoverse_label", "Immersive Experience")}
+        </div>
+        <button
+          onClick={() => navigate("/hypsoverse/dionysus")}
+          style={{ width:"100%", padding:"0.75rem 0", background:"linear-gradient(135deg,rgba(34,197,94,0.15) 0%,rgba(34,197,94,0.07) 100%)", border:"1px solid rgba(34,197,94,0.5)", color:"#4ade80", fontFamily:"'Cinzel',serif", fontSize:"0.62rem", letterSpacing:"0.18em", textTransform:"uppercase", cursor:"pointer", borderRadius:"2px", transition:"all 0.25s", display:"flex", alignItems:"center", justifyContent:"center", gap:"0.5rem" }}
+          onMouseEnter={e => { const b = e.currentTarget; b.style.background="linear-gradient(135deg,rgba(34,197,94,0.28) 0%,rgba(34,197,94,0.15) 100%)"; b.style.borderColor="rgba(34,197,94,0.85)"; b.style.boxShadow="0 0 24px rgba(34,197,94,0.18)"; }}
+          onMouseLeave={e => { const b = e.currentTarget; b.style.background="linear-gradient(135deg,rgba(34,197,94,0.15) 0%,rgba(34,197,94,0.07) 100%)"; b.style.borderColor="rgba(34,197,94,0.5)"; b.style.boxShadow="none"; }}
+        >
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          </svg>
+          {t("gallery.enter_hypsoverse", "Enter Hypsoverse")}
+        </button>
+        <div style={{ fontSize:"0.44rem", color:"rgba(74,222,128,0.25)", letterSpacing:"0.18em", textTransform:"uppercase", marginTop:"0.35rem", textAlign:"center" }}>
+          {t("gallery.hypsoverse_hint", "Gaussian Splat · Premium")}
+        </div>
       </div>
 
       {/* Vimeo */}
-      <div style={{ padding: "0.75rem", borderBottom: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
-        <div onClick={() => setOpenVimeo(o => !o)} style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: openVimeo ? "0.5rem" : 0, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span>{t("gallery.watch_on_vimeo", "Watch on Vimeo")}</span>
-          <span style={{ fontSize: "0.5rem" }}>{openVimeo ? "▲" : "▼"}</span>
+      <div style={{ padding:"0.75rem", borderBottom:"1px solid rgba(212,175,55,0.07)", flexShrink:0 }}>
+        <div onClick={() => setOpenVimeo(o => !o)} style={{ fontSize:"0.58rem", color:"#d4af37", letterSpacing:"0.14em", textTransform:"uppercase", marginBottom:openVimeo?"0.5rem":0, cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+          <span>{t("gallery.watch_on_vimeo","Watch on Vimeo")}</span>
+          <span style={{ fontSize:"0.5rem" }}>{openVimeo?"▲":"▼"}</span>
         </div>
         {openVimeo && (
           <a href="https://vimeo.com/musee-crosdale" target="_blank" rel="noopener noreferrer"
-            style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.45rem 0.75rem", borderRadius: "4px", background: "rgba(26,183,234,0.08)", border: "1px solid rgba(26,183,234,0.35)", color: "#1ab7ea", textDecoration: "none", fontFamily: "'Cinzel',serif", fontSize: "0.62rem", letterSpacing: "0.1em" }}>
+            style={{ display:"flex", alignItems:"center", gap:"0.5rem", padding:"0.45rem 0.75rem", borderRadius:"4px", background:"rgba(26,183,234,0.08)", border:"1px solid rgba(26,183,234,0.35)", color:"#1ab7ea", textDecoration:"none", fontFamily:"'Cinzel',serif", fontSize:"0.62rem", letterSpacing:"0.1em" }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 12.5C4.603 9.913 3.834 8.619 3.01 8.619c-.179 0-.806.378-1.881 1.132L0 8.332c1.185-1.044 2.351-2.084 3.501-3.128C5.08 3.732 6.266 2.989 7.055 2.917c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.612-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.478 4.799z"/></svg>
-            {t("gallery.watch_doc", "Watch on Vimeo")}
+            {t("gallery.watch_doc","Watch on Vimeo")}
           </a>
         )}
       </div>
 
       {/* VPN */}
-      <div style={{ padding: "0.75rem", borderBottom: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
-        <div onClick={() => setOpenVpn(o => !o)} style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: openVpn ? "0.5rem" : 0, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span>{t("gallery.private_viewing", "Private Viewing")}</span>
-          <span style={{ fontSize: "0.5rem" }}>{openVpn ? "▲" : "▼"}</span>
+      <div style={{ padding:"0.75rem", borderBottom:"1px solid rgba(212,175,55,0.07)", flexShrink:0 }}>
+        <div onClick={() => setOpenVpn(o => !o)} style={{ fontSize:"0.58rem", color:"#d4af37", letterSpacing:"0.14em", textTransform:"uppercase", marginBottom:openVpn?"0.5rem":0, cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+          <span>{t("gallery.private_viewing","Private Viewing")}</span>
+          <span style={{ fontSize:"0.5rem" }}>{openVpn?"▲":"▼"}</span>
         </div>
         {openVpn && (
           <>
-            <div style={{ fontSize: "0.72rem", color: "#8a8278", fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", lineHeight: 1.5, marginBottom: "0.5rem" }}>
-              {t("gallery.vpn_notice", "For collector privacy, connect via a trusted VPN.")}
-            </div>
+            <div style={{ fontSize:"0.72rem", color:"#8a8278", fontFamily:"'Cormorant Garamond',serif", fontStyle:"italic", lineHeight:1.5, marginBottom:"0.5rem" }}>{t("gallery.vpn_notice","For collector privacy, connect via a trusted VPN.")}</div>
             <a href="https://protonvpn.com" target="_blank" rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.4rem 0.75rem", borderRadius: "4px", background: "rgba(109,74,255,0.1)", border: "1px solid rgba(109,74,255,0.35)", color: "#9d80ff", textDecoration: "none", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.1em" }}>
+              style={{ display:"inline-flex", alignItems:"center", gap:"0.4rem", padding:"0.4rem 0.75rem", borderRadius:"4px", background:"rgba(109,74,255,0.1)", border:"1px solid rgba(109,74,255,0.35)", color:"#9d80ff", textDecoration:"none", fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.1em" }}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              {t("gallery.hide_doc", "Connect VPN")}
+              {t("gallery.hide_doc","Connect VPN")}
             </a>
           </>
         )}
       </div>
 
       {/* Curator analysis */}
-      <div style={{ padding: "0.85rem 1rem", borderBottom: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
-        <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.5rem" }}>{t("gallery.curators_eye")}</div>
-        {status === "idle" && (
-          <button onClick={invoke} style={{ width: "100%", padding: "0.55rem 0", background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.4)", color: "#d4af37", fontFamily: "'Cinzel',serif", fontSize: "0.65rem", letterSpacing: "0.12em", cursor: "pointer", borderRadius: "2px" }}>
-            {t("gallery.btn_invoke")}
-          </button>
-        )}
-        {status === "loading" && <div style={{ color: "#8a8278", fontSize: "0.8rem", fontStyle: "italic" }}>{t("gallery.analysing")}</div>}
-        {status === "done" && <div style={{ color: "#b0a898", fontSize: "0.82rem", lineHeight: 1.65 }}><Markdown text={analysis} /></div>}
-        {status === "error" && (
+      <div style={{ padding:"0.85rem 1rem", borderBottom:"1px solid rgba(212,175,55,0.07)", flexShrink:0 }}>
+        <div style={{ fontSize:"0.58rem", color:"#d4af37", letterSpacing:"0.14em", textTransform:"uppercase", marginBottom:"0.5rem" }}>{t("gallery.curators_eye")}</div>
+        {status==="idle" && <button onClick={invoke} style={{ width:"100%", padding:"0.55rem 0", background:"rgba(212,175,55,0.08)", border:"1px solid rgba(212,175,55,0.4)", color:"#d4af37", fontFamily:"'Cinzel',serif", fontSize:"0.65rem", letterSpacing:"0.12em", cursor:"pointer", borderRadius:"2px" }}>{t("gallery.btn_invoke")}</button>}
+        {status==="loading" && <div style={{ color:"#8a8278", fontSize:"0.8rem", fontStyle:"italic" }}>{t("gallery.analysing")}</div>}
+        {status==="done" && <div style={{ color:"#b0a898", fontSize:"0.82rem", lineHeight:1.65 }}><Markdown text={analysis} /></div>}
+        {status==="error" && (
           <div>
-            <div style={{ color: "#a04040", fontSize: "0.75rem", marginBottom: "0.4rem" }}>{t("gallery.ai_error")}</div>
-            <pre style={{ color: "#664040", fontSize: "0.62rem", whiteSpace: "pre-wrap", wordBreak: "break-all", maxHeight: "80px", overflowY: "auto", background: "rgba(255,0,0,0.04)", padding: "0.4rem", borderRadius: "3px" }}>{errMsg}</pre>
-            <button onClick={invoke} style={{ marginTop: "0.5rem", padding: "0.3rem 0.7rem", background: "none", border: "1px solid rgba(212,175,55,0.3)", color: "#888", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", cursor: "pointer" }}>{t("gallery.btn_retry")}</button>
+            <div style={{ color:"#a04040", fontSize:"0.75rem", marginBottom:"0.4rem" }}>{t("gallery.ai_error")}</div>
+            <pre style={{ color:"#664040", fontSize:"0.62rem", whiteSpace:"pre-wrap", wordBreak:"break-all", maxHeight:"80px", overflowY:"auto", background:"rgba(255,0,0,0.04)", padding:"0.4rem", borderRadius:"3px" }}>{errMsg}</pre>
+            <button onClick={invoke} style={{ marginTop:"0.5rem", padding:"0.3rem 0.7rem", background:"none", border:"1px solid rgba(212,175,55,0.3)", color:"#888", fontFamily:"'Cinzel',serif", fontSize:"0.6rem", cursor:"pointer" }}>{t("gallery.btn_retry")}</button>
           </div>
         )}
       </div>
 
       {/* Chat */}
-      <div style={{ flex: 1, overflowY: "auto", padding: "0.75rem 1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-        <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.1rem" }}>{t("gallery.ask_curator")}</div>
-        {chat.length === 0 && <div style={{ color: "#282828", fontSize: "0.75rem", fontStyle: "italic" }}>{t("gallery.ask_hint")}</div>}
-        {chat.map((m, i) => (
-          <div key={i} style={{ alignSelf: m.role === "user" ? "flex-end" : "flex-start", background: m.role === "user" ? "rgba(212,175,55,0.09)" : "rgba(255,255,255,0.03)", border: `1px solid ${m.role === "user" ? "rgba(212,175,55,0.25)" : "rgba(255,255,255,0.05)"}`, borderRadius: "5px", padding: "0.4rem 0.65rem", maxWidth: "93%", fontSize: "0.8rem", lineHeight: 1.55, color: m.role === "user" ? "#e8d89a" : "#aaa" }}>
-            {m.role === "assistant" ? <Markdown text={m.content} /> : m.content}
+      <div style={{ flex:1, overflowY:"auto", padding:"0.75rem 1rem", display:"flex", flexDirection:"column", gap:"0.5rem" }}>
+        <div style={{ fontSize:"0.58rem", color:"#d4af37", letterSpacing:"0.14em", textTransform:"uppercase", marginBottom:"0.1rem" }}>{t("gallery.ask_curator")}</div>
+        {chat.length===0 && <div style={{ color:"#282828", fontSize:"0.75rem", fontStyle:"italic" }}>{t("gallery.ask_hint")}</div>}
+        {chat.map((m,i) => (
+          <div key={i} style={{ alignSelf:m.role==="user"?"flex-end":"flex-start", background:m.role==="user"?"rgba(212,175,55,0.09)":"rgba(255,255,255,0.03)", border:`1px solid ${m.role==="user"?"rgba(212,175,55,0.25)":"rgba(255,255,255,0.05)"}`, borderRadius:"5px", padding:"0.4rem 0.65rem", maxWidth:"93%", fontSize:"0.8rem", lineHeight:1.55, color:m.role==="user"?"#e8d89a":"#aaa" }}>
+            {m.role==="assistant" ? <Markdown text={m.content} /> : m.content}
           </div>
         ))}
-        {chatBusy && <div style={{ color: "#484848", fontSize: "0.72rem", fontStyle: "italic" }}>{t("gallery.thinking")}</div>}
+        {chatBusy && <div style={{ color:"#484848", fontSize:"0.72rem", fontStyle:"italic" }}>{t("gallery.thinking")}</div>}
         <div ref={endRef} />
       </div>
 
       {/* Input */}
-      <div style={{ padding: "0.65rem 0.85rem", borderTop: "1px solid rgba(212,175,55,0.07)", display: "flex", gap: "0.4rem", flexShrink: 0 }}>
-        <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && send()} placeholder={t("gallery.placeholder_ask")}
-          style={{ flex: 1, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(212,175,55,0.18)", color: "#ccc", borderRadius: "3px", padding: "0.35rem 0.5rem", fontSize: "0.78rem", fontFamily: "inherit", outline: "none" }} />
-        <button onClick={send} style={{ background: "rgba(212,175,55,0.1)", border: "1px solid rgba(212,175,55,0.35)", color: "#d4af37", borderRadius: "3px", padding: "0.35rem 0.6rem", cursor: "pointer", fontFamily: "'Cinzel',serif", fontSize: "0.72rem" }}>➤</button>
+      <div style={{ padding:"0.65rem 0.85rem", borderTop:"1px solid rgba(212,175,55,0.07)", display:"flex", gap:"0.4rem", flexShrink:0 }}>
+        <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key==="Enter" && send()} placeholder={t("gallery.placeholder_ask")}
+          style={{ flex:1, background:"rgba(255,255,255,0.03)", border:"1px solid rgba(212,175,55,0.18)", color:"#ccc", borderRadius:"3px", padding:"0.35rem 0.5rem", fontSize:"0.78rem", fontFamily:"inherit", outline:"none" }} />
+        <button onClick={send} style={{ background:"rgba(212,175,55,0.1)", border:"1px solid rgba(212,175,55,0.35)", color:"#d4af37", borderRadius:"3px", padding:"0.35rem 0.6rem", cursor:"pointer", fontFamily:"'Cinzel',serif", fontSize:"0.72rem" }}>➤</button>
       </div>
 
       {/* Related works */}
-      <div style={{ padding: "0.7rem 0.85rem 0.9rem", borderTop: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
-        <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.5rem" }}>{t("gallery.related_works")}</div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3px" }}>
+      <div style={{ padding:"0.7rem 0.85rem 0.9rem", borderTop:"1px solid rgba(212,175,55,0.07)", flexShrink:0 }}>
+        <div style={{ fontSize:"0.58rem", color:"#d4af37", letterSpacing:"0.14em", textTransform:"uppercase", marginBottom:"0.5rem" }}>{t("gallery.related_works")}</div>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"3px" }}>
           {related.map((f) => (
-            <div key={f} onClick={() => onJump(f)} title={getLabel(f)} style={{ aspectRatio: "1/1", overflow: "hidden", cursor: "pointer", border: "1px solid rgba(212,175,55,0.08)", borderRadius: "1px" }}>
-              <img src={`/images/${encodeURIComponent(f)}`} alt={getLabel(f)} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.3s" }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")} />
+            <div key={f} onClick={() => onJump(f)} title={getLabel(f)} style={{ aspectRatio:"1/1", overflow:"hidden", cursor:"pointer", border:"1px solid rgba(212,175,55,0.08)", borderRadius:"1px" }}>
+              <img src={`/images/${encodeURIComponent(f)}`} alt={getLabel(f)} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block", transition:"transform 0.3s" }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform="scale(1.1)")}
+                onMouseLeave={(e) => (e.currentTarget.style.transform="scale(1)")} />
             </div>
           ))}
         </div>
@@ -460,28 +390,21 @@ function AiPanel({ filename, allImages, onJump }: { filename: string; allImages:
   );
 }
 
-// --------- Lightbox ---------
 function Lightbox({ filtered, index, setIndex, onClose }: { filtered: string[]; index: number; setIndex: React.Dispatch<React.SetStateAction<number|null>>; onClose: ()=>void }) {
   const file = filtered[index];
-  const prev = useCallback(() => setIndex((i) => ((i as number) - 1 + filtered.length) % filtered.length), [filtered.length, setIndex]);
-  const next = useCallback(() => setIndex((i) => ((i as number) + 1) % filtered.length), [filtered.length, setIndex]);
-  const jumpToFile = useCallback((f: string) => { const i = filtered.indexOf(f); if (i !== -1) setIndex(i); }, [filtered, setIndex]);
-
+  const prev = useCallback(() => setIndex((i) => ((i as number)-1+filtered.length)%filtered.length), [filtered.length, setIndex]);
+  const next = useCallback(() => setIndex((i) => ((i as number)+1)%filtered.length), [filtered.length, setIndex]);
+  const jumpToFile = useCallback((f: string) => { const i=filtered.indexOf(f); if (i!==-1) setIndex(i); }, [filtered, setIndex]);
   return (
-    <div style={{ position: "fixed", inset: 0, zIndex: 1000, display: "flex", flexDirection: "row", background: "rgba(3,3,3,0.98)", animation: "lbFade 0.2s ease" }}>
-      <style>{`
-        @keyframes lbFade { from{opacity:0}to{opacity:1} }
-        @keyframes lbIn   { from{opacity:0;transform:scale(0.97)}to{opacity:1;transform:scale(1)} }
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
-      `}</style>
+    <div style={{ position:"fixed", inset:0, zIndex:1000, display:"flex", flexDirection:"row", background:"rgba(3,3,3,0.98)", animation:"lbFade 0.2s ease" }}>
+      <style>{`@keyframes lbFade{from{opacity:0}to{opacity:1}}@keyframes lbIn{from{opacity:0;transform:scale(0.97)}to{opacity:1;transform:scale(1)}}@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');`}</style>
       <ZoomPane src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} onClose={onClose} onPrev={prev} onNext={next} index={index} total={filtered.length} />
       <AiPanel filename={file} allImages={filtered} onJump={jumpToFile} />
-      <button onClick={onClose} style={{ position: "fixed", top: "0.8rem", right: "328px", background: "rgba(0,0,0,0.7)", border: "1px solid rgba(212,175,55,0.28)", color: "#d4af37", width: "2rem", height: "2rem", borderRadius: "50%", fontSize: "0.85rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1010 }}>✕</button>
+      <button onClick={onClose} style={{ position:"fixed", top:"0.8rem", right:"328px", background:"rgba(0,0,0,0.7)", border:"1px solid rgba(212,175,55,0.28)", color:"#d4af37", width:"2rem", height:"2rem", borderRadius:"50%", fontSize:"0.85rem", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", zIndex:1010 }}>✕</button>
     </div>
   );
 }
 
-// --------- CSS ---------
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
   .g-marquee{overflow:hidden;width:100%;background:#111}
@@ -518,7 +441,6 @@ const css = `
   .dion-hint{font-family:'Cinzel',serif;font-size:0.44rem;letter-spacing:0.22em;color:rgba(212,175,55,0.18);text-transform:uppercase;white-space:nowrap}
 `;
 
-// --------- Gallery page ---------
 export default function Gallery() {
   const { t } = useTranslation();
   useMeta({
@@ -542,47 +464,39 @@ export default function Gallery() {
   const dionRef = useRef<HTMLVideoElement>(null);
   const [speed, setSpeed] = useState(1);
 
-  const setPlaybackRate = (rate: number) => {
-    setSpeed(rate);
-    if (dionRef.current) dionRef.current.playbackRate = rate;
-  };
+  const setPlaybackRate = (rate: number) => { setSpeed(rate); if (dionRef.current) dionRef.current.playbackRate = rate; };
 
   return (
-    <section style={{ color: "#f2ece0", minHeight: "100vh", background: "#202020" }}>
+    <section style={{ color:"#f2ece0", minHeight:"100vh", background:"#202020" }}>
       <style>{css}</style>
 
-      {/* ── Header ── */}
-      <header style={{ textAlign: "center", padding: "2rem 2rem 1.5rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
-        <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#d4af37", marginBottom: "1rem", position: "relative" }}>
-          {t("gallery.eyebrow", "Musée-Crosdale — Original Works")}
+      <header style={{ textAlign:"center", padding:"2rem 2rem 1.5rem", position:"relative", borderBottom:"1px solid rgba(212,175,55,0.08)" }}>
+        <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 70% 60% at 50% 0%,rgba(212,175,55,0.05) 0%,transparent 70%)", pointerEvents:"none" }} />
+        <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.35em", textTransform:"uppercase", color:"#d4af37", marginBottom:"1rem", position:"relative" }}>
+          {t("gallery.eyebrow","Musée-Crosdale — Original Works")}
         </p>
-        <h1 style={{ fontFamily: "'Cinzel',serif", color: "#f2ece0", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 400, letterSpacing: "0.15em", margin: 0, position: "relative" }}>
+        <h1 style={{ fontFamily:"'Cinzel',serif", color:"#f2ece0", fontSize:"clamp(1.6rem,3.5vw,2.4rem)", fontWeight:400, letterSpacing:"0.15em", margin:0, position:"relative" }}>
           {t("gallery.title")}
         </h1>
-        <p style={{ color: "#b8b0a4", fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "1.05rem", marginTop: "1rem", marginBottom: 0, position: "relative" }}>
+        <p style={{ color:"#b8b0a4", fontFamily:"'Cormorant Garamond',serif", fontStyle:"italic", fontSize:"1.05rem", marginTop:"1rem", marginBottom:0, position:"relative" }}>
           {t("gallery.subtitle")}
         </p>
         <div className="g-div" />
       </header>
 
-      {/* ── Body ── */}
-      <div style={{ padding: "0 2rem 2rem" }}>
-
-        {/* Filter buttons */}
-        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", margin: "0.75rem 0", alignItems: "center" }}>
-          {SERIES.map((s, i) => (
-            <button key={s.label} className={`f-btn${filter === i ? " on" : ""}`} onClick={() => setFilter(i)}>{s.label}</button>
+      <div style={{ padding:"0 2rem 2rem" }}>
+        <div style={{ display:"flex", gap:"0.5rem", flexWrap:"wrap", margin:"0.75rem 0", alignItems:"center" }}>
+          {SERIES.map((s,i) => (
+            <button key={s.label} className={`f-btn${filter===i?" on":""}`} onClick={() => setFilter(i)}>{s.label}</button>
           ))}
-          <span style={{ marginLeft: "auto", color: "#8a8278", fontFamily: "'Cinzel',serif", fontSize: "0.65rem", letterSpacing: "0.1em" }}>
-            {t("gallery.works_count", { count: filtered.length })}
+          <span style={{ marginLeft:"auto", color:"#8a8278", fontFamily:"'Cinzel',serif", fontSize:"0.65rem", letterSpacing:"0.1em" }}>
+            {t("gallery.works_count",{ count: filtered.length })}
           </span>
         </div>
 
-        {/* Dionysus video */}
         <div className="dion-section">
           <div className="dion-header">
-            <span className="dion-eyebrow">{t("home.moving_image", "Moving Image")}</span>
+            <span className="dion-eyebrow">{t("home.moving_image","Moving Image")}</span>
             <h2 className="dion-title">Dionysus</h2>
           </div>
           <div className="dion-rule" />
@@ -594,22 +508,21 @@ export default function Gallery() {
             </video>
           </div>
           <div className="dion-caption">
-            <p className="dion-caption-text">{t("home.artwork_caption", "A work presented on Facinations")}</p>
-            <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
-              <span className="dion-hint" style={{ marginRight: "0.5rem" }}>{t("gallery.speed", "Speed")}</span>
-              {[0.25, 0.5, 1].map(r => (
-                <button key={r} onClick={() => setPlaybackRate(r)} style={{ background: speed === r ? "rgba(212,175,55,0.15)" : "none", border: `1px solid ${speed === r ? "#d4af37" : "rgba(212,175,55,0.25)"}`, color: speed === r ? "#d4af37" : "rgba(212,175,55,0.35)", fontFamily: "'Cinzel',serif", fontSize: "0.5rem", letterSpacing: "0.1em", padding: "0.2rem 0.5rem", cursor: "pointer", transition: "all 0.2s" }}>
-                  {r === 1 ? "1×" : `${r}×`}
+            <p className="dion-caption-text">{t("home.artwork_caption","A work presented on Facinations")}</p>
+            <div style={{ display:"flex", gap:"0.4rem", alignItems:"center" }}>
+              <span className="dion-hint" style={{ marginRight:"0.5rem" }}>{t("gallery.speed","Speed")}</span>
+              {[0.25,0.5,1].map(r => (
+                <button key={r} onClick={() => setPlaybackRate(r)} style={{ background:speed===r?"rgba(212,175,55,0.15)":"none", border:`1px solid ${speed===r?"#d4af37":"rgba(212,175,55,0.25)"}`, color:speed===r?"#d4af37":"rgba(212,175,55,0.35)", fontFamily:"'Cinzel',serif", fontSize:"0.5rem", letterSpacing:"0.1em", padding:"0.2rem 0.5rem", cursor:"pointer", transition:"all 0.2s" }}>
+                  {r===1?"1×":`${r}×`}
                 </button>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Marquee gallery */}
         <div className="g-marquee" key={`marquee-${filter}`}>
-          <div className="g-track left" style={{ marginBottom: "3px" }}>
-            {[...filtered, ...filtered].map((file, i) => (
+          <div className="g-track left" style={{ marginBottom:"3px" }}>
+            {[...filtered,...filtered].map((file,i) => (
               <div key={`r1-${i}`} className="g-item" onClick={() => setLbIdx(filtered.indexOf(file))}>
                 <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
                 <div className="g-item-ov"><span className="g-lbl">{getLabel(file)}</span></div>
@@ -617,7 +530,7 @@ export default function Gallery() {
             ))}
           </div>
           <div className="g-track right">
-            {[...[...filtered].reverse(), ...[...filtered].reverse()].map((file, i) => (
+            {[...[...filtered].reverse(),...[...filtered].reverse()].map((file,i) => (
               <div key={`r2-${i}`} className="g-item" onClick={() => setLbIdx(filtered.indexOf(file))}>
                 <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
                 <div className="g-item-ov"><span className="g-lbl">{getLabel(file)}</span></div>
@@ -626,11 +539,9 @@ export default function Gallery() {
           </div>
         </div>
 
-        {lbIdx !== null && (
-          <Lightbox filtered={filtered} index={lbIdx} setIndex={setLbIdx} onClose={() => setLbIdx(null)} />
-        )}
+        {lbIdx!==null && <Lightbox filtered={filtered} index={lbIdx} setIndex={setLbIdx} onClose={() => setLbIdx(null)} />}
 
-        <div style={{ marginTop: "3rem", borderTop: "1px solid rgba(212,175,55,0.15)", paddingTop: "2rem", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
+        <div style={{ marginTop:"3rem", borderTop:"1px solid rgba(212,175,55,0.15)", paddingTop:"2rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:"1rem" }}>
           <MistralWidget context="gallery" />
           <VoiceAICurator context="Musée-https://xervault.com/gallery — fine art collection by Crosdale" />
         </div>

@@ -36,6 +36,10 @@ const Community    = React.lazy(() => import("./pages/Community"));
 const Admin        = React.lazy(() => import("./pages/Admin"));
 const Galleries    = React.lazy(() => import("./pages/Galleries"));
 const GalleryPage  = React.lazy(() => import("./pages/GalleryPage"));
+const Hypsoverse   = React.lazy(() => import("./pages/Hypsoverse"));
+const GeneralIntelligence = React.lazy(() => import("./pages/GeneralIntelligence"));
+const Hypsoverse   = React.lazy(() => import("./pages/Hypsoverse"));
+const GeneralIntelligence = React.lazy(() => import("./pages/GeneralIntelligence"));
 const NotFound     = React.lazy(() => import("./pages/NotFound"));
 
 // ── Loading fallback ──────────────────────────────────────────────────────────
@@ -103,8 +107,12 @@ export default function App() {
                 <Route path="/checkout/paypal-success"  element={<PayPalSuccess />} />
                 <Route path="/community"      element={<Community />} />
                 <Route path="/admin"          element={<Admin />} />
-                <Route path="/galleries"     element={<Galleries />} />
-                <Route path="/gallery/:slug" element={<GalleryPage />} />
+                <Route path="/galleries"      element={<Galleries />} />
+                <Route path="/gallery/:slug"  element={<GalleryPage />} />
+                {/* Hypsoverse immersive experience */}
+                <Route path="/hypsoverse/:sceneId" element={<Hypsoverse />} />
+                {/* General Intelligence command center */}
+                <Route path="/intelligence"  element={<GeneralIntelligence />} />
                 <Route path="*"              element={<NotFound />} />
               </Routes>
             </Suspense>
