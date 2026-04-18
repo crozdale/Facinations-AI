@@ -6,12 +6,12 @@
 import { useEffect } from "react";
 
 const SITE_NAME  = "Musée-Crosdale";
-const SITE_URL   = "https://xdale.art";
+const SITE_URL   = "https://xdale.net";
 const DEFAULT_IMG = "/images/Alchemist-of-Light.jpg";
 
 const DEFAULTS = {
   title:       SITE_NAME,
-  description: "A synthetic museum and intelligence console for vaulted culture, powered by the Facinations fine-art protocol.",
+  description: "A museum and console with synthetic intelligence intended for vaulted culture, and powered by the fine-art protocol of Façinations.",
   image:       DEFAULT_IMG,
   type:        "website" as const,
 };

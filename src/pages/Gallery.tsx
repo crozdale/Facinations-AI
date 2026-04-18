@@ -1,36 +1,9 @@
-﻿import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import MistralWidget from "../components/MistralWidget";
 import VoiceAICurator from "../components/VoiceAICurator";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
 import { HypsoverseViewer } from "../components/teleport";
-
-// -- VideoHero: tries mp4, falls back to a still image -------------------------
-function VideoHero() {
-  const [useFallback, setUseFallback] = useState(false);
-  return (
-    <div style={{ width: "100%", height: "100%", position: "relative" }}>
-      {useFallback ? (
-        <img
-          src="/images/Aurora.jpg"
-          alt="Musée Crosdale"
-          style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }}
-        />
-      ) : (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }}
-          onError={() => setUseFallback(true)}
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-      )}
-    </div>
-  );
-}
 
 // ------------------------- Image list -------------------------
 const images = [
@@ -354,6 +327,8 @@ function AiPanel({ filename, allImages, onJump }: { filename: string; allImages:
   const [chat, setChat] = useState<{role:string;content:string}[]>([]);
   const [input, setInput] = useState("");
   const [chatBusy, setChatBusy] = useState(false);
+  const [openVimeo, setOpenVimeo] = useState(false);
+  const [openVpn, setOpenVpn] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setStatus("idle"); setAnalysis(""); setErrMsg(""); setChat([]); setInput(""); }, [filename]);
@@ -382,7 +357,7 @@ function AiPanel({ filename, allImages, onJump }: { filename: string; allImages:
   };
 
   return (
-    <div style={{ width: "320px", minWidth: "280px", flexShrink: 0, background: "#242424", borderLeft: "1px solid rgba(212,175,55,0.12)", display: "flex", flexDirection: "column", height: "100vh", overflow: "hidden", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+    <div style={{ width: "320px", minWidth: "280px", flexShrink: 0, background: "#242424", borderLeft: "1px solid rgba(212,175,55,0.12)", display: "flex", flexDirection: "column", height: "100vh", overflowY: "auto", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
       <div style={{ padding: "1rem 1rem 0.6rem", borderBottom: "1px solid rgba(212,175,55,0.1)", flexShrink: 0 }}>
         <div style={{ fontFamily: "'Cinzel',serif", color: "#d4af37", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", lineHeight: 1.4 }}>{label}</div>
         <div style={{ fontSize: "0.58rem", color: "#8a8278", marginTop: "0.2rem" }}>{t("gallery.ai_subtitle")}</div>
@@ -391,9 +366,42 @@ function AiPanel({ filename, allImages, onJump }: { filename: string; allImages:
       {/* Teleport 3D viewer */}
       <div style={{ padding: "0.75rem", borderBottom: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
         <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.5rem" }}>{t("teleport.immersive_3d")}</div>
-        <HypsoverseViewer
-          artworkTitle={label}
-        />
+        <HypsoverseViewer artworkTitle={label} />
+      </div>
+
+      {/* Vimeo */}
+      <div style={{ padding: "0.75rem", borderBottom: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
+        <div onClick={() => setOpenVimeo(o => !o)} style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: openVimeo ? "0.5rem" : 0, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span>{t("gallery.watch_on_vimeo", "Watch on Vimeo")}</span>
+          <span style={{ fontSize: "0.5rem" }}>{openVimeo ? "▲" : "▼"}</span>
+        </div>
+        {openVimeo && (
+          <a href="https://vimeo.com/musee-crosdale" target="_blank" rel="noopener noreferrer"
+            style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.45rem 0.75rem", borderRadius: "4px", background: "rgba(26,183,234,0.08)", border: "1px solid rgba(26,183,234,0.35)", color: "#1ab7ea", textDecoration: "none", fontFamily: "'Cinzel',serif", fontSize: "0.62rem", letterSpacing: "0.1em" }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 12.5C4.603 9.913 3.834 8.619 3.01 8.619c-.179 0-.806.378-1.881 1.132L0 8.332c1.185-1.044 2.351-2.084 3.501-3.128C5.08 3.732 6.266 2.989 7.055 2.917c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.612-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.478 4.799z"/></svg>
+            {t("gallery.watch_doc", "Watch on Vimeo")}
+          </a>
+        )}
+      </div>
+
+      {/* VPN */}
+      <div style={{ padding: "0.75rem", borderBottom: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
+        <div onClick={() => setOpenVpn(o => !o)} style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: openVpn ? "0.5rem" : 0, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span>{t("gallery.private_viewing", "Private Viewing")}</span>
+          <span style={{ fontSize: "0.5rem" }}>{openVpn ? "▲" : "▼"}</span>
+        </div>
+        {openVpn && (
+          <>
+            <div style={{ fontSize: "0.72rem", color: "#8a8278", fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", lineHeight: 1.5, marginBottom: "0.5rem" }}>
+              {t("gallery.vpn_notice", "For collector privacy, connect via a trusted VPN.")}
+            </div>
+            <a href="https://protonvpn.com" target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.4rem 0.75rem", borderRadius: "4px", background: "rgba(109,74,255,0.1)", border: "1px solid rgba(109,74,255,0.35)", color: "#9d80ff", textDecoration: "none", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.1em" }}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              {t("gallery.hide_doc", "Connect VPN")}
+            </a>
+          </>
+        )}
       </div>
 
       {/* Curator analysis */}
@@ -432,7 +440,7 @@ function AiPanel({ filename, allImages, onJump }: { filename: string; allImages:
       <div style={{ padding: "0.65rem 0.85rem", borderTop: "1px solid rgba(212,175,55,0.07)", display: "flex", gap: "0.4rem", flexShrink: 0 }}>
         <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && send()} placeholder={t("gallery.placeholder_ask")}
           style={{ flex: 1, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(212,175,55,0.18)", color: "#ccc", borderRadius: "3px", padding: "0.35rem 0.5rem", fontSize: "0.78rem", fontFamily: "inherit", outline: "none" }} />
-        <button onClick={send} style={{ background: "rgba(212,175,55,0.1)", border: "1px solid rgba(212,175,55,0.35)", color: "#d4af37", borderRadius: "3px", padding: "0.35rem 0.6rem", cursor: "pointer", fontFamily: "'Cinzel',serif", fontSize: "0.72rem" }}>?</button>
+        <button onClick={send} style={{ background: "rgba(212,175,55,0.1)", border: "1px solid rgba(212,175,55,0.35)", color: "#d4af37", borderRadius: "3px", padding: "0.35rem 0.6rem", cursor: "pointer", fontFamily: "'Cinzel',serif", fontSize: "0.72rem" }}>➤</button>
       </div>
 
       {/* Related works */}
@@ -543,7 +551,8 @@ export default function Gallery() {
     <section style={{ color: "#f2ece0", minHeight: "100vh", background: "#202020" }}>
       <style>{css}</style>
 
-      <header style={{ textAlign: "center", padding: "4rem 2rem 3rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
+      {/* ── Header ── */}
+      <header style={{ textAlign: "center", padding: "2rem 2rem 1.5rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
         <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#d4af37", marginBottom: "1rem", position: "relative" }}>
           {t("gallery.eyebrow", "Musée-Crosdale — Original Works")}
@@ -557,12 +566,11 @@ export default function Gallery() {
         <div className="g-div" />
       </header>
 
-      <div style={{ padding: "2rem" }}>
-        <div style={{ margin: "1.5rem -2rem 0", position: "relative", width: "calc(100% + 4rem)", height: "480px", overflow: "hidden", background: "#000" }}>
-          <VideoHero />
-        </div>
+      {/* ── Body ── */}
+      <div style={{ padding: "0 2rem 2rem" }}>
 
-        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", margin: "1.5rem 0", alignItems: "center" }}>
+        {/* Filter buttons */}
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", margin: "0.75rem 0", alignItems: "center" }}>
           {SERIES.map((s, i) => (
             <button key={s.label} className={`f-btn${filter === i ? " on" : ""}`} onClick={() => setFilter(i)}>{s.label}</button>
           ))}
@@ -571,6 +579,7 @@ export default function Gallery() {
           </span>
         </div>
 
+        {/* Dionysus video */}
         <div className="dion-section">
           <div className="dion-header">
             <span className="dion-eyebrow">{t("home.moving_image", "Moving Image")}</span>
@@ -597,6 +606,7 @@ export default function Gallery() {
           </div>
         </div>
 
+        {/* Marquee gallery */}
         <div className="g-marquee" key={`marquee-${filter}`}>
           <div className="g-track left" style={{ marginBottom: "3px" }}>
             {[...filtered, ...filtered].map((file, i) => (
