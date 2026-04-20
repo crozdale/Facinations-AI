@@ -5,7 +5,7 @@ import VoiceAICurator from "../components/VoiceAICurator";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
 
-// ------------------------- Image list -------------------------
+// ── Image list ────────────────────────────────────────────────────────────────
 const images = [
   "Abiaat.jpg","Angie-eye-_2023-01-11_17-29-08.jpg",
   "ARANCAME La VIDA-438093283_418377434483858_7953622244752444593_n.jpg",
@@ -276,14 +276,12 @@ function AiPanel({ filename, allImages, onJump }: { filename: string; allImages:
 
   return (
     <div style={{ width:"320px", minWidth:"280px", flexShrink:0, background:"#242424", borderLeft:"1px solid rgba(212,175,55,0.12)", display:"flex", flexDirection:"column", height:"100vh", overflowY:"auto", fontFamily:"'Cormorant Garamond', Georgia, serif" }}>
-
-      {/* Title */}
       <div style={{ padding:"1rem 1rem 0.6rem", borderBottom:"1px solid rgba(212,175,55,0.1)", flexShrink:0 }}>
         <div style={{ fontFamily:"'Cinzel',serif", color:"#d4af37", fontSize:"0.68rem", letterSpacing:"0.14em", textTransform:"uppercase", lineHeight:1.4 }}>{label}</div>
         <div style={{ fontSize:"0.58rem", color:"#8a8278", marginTop:"0.2rem" }}>{t("gallery.ai_subtitle")}</div>
       </div>
 
-      {/* ── Enter Hypsoverse ── */}
+      {/* Enter Hypsoverse */}
       <div style={{ padding:"0.85rem", borderBottom:"1px solid rgba(212,175,55,0.07)", flexShrink:0 }}>
         <div style={{ fontSize:"0.55rem", color:"rgba(74,222,128,0.5)", letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"0.55rem" }}>
           {t("gallery.hypsoverse_label", "Immersive Experience")}
@@ -291,12 +289,11 @@ function AiPanel({ filename, allImages, onJump }: { filename: string; allImages:
         <button
           onClick={() => navigate("/hypsoverse/dionysus")}
           style={{ width:"100%", padding:"0.75rem 0", background:"linear-gradient(135deg,rgba(34,197,94,0.15) 0%,rgba(34,197,94,0.07) 100%)", border:"1px solid rgba(34,197,94,0.5)", color:"#4ade80", fontFamily:"'Cinzel',serif", fontSize:"0.62rem", letterSpacing:"0.18em", textTransform:"uppercase", cursor:"pointer", borderRadius:"2px", transition:"all 0.25s", display:"flex", alignItems:"center", justifyContent:"center", gap:"0.5rem" }}
-          onMouseEnter={e => { const b = e.currentTarget; b.style.background="linear-gradient(135deg,rgba(34,197,94,0.28) 0%,rgba(34,197,94,0.15) 100%)"; b.style.borderColor="rgba(34,197,94,0.85)"; b.style.boxShadow="0 0 24px rgba(34,197,94,0.18)"; }}
-          onMouseLeave={e => { const b = e.currentTarget; b.style.background="linear-gradient(135deg,rgba(34,197,94,0.15) 0%,rgba(34,197,94,0.07) 100%)"; b.style.borderColor="rgba(34,197,94,0.5)"; b.style.boxShadow="none"; }}
+          onMouseEnter={e => { const b=e.currentTarget; b.style.background="linear-gradient(135deg,rgba(34,197,94,0.28) 0%,rgba(34,197,94,0.15) 100%)"; b.style.borderColor="rgba(34,197,94,0.85)"; b.style.boxShadow="0 0 24px rgba(34,197,94,0.18)"; }}
+          onMouseLeave={e => { const b=e.currentTarget; b.style.background="linear-gradient(135deg,rgba(34,197,94,0.15) 0%,rgba(34,197,94,0.07) 100%)"; b.style.borderColor="rgba(34,197,94,0.5)"; b.style.boxShadow="none"; }}
         >
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+            <circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
           </svg>
           {t("gallery.enter_hypsoverse", "Enter Hypsoverse")}
         </button>
@@ -405,6 +402,113 @@ function Lightbox({ filtered, index, setIndex, onClose }: { filtered: string[]; 
   );
 }
 
+// ── Gaussian Splat Gate ───────────────────────────────────────────────────────
+function SplatGate({ onEnter }: { onEnter: () => void }) {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || submitting) return;
+    setSubmitting(true);
+    setSubmitError("");
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      if (!res.ok) {
+        const { error } = await res.json().catch(() => ({}));
+        throw new Error(error || "Something went wrong.");
+      }
+      setSubmitted(true);
+    } catch (err: any) {
+      setSubmitError(err.message ?? "Could not submit — please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div style={{
+      position: "relative", overflow: "hidden",
+      background: "linear-gradient(135deg, #0a0a08 0%, #111209 50%, #0c0e0a 100%)",
+      border: "1px solid rgba(212,175,55,0.15)",
+      margin: "0 0 2rem",
+    }}>
+      {/* Decorative corner marks */}
+      {[["top:0;left:0","border-width:1px 0 0 1px"],["top:0;right:0","border-width:1px 1px 0 0"],["bottom:0;left:0","border-width:0 0 1px 1px"],["bottom:0;right:0","border-width:0 1px 1px 0"]].map(([pos, bw], i) => (
+        <span key={i} style={{ position:"absolute", ...Object.fromEntries(pos.split(";").map(p => { const [k,v]=p.split(":"); return [k,v]; })), width:"16px", height:"16px", borderColor:"rgba(212,175,55,0.4)", borderStyle:"solid", ...(Object.fromEntries(bw.split(":").map((v,j) => j===0?["borderWidth",undefined]:["borderWidth",v]).filter(([,v])=>v))) } as React.CSSProperties} />
+      ))}
+      <div style={{ position:"absolute", top:0, left:0, right:0, height:"1px", background:"linear-gradient(90deg,transparent,rgba(212,175,55,0.4),transparent)" }} />
+
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:0, minHeight:"340px" }}>
+        {/* Left: preview / teaser */}
+        <div style={{ position:"relative", borderRight:"1px solid rgba(212,175,55,0.1)", overflow:"hidden", display:"flex", alignItems:"center", justifyContent:"center", minHeight:"340px" }}>
+          {/* Blurred preview still */}
+          <div style={{ position:"absolute", inset:0, backgroundImage:"url('/images/Dreamers.jpg')", backgroundSize:"cover", backgroundPosition:"center", filter:"blur(14px) brightness(0.25)", transform:"scale(1.1)" }} />
+          <div style={{ position:"relative", zIndex:1, textAlign:"center" }}>
+            <div style={{ width:"72px", height:"72px", border:"1px solid rgba(212,175,55,0.3)", borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", margin:"0 auto 1.25rem" }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(212,175,55,0.7)" strokeWidth="1">
+                <circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
+            </div>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:"0.55rem", letterSpacing:"0.28em", color:"rgba(212,175,55,0.5)", textTransform:"uppercase", marginBottom:"0.5rem" }}>Gaussian Splat</div>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"1.2rem", color:"rgba(242,236,224,0.6)", fontStyle:"italic" }}>Dionysus</div>
+          </div>
+        </div>
+
+        {/* Right: subscription gate */}
+        <div style={{ padding:"2.5rem 2.5rem", display:"flex", flexDirection:"column", justifyContent:"center" }}>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:"0.52rem", letterSpacing:"0.3em", color:"rgba(212,175,55,0.5)", textTransform:"uppercase", marginBottom:"1.25rem" }}>
+            Gallery Access
+          </div>
+          <h2 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"1.65rem", fontWeight:300, color:"#f2ece0", lineHeight:1.2, marginBottom:"0.85rem" }}>
+            Step inside the work.<br /><em style={{ color:"rgba(212,175,55,0.8)" }}>Not just look at it.</em>
+          </h2>
+          <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"0.95rem", color:"#8a8278", lineHeight:1.75, marginBottom:"1.75rem" }}>
+            Gallery subscribers access immersive Gaussian Splat environments — walk through the work in three dimensions. Subscribe to unlock Dionysus and all future Hypsoverse scenes.
+          </p>
+
+          {submitted ? (
+            <div style={{ padding:"1.25rem", border:"1px solid rgba(212,175,55,0.2)", background:"rgba(212,175,55,0.04)" }}>
+              <div style={{ fontFamily:"'Cinzel',serif", fontSize:"0.58rem", letterSpacing:"0.16em", color:"#d4af37", textTransform:"uppercase", marginBottom:"0.4rem" }}>Access requested</div>
+              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"0.9rem", color:"#8a8278", fontStyle:"italic" }}>We'll be in touch shortly. In the meantime, you may enter as a guest.</div>
+              <button onClick={onEnter} style={{ marginTop:"1rem", width:"100%", padding:"0.7rem", background:"rgba(212,175,55,0.08)", border:"1px solid rgba(212,175,55,0.3)", color:"#d4af37", fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.14em", textTransform:"uppercase", cursor:"pointer" }}>
+                Enter as guest →
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubscribe} style={{ display:"flex", flexDirection:"column", gap:"0.65rem" }}>
+              <input
+                type="email" required value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email address"
+                style={{ background:"rgba(255,255,255,0.03)", border:"1px solid rgba(212,175,55,0.2)", color:"#f2ece0", padding:"0.75rem 1rem", fontFamily:"'Cormorant Garamond',serif", fontSize:"0.95rem", outline:"none", borderRadius:"1px" }}
+              />
+              <button type="submit" disabled={submitting} style={{ padding:"0.8rem", background:"rgba(212,175,55,0.1)", border:"1px solid rgba(212,175,55,0.5)", color: submitting ? "rgba(212,175,55,0.4)" : "#d4af37", fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.16em", textTransform:"uppercase", cursor: submitting ? "default" : "pointer", transition:"all 0.2s", opacity: submitting ? 0.7 : 1 }}
+                onMouseEnter={e => { if (!submitting) { e.currentTarget.style.background="rgba(212,175,55,0.18)"; e.currentTarget.style.borderColor="rgba(212,175,55,0.8)"; }}}
+                onMouseLeave={e => { e.currentTarget.style.background="rgba(212,175,55,0.1)"; e.currentTarget.style.borderColor="rgba(212,175,55,0.5)"; }}>
+                {submitting ? "Requesting access…" : "Subscribe for gallery access"}
+              </button>
+              {submitError && (
+                <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"0.82rem", color:"rgba(200,80,80,0.8)", fontStyle:"italic", margin:"0.25rem 0 0" }}>{submitError}</p>
+              )}
+              <button type="button" onClick={onEnter} style={{ background:"none", border:"none", color:"rgba(212,175,55,0.3)", fontFamily:"'Cinzel',serif", fontSize:"0.52rem", letterSpacing:"0.12em", textTransform:"uppercase", cursor:"pointer", textDecoration:"underline", textUnderlineOffset:"4px", padding:"0.25rem 0" }}>
+                Continue as guest (limited access)
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
   .g-marquee{overflow:hidden;width:100%;background:#111}
@@ -443,6 +547,7 @@ const css = `
 
 export default function Gallery() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   useMeta({
     title: t("gallery.title"),
     description: "Browse the Musée-Crosdale collection — original works by Crosdale and invited artists, each with on-chain provenance secured by the Facinations protocol.",
@@ -470,6 +575,7 @@ export default function Gallery() {
     <section style={{ color:"#f2ece0", minHeight:"100vh", background:"#202020" }}>
       <style>{css}</style>
 
+      {/* ── PAGE HEADER ── */}
       <header style={{ textAlign:"center", padding:"2rem 2rem 1.5rem", position:"relative", borderBottom:"1px solid rgba(212,175,55,0.08)" }}>
         <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 70% 60% at 50% 0%,rgba(212,175,55,0.05) 0%,transparent 70%)", pointerEvents:"none" }} />
         <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.35em", textTransform:"uppercase", color:"#d4af37", marginBottom:"1rem", position:"relative" }}>
@@ -485,6 +591,13 @@ export default function Gallery() {
       </header>
 
       <div style={{ padding:"0 2rem 2rem" }}>
+
+        {/* ── GAUSSIAN SPLAT GATE — prominent, always visible ── */}
+        <div style={{ marginTop:"2rem" }}>
+          <SplatGate onEnter={() => navigate("/hypsoverse/dionysus")} />
+        </div>
+
+        {/* ── FILTERS ── */}
         <div style={{ display:"flex", gap:"0.5rem", flexWrap:"wrap", margin:"0.75rem 0", alignItems:"center" }}>
           {SERIES.map((s,i) => (
             <button key={s.label} className={`f-btn${filter===i?" on":""}`} onClick={() => setFilter(i)}>{s.label}</button>
@@ -494,6 +607,7 @@ export default function Gallery() {
           </span>
         </div>
 
+        {/* ── DIONYSUS VIDEO ── */}
         <div className="dion-section">
           <div className="dion-header">
             <span className="dion-eyebrow">{t("home.moving_image","Moving Image")}</span>
@@ -520,6 +634,7 @@ export default function Gallery() {
           </div>
         </div>
 
+        {/* ── MARQUEE ── */}
         <div className="g-marquee" key={`marquee-${filter}`}>
           <div className="g-track left" style={{ marginBottom:"3px" }}>
             {[...filtered,...filtered].map((file,i) => (
